@@ -142,4 +142,7 @@ const std::array<char32_t, 37> alphabet_ = { HAMZA,
 
 const std::array<char32_t, 9> tashkeel_list_
     = { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN };
+
+const std::array<char32_t, 3> small_list_ = { SMALL_ALEF, SMALL_WAW, SMALL_YEH };
+
 } // namespace anltk

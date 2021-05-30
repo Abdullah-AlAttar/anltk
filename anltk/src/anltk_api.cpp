@@ -58,6 +58,11 @@ const char* anltk_preprocessor_remove_tashkeel(Preprocessor* preprocessor, const
     return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->remove_tashkeel(input);
 }
 
+const char* anltk_preprocessor_remove_small(Preprocessor* preprocessor, const char* input)
+{
+    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->remove_small(input);
+}
+
 void anltk_preprocessor_free(Preprocessor* preprocessor)
 {
     delete reinterpret_cast<anltk::Preprocessor*>(preprocessor);

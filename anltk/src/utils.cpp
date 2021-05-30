@@ -37,6 +37,22 @@ bool is_arabic_alpha(char32_t c)
 {
     return std::find(alphabet_.begin(), alphabet_.end(), c) != alphabet_.end();
 }
+
+bool is_small(char32_t c)
+{
+    return std::find(small_list_.begin(), small_list_.end(), c) != small_list_.end();
+}
+
+bool is_small(const char* input)
+{
+    tiny_utf8::string text = input;
+    if (text.length() > 1)
+    {
+        return false;
+    }
+    return is_small(text.front());
+}
+
 bool is_valid_kalima(const char* input)
 {
     tiny_utf8::string text = input;

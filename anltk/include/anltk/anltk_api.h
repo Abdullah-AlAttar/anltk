@@ -96,6 +96,7 @@ ANLTK_PUBLIC bool anltk_is_arabic_alpha(const char* input);
 ANLTK_PUBLIC Preprocessor* anltk_preprocessor_new();
 
 ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(Preprocessor*, const char* input);
+ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(Preprocessor*, const char* input);
 
 ANLTK_PUBLIC void anltk_preprocessor_free(Preprocessor*);
 

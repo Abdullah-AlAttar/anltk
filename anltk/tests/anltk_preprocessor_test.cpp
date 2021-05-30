@@ -19,4 +19,11 @@ TEST_CASE("Presprocessor")
         const char* input = "وَلَاd أَنتُمْ عَابِدُونَ مَا أَعْبُدُ";
         REQUIRE(anltk_preprocessor_remove_tashkeel(p, input) == "ولاd أنتم عابدون ما أعبد"s);
     }
+    SUBCASE("Remove small")
+    {
+        const char *input = "الرَّحْمَٰنِ الرَّحِيمِ";
+        const char *no_tashkeel = anltk_preprocessor_remove_tashkeel(p, input);
+        REQUIRE(no_tashkeel == "الرحمٰن الرحيم"s);
+        REQUIRE(anltk_preprocessor_remove_small(p, no_tashkeel) == "الرحمن الرحيم"s);
+    }
 }

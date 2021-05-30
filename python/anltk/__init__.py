@@ -67,6 +67,11 @@ class Preprocessor:
         return _ffi.string(
             _c.anltk_preprocessor_remove_tashkeel(self._handle, input.encode('utf-8'))
         ).decode('utf-8')
+    def remove_small(self, input: str) -> str:
+        return _ffi.string(
+            _c.anltk_preprocessor_remove_small(self._handle, input.encode('utf-8'))
+        ).decode('utf-8')
+
 
 
 def ar_to_bw(text: str) -> str:
@@ -99,4 +104,8 @@ def is_arabic_alpha(input_text: str) -> bool:
 
 def remove_tashkeel(input_text : str) -> str:
     p = Preprocessor()
-    return p.remove_tashkeel(input_text);
+    return p.remove_tashkeel(input_text)
+
+def remove_small(input_text : str) -> str:
+    p = Preprocessor()
+    return p.remove_small(input_text)

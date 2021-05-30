@@ -40,6 +40,7 @@ public:
     Preprocessor();
     ~Preprocessor() = default;
     const char* remove_tashkeel(const char* input);
+    const char* remove_small(const char* input);
 
 private:
     std::string result_;
@@ -54,6 +55,10 @@ bool is_arabic_alpha(const char* input);
 bool is_arabic_alpha(char32_t c);
 
 bool is_valid_kalima(const char* input);
+
+bool is_small(char32_t c);
+
+bool is_small(const char* input);
 
 } // namespace anltk
 
