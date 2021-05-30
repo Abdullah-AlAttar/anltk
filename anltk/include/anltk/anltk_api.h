@@ -25,7 +25,7 @@ extern "C" {
 
 typedef struct Transliterator Transliterator;
 typedef struct Mofaqqet Mofaqqet;
-
+typedef struct Preprocessor Preprocessor;
 typedef enum
 {
     CM_AR2BW,
@@ -79,17 +79,25 @@ ANLTK_PUBLIC const char* anltk_mofaqqet_tafqeet(Mofaqqet*, long long input);
 /**
  * @brief Check wether the input is a valid arabic word
  * by valid means :
- *  1- Contains no spaces. @n 
- *  2- Is not empty. @n 
- *  3- Doesn't have double shadda. @n 
+ *  1- Contains no spaces. @n
+ *  2- Is not empty. @n
+ *  3- Doesn't have double shadda. @n
  *  4- Doesn't coutain ئ or ؤ at the start of the word. @n.
  *  5- Doesn't contain ة or ى before the last character. @n
- * @param input 
- * @return bool 
+ * @param input
+ * @return bool
  */
 ANLTK_PUBLIC bool anltk_is_valid_kalima(const char* input);
 
+ANLTK_PUBLIC bool anltk_is_tashkeel(const char* input);
 
+ANLTK_PUBLIC bool anltk_is_arabic_alpha(const char* input);
+
+ANLTK_PUBLIC Preprocessor* anltk_preprocessor_new();
+
+ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(Preprocessor*, const char* input);
+
+ANLTK_PUBLIC void anltk_preprocessor_free(Preprocessor*);
 
 #ifdef __cplusplus
 }

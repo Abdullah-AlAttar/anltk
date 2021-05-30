@@ -4,5 +4,6 @@ anltk_sources = files([
     'char_maps.cpp',
     'transliteratation.cpp',
     'tafqeet.cpp',
-    'utils.cpp'
+    'utils.cpp',
+    'Preprocessor.cpp'
 ])

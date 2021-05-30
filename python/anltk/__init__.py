@@ -55,6 +55,20 @@ class Mofaqqet:
         ).decode('utf-8')
 
 
+class Preprocessor:
+
+    def __init__(self):
+        self._handle = _c.anltk_preprocessor_new()
+
+    def __del__(self):
+        _c.anltk_preprocessor_free(self._handle)
+
+    def remove_tashkeel(self, input: str) -> str:
+        return _ffi.string(
+            _c.anltk_preprocessor_remove_tashkeel(self._handle, input.encode('utf-8'))
+        ).decode('utf-8')
+
+
 def ar_to_bw(text: str) -> str:
     mapping = CM_AR2BW
     ttor = Transliterator(mapping)
@@ -74,3 +88,15 @@ def tafqeet(number: int, is_ordinal: bool = False, is_feminine: bool = False) ->
 
 def is_valid_kalima(input_text: str) -> bool:
     return _c.anltk_is_valid_kalima(input_text.encode('utf-8'))
+
+
+def is_tashkeel(input_text: str) -> bool:
+    return _c.anltk_is_tashkeel(input_text.encode('utf-8'))
+
+
+def is_arabic_alpha(input_text: str) -> bool:
+    return _c.anltk_is_arabic_alpha(input_text.encode('utf-8'))
+
+def remove_tashkeel(input_text : str) -> str:
+    p = Preprocessor()
+    return p.remove_tashkeel(input_text);

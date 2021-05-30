@@ -34,7 +34,24 @@ private:
     bool is_feminine_;
 };
 
+class Preprocessor
+{
+public:
+    Preprocessor();
+    ~Preprocessor() = default;
+    const char* remove_tashkeel(const char* input);
+
+private:
+    std::string result_;
+};
+
+bool is_tashkeel(const char* input);
+
 bool is_tashkeel(char32_t c);
+
+bool is_arabic_alpha(const char* input);
+
+bool is_arabic_alpha(char32_t c);
 
 bool is_valid_kalima(const char* input);
 

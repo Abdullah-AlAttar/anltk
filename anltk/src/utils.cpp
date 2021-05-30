@@ -8,11 +8,35 @@
 namespace anltk
 {
 
+bool is_tashkeel(const char* input)
+{
+    tiny_utf8::string text = input;
+    if (text.length() > 1)
+    {
+        return false;
+    }
+    return is_tashkeel(text.front());
+}
+
 bool is_tashkeel(char32_t c)
 {
     return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
 }
 
+bool is_arabic_alpha(const char* input)
+{
+    tiny_utf8::string text = input;
+    if (text.length() > 1)
+    {
+        return false;
+    }
+    return is_arabic_alpha(text.front());
+}
+
+bool is_arabic_alpha(char32_t c)
+{
+    return std::find(alphabet_.begin(), alphabet_.end(), c) != alphabet_.end();
+}
 bool is_valid_kalima(const char* input)
 {
     tiny_utf8::string text = input;

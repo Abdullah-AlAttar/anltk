@@ -33,3 +33,8 @@ print(anltk.tafqeet(num))
 print(anltk.is_valid_kalima('اثنى'))
 print(anltk.is_valid_kalima('اّّثنى'))
 print(anltk.is_valid_kalima('ىياريت'))
+
+
+print(anltk.is_tashkeel(''))
+print(anltk.is_arabic_alpha('ي'))
+print(anltk.remove_tashkeel('بًسَمُ اللهّ'))

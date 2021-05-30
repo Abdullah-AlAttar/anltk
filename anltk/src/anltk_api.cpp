@@ -34,8 +34,31 @@ const char* anltk_mofaqqet_tafqeet(Mofaqqet* mof, long long input)
     return (reinterpret_cast<anltk::Mofaqqet*>(mof))->tafqeet(input);
 }
 
-
 bool anltk_is_valid_kalima(const char* input)
 {
     return anltk::is_valid_kalima(input);
+}
+
+bool anltk_is_tashkeel(const char* input)
+{
+    return anltk::is_tashkeel(input);
+}
+bool anltk_is_arabic_alpha(const char* input)
+{
+    return anltk::is_arabic_alpha(input);
+}
+
+Preprocessor* anltk_preprocessor_new()
+{
+    return reinterpret_cast<Preprocessor*>(new anltk::Preprocessor());
+}
+
+const char* anltk_preprocessor_remove_tashkeel(Preprocessor* preprocessor, const char* input)
+{
+    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->remove_tashkeel(input);
+}
+
+void anltk_preprocessor_free(Preprocessor* preprocessor)
+{
+    delete reinterpret_cast<anltk::Preprocessor*>(preprocessor);
 }
