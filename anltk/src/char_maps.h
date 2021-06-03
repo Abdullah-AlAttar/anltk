@@ -89,6 +89,7 @@ constexpr char32_t SMALL_ALEF = U'\u0670';
 constexpr char32_t SMALL_WAW  = U'\u06E5';
 constexpr char32_t SMALL_YEH  = U'\u06E6';
 
+
 extern const std::map<char32_t, char32_t> arabic_to_buckwalter_;
 extern const std::map<char32_t, char32_t> buckwalter_to_arabic_;
 

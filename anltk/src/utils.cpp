@@ -79,15 +79,6 @@ bool is_valid_kalima(const char* input)
         return false;
     }
 
-    text.pop_back();
-    for (auto it = text.begin(); it != text.end(); ++it)
-    {
-        if (*it == TEH_MARBOOTA || *it == ALEF_MAQSURA)
-        {
-            return false;
-        }
-    }
-
     // Three consecutive harakat
     if (text.length() > 3)
     {
@@ -99,6 +90,16 @@ bool is_valid_kalima(const char* input)
             }
         }
     }
+
+    text.pop_back();
+    for (auto it = text.begin(); it != text.end(); ++it)
+    {
+        if (*it == TEH_MARBOOTA || *it == ALEF_MAQSURA)
+        {
+            return false;
+        }
+    }
+
     return true;
 }
 
