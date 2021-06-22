@@ -127,6 +127,16 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(Preprocessor*, const
  * @return ANLTK_PUBLIC const* 
  */
 ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(Preprocessor*, const char* input);
+
+/**
+ * @brief Removes non alphapet 28 characters from the given arabic text
+ * @param input 
+ * @param stop_list list of "separator" separated list of characters that won't be removed each one should be a single character
+ * @param separator the separator used to split the stop_list, must be a single character
+ * @return const char* 
+ */
+ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(Preprocessor*, const char* input, const char* stop_list, const char* separator);
+
 /**
  * @brief Releases the preprocessor
  * 

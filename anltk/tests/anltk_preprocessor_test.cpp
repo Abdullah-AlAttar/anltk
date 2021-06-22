@@ -26,4 +26,35 @@ TEST_CASE("Presprocessor")
         REQUIRE(no_tashkeel == "الرحمٰن الرحيم"s);
         REQUIRE(anltk_preprocessor_remove_small(p, no_tashkeel) == "الرحمن الرحيم"s);
     }
+    
+}
+
+
+TEST_CASE("Presprocessor Remove non alpha")
+{
+    using namespace std::string_literals;
+    Preprocessor* p = anltk_preprocessor_new();
+
+    SUBCASE("Basic")
+    {
+        const char* input = "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ";
+        std::cout<< anltk_preprocessor_remove_non_alpha(p, input, " ", "")<<std::endl;
+        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " " , "") == "ولا أنتم عابدون ما أعبد"s);
+    }
+
+    SUBCASE("Mixed with non arabic ")
+    {
+        const char* input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+        std::cout<< anltk_preprocessor_remove_non_alpha(p, input, " ", "")<<std::endl;
+
+        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ", "") == "ولا أنتم عابدون ما أعبد"s);
+    }
+    SUBCASE("Remove multi speartor")
+    {
+        const char* input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+        std::cout<< anltk_preprocessor_remove_non_alpha(p, input, " ,!", ",") <<std::endl;
+
+        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ,!", ",") == "ولا !!!!أنتم عابدون ما أعبد"s);
+    }
+    
 }
