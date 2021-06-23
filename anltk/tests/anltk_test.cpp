@@ -8,7 +8,7 @@ TEST_CASE("testing the factorial function")
 {
     // tiny_utf8::string bw = anltk_ar_to_bw("w");
     // ;
-    // std::cout << anltk_ar_to_bw("w");
+    //  << anltk_ar_to_bw("w");
 
     // const char* text = "بسمء اللهص ءالرحمن الرحيم";
     // char* dad        = "\u0635";
@@ -19,10 +19,10 @@ TEST_CASE("testing the factorial function")
 
     // const tiny_utf8::string sad = dad;
     // std::for_each(str.rbegin(), str.rend(), [](char32_t codepoint) {
-    //     std::cout << (char32_t)codepoint << " " << std::endl;
+    //      << (char32_t)codepoint << " " << std::endl;
     // });
 
-    // std::cout << str.c_str() << std::endl;
+    //  << str.c_str() << std::endl;
     // for (auto i = str.begin(); i != str.end(); ++i)
     // {
     //     if (*i == sad.front())
@@ -31,10 +31,10 @@ TEST_CASE("testing the factorial function")
     //     }
     //     if (*i == bw.front())
     //     {
-    //         std::cout << "HAMZAA";
+    //          << "HAMZAA";
     //         REQUIRE(true);
     //     }
-    //     std::cout << (uint64_t)*i << " ";
+    //      << (uint64_t)*i << " ";
     // }
 }
 
@@ -46,7 +46,6 @@ TEST_CASE("Arabic to Buckwalter test C-api")
 
     const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
 
-    std::cout << bw_text << std::endl;
 
     const char* expected = ">bjd hwz HTy klmn sEfS qr$t vx* DZg";
 
@@ -63,7 +62,6 @@ TEST_CASE("Buckwalter to Arabic test C-api")
     const char* ar_text  = anltk_transliterator_convert(ttor, bw_text);
     const char* expected = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
 
-    std::cout << ar_text << std::endl;
     REQUIRE(std::string(ar_text) == std::string(expected));
 
     anltk_transliterator_free(ttor);
@@ -78,7 +76,6 @@ TEST_CASE("Buckwalter to Arabic Mixed ")
     const char* ar_text = anltk_transliterator_convert(ttor, bw_text);
     const char* expected = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ بسم الله 123";
 
-    std::cout << ar_text << std::endl;
     REQUIRE(std::string(ar_text) == std::string(expected));
 
     anltk_transliterator_free(ttor);

@@ -101,7 +101,7 @@ TEST_CASE("Is Alphabet")
         const char* ar_text = "أ";
         REQUIRE(anltk_is_arabic_alpha(ar_text) == true);
     }
-       SUBCASE("Basic2")
+    SUBCASE("Basic2")
     {
         const char* ar_text = "ذ";
         REQUIRE(anltk_is_arabic_alpha(ar_text) == true);

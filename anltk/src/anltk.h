@@ -43,7 +43,9 @@ public:
     ~Preprocessor() = default;
     const char* remove_tashkeel(const char* input);
     const char* remove_small(const char* input);
-    const char* remove_non_alpha(const char* input, const char* stop_list, const char* separator);
+    const char* remove_non_alpha(const char* input, const char* stop_list);
+    const char* remove_non_alphanumeric(const char* input, const char* stop_list);
+
 
 private:
     tiny_utf8::string result_;
@@ -63,17 +65,8 @@ bool is_small(char32_t c);
 
 bool is_small(const char* input);
 
+bool is_indic_digit(char32_t c);
 
-template<class ForwardIt, class UnaryPredicate>
-ForwardIt remove_if(ForwardIt first, ForwardIt last, UnaryPredicate p)
-{
-    first = std::find_if(first, last, p);
-    if (first != last)
-        for(ForwardIt i = first; ++i != last; )
-            if (!p(*i))
-                *first++ = std::move(*i);
-    return first;
-}
 
 template <typename Func>
 void erase_if(tiny_utf8::string& input, Func&& f)

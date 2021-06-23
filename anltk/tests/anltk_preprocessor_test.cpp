@@ -12,7 +12,6 @@ TEST_CASE("Presprocessor")
     {
         const char* input = "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ";
         
-        std::cout << anltk_preprocessor_remove_tashkeel(p, input) << std::endl;
         REQUIRE(anltk_preprocessor_remove_tashkeel(p, input) == "ولا أنتم عابدون ما أعبد"s);
     }
 
@@ -38,25 +37,49 @@ TEST_CASE("Presprocessor Remove non alpha")
     SUBCASE("Basic")
     {
         const char* input = "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ";
-        std::cout << anltk_preprocessor_remove_non_alpha(p, input, " ", "") << std::endl;
-        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ", "")
+        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ")
                 == "ولا أنتم عابدون ما أعبد"s);
     }
 
     SUBCASE("Mixed with non arabic ")
     {
         const char* input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
-        std::cout << anltk_preprocessor_remove_non_alpha(p, input, " ", "") << std::endl;
 
-        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ", "")
+        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ")
                 == "ولا أنتم عابدون ما أعبد"s);
     }
     SUBCASE("Remove multi speartor")
     {
         const char* input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
-        std::cout << anltk_preprocessor_remove_non_alpha(p, input, " ,!", ",") << std::endl;
 
-        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " ,!", ",")
+        REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " !")
                 == "ولا !!!!أنتم عابدون ما أعبد"s);
+    }
+}
+
+TEST_CASE("Presprocessor Remove non alphanmeric")
+{
+    using namespace std::string_literals;
+    Preprocessor* p = anltk_preprocessor_new();
+
+    SUBCASE("Basic")
+    {
+        const char* input = "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ";
+        REQUIRE(anltk_preprocessor_remove_non_alphanumeric(p, input, " ")
+                == "ولا أنتم عابدون ما أعبد"s);
+    }
+
+    SUBCASE("Mixed with non arabic ")
+    {
+        const char* input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+
+        REQUIRE(anltk_preprocessor_remove_non_alphanumeric(p, input, " ")
+                == "ولا أنتم 32عابدون ما أعبد"s);
+    }
+    SUBCASE("Remove multi speartor")
+    {
+        const char* input = "وَلَاd d!!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+        REQUIRE(anltk_preprocessor_remove_non_alphanumeric(p, input, " عd!")
+                == "ولاd d!!!!أنتمd 32عابدون ما أعبد"s);
     }
 }

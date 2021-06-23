@@ -5,5 +5,5 @@ anltk_sources = files([
     'transliteratation.cpp',
     'tafqeet.cpp',
     'utils.cpp',
-    'Preprocessor.cpp'
+    'preprocessor.cpp'
 ])

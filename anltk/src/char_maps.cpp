@@ -145,4 +145,6 @@ const std::array<char32_t, 9> tashkeel_list_
 
 const std::array<char32_t, 3> small_list_ = { SMALL_ALEF, SMALL_WAW, SMALL_YEH };
 
+const std::array<char32_t, 10> digits_
+    = { SEFR, WAHED, ETHNAN, THALATHA, ARBA3A, KHAMSA, SETTA, SAB3A, THAMANEYA, TES3A };
 } // namespace anltk

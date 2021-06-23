@@ -94,9 +94,11 @@ extern const std::map<char32_t, char32_t> arabic_to_buckwalter_;
 extern const std::map<char32_t, char32_t> buckwalter_to_arabic_;
 
 extern const std::array<char32_t, 37> alphabet_;
+
+
 extern const std::array<char32_t, 9> tashkeel_list_;
 extern const std::array<char32_t, 3> small_list_;
-
+extern const std::array<char32_t, 10> digits_;
 
 } // namespace anltk
 

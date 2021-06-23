@@ -8,6 +8,10 @@
 namespace anltk
 {
 
+bool is_indic_digit(char32_t c)
+{
+    return std::find(digits_.begin(), digits_.end(), c) != digits_.end();
+}
 bool is_tashkeel(const char* input)
 {
     tiny_utf8::string text = input;
