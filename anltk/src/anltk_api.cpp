@@ -63,20 +63,27 @@ const char* anltk_preprocessor_remove_small(Preprocessor* preprocessor, const ch
     return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->remove_small(input);
 }
 
-const char* anltk_preprocessor_remove_non_alpha(Preprocessor* preprocessor,
-                                                             const char* input,
-                                                             const char* stop_list)
+const char* anltk_preprocessor_remove_non_alpha(Preprocessor* preprocessor, const char* input,
+                                                const char* stop_list)
 
 {
     return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))
         ->remove_non_alpha(input, stop_list);
 }
-const char* anltk_preprocessor_remove_non_alphanumeric(Preprocessor*preprocessor, const char* input, const char* stop_list)
+const char* anltk_preprocessor_remove_non_alphanumeric(Preprocessor* preprocessor,
+                                                       const char* input, const char* stop_list)
 {
     return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))
         ->remove_non_alphanumeric(input, stop_list);
 }
 
+const char* anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(Preprocessor* preprocessor,
+                                                                    const char* input,
+                                                                    const char* stop_list)
+{
+    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))
+        ->remove_non_alphanumeric_and_tashkeel(input, stop_list);
+}
 
 void anltk_preprocessor_free(Preprocessor* preprocessor)
 {

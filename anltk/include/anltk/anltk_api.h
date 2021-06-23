@@ -146,6 +146,16 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(Preprocessor
 
 
 /**
+ * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and English) plus 
+ * tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
+ * @param input 
+ * @param stop_list strings containing list of characters that won't be removed. each one should be a single character
+ * @return const char* 
+ */
+ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(Preprocessor*, const char* input, const char* stop_list);
+
+
+/**
  * @brief Releases the preprocessor
  * 
  * @return ANLTK_PUBLIC 
