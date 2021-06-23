@@ -1,10 +1,8 @@
 #ifndef ANLTK_H
 #define ANLTK_H
-#include <string>
 #include <map>
+#include <string>
 #include <tinyutf8/tinyutf8.h>
-
-
 
 namespace anltk
 {
@@ -22,7 +20,7 @@ public:
 
 private:
     std::string result_;
-    const std::map<char32_t, char32_t> * chars_map_;
+    const std::map<char32_t, char32_t>* chars_map_;
 };
 
 class Mofaqqet
@@ -46,8 +44,9 @@ public:
     const char* remove_tashkeel(const char* input);
     const char* remove_small(const char* input);
     const char* remove_non_alpha(const char* input, const char* stop_list, const char* separator);
+
 private:
-    std::string result_;
+    tiny_utf8::string result_;
 };
 
 bool is_tashkeel(const char* input);
@@ -65,19 +64,32 @@ bool is_small(char32_t c);
 bool is_small(const char* input);
 
 
-template<typename Func>
-tiny_utf8::string remove_if(const tiny_utf8::string& input, Func && f)
+template<class ForwardIt, class UnaryPredicate>
+ForwardIt remove_if(ForwardIt first, ForwardIt last, UnaryPredicate p)
 {
+    first = std::find_if(first, last, p);
+    if (first != last)
+        for(ForwardIt i = first; ++i != last; )
+            if (!p(*i))
+                *first++ = std::move(*i);
+    return first;
+}
+
+template <typename Func>
+void erase_if(tiny_utf8::string& input, Func&& f)
+{
+    // input.erase(anltk::remove_if(input.begin(), input.end(), f), input.end());
+
     tiny_utf8::string output;
-    for(auto it = input.begin(); it != input.end() ; ++it)
+    for (auto it = input.begin(); it != input.end(); ++it)
     {
-        if(f(*it))
+        if (f(*it))
         {
             continue;
         }
-        output.append(tiny_utf8::string(*it));
+        output += *it;
     }
-    return output;
+    input = std::move(output);
 }
 } // namespace anltk
 

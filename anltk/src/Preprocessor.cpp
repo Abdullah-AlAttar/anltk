@@ -11,19 +11,21 @@ Preprocessor::Preprocessor()
 {
 }
 
+
+
 const char* Preprocessor::remove_tashkeel(const char* input)
 {
-    tiny_utf8::string utf_ar_text = input;
-    this->result_
-        = anltk::remove_if(input, [](char32_t c) { return anltk::is_tashkeel(c); }).cpp_str();
+    this->result_ = input;
+    anltk::erase_if(this->result_, [](const tiny_utf8::string::value_type&c) { return anltk::is_tashkeel(c); });
+
     return this->result_.c_str();
 }
 
 const char* Preprocessor::remove_small(const char* input)
 {
-    tiny_utf8::string utf_ar_text = input;
-    this->result_
-        = anltk::remove_if(input, [](char32_t c) { return anltk::is_small(c); }).cpp_str();
+    this->result_ = input;
+    anltk::erase_if(this->result_, [](char32_t c) { return anltk::is_small(c); });
+
     return this->result_.c_str();
 }
 
@@ -57,21 +59,21 @@ std::vector<char32_t> get_stop_list(const char* stop_list, const char* separator
         buffer += *it;
     }
     stop_list_vec.push_back(buffer.front());
-    std::cout << stop_list <<" "<< sep <<" "<< separator << " : "<<stop_list_vec.size() << std::endl;
+    std::cout << stop_list << " " << sep << " " << separator << " : " << stop_list_vec.size()
+              << std::endl;
     return stop_list_vec;
 }
 const char* Preprocessor::remove_non_alpha(const char* input, const char* stop_list,
                                            const char* separator)
 {
-    tiny_utf8::string utf_ar_text   = input;
+    this->result_ = input;
 
     std::vector<char32_t> stop_list_vec = get_stop_list(stop_list, separator);
 
-    this->result_ = anltk::remove_if(input, [&stop_list_vec](char32_t c) {
-                        return !anltk::is_arabic_alpha(c)
-                            && std::find(stop_list_vec.begin(), stop_list_vec.end(), c)
-                            == stop_list_vec.end();
-                    }).cpp_str();
+    anltk::erase_if(result_, [&stop_list_vec](char32_t c) {
+        return !anltk::is_arabic_alpha(c)
+            && std::find(stop_list_vec.begin(), stop_list_vec.end(), c) == stop_list_vec.end();
+    });
 
     return this->result_.c_str();
 }
