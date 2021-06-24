@@ -65,13 +65,33 @@ class Preprocessor:
 
     def remove_tashkeel(self, input: str) -> str:
         return _ffi.string(
-            _c.anltk_preprocessor_remove_tashkeel(self._handle, input.encode('utf-8'))
-        ).decode('utf-8')
-    def remove_small(self, input: str) -> str:
-        return _ffi.string(
-            _c.anltk_preprocessor_remove_small(self._handle, input.encode('utf-8'))
+            _c.anltk_preprocessor_remove_tashkeel(
+                self._handle, input.encode('utf-8'))
         ).decode('utf-8')
 
+    def remove_small(self, input: str) -> str:
+        return _ffi.string(
+            _c.anltk_preprocessor_remove_small(
+                self._handle, input.encode('utf-8'))
+        ).decode('utf-8')
+
+    def remove_non_alpha(self, input: str, stop_list: str):
+        return _ffi.string(
+            _c.anltk_preprocessor_remove_nona_alpha(
+                self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
+        ).decode('utf-8')
+
+    def remove_non_alphanumeric(self, input: str, stop_list: str):
+        return _ffi.string(
+            _c.anltk_preprocessor_remove_nona_alphanumeric(
+                self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
+        ).decode('utf-8')
+
+    def remove_non_alphanumeric_and_tashkeel(self, input: str, stop_list: str):
+        return _ffi.string(
+            _c.anltk_preprocessor_remove_nona_alphanumeric_and_tashkeel(
+                self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
+        ).decode('utf-8')
 
 
 def ar_to_bw(text: str) -> str:
@@ -102,10 +122,12 @@ def is_tashkeel(input_text: str) -> bool:
 def is_arabic_alpha(input_text: str) -> bool:
     return _c.anltk_is_arabic_alpha(input_text.encode('utf-8'))
 
-def remove_tashkeel(input_text : str) -> str:
+
+def remove_tashkeel(input_text: str) -> str:
     p = Preprocessor()
     return p.remove_tashkeel(input_text)
 
-def remove_small(input_text : str) -> str:
+
+def remove_small(input_text: str) -> str:
     p = Preprocessor()
     return p.remove_small(input_text)

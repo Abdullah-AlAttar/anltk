@@ -27,6 +27,7 @@ TEST_CASE("Presprocessor")
         REQUIRE(no_tashkeel == "الرحمٰن الرحيم"s);
         REQUIRE(anltk_preprocessor_remove_small(p, no_tashkeel) == "الرحمن الرحيم"s);
     }
+    anltk_preprocessor_free(p);
 }
 
 TEST_CASE("Presprocessor Remove non alpha")
@@ -53,6 +54,7 @@ TEST_CASE("Presprocessor Remove non alpha")
         REQUIRE(anltk_preprocessor_remove_non_alpha(p, input, " !")
                 == "ولا !!!!أنتم عابدون ما أعبد"s);
     }
+    anltk_preprocessor_free(p);
 }
 
 TEST_CASE("Presprocessor Remove non alphanmeric")
@@ -80,6 +82,7 @@ TEST_CASE("Presprocessor Remove non alphanmeric")
         REQUIRE(anltk_preprocessor_remove_non_alphanumeric(p, input, " عd!")
                 == "ولاd d!!!!أنتمd 32عابدون ما أعبد"s);
     }
+    anltk_preprocessor_free(p);
 }
 
 TEST_CASE("Presprocessor Remove non alphanmeric and tashkeel")
@@ -111,4 +114,5 @@ TEST_CASE("Presprocessor Remove non alphanmeric and tashkeel")
 
         REQUIRE(found == "وَلَاd dأَنتُمْd 32عَابِدُونَ مَا أَعْبُدُ"s);
     }
+    anltk_preprocessor_free(p);
 }

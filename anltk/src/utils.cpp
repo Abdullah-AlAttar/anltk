@@ -77,6 +77,12 @@ bool is_valid_kalima(const char* input)
         return false;
     }
 
+    const char32_t* double_taa_teh_marboota = U"\u0629\u0629";
+    if (text.find(double_taa_teh_marboota) != tiny_utf8::string::npos)
+    {
+        return false;
+    }
+
     const char32_t space = U' ';
     if (text.find(space) != tiny_utf8::string::npos)
     {
@@ -95,6 +101,7 @@ bool is_valid_kalima(const char* input)
         }
     }
 
+    // TEH_MARBOOTA or ALEF_MQSURA not at the end
     text.pop_back();
     for (auto it = text.begin(); it != text.end(); ++it)
     {

@@ -51,6 +51,11 @@ TEST_CASE("Valid Kalima")
         const char* ar_text = "ىاًَُ لةيلى";
         REQUIRE(anltk_is_valid_kalima(ar_text) == false);
     }
+       SUBCASE(" double Teh Marbuta")
+    {
+        const char* ar_text = "ىا لةةيلى";
+        REQUIRE(anltk_is_valid_kalima(ar_text) == false);
+    }
 
     SUBCASE("Valid")
     {

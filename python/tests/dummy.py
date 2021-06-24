@@ -40,3 +40,6 @@ print(anltk.is_arabic_alpha('ي'))
 print(anltk.remove_tashkeel('بًسَمُ اللهّ'))
 
 print(anltk.remove_small('ّبسٍم الله'))
+
+def test_transliatator():
+	assert True
