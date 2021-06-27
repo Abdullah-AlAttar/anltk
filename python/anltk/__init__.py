@@ -132,16 +132,17 @@ def remove_small(input_text: str) -> str:
     p = Preprocessor()
     return p.remove_small(input_text)
 
+
 def remove_non_alpha(input: str, stop_list: str):
     p = Preprocessor()
-    return p.remove_non_alpha(input. stop_list)
+    return p.remove_non_alpha(input, stop_list)
+
 
 def remove_non_alphanumeric(input: str, stop_list: str):
     p = Preprocessor()
-    return p.remove_non_alphanumeric(input. stop_list)
+    return p.remove_non_alphanumeric(input,stop_list)
 
 
 def remove_non_alphanumeric_and_tashkeel(input: str, stop_list: str):
     p = Preprocessor()
-    return p.remove_non_alphanumeric_and_tashkeel(input. stop_list)
-
+    return p.remove_non_alphanumeric_and_tashkeel(input, stop_list)
