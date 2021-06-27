@@ -89,7 +89,7 @@ class Preprocessor:
 
     def remove_non_alphanumeric_and_tashkeel(self, input: str, stop_list: str):
         return _ffi.string(
-            _c.anltk_preprocessor_remove_nona_alphanumeric_and_tashkeel(
+            _c.anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(
                 self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
         ).decode('utf-8')
 

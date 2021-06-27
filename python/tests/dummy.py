@@ -43,3 +43,6 @@ print(anltk.remove_small('ّبسٍم الله'))
 
 def test_transliatator():
 	assert True
+
+
+print(anltk.remove_non_alphanumeric_and_tashkeel("بسم الله", " "))
