@@ -24,8 +24,8 @@ Transliterator::Transliterator(Mappings mapping)
 
 const char* Transliterator::convert(const char* input)
 {
-    tiny_utf8::string utf_ar_text = input;
-    tiny_utf8::string utf_bw_text = utf_ar_text;
+    string_t utf_ar_text = input;
+    string_t utf_bw_text = utf_ar_text;
 
     for (size_t i = 0; i < utf_ar_text.length(); ++i)
     {

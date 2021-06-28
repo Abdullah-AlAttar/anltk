@@ -102,7 +102,8 @@ TEST_CASE("Presprocessor Remove non alphanmeric and tashkeel")
     {
         const char* input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
         const char* found = anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(p, input, " ");
-
+// وَلَا أأأأأأَنتُمْ 32ععععَابِدُونَ مَا أَعْبُدُ
+// وَلَا أَنتُمْ 32عَابِدُونَ مَا أَعْبُدُبُدُ
         std::cout << found << std::endl;
         REQUIRE(found == "وَلَا أَنتُمْ 32عَابِدُونَ مَا أَعْبُدُ"s);
     }

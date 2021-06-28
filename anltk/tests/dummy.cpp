@@ -6,12 +6,11 @@
 
 int main()
 {
-    tiny_utf8::string str = u8"Hello 🌍 World";
+    tiny_utf8::string str = "!!مرحبا !! بكم!";    std::cout << str << std::endl;
 
-    std::cout << str << std::endl;
-
-    str.erase(std::remove_if(str.begin(), str.end(), [](auto c) { return c == 'W'; }),
+    str.erase(std::remove_if(str.begin(), str.end(), [](char32_t c) { return c == U'!'; }),
               str.end());
-
     std::cout << str << std::endl;
+    // مرحبا  بكم�!
 }
+

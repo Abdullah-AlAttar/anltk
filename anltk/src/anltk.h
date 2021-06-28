@@ -6,6 +6,11 @@
 
 namespace anltk
 {
+
+
+using string_t = tiny_utf8::string;
+// using string_t = std::u32string;
+
 enum class Mappings
 {
     AR2BW,
@@ -48,7 +53,7 @@ public:
     const char* remove_non_alphanumeric_and_tashkeel(const char* input, const char* stop_list);
 
 private:
-    tiny_utf8::string result_;
+    string_t result_;
 };
 
 bool is_tashkeel(const char* input);
@@ -68,11 +73,12 @@ bool is_small(const char* input);
 bool is_indic_digit(char32_t c);
 
 template <typename Func>
-void erase_if(tiny_utf8::string& input, Func&& f)
+void erase_if(string_t& input, Func&& f)
 {
-    // input.erase(anltk::remove_if(input.begin(), input.end(), f), input.end());
-
-    tiny_utf8::string output;
+    // TODO(Abdullah): This needs improvement
+    // input.erase(std::remove_if(input.begin(), input.end(), f), input.end());
+    // return;
+    string_t output;
     for (auto it = input.begin(); it != input.end(); ++it)
     {
         if (f(*it))

@@ -14,7 +14,7 @@ bool is_indic_digit(char32_t c)
 }
 bool is_tashkeel(const char* input)
 {
-    tiny_utf8::string text = input;
+    string_t text = input;
     if (text.length() > 1)
     {
         return false;
@@ -29,7 +29,7 @@ bool is_tashkeel(char32_t c)
 
 bool is_arabic_alpha(const char* input)
 {
-    tiny_utf8::string text = input;
+    string_t text = input;
     if (text.length() > 1)
     {
         return false;
@@ -49,7 +49,7 @@ bool is_small(char32_t c)
 
 bool is_small(const char* input)
 {
-    tiny_utf8::string text = input;
+    string_t text = input;
     if (text.length() > 1)
     {
         return false;
@@ -59,7 +59,7 @@ bool is_small(const char* input)
 
 bool is_valid_kalima(const char* input)
 {
-    tiny_utf8::string text = input;
+    string_t text = input;
     if (text.empty())
     {
         return false;
@@ -72,19 +72,19 @@ bool is_valid_kalima(const char* input)
     }
 
     const char32_t* double_shadda = U"\u0651\u0651";
-    if (text.find(double_shadda) != tiny_utf8::string::npos)
+    if (text.find(double_shadda) != string_t::npos)
     {
         return false;
     }
 
     const char32_t* double_taa_teh_marboota = U"\u0629\u0629";
-    if (text.find(double_taa_teh_marboota) != tiny_utf8::string::npos)
+    if (text.find(double_taa_teh_marboota) != string_t::npos)
     {
         return false;
     }
 
     const char32_t space = U' ';
-    if (text.find(space) != tiny_utf8::string::npos)
+    if (text.find(space) != string_t::npos)
     {
         return false;
     }
