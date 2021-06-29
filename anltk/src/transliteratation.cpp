@@ -24,20 +24,16 @@ Transliterator::Transliterator(Mappings mapping)
 
 const char* Transliterator::convert(const char* input)
 {
-    // string_t utf_ar_text = input;
     this->result_ = input;
-    // string_t utf_bw_text = utf_ar_text;
-
-    for (size_t i = 0; i < result_.length(); ++i)
+    for (auto it = this->result_.begin(); it != this->result_.end(); ++it)
     {
-        const auto& rune = result_[i];
-
-        auto node = this->chars_map_->find(rune);
-
-        result_[i] = (node == this->chars_map_->cend()) ? rune : node->second;
+        auto node = this->chars_map_->find(*it);
+        
+        if (node != this->chars_map_->end())
+        {
+            *it = node->second;
+        }
     }
-    
-    // this->result_ = utf_bw_text.cpp_str();
     return this->result_.c_str();
 }
 
