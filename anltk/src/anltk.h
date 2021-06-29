@@ -75,19 +75,20 @@ bool is_indic_digit(char32_t c);
 template <typename Func>
 void erase_if(string_t& input, Func&& f)
 {
-    // TODO(Abdullah): This needs improvement
-    // input.erase(std::remove_if(input.begin(), input.end(), f), input.end());
-    // return;
-    string_t output;
-    for (auto it = input.begin(); it != input.end(); ++it)
-    {
-        if (f(*it))
-        {
-            continue;
-        }
-        output += *it;
-    }
-    input = std::move(output);
+    TODO(Abdullah): This needs improvement
+    input.erase(std::remove_if(input.begin(), input.end(), f), input.end());
+    return;
+
+    // string_t output;
+    // for (auto it = input.begin(); it != input.end(); ++it)
+    // {
+    //     if (f(*it))
+    //     {
+    //         continue;
+    //     }
+    //     output += *it;
+    // }
+    // input = std::move(output);
 }
 } // namespace anltk
 
