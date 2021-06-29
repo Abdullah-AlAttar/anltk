@@ -53,6 +53,20 @@ TEST_CASE("Arabic to Buckwalter test C-api")
     anltk_transliterator_free(ttor);
 }
 
+TEST_CASE("Arabic to Buckwalter test C-api mixed")
+{
+    Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+
+    const char* ar_text = "أبجد هوزd حطي كلمن سعفص3 قرشت ثخذ ضظغ";
+
+    const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
+
+    const char* expected = ">bjd hwzd HTy klmn sEfS3 qr$t vx* DZg";
+
+    REQUIRE(std::string(bw_text) == std::string(expected));
+    anltk_transliterator_free(ttor);
+}
+
 TEST_CASE("Buckwalter to Arabic test C-api")
 {
     Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);

@@ -24,7 +24,7 @@ public:
     const char* convert(const char*);
 
 private:
-    std::string result_;
+    string_t result_;
     const std::map<char32_t, char32_t>* chars_map_;
 };
 
@@ -36,7 +36,7 @@ public:
     const char* tafqeet(long long number);
 
 private:
-    std::string result_;
+    string_t result_;
     bool is_ordinal_;
     bool is_feminine_;
 };
@@ -75,7 +75,6 @@ bool is_indic_digit(char32_t c);
 template <typename Func>
 void erase_if(string_t& input, Func&& f)
 {
-    TODO(Abdullah): This needs improvement
     input.erase(std::remove_if(input.begin(), input.end(), f), input.end());
     return;
 
