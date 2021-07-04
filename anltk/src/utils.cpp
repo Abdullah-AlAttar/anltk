@@ -1,8 +1,8 @@
 #include "anltk.h"
 #include "char_maps.h"
 
-#include <tinyutf8/tinyutf8.h>
 
+#include "utf8.h"
 #include <algorithm>
 
 namespace anltk
@@ -12,14 +12,15 @@ bool is_indic_digit(char32_t c)
 {
     return std::find(digits_.begin(), digits_.end(), c) != digits_.end();
 }
-bool is_tashkeel(const char* input)
+bool is_tashkeel(string_view_t input)
 {
-    string_t text = input;
-    if (text.length() > 1)
+    auto start = input.begin();
+    auto end   = input.end();
+    if (utf8::distance(start, end) > 1)
     {
         return false;
     }
-    return is_tashkeel(text.front());
+    return is_tashkeel(utf8::next(start, end));
 }
 
 bool is_tashkeel(char32_t c)
@@ -27,14 +28,15 @@ bool is_tashkeel(char32_t c)
     return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
 }
 
-bool is_arabic_alpha(const char* input)
+bool is_arabic_alpha(string_view_t input)
 {
-    string_t text = input;
-    if (text.length() > 1)
+    auto start = input.begin();
+    auto end   = input.end();
+    if (utf8::distance(start, end) > 1)
     {
         return false;
     }
-    return is_arabic_alpha(text.front());
+    return is_arabic_alpha(utf8::next(start, end));
 }
 
 bool is_arabic_alpha(char32_t c)
@@ -47,23 +49,27 @@ bool is_small(char32_t c)
     return std::find(small_list_.begin(), small_list_.end(), c) != small_list_.end();
 }
 
-bool is_small(const char* input)
+bool is_small(string_view_t input)
 {
-    string_t text = input;
-    if (text.length() > 1)
+    auto start = input.begin();
+    auto end   = input.end();
+    if (utf8::distance(start, end) > 1)
     {
         return false;
     }
-    return is_small(text.front());
+    return is_small(utf8::next(start, end));
 }
 
-bool is_valid_kalima(const char* input)
+bool is_valid_kalima(string_view_t input)
 {
-    string_t text = input;
+
+    std::u32string text = to_32string(input);
+    
     if (text.empty())
     {
         return false;
     }
+
     auto first_letter = text.front();
     if (is_tashkeel(first_letter) || first_letter == WAW_HAMZA_ABOVE
         || first_letter == YEH_HAMZA_ABOVE)
@@ -112,6 +118,19 @@ bool is_valid_kalima(const char* input)
     }
 
     return true;
+}
+
+std::u32string to_32string(string_view_t input)
+{
+    auto start = input.begin();
+    auto end   = input.end();
+
+    std::u32string text;
+    while (start < end)
+    {
+        text += utf8::next(start, end);
+    }
+    return text;
 }
 
 } // namespace anltk

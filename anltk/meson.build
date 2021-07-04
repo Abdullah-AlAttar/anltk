@@ -24,13 +24,13 @@ anltk_lib = library('anltk',
   install : true,
   cpp_args : anltk_cpp_args,
   gnu_symbol_visibility : 'hidden',
-  dependencies: [tiny_utf8_dep, utfcpp_dep],
+  dependencies: [utfcpp_dep],
 )
 
 anltk_dep = declare_dependency(
   include_directories: include_directories('.', './include'),
   link_with : anltk_lib,
-  dependencies : [CXX.find_library('dl'),tiny_utf8_dep, utfcpp_dep]
+  dependencies : [CXX.find_library('dl'), utfcpp_dep]
 )
 
 

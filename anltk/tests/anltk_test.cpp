@@ -2,7 +2,6 @@
 
 #include "doctest.h"
 #include <iostream>
-#include <tinyutf8/tinyutf8.h>
 
 TEST_CASE("testing the factorial function")
 {
