@@ -39,7 +39,7 @@ TEST_CASE("testing the factorial function")
 
 TEST_CASE("Arabic to Buckwalter test C-api")
 {
-    Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
 
     const char* ar_text = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
 
@@ -54,7 +54,7 @@ TEST_CASE("Arabic to Buckwalter test C-api")
 
 TEST_CASE("Arabic to Buckwalter test C-api mixed")
 {
-    Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
 
     const char* ar_text = "أبجد هوزd حطي كلمن سعفص3 قرشت ثخذ ضظغ";
 
@@ -68,7 +68,7 @@ TEST_CASE("Arabic to Buckwalter test C-api mixed")
 
 TEST_CASE("Buckwalter to Arabic test C-api")
 {
-    Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
+    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
 
     const char* bw_text = ">bjd hwz HTy klmn sEfS qr$t vx* DZg";
 
@@ -82,7 +82,7 @@ TEST_CASE("Buckwalter to Arabic test C-api")
 
 TEST_CASE("Buckwalter to Arabic Mixed ")
 {
-    Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
+    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
 
     const char* bw_text = ">bjd hwz HTy klmn sEfS qr$t vx* DZg بسم الله 123";
 

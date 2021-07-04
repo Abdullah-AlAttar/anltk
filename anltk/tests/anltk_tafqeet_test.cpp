@@ -6,7 +6,7 @@
 TEST_CASE("Testing Cardinal Masculine")
 {
     using namespace std::string_literals;
-    Mofaqqet* mof = anltk_mofaqqet_new(false, false);
+    ANLTK_Mofaqqet* mof = anltk_mofaqqet_new(false, false);
 
     CHECK(std::string(anltk_mofaqqet_tafqeet(mof, 0)) == "صفر"s);
     CHECK(std::string(anltk_mofaqqet_tafqeet(mof, 0)) == "صفر"s);
@@ -80,7 +80,7 @@ TEST_CASE("Testing Ordinal Masculine")
 {
     using namespace std::string_literals;
 
-    Mofaqqet* mof = anltk_mofaqqet_new(true, false);
+    ANLTK_Mofaqqet* mof = anltk_mofaqqet_new(true, false);
 
     CHECK(std::string(anltk_mofaqqet_tafqeet(mof, 0)) == "الصفر"s);
 
@@ -114,7 +114,7 @@ TEST_CASE("Testing Ordinal Feminine")
 {
     using namespace std::string_literals;
 
-    Mofaqqet* mof = anltk_mofaqqet_new(true, true);
+    ANLTK_Mofaqqet* mof = anltk_mofaqqet_new(true, true);
 
     CHECK(std::string(anltk_mofaqqet_tafqeet(mof, 0)) == "الصفر"s);
 
@@ -147,7 +147,7 @@ TEST_CASE("Testing Cardinal Feminine")
 {
     using namespace std::string_literals;
     // TODO(abdullah): not sure about these
-    Mofaqqet* mof = anltk_mofaqqet_new(false, true);
+    ANLTK_Mofaqqet* mof = anltk_mofaqqet_new(false, true);
 
     CHECK(std::string(anltk_mofaqqet_tafqeet(mof, 0)) == "صفر"s);
 

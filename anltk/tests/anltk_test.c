@@ -3,7 +3,7 @@
 
 int main()
 {
-    Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
 
     const char* ar_text = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
 

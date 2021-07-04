@@ -30,7 +30,7 @@ int main(int argc, char** argv)
     std::ofstream out_file;
     out_file.open("utfcpp.txt");
     std::string output;
-    Preprocessor* pp = anltk_preprocessor_new();
+    ANLTK_Preprocessor* pp = anltk_preprocessor_new();
     std::cout << timeFuncInvocation([&]() {
        output = anltk_preprocessor_remove_tashkeel(pp, str.c_str());
     }) << " s" << std::endl;

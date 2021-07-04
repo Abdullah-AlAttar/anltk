@@ -6,7 +6,7 @@
 TEST_CASE("Presprocessor")
 {
     using namespace std::string_literals;
-    Preprocessor* p = anltk_preprocessor_new();
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
 
     SUBCASE("Basic")
     {
@@ -33,7 +33,7 @@ TEST_CASE("Presprocessor")
 TEST_CASE("Presprocessor Remove non alpha")
 {
     using namespace std::string_literals;
-    Preprocessor* p = anltk_preprocessor_new();
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
 
     SUBCASE("Basic")
     {
@@ -60,7 +60,7 @@ TEST_CASE("Presprocessor Remove non alpha")
 TEST_CASE("Presprocessor Remove non alphanmeric")
 {
     using namespace std::string_literals;
-    Preprocessor* p = anltk_preprocessor_new();
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
 
     SUBCASE("Basic")
     {
@@ -88,7 +88,7 @@ TEST_CASE("Presprocessor Remove non alphanmeric")
 TEST_CASE("Presprocessor Remove non alphanmeric and tashkeel")
 {
     using namespace std::string_literals;
-    Preprocessor* p = anltk_preprocessor_new();
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
 
     SUBCASE("Basic")
     {
