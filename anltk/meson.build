@@ -19,7 +19,7 @@ subdir('src')
 anltk_cpp_args = ['-DBUILDING_ANLTK']
 
 anltk_lib = library('anltk', 
-  include_directories: include_directories('.', './include'),
+  include_directories: include_directories('.', './include' , './src'),
   sources : anltk_sources,
   install : true,
   cpp_args : anltk_cpp_args,

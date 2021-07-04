@@ -29,7 +29,7 @@ const char* Transliterator::convert(string_view_t input)
     auto end   = input.end();
     while (start < end)
     {
-        char32_t next = utf8::next(start, end);
+        char_t next = utf8::next(start, end);
 
         auto node = this->chars_map_->find(next);
 

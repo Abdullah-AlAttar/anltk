@@ -8,7 +8,7 @@
 namespace anltk
 {
 
-bool is_indic_digit(char32_t c)
+bool is_indic_digit(char_t c)
 {
     return std::find(digits_.begin(), digits_.end(), c) != digits_.end();
 }
@@ -23,7 +23,7 @@ bool is_tashkeel(string_view_t input)
     return is_tashkeel(utf8::next(start, end));
 }
 
-bool is_tashkeel(char32_t c)
+bool is_tashkeel(char_t c)
 {
     return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
 }
@@ -39,12 +39,12 @@ bool is_arabic_alpha(string_view_t input)
     return is_arabic_alpha(utf8::next(start, end));
 }
 
-bool is_arabic_alpha(char32_t c)
+bool is_arabic_alpha(char_t c)
 {
     return std::find(alphabet_.begin(), alphabet_.end(), c) != alphabet_.end();
 }
 
-bool is_small(char32_t c)
+bool is_small(char_t c)
 {
     return std::find(small_list_.begin(), small_list_.end(), c) != small_list_.end();
 }
@@ -77,19 +77,19 @@ bool is_valid_kalima(string_view_t input)
         return false;
     }
 
-    const char32_t* double_shadda = U"\u0651\u0651";
+    const char_t* double_shadda = U"\u0651\u0651";
     if (text.find(double_shadda) != string_t::npos)
     {
         return false;
     }
 
-    const char32_t* double_taa_teh_marboota = U"\u0629\u0629";
+    const char_t* double_taa_teh_marboota = U"\u0629\u0629";
     if (text.find(double_taa_teh_marboota) != string_t::npos)
     {
         return false;
     }
 
-    const char32_t space = U' ';
+    const char_t space = U' ';
     if (text.find(space) != string_t::npos)
     {
         return false;
