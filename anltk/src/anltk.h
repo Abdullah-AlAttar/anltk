@@ -4,12 +4,12 @@
 
 #include <map>
 
+#include <anltk_algorihtm.h>
 #include <anltk_typedefs.h>
 
 namespace anltk
 {
 
-// using string_t = std::u32string;
 
 enum class Mappings
 {
@@ -48,9 +48,9 @@ public:
     ~Preprocessor() = default;
     const char* remove_tashkeel(string_view_t input);
     const char* remove_small(string_view_t input);
-    const char* remove_non_alpha(string_view_t input, const char* stop_list);
-    const char* remove_non_alphanumeric(string_view_t input, const char* stop_list);
-    const char* remove_non_alphanumeric_and_tashkeel(string_view_t input, const char* stop_list);
+    const char* remove_non_alpha(string_view_t input, string_view_t stop_list);
+    const char* remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
+    const char* remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
 
 private:
     string_t result_;
@@ -73,26 +73,6 @@ bool is_small(string_view_t input);
 bool is_indic_digit(char_t c);
 
 std::u32string to_32string(string_view_t input);
-
-template <typename Func>
-string_t anltk_erase_if(string_view_t input, Func&& f)
-{
-    auto start = input.begin();
-    auto end   = input.end();
-
-    string_t output;
-
-    while (start < end)
-    {
-        char_t next = utf8::next(start, end);
-        if (!f(next))
-        {
-            utf8::append(next, output);
-        }
-    }
-
-    return output;
-}
 
 } // namespace anltk
 

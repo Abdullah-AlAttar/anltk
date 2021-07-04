@@ -25,7 +25,7 @@ const char* Preprocessor::remove_small(string_view_t input)
     return this->result_.c_str();
 }
 
-const char* Preprocessor::remove_non_alpha(string_view_t input, const char* stop_list)
+const char* Preprocessor::remove_non_alpha(string_view_t input, string_view_t stop_list)
 {
     this->result_ = input;
 
@@ -39,7 +39,7 @@ const char* Preprocessor::remove_non_alpha(string_view_t input, const char* stop
     return this->result_.c_str();
 }
 
-const char* Preprocessor::remove_non_alphanumeric(string_view_t input, const char* stop_list)
+const char* Preprocessor::remove_non_alphanumeric(string_view_t input, string_view_t stop_list)
 {
 
     this->result_ = input;
@@ -55,7 +55,7 @@ const char* Preprocessor::remove_non_alphanumeric(string_view_t input, const cha
 }
 
 const char* Preprocessor::remove_non_alphanumeric_and_tashkeel(string_view_t input,
-                                                               const char* stop_list)
+                                                               string_view_t stop_list)
 {
 
     this->result_ = input;
