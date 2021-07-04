@@ -1,5 +1,6 @@
 #ifndef ANLTK_H
 #define ANLTK_H
+#include "utf8.h"
 #include <map>
 #include <string>
 #include <tinyutf8/tinyutf8.h>
@@ -7,8 +8,8 @@
 namespace anltk
 {
 
-
 using string_t = tiny_utf8::string;
+using string_view_t = std::string_view;
 // using string_t = std::u32string;
 
 enum class Mappings
@@ -21,10 +22,10 @@ class Transliterator
 public:
     Transliterator(Mappings);
     ~Transliterator() = default;
-    const char* convert(const char*);
+    const char* convert(string_view_t);
 
 private:
-    string_t result_;
+    std::string result_;
     const std::map<char32_t, char32_t>* chars_map_;
 };
 
@@ -53,7 +54,7 @@ public:
     const char* remove_non_alphanumeric_and_tashkeel(const char* input, const char* stop_list);
 
 private:
-    string_t result_;
+    std::string result_;
 };
 
 bool is_tashkeel(const char* input);
@@ -73,7 +74,37 @@ bool is_small(const char* input);
 bool is_indic_digit(char32_t c);
 
 template <typename Func>
-void erase_if(string_t& input, Func&& f)
+std::string anltk_for_each(std::string_view& input, Func&& f)
+{
+    auto start = input.begin();
+    auto end   = input.end();
+    std::string output;
+    while (start < end)
+    {
+        utf8::append(f(utf8::next(start, end)), output);
+    }
+    return output;
+}
+
+// template <typename Func>
+// std::string anltk_erase_if(std::string_view& input, Func&& f)
+// {
+//     auto start = input.begin();
+//     auto end   = input.end();
+//     std::string output;
+//     while (start < end)
+//     {
+
+//         if (!f(next))
+//         {
+//             utf8::append(next, output);
+//         }
+//     }
+//     return output;
+// }
+
+template <typename Func>
+void erase_if(std::string& input, Func&& f)
 {
     input.erase(std::remove_if(input.begin(), input.end(), f), input.end());
     return;

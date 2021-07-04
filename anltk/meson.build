@@ -1,9 +1,14 @@
 project('anltk', 'c', 'cpp',
   version : '0.1',
-  default_options : ['warning_level=3', 'cpp_std=c++14'])
+  default_options : ['warning_level=3', 'cpp_std=c++17'])
 
 
 CXX = meson.get_compiler('cpp')
+
+
+utfcpp_dep = declare_dependency(
+    include_directories : include_directories('./third_party/utfcpp/source')
+)
 
 tiny_utf8_dep = declare_dependency(
   include_directories : include_directories('./third_party/tiny-utf8/include')
@@ -19,13 +24,13 @@ anltk_lib = library('anltk',
   install : true,
   cpp_args : anltk_cpp_args,
   gnu_symbol_visibility : 'hidden',
-  dependencies: [tiny_utf8_dep],
+  dependencies: [tiny_utf8_dep, utfcpp_dep],
 )
 
 anltk_dep = declare_dependency(
   include_directories: include_directories('.', './include'),
   link_with : anltk_lib,
-  dependencies : [CXX.find_library('dl'), tiny_utf8_dep]
+  dependencies : [CXX.find_library('dl'),tiny_utf8_dep, utfcpp_dep]
 )
 
 

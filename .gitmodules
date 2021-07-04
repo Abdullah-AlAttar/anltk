@@ -1,3 +1,6 @@
 [submodule "anltk/third_party/tiny-utf8"]
 	path = anltk/third_party/tiny-utf8
 	url = https://github.com/DuffsDevice/tiny-utf8.git
+[submodule "anltk/third_party/utfcpp"]
+	path = anltk/third_party/utfcpp
+	url = https://github.com/nemtrif/utfcpp.git

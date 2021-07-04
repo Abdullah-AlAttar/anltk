@@ -1,7 +1,7 @@
 #include "anltk.h"
 #include "char_maps.h"
 #include <iostream>
-#include <tinyutf8/tinyutf8.h>
+// #include <tinyutf8/tinyutf8.h>
 
 namespace anltk
 {
@@ -22,17 +22,18 @@ Transliterator::Transliterator(Mappings mapping)
     }
 }
 
-const char* Transliterator::convert(const char* input)
+const char* Transliterator::convert(string_view_t input)
 {
-    this->result_ = input;
-    for (auto it = this->result_.begin(); it != this->result_.end(); ++it)
+
+    auto start = input.begin();
+    auto end   = input.end();
+    while (start < end)
     {
-        auto node = this->chars_map_->find(*it);
-        
-        if (node != this->chars_map_->end())
-        {
-            *it = node->second;
-        }
+        char32_t next = utf8::next(start, end);
+
+        auto node = this->chars_map_->find(next);
+
+        utf8::append(node != this->chars_map_->end() ? node->second : next, this->result_);
     }
     return this->result_.c_str();
 }
