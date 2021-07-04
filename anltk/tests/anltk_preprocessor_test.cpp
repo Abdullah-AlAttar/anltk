@@ -115,5 +115,14 @@ TEST_CASE("Presprocessor Remove non alphanmeric and tashkeel")
 
         REQUIRE(found == "وَلَاd dأَنتُمْd 32عَابِدُونَ مَا أَعْبُدُ"s);
     }
+
+     SUBCASE("Remove mixed sepratred")
+    {
+        const char* input = "بسم الله al rahman";
+        const char* found = anltk_preprocessor_remove_non_alpha(p, input, " ");
+        std::cout << found << std::endl;
+
+        REQUIRE(found == "بسم الله  "s);
+    }
     anltk_preprocessor_free(p);
 }
