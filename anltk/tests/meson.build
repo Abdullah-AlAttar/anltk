@@ -62,7 +62,7 @@ test('anltk_preprocessor_test', exe)
 exe = executable(
     'dumm',
     sources : ['dummy.cpp'],
-    dependencies : [anltk_dep]
+    dependencies : [anltk_dep, memap_dep]
 )
 
 

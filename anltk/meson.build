@@ -10,9 +10,7 @@ utfcpp_dep = declare_dependency(
     include_directories : include_directories('./third_party/utfcpp/source')
 )
 
-tiny_utf8_dep = declare_dependency(
-  include_directories : include_directories('./third_party/tiny-utf8/include')
-)
+subdir('./third_party/MemMap')
 
 subdir('src')
 
@@ -24,13 +22,13 @@ anltk_lib = library('anltk',
   install : true,
   cpp_args : anltk_cpp_args,
   gnu_symbol_visibility : 'hidden',
-  dependencies: [utfcpp_dep],
+  dependencies: [utfcpp_dep, memap_dep],
 )
 
 anltk_dep = declare_dependency(
   include_directories: include_directories('.', './include'),
   link_with : anltk_lib,
-  dependencies : [CXX.find_library('dl'), utfcpp_dep]
+  dependencies : [CXX.find_library('dl'), utfcpp_dep, memap_dep]
 )
 
 
