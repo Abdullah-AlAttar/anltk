@@ -41,14 +41,15 @@ subdir('tests')
 # package manager.
 install_headers('./include/anltk/anltk_api.h', subdir : 'anltk')
 
+
 pkg_mod = import('pkgconfig')
 
 pkg_mod.generate(
   name : 'ANLTK',
-  filebase : 'ANLTK',
+  filebase : 'anltk',
   description : 'Arabic Natural Language Toolkit (ANLTK)',
   subdirs : 'anltk',
   libraries : anltk_lib,
-  version : '0.1',
+  version : meson.project_version(),
 )
 
