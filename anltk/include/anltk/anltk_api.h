@@ -194,12 +194,12 @@ anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* inpu
 
 
 /**
- * @brief Extract word roots
+ * @brief Extract word roots TODO(Abdullah):
  * @param input a single word  
  * @return  const char* 
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_extract_root(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_extract_root(ANLTK_Preprocessor*, const char* input);
 
 /**
  * @brief Releases the preprocessor

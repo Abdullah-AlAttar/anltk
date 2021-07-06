@@ -54,6 +54,7 @@ public:
     const char* remove_kasheeda(string_view_t input);
     const char* normalize_hamzat(string_view_t input);
     const char* duplicate_shadda_letter(string_view_t input);
+    const char* extract_root(string_view_t input);
 
 private:
     string_t result_;
