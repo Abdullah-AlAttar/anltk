@@ -85,6 +85,25 @@ anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor* prep
         ->remove_non_alphanumeric_and_tashkeel(input, stop_list);
 }
 
+const char* anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor* preprocessor, const char* input)
+{
+    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))
+        ->normalize_hamzat(input);
+}
+
+const char* anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor* preprocessor, const char* input)
+{
+    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))
+        ->remove_kasheeda(input);
+}
+
+const char* anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor* preprocessor,
+                                                       const char* input)
+{
+    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))
+        ->duplicate_shadda_letter(input);
+}
+
 void anltk_preprocessor_free(ANLTK_Preprocessor* preprocessor)
 {
     delete reinterpret_cast<anltk::Preprocessor*>(preprocessor);

@@ -126,3 +126,67 @@ TEST_CASE("Presprocessor Remove non alphanmeric and tashkeel")
     }
     anltk_preprocessor_free(p);
 }
+
+
+
+TEST_CASE("HAMZA Normalization")
+{
+    using namespace std::string_literals;
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
+
+    SUBCASE("Basic")
+    {
+        const char* input = "سماء";
+        const char* found = anltk_preprocessor_normalize_hamzat(p, input);
+        std::cout << found << std::endl;
+        REQUIRE(found == "سماأ"s);
+    }
+
+    SUBCASE("Full")
+    {
+        const char* input = " يآ إمام اللؤلؤ المتلألئ في المساء";
+        const char* found = anltk_preprocessor_normalize_hamzat(p, input);
+        std::cout << found << std::endl;
+        REQUIRE(found == " يأ أمام اللألأ المتلألأ في المساأ"s);
+    }
+    SUBCASE("Should do nothing")
+    {
+        const char* input = "وَلَاd d!!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+        const char* found = anltk_preprocessor_normalize_hamzat(p, input);
+        std::cout << found << std::endl;
+
+        REQUIRE(found == "وَلَاd d!!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ"s);
+    }
+    anltk_preprocessor_free(p);
+}
+
+TEST_CASE("Remove Kasheeda")
+{
+    using namespace std::string_literals;
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
+
+    SUBCASE("Basic")
+    {
+        const char* input = " سـماء زرقــاء";
+        const char* found = anltk_preprocessor_remove_kasheeda(p, input);
+        std::cout << found << std::endl;
+        REQUIRE(found == " سماء زرقاء"s);
+    }
+        anltk_preprocessor_free(p);
+}
+
+
+TEST_CASE("Duplicate Shadda Letters")
+{
+    using namespace std::string_literals;
+    ANLTK_Preprocessor* p = anltk_preprocessor_new();
+
+    SUBCASE("Basic")
+    {
+        const char* input = "الشّمس برّاقة";
+        const char* found = anltk_preprocessor_duplicate_shadda_letter(p, input);
+        std::cout << found << std::endl;
+        REQUIRE(found == "الششمس برراقة"s);
+    }
+        anltk_preprocessor_free(p);
+}

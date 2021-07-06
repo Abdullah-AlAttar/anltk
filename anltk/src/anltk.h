@@ -51,6 +51,9 @@ public:
     const char* remove_non_alpha(string_view_t input, string_view_t stop_list);
     const char* remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
     const char* remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
+    const char* remove_kasheeda(string_view_t input);
+    const char* normalize_hamzat(string_view_t input);
+    const char* duplicate_shadda_letter(string_view_t input);
 
 private:
     string_t result_;

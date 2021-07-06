@@ -165,6 +165,43 @@ anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, con
                                                         const char* stop_list);
 
 /**
+ * @brief Replaces Hamzaat forms ‫ء‬, ,‫آ‬ ‫ؤ‬, ‫ئ‬, ‫ئ‬ with ‫أ‬
+ * 
+ * @param input 
+ * @return  const char*  
+ */
+ANLTK_PUBLIC const char*
+anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
+
+/**
+ * @brief Removes Kasheesa AKA Tatweel‬
+ * 
+ * @param input 
+ * @return  const char*  
+ */
+ANLTK_PUBLIC const char*
+anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
+
+
+/**
+ * @brief Duplicates the shadda letter
+ * eg : الشّمس becomes الششمس
+ * @param input 
+ * @return  const char* 
+ */
+ANLTK_PUBLIC const char*
+anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* input);
+
+
+/**
+ * @brief Extract word roots
+ * @param input a single word  
+ * @return  const char* 
+ */
+ANLTK_PUBLIC const char*
+anltk_preprocessor_extract_root(ANLTK_Preprocessor*, const char* input);
+
+/**
  * @brief Releases the preprocessor
  *
  * @return ANLTK_PUBLIC
