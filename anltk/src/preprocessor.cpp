@@ -103,7 +103,7 @@ const char* Preprocessor::duplicate_shadda_letter(string_view_t input)
 {
     auto start = input.begin();
     auto end   = input.end();
-    char_t prev;
+    char_t prev{};
     // TODO(Abdullah) : Could be more efficient
     while (start < end)
     {

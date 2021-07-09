@@ -15,7 +15,7 @@ RUN pip3 install meson
 
 RUN git clone --recurse-submodules https://github.com/Abdullah-AlAttar/anltk.git \
     && cd ./anltk/anltk \
-    && meson build --default-library=shared --buildtype=release --Dbuild_tests=false \
+    && meson build --default-library=shared --buildtype=release -Dbuild_tests=false \
     && cd build \
     && ninja \
     && cd ../../python \
