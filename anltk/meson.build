@@ -31,8 +31,9 @@ anltk_dep = declare_dependency(
   dependencies : [CXX.find_library('dl'), utfcpp_dep, memap_dep]
 )
 
-
-subdir('tests')
+if get_option('build_tests')
+  subdir('tests')
+endif
 
 
 # Make this library usable from the system's
