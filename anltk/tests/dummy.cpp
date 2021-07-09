@@ -34,17 +34,16 @@ int main(int argc, char** argv)
     out_file.open("utfcpp.txt");
     std::string line;
     ANLTK_Preprocessor* pp = anltk_preprocessor_new();
+    std::cout<< timeFuncInvocation([&]() {
+        while (std::getline(t, line))
+        {
+            // line contains the current line
+            std::string output;
 
-    while (std::getline(t, line))
-    {
-        // line contains the current line
-        std::string output;
-        timeFuncInvocation([&]() {
             output = anltk_preprocessor_remove_tashkeel(pp, line.c_str());
-        });
-        out_file << output << '\n';
-    }
-
+            // out_file << output << '\n';
+        }
+    }) << std::endl;;
     anltk_preprocessor_free(pp);
 
     // مرحبا  بكم�!

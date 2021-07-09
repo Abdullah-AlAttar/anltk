@@ -101,10 +101,10 @@ const char* anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor* prepr
     return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->duplicate_shadda_letter(input);
 }
 
-const char* anltk_preprocessor_extract_root(ANLTK_Preprocessor* preprocessor, const char* input)
-{
-    return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->extract_root(input);
-}
+// const char* anltk_preprocessor_extract_root(ANLTK_Preprocessor* preprocessor, const char* input)
+// {
+//     return (reinterpret_cast<anltk::Preprocessor*>(preprocessor))->extract_root(input);
+// }
 
 void anltk_preprocessor_free(ANLTK_Preprocessor* preprocessor)
 {
