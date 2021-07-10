@@ -65,7 +65,7 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ PEH			   , 	U'P' },
 	{ TCHEH   		   , 	U'J' },
 	{ VEH			   , 	U'V' },
-	{ QAF			   , 	U'G' },
+	{ GAF			   , 	U'G' },
  };
 
 const std::map<char_t , char_t> buckwalter_to_arabic_ = flip_map(arabic_to_buckwalter_);
@@ -121,7 +121,7 @@ const std::map<char_t , char_t> arabic_to_safe_buckwalter_ = {
 	{ PEH			   , 	U'P' },
 	{ TCHEH   		   , 	U'J' },
 	{ VEH			   , 	U'B' },
-	{ QAF			   , 	U'G' },
+	{ GAF			   , 	U'G' },
  };
 
 const std::map<char_t, char_t> safe_buckwalter_to_arabic_= flip_map(arabic_to_safe_buckwalter_);
