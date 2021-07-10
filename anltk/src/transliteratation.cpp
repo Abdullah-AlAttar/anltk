@@ -16,6 +16,12 @@ Transliterator::Transliterator(Mappings mapping)
     case Mappings::BW2AR:
         this->chars_map_ = &buckwalter_to_arabic_;
         break;
+    case Mappings::AR2SBW:
+        this->chars_map_ = &arabic_to_safe_buckwalter_;
+        break;
+    case Mappings::SBW2AR:
+        this->chars_map_ = &safe_buckwalter_to_arabic_;
+        break;
     default:
         // TODO(abdullah): handle this
         break;

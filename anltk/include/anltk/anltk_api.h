@@ -29,7 +29,9 @@ typedef struct ANLTK_Preprocessor ANLTK_Preprocessor;
 typedef enum
 {
     CM_AR2BW,
-    CM_BW2AR
+    CM_BW2AR,
+    CM_AR2SBW,
+    CM_SBW2AR
 } Mappings;
 
 /**

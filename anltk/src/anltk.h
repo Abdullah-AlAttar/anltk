@@ -14,7 +14,9 @@ namespace anltk
 enum class Mappings
 {
     AR2BW,
-    BW2AR
+    BW2AR,
+    AR2SBW,
+    SBW2AR
 };
 class Transliterator
 {

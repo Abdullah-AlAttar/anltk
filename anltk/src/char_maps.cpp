@@ -4,9 +4,18 @@
 
 namespace anltk
 {
+
+std::map<char_t, char_t> flip_map(const std::map<char_t, char_t>& other)
+{
+    std::map<char_t, char_t> output;
+    for (const auto& item : other)
+        output[item.second] = item.first;
+    return output;
+}
+
 // clang-format off
 const std::map<char_t , char_t> arabic_to_buckwalter_ = {
-	{ HAMZA            ,	U'\''},
+	{ HAMZA            ,	U'‘' } ,
 	{ ALEF_MADDA       ,	U'|' },
 	{ ALEF_HAMZA_ABOVE ,	U'>' },
 	{ WAW_HAMZA_ABOVE  ,	U'&' },
@@ -32,6 +41,7 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ ZAH              ,	U'Z' },
 	{ AIN              ,	U'E' },
 	{ GHAIN            ,	U'g' },
+	{ TATWEEL          ,	U'_' },
 	{ FEH              ,	U'f' },
 	{ QAF              ,	U'q' },
 	{ KAF              ,	U'k' },
@@ -42,7 +52,6 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ WAW              ,	U'w' },
 	{ ALEF_MAQSURA     ,	U'Y' },
 	{ YEH 			   ,	U'y' },
-	{ TATWEEL          ,	U'_' },
 	{ TANWEEN_FATHA    ,	U'F' },
 	{ TANWEEN_DAMMA    ,	U'N' },
 	{ TANWEEN_KASRA    ,	U'K' },
@@ -50,57 +59,73 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ DAMMA            ,	U'u' },
 	{ KASRA            ,	U'i' },
 	{ SHADDA           ,	U'~' },
-	{ SUKUN            ,	U'o' }
+	{ SUKUN            ,	U'o' },
+	{ SMALL_ALEF 	   ,    U'`' },
+	{ ALEF_WASLA	   ,    U'{' },
+	{ PEH			   , 	U'P' },
+	{ TCHEH   		   , 	U'J' },
+	{ VEH			   , 	U'V' },
+	{ QAF			   , 	U'G' },
  };
 
-const std::map<char_t , char_t> buckwalter_to_arabic_ = {
-	{	U'\''	,	HAMZA            },
-	{	U'|'	,	ALEF_MADDA       },
-	{	U'>'	,	ALEF_HAMZA_ABOVE },
-	{	U'&'	,	WAW_HAMZA_ABOVE  },
-	{	U'<'	,	ALEF_HAMZA_BELOW },
-	{	U'}'	,	YEH_HAMZA_ABOVE  },
-	{	U'A'	,	ALEF_NO_HAMZA    },
-	{	U'b'	,	BEH              },
-	{	U'p'	,	TEH_MARBOOTA     },
-	{	U't'	,	TEH              },
-	{	U'v'	,	THEH             },
-	{	U'j'	,	JEEM             },
-	{	U'H'	,	HAH              },
-	{	U'x'	,	KHAH             },
-	{	U'd'	,	DAL              },
-	{	U'*'	,	THAL             },
-	{	U'r'	,	REH              },
-	{	U'z'	,	ZAIN             },
-	{	U's'	,	SEEN             },
-	{	U'$'	,	SHEEN            },
-	{	U'S'	,	SAD              },
-	{	U'D'	,	DAD              },
-	{	U'T'	,	TAH              },
-	{	U'Z'	,	ZAH              },
-	{	U'E'	,	AIN              },
-	{	U'g'	,	GHAIN            },
-	{	U'f'	,	FEH              },
-	{	U'q'	,	QAF              },
-	{	U'k'	,	KAF              },
-	{	U'l'	,	LAM              },
-	{	U'm'	,	MEEM             },
-	{	U'n'	,	NOON             },
-	{	U'h'	,	HEH              },
-	{	U'w'	,	WAW              },
-	{	U'Y'	,	ALEF_MAQSURA      },
-	{	U'y'	,	YEH    },
-	{	U'_'	,	TATWEEL          },
-	{	U'F'	,	TANWEEN_FATHA    },
-	{	U'N'	,	TANWEEN_DAMMA     },
-	{	U'K'	,	TANWEEN_KASRA    },
-	{	U'a'	,	FATHA            },
-	{	U'u'	,	DAMMA            },
-	{	U'i'	,	KASRA            },
-	{	U'~'	,	SHADDA           },
-	{	U'o'	,	SUKUN            }
+const std::map<char_t , char_t> buckwalter_to_arabic_ = flip_map(arabic_to_buckwalter_);
 
+const std::map<char_t , char_t> arabic_to_safe_buckwalter_ = {
+	{ HAMZA            ,	U'C' } ,
+	{ ALEF_MADDA       ,	U'M' },
+	{ ALEF_HAMZA_ABOVE ,	U'O' },
+	{ WAW_HAMZA_ABOVE  ,	U'W' },
+	{ ALEF_HAMZA_BELOW ,	U'I' },
+	{ YEH_HAMZA_ABOVE  ,	U'Q' },
+	{ ALEF_NO_HAMZA    ,	U'A' },
+	{ BEH              ,	U'b' },
+	{ TEH_MARBOOTA     ,	U'p' },
+	{ TEH              ,	U't' },
+	{ THEH             ,	U'v' },
+	{ JEEM             ,	U'j' },
+	{ HAH              ,	U'H' },
+	{ KHAH             ,	U'x' },
+	{ DAL              ,	U'd' },
+	{ THAL             ,	U'V' },
+	{ REH              ,	U'r' },
+	{ ZAIN             ,	U'z' },
+	{ SEEN             ,	U's' },
+	{ SHEEN            ,	U'c' },
+	{ SAD              ,	U'S' },
+	{ DAD              ,	U'D' },
+	{ TAH              ,	U'T' },
+	{ ZAH              ,	U'Z' },
+	{ AIN              ,	U'E' },
+	{ GHAIN            ,	U'g' },
+	{ TATWEEL          ,	U'_' },
+	{ FEH              ,	U'f' },
+	{ QAF              ,	U'q' },
+	{ KAF              ,	U'k' },
+	{ LAM              ,	U'l' },
+	{ MEEM             ,	U'm' },
+	{ NOON             ,	U'n' },
+	{ HEH              ,	U'h' },
+	{ WAW              ,	U'w' },
+	{ ALEF_MAQSURA     ,	U'Y' },
+	{ YEH 			   ,	U'y' },
+	{ TANWEEN_FATHA    ,	U'F' },
+	{ TANWEEN_DAMMA    ,	U'N' },
+	{ TANWEEN_KASRA    ,	U'K' },
+	{ FATHA            ,	U'a' },
+	{ DAMMA            ,	U'u' },
+	{ KASRA            ,	U'i' },
+	{ SHADDA           ,	U'~' },
+	{ SUKUN            ,	U'o' },
+	{ SMALL_ALEF 	   ,    U'e' },
+	{ ALEF_WASLA	   ,    U'L' },
+	{ PEH			   , 	U'P' },
+	{ TCHEH   		   , 	U'J' },
+	{ VEH			   , 	U'B' },
+	{ QAF			   , 	U'G' },
  };
+
+const std::map<char_t, char_t> safe_buckwalter_to_arabic_= flip_map(arabic_to_safe_buckwalter_);
+
 // clang-format on
 
 const std::array<char_t, 37> alphabet_ = { HAMZA,
