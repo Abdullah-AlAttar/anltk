@@ -7,7 +7,29 @@
 
 namespace anltk
 {
-
+bool is_digit(char_t c)
+{
+    switch (c)
+    {
+            case U'0':
+    case U'1':
+    case U'2':
+    case U'3':
+    case U'4':
+    case U'5':
+    case U'6':
+    case U'7':
+    case U'8':
+    case U'9':
+    return true;
+        /* code */
+        break;
+    
+    default:
+    return false;
+        break;
+    }
+}
 bool is_indic_digit(char_t c)
 {
     return std::find(digits_.begin(), digits_.end(), c) != digits_.end();

@@ -105,7 +105,7 @@ void tafqeet_impl(long long num, std::vector<std::string>& pieces, bool is_ordin
             }
             else
             {
-                uint16_t tmp = current_multiplier / 10;
+                long long tmp = current_multiplier / 10;
                 tafqeet_impl(thousands_digits, pieces, is_ordinal, is_feminine);
                 pieces.back() += is_between(thousands_digits % tmp, 2, 11) ? " " + alaaf[i - 1][3]
                                                                            : " " + alaaf[i - 1][1];
@@ -126,7 +126,7 @@ void tafqeet_impl(long long num, std::vector<std::string>& pieces, bool is_ordin
     }
     else
     {
-        uint16_t tmp = current_multiplier / 10;
+        long long tmp = current_multiplier / 10;
 
         tafqeet_impl(thousands_digits, pieces, is_feminine);
         pieces.back() += is_between(thousands_digits % tmp, 2, 11) ? " " + alaaf[i - 1][3]

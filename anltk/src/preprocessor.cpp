@@ -44,7 +44,7 @@ const char* Preprocessor::remove_non_alphanumeric(string_view_t input, string_vi
 
     this->result_ = anltk_erase_if(input, [&](char_t c) {
         return std::find(stop_list_.begin(), stop_list_.end(), c) == stop_list_.end()
-            && !anltk::is_arabic_alpha(c) && !anltk::is_indic_digit(c) && !std::isdigit(c);
+            && !anltk::is_arabic_alpha(c) && !anltk::is_indic_digit(c) && !anltk::is_digit(c);
     });
 
     return this->result_.c_str();

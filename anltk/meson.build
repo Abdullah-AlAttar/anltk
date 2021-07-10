@@ -3,6 +3,13 @@ project('anltk', 'c', 'cpp',
   default_options : ['warning_level=3', 'cpp_std=c++17'])
 
 
+host_system = host_machine.system()
+
+if host_system == 'windows'
+  # add_global_link_arguments('/utf-8', language : 'cpp')
+  add_global_arguments('/utf-8', language : 'cpp')
+endif
+
 CXX = meson.get_compiler('cpp')
 
 
@@ -14,9 +21,13 @@ subdir('./third_party/MemMap')
 
 subdir('src')
 
-anltk_cpp_args = ['-DBUILDING_ANLTK']
 
-anltk_lib = library('anltk', 
+anltk_cpp_args = []
+if get_option('default_library') == 'shared'
+  anltk_cpp_args = ['-DBUILDING_ANLTK']
+endif
+
+anltk_lib = shared_library('anltk', 
   include_directories: include_directories('.', './include' , './src'),
   sources : anltk_sources,
   install : true,
@@ -28,13 +39,13 @@ anltk_lib = library('anltk',
 anltk_dep = declare_dependency(
   include_directories: include_directories('.', './include'),
   link_with : anltk_lib,
-  dependencies : [CXX.find_library('dl'), utfcpp_dep, memap_dep]
+  dependencies : [utfcpp_dep, memap_dep]
 )
 
 if get_option('build_tests')
   subdir('tests')
 endif
-
+  # subdir('tests')
 
 # Make this library usable from the system's
 # package manager.

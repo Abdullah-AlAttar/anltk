@@ -78,6 +78,9 @@ bool is_small(string_view_t input);
 
 bool is_indic_digit(char_t c);
 
+bool is_digit(char_t c);
+
+
 std::u32string to_32string(string_view_t input);
 
 } // namespace anltk
