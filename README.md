@@ -74,3 +74,25 @@ print(anltk.remove_tashkeel("فَرَاشَةٌ مُلَوَّنَةٌ تَطِ�
 
 # فراشة ملونة تطير في البستان، حلوة مهندمة تدهش الإنسان.
 ```
+
+
+
+## Benchmarks
+
+Processing a file containing 2499995 line, 563522705 characters. the task is to remove diacritics.
+
+### **Reading entire file into a string then a single call to remove_tashkeel:**
+
+
+| Method           | Time          |   |   |   
+|------------------|---------------|---|---|
+| anltk python-api | 5.001 seconds |   |   |   
+| anltk c-api      | 3.507 seconds |   |   |   
+| Regular Python   | 23.46 seconds |   |   |   
+### **Processing the file line by line:**
+
+| Method           | Time          |   |   |   
+|------------------|---------------|---|---|
+| anltk python-api | 9.636 seconds |   |   |   
+| anltk c-api      | 3.601 seconds |   |   |   
+| Regular Python   | 22.37 seconds |   |   |   

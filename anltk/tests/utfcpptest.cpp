@@ -30,10 +30,10 @@ int main(int argc, char const* argv[])
     out_file.open("utfcpp.txt");
 
 
-    anltk::Transliterator trans(anltk::Mappings::AR2BW);
+    // anltk::Transliterator trans(anltk::Mappings::AR2BW);
 
 
-    out_file << trans.convert(str.c_str());
+    // out_file << trans.convert(str.c_str());
 
     // const char* c_str = str.c_str();
 

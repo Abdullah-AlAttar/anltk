@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     std::string file_name = argv[1];
     std::ifstream t(file_name.c_str());
 
-    // std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+    std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
     // MemoryMapped data(file_name.c_str());
     // const char* str = (const char*) data.getData();
 
@@ -34,17 +34,18 @@ int main(int argc, char** argv)
     out_file.open("utfcpp.txt");
     std::string line;
     ANLTK_Preprocessor* pp = anltk_preprocessor_new();
+       std::string output;
     std::cout<< timeFuncInvocation([&]() {
-        while (std::getline(t, line))
+        // while (std::getline(t, line))
         {
             // line contains the current line
-            std::string output;
+         
 
-            output = anltk_preprocessor_remove_tashkeel(pp, line.c_str());
+            output = anltk_preprocessor_remove_tashkeel(pp, str.c_str());
             // out_file << output << '\n';
         }
     }) << std::endl;;
     anltk_preprocessor_free(pp);
-
+    out_file << output ;
     // مرحبا  بكم�!
 }
