@@ -88,11 +88,11 @@ Processing a file containing 2499995 line, 563522705 characters. the task is to 
 |------------------|---------------|---|---|
 | anltk python-api | 5.001 seconds |   |   |   
 | anltk c-api      | 3.507 seconds |   |   |   
-| Regular Python   | 23.46 seconds |   |   |   
+| python (camel_tools)  | 23.46 seconds |   |   |   
 ### **Processing the file line by line:**
 
 | Method           | Time          |   |   |   
 |------------------|---------------|---|---|
 | anltk python-api | 9.636 seconds |   |   |   
 | anltk c-api      | 3.601 seconds |   |   |   
-| Regular Python   | 22.37 seconds |   |   |   
+| python (camel_tools)   | 22.37 seconds |   |   |   
