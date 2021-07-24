@@ -1,0 +1,24 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/meson-build@v1.0.3
+      - name: configure
+        run: meson build --default-library=shared --buildtype=release -Dbuild_tests=false --prefix=/usr/local --libdir=lib 
+      - name : build
+      - run : ninja -C build 
+      - name : test
+      - run : cd build && ninja test
+
