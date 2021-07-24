@@ -47,11 +47,11 @@ constexpr char_t ALEF_MAQSURA     = U'\u0649'; // ى	 \u0649
 constexpr char_t YEH              = U'\u064A'; // ي	 \u064A	
 
 // extras
-constexpr char_t ALEF_WASLA = U'\u0671'; // \u0671	ٱ
-constexpr char_t PEH 		= U'\u067E'; // \u067E	پ
-constexpr char_t TCHEH		= U'\u067E'; // \u0686	چ
-constexpr char_t VEH		= U'\u06A4'; // \u06A4	ڤ
-constexpr char_t GAF		= U'\u06AF'; // \u06AF	گ
+constexpr char_t ALEF_WASLA = U'\u0671'; // ٱ  \u0671	
+constexpr char_t PEH 		= U'\u067E'; // پ  \u067E	
+constexpr char_t TCHEH		= U'\u067E'; // چ  \u0686	
+constexpr char_t VEH		= U'\u06A4'; // ڤ  \u06A4	
+constexpr char_t GAF		= U'\u06AF'; // گ  \u06AF	
 
 // \u064B	ً
 // \u064C	ٌ
