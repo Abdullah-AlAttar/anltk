@@ -14,8 +14,8 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
+    - uses: snickerbockers/submodules-init@v4
     - run: pip install meson ninja
-    - run : git submodule sync --recursive
     - run: cd anltk && meson builddir --default-library=shared --buildtype=release -Dbuild_tests=false --prefix=/usr/local --libdir=lib 
       env:
         CC: gcc
