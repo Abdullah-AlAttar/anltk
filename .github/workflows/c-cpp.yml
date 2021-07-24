@@ -19,11 +19,11 @@ jobs:
     - run: cd anltk && meson builddir --default-library=shared --buildtype=release -Dbuild_tests=false --prefix=/usr/local --libdir=lib 
       env:
         CC: gcc
-    - run: meson test -C builddir/ -v
+    - run: meson test -C anltk/builddir/ -v
     - uses: actions/upload-artifact@v1
       if: failure()
       with:
         name: Linux_Meson_Testlog
-        path: builddir/meson-logs/testlog.txt
+        path: anltk/builddir/meson-logs/testlog.txt
 
 
