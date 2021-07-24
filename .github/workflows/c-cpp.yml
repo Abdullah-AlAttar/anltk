@@ -7,18 +7,22 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  linux:
     runs-on: ubuntu-latest
-  
     steps:
-      - name: configure
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v1
-      - uses: BSFishy/meson-build@v1.0.3
-        run: meson build --default-library=shared --buildtype=release -Dbuild_tests=false --prefix=/usr/local --libdir=lib 
-      - name : build
-      - run : ninja -C build 
-      - name : test
-      - run : cd build && ninja test
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: pip install meson ninja
+    - run: meson builddir --default-library=shared --buildtype=release -Dbuild_tests=false --prefix=/usr/local --libdir=lib 
+      env:
+        CC: gcc
+    - run: meson test -C builddir/ -v
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: Linux_Meson_Testlog
+        path: builddir/meson-logs/testlog.txt
+
 
