@@ -145,15 +145,7 @@ bool is_valid_kalima(string_view_t input)
 
 std::u32string to_32string(string_view_t input)
 {
-    auto start = input.begin();
-    auto end   = input.end();
-
-    std::u32string text;
-    while (start < end)
-    {
-        text += utf8::next(start, end);
-    }
-    return text;
+    return utf8::utf8to32(input);
 }
 
 } // namespace anltk
