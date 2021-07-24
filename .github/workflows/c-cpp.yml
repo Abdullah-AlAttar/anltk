@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      run : git submodule sync --recursive
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
     - run: pip install meson ninja
+    - run : git submodule sync --recursive
     - run: cd anltk && meson builddir --default-library=shared --buildtype=release -Dbuild_tests=false --prefix=/usr/local --libdir=lib 
       env:
         CC: gcc
