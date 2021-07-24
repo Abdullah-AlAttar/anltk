@@ -1,7 +1,6 @@
 #include "anltk.h"
 #include "char_maps.h"
 
-
 #include "utf8.h"
 #include <algorithm>
 
@@ -9,9 +8,11 @@ namespace anltk
 {
 bool is_digit(char_t c)
 {
+    // TODO(Abdullah) This causes issues in windows, needs more testing
+    // return c  >= U'0' && c <= U'9'; 
     switch (c)
     {
-            case U'0':
+    case U'0':
     case U'1':
     case U'2':
     case U'3':
@@ -21,12 +22,12 @@ bool is_digit(char_t c)
     case U'7':
     case U'8':
     case U'9':
-    return true;
+        return true;
         /* code */
         break;
-    
+
     default:
-    return false;
+        return false;
         break;
     }
 }
@@ -86,7 +87,7 @@ bool is_valid_kalima(string_view_t input)
 {
 
     std::u32string text = to_32string(input);
-    
+
     if (text.empty())
     {
         return false;
