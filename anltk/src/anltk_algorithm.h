@@ -1,6 +1,8 @@
-#include "utf8.h"
-#include "anltk_typedefs.h"
+#ifndef ANLTK_ALGORIHTM_H
+#define ANLTK_ALGORIHTM_H
 
+#include "anltk_typedefs.h"
+#include "utf8.h"
 
 namespace anltk
 {
@@ -24,3 +26,4 @@ string_t anltk_erase_if(string_view_t input, Func&& f)
     return output;
 }
 } // namespace anltk
+#endif
