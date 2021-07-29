@@ -31,10 +31,10 @@ const std::vector<const char*>& Tokenizer::tokenize_words(string_view_t input)
 
     auto start = input.begin();
     auto end   = input.end();
-	if(start == end)
-	{
-		return result_;
-	}
+    if (start == end)
+    {
+        return result_;
+    }
     char_t next = utf8::next(start, end);
     bool done   = false;
     while (start != end)
@@ -53,11 +53,11 @@ const std::vector<const char*>& Tokenizer::tokenize_words(string_view_t input)
         }
         else
         {
-            this->holder_.push_back(parse_sequence(next, start, end, done, [](char_t c) {
-                return !is_arabic_alpha(c) && !isspace(c);
-            }));
+            this->holder_.push_back(parse_sequence(next, start, end, done,
+                                                   [](char_t c)
+                                                   { return !is_arabic_alpha(c) && !isspace(c); }));
         }
-		// To handle last character, if it didn't belong to the previous sequence eg : "بسم."
+        // To handle last character, if it didn't belong to the previous sequence eg : "بسم."
         if (done)
         {
             string_t last;
