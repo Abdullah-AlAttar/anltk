@@ -9,6 +9,23 @@
 
 
 
+TEST_CASE("Empty")
+{
+    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+
+    const char* ar_text = "";
+
+    const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
+
+
+    const char* expected = "";
+
+    REQUIRE(std::string(bw_text) == std::string(expected));
+    anltk_transliterator_free(ttor);
+}
+
+
+
 TEST_CASE("Arabic to Buckwalter")
 {
     ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
