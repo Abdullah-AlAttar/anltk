@@ -7,7 +7,6 @@
 #include <iostream>
 #include <string>
 
-
 TEST_CASE("Empty")
 {
     ANLTK_Tokenizer* tok = anltk_tokenizer_new();
@@ -15,13 +14,11 @@ TEST_CASE("Empty")
     ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "");
 
     REQUIRE(arr.len == 0);
-   //  CHECK(std::string(arr.data[0]) == "بسم");
-   //  CHECK(std::string(arr.data[1]) == ".");
+    //  CHECK(std::string(arr.data[0]) == "بسم");
+    //  CHECK(std::string(arr.data[1]) == ".");
 
     anltk_tokenizer_free(tok);
 }
-
-
 
 TEST_CASE("Very Basic Tokenization")
 {
@@ -35,7 +32,6 @@ TEST_CASE("Very Basic Tokenization")
 
     anltk_tokenizer_free(tok);
 }
-
 
 TEST_CASE("Basic Tokenization")
 {
@@ -59,10 +55,10 @@ TEST_CASE("Mixed with non arabic letters Tokenization")
 
     ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "ال3 بسم الله!! ي الرح3من ال يي");
 
-   //  for (size_t i = 0; i < arr.len; ++i)
-   //  {
-   //      std::cout << i << " \"" << arr.data[i] << '"' << std::endl;
-   //  }
+    //  for (size_t i = 0; i < arr.len; ++i)
+    //  {
+    //      std::cout << i << " \"" << arr.data[i] << '"' << std::endl;
+    //  }
     REQUIRE(arr.len == 11);
     CHECK(std::string(arr.data[0]) == "ال");
     CHECK(std::string(arr.data[1]) == "3");
@@ -75,5 +71,32 @@ TEST_CASE("Mixed with non arabic letters Tokenization")
     CHECK(std::string(arr.data[8]) == "من");
     CHECK(std::string(arr.data[9]) == "ال");
     CHECK(std::string(arr.data[10]) == "يي");
+    anltk_tokenizer_free(tok);
+}
+
+TEST_CASE("Mixed with non arabic letters and tashkeel Tokenization")
+{
+    ANLTK_Tokenizer* tok = anltk_tokenizer_new();
+
+    ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "ال3 بِسْمِ الله!! ي الرّح3من ال رحيمِ؟");
+
+    for (size_t i = 0; i < arr.len; ++i)
+    {
+        std::cout << i << " \"" << arr.data[i] << '"' << std::endl;
+    }
+    REQUIRE(arr.len == 12);
+    CHECK(std::string(arr.data[0]) == "ال");
+    CHECK(std::string(arr.data[1]) == "3");
+    CHECK(std::string(arr.data[2]) == "بِسْمِ");
+    CHECK(std::string(arr.data[3]) == "الله");
+    CHECK(std::string(arr.data[4]) == "!!");
+    CHECK(std::string(arr.data[5]) == "ي");
+    CHECK(std::string(arr.data[6]) == "الرّح");
+    CHECK(std::string(arr.data[7]) == "3");
+    CHECK(std::string(arr.data[8]) == "من");
+    CHECK(std::string(arr.data[9]) == "ال");
+    CHECK(std::string(arr.data[10]) == "رحيمِ");
+    CHECK(std::string(arr.data[11]) == "؟");
+
     anltk_tokenizer_free(tok);
 }
