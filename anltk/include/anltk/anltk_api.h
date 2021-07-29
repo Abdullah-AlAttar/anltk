@@ -26,6 +26,16 @@ extern "C" {
 typedef struct ANLTK_Transliterator ANLTK_Transliterator;
 typedef struct ANLTK_Mofaqqet ANLTK_Mofaqqet;
 typedef struct ANLTK_Preprocessor ANLTK_Preprocessor;
+typedef struct ANLTK_Tokenizer ANLTK_Tokenizer;
+
+
+typedef struct ANLTK_LIST
+{
+  const char *const * data;
+  // TODO(Abdullah) : This should be a size_t, but including stddef causes issue with cffi
+  unsigned long long len;
+} ANLTK_LIST;
+
 typedef enum
 {
     CM_AR2BW,
@@ -209,6 +219,27 @@ anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* inpu
  * @return ANLTK_PUBLIC
  */
 ANLTK_PUBLIC void anltk_preprocessor_free(ANLTK_Preprocessor*);
+
+
+
+
+/**
+ * @brief creates Tokenizer
+ *
+ * @return ANLTK_Tokenizer*
+ */
+ANLTK_PUBLIC ANLTK_Tokenizer* anltk_tokenizer_new();
+
+
+ANLTK_PUBLIC struct ANLTK_LIST anltk_tokenizer_tokenize_words(ANLTK_Tokenizer*, const char* input);
+
+
+/**
+ * @brief Releases the Tokenizer
+ *
+ * @return ANLTK_PUBLIC
+ */
+ANLTK_PUBLIC void anltk_tokenizer_free(ANLTK_Tokenizer*);
 
 #ifdef __cplusplus
 }

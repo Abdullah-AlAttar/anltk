@@ -24,6 +24,11 @@ print(ar2)
 
 print(anltk.remove_tashkeel("فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ."))
 
+
+tok = anltk.Tokenizer()
+cdata = tok.tokenize('واو')
+print(cdata)
+# print(tok.tokenize('واو'))
 # num = 12399
 # ttor = anltk.Transliterator(mapping=anltk.CM_AR2BW)
 # bw2 = ttor.convert(ar)

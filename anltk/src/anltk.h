@@ -3,13 +3,14 @@
 #include "utf8.h"
 
 #include <map>
+#include <deque>
+#include <vector>
 
 #include <anltk_algorithm.h>
 #include <anltk_typedefs.h>
 
 namespace anltk
 {
-
 
 enum class Mappings
 {
@@ -57,7 +58,6 @@ public:
     const char* normalize_hamzat(string_view_t input);
     const char* duplicate_shadda_letter(string_view_t input);
     const char* extract_root(string_view_t input);
-    
 
 private:
     string_t result_;
@@ -81,13 +81,22 @@ bool is_indic_digit(char_t c);
 
 bool is_digit(char_t c);
 
-
 std::u32string to_32string(string_view_t input);
 
+class Tokenizer
+{
+public:
+    Tokenizer()  = default;
+    ~Tokenizer() = default;
 
+    const std::vector<const char*>& tokenize_words(string_view_t input);
 
+private:
+    std::vector<const char*> result_;
+    std::vector<std::string> holder_;
+};
 
-#define FUNC_DECL(prefix, name) bool prefix ## _ ## name(char_t c);
+#define FUNC_DECL(prefix, name) bool prefix##_##name(char_t c);
 #define LIFT_DECL(name) FUNC_DECL(is, name)
 
 LIFT_DECL(HAMZA)
@@ -167,7 +176,6 @@ LIFT_DECL(TES3A)
 LIFT_DECL(SMALL_ALEF)
 LIFT_DECL(SMALL_WAW)
 LIFT_DECL(SMALL_YEH)
-
 
 } // namespace anltk
 

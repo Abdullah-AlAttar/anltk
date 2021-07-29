@@ -37,7 +37,7 @@ class Transliterator:
 
     def convert(self, input: str) -> str:
         return _ffi.string(
-            _c.anltk_transliterator_convert(self._ttor, input.encode())
+            _c.anltk_transliterator_convert(self._ttor, input.encode('utf-8'))
         ).decode('utf-8')
 
 
@@ -55,6 +55,17 @@ class Mofaqqet:
         ).decode('utf-8')
 
 
+class Tokenizer:
+
+    def __init__(self):
+        self._handle = _c.anltk_tokenizer_new()
+
+    def __del__(self):
+        _c.anltk_tokenizer_free(self._handle)
+
+    def tokenize(self, input: int):
+        cdata =  _c.anltk_tokenizer_tokenize(self._handle, input.encode('utf-8'))
+        return [_ffi.string(cdata.data[i]).decode('utf-8') for i in range(cdata.len)]
 class Preprocessor:
 
     def __init__(self):
@@ -66,31 +77,31 @@ class Preprocessor:
     def remove_tashkeel(self, input: str) -> str:
         return _ffi.string(
             _c.anltk_preprocessor_remove_tashkeel(
-                self._handle, input.encode())
+                self._handle, input.encode('utf-8'))
         ).decode('utf-8')
 
     def remove_small(self, input: str) -> str:
         return _ffi.string(
             _c.anltk_preprocessor_remove_small(
-                self._handle, input.encode())
+                self._handle, input.encode('utf-8'))
         ).decode('utf-8')
 
     def remove_non_alpha(self, input: str, stop_list: str):
         return _ffi.string(
             _c.anltk_preprocessor_remove_nona_alpha(
-                self._handle, input.encode(), stop_list.encode())
+                self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
         ).decode('utf-8')
 
     def remove_non_alphanumeric(self, input: str, stop_list: str):
         return _ffi.string(
             _c.anltk_preprocessor_remove_nona_alphanumeric(
-                self._handle, input.encode(), stop_list.encode())
+                self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
         ).decode('utf-8')
 
     def remove_non_alphanumeric_and_tashkeel(self, input: str, stop_list: str):
         return _ffi.string(
             _c.anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(
-                self._handle, input.encode(), stop_list.encode())
+                self._handle, input.encode('utf-8'), stop_list.encode('utf-8'))
         ).decode('utf-8')
 
 
@@ -112,15 +123,15 @@ def tafqeet(number: int, is_ordinal: bool = False, is_feminine: bool = False) ->
 
 
 def is_valid_kalima(input_text: str) -> bool:
-    return _c.anltk_is_valid_kalima(input_text.encode())
+    return _c.anltk_is_valid_kalima(input_text.encode('utf-8'))
 
 
 def is_tashkeel(input_text: str) -> bool:
-    return _c.anltk_is_tashkeel(input_text.encode())
+    return _c.anltk_is_tashkeel(input_text.encode('utf-8'))
 
 
 def is_arabic_alpha(input_text: str) -> bool:
-    return _c.anltk_is_arabic_alpha(input_text.encode())
+    return _c.anltk_is_arabic_alpha(input_text.encode('utf-8'))
 
 
 def remove_tashkeel(input_text: str) -> str:

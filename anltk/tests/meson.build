@@ -75,3 +75,12 @@ exe = executable(
     include_directories : include_directories('../src','../include'),
     dependencies : [anltk_dep]
 )
+
+
+exe = executable(
+    'anltk_tokenizer_test',
+    sources : ['anltk_tokenizer_test.cpp', 'doctest_main.cpp'],
+    dependencies : [anltk_dep, doctest_dep]
+)
+
+test('anltk_tokenizer_test', exe)

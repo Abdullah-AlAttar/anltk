@@ -3,6 +3,8 @@
 #include "anltk/anltk_api.h"
 #include "anltk.h"
 
+#include <iostream>
+
 ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping)
 {
     return reinterpret_cast<ANLTK_Transliterator*>(
@@ -109,4 +111,27 @@ const char* anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor* prepr
 void anltk_preprocessor_free(ANLTK_Preprocessor* preprocessor)
 {
     delete reinterpret_cast<anltk::Preprocessor*>(preprocessor);
+}
+
+ANLTK_Tokenizer* anltk_tokenizer_new()
+{
+    return reinterpret_cast<ANLTK_Tokenizer*>(new anltk::Tokenizer());
+}
+
+struct ANLTK_LIST anltk_tokenizer_tokenize_words(ANLTK_Tokenizer* tok, const char* input)
+{
+    const std::vector<const char*>& tokens
+        = reinterpret_cast<anltk::Tokenizer*>(tok)->tokenize_words(input);
+
+
+    ANLTK_LIST arr;
+    arr.data = tokens.data();
+    arr.len  = tokens.size();
+
+    return arr;
+}
+
+void anltk_tokenizer_free(ANLTK_Tokenizer* tok)
+{
+    delete reinterpret_cast<anltk::Tokenizer*>(tok);
 }
