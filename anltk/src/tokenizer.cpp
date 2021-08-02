@@ -29,14 +29,17 @@ string_t parse_sequence(char_t& next, Iter& start, Iter end, bool& done, F&& pre
 const std::vector<const char*>& Tokenizer::tokenize_words(string_view_t input)
 {
 
-    auto start = input.begin();
-    auto end   = input.end();
-    if (start == end)
+    if(input.empty())
     {
         return result_;
     }
+
+    auto start = input.begin();
+    auto end   = input.end();
+    
     char_t next = utf8::next(start, end);
     bool done   = false;
+
     while (start != end)
     {
 
@@ -66,11 +69,11 @@ const std::vector<const char*>& Tokenizer::tokenize_words(string_view_t input)
         }
     }
 
-    this->result_.reserve(holder_.size());
+    result_.reserve(holder_.size());
 
     for (const auto& token : this->holder_)
     {
-        this->result_.push_back(token.c_str());
+        result_.push_back(token.c_str());
     }
 
     return result_;

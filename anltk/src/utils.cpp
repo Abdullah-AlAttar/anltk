@@ -37,6 +37,10 @@ bool is_indic_digit(char_t c)
 }
 bool is_tashkeel(string_view_t input)
 {
+    if (input.empty())
+    {
+        return false;
+    }
     auto start = input.begin();
     auto end   = input.end();
     if (utf8::distance(start, end) > 1)
@@ -53,6 +57,11 @@ bool is_tashkeel(char_t c)
 
 bool is_arabic_alpha(string_view_t input)
 {
+    if (input.empty())
+    {
+        return false;
+    }
+
     auto start = input.begin();
     auto end   = input.end();
     if (utf8::distance(start, end) > 1)
@@ -74,6 +83,11 @@ bool is_small(char_t c)
 
 bool is_small(string_view_t input)
 {
+    if (input.empty())
+    {
+        return false;
+    }
+
     auto start = input.begin();
     auto end   = input.end();
     if (utf8::distance(start, end) > 1)

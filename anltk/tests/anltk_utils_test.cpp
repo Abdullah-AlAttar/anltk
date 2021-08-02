@@ -51,7 +51,7 @@ TEST_CASE("Valid Kalima")
         const char* ar_text = "ىاًَُ لةيلى";
         REQUIRE(anltk_is_valid_kalima(ar_text) == false);
     }
-       SUBCASE(" double Teh Marbuta")
+    SUBCASE(" double Teh Marbuta")
     {
         const char* ar_text = "ىا لةةيلى";
         REQUIRE(anltk_is_valid_kalima(ar_text) == false);
@@ -71,6 +71,11 @@ TEST_CASE("Valid Kalima")
 
 TEST_CASE("is tashkeel")
 {
+    SUBCASE("EMPTY")
+    {
+        const char* ar_text = "";
+        REQUIRE(anltk_is_tashkeel(ar_text) == false);
+    }
     SUBCASE("Fatha")
     {
         const char* ar_text = "َ";
