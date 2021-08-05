@@ -1,4 +1,4 @@
-#include "anltk.h"
+#include "anltk/anltk.hpp"
 #include "char_maps.h"
 
 #include "utf8.h"

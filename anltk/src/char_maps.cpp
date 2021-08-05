@@ -174,7 +174,7 @@ const std::array<char_t, 10> digits_
     = { SEFR, WAHED, ETHNAN, THALATHA, ARBA3A, KHAMSA, SETTA, SAB3A, THAMANEYA, TES3A };
 
 #define FUNC_IMPL(prefix, name)                                                                    \
-    bool prefix ## _ ## name(char_t c)                                                                 \
+    bool prefix##_##name(char_t c)                                                                 \
     {                                                                                              \
         return c == name;                                                                          \
     }

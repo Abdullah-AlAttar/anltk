@@ -1,12 +1,13 @@
 #ifndef ANLTK_H
 #define ANLTK_H
+
+
 #include "utf8.h"
 
 #include <map>
 #include <deque>
 #include <vector>
 
-#include <anltk_algorithm.h>
 #include <anltk_typedefs.h>
 
 namespace anltk
