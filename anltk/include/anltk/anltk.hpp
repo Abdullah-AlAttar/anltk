@@ -1,7 +1,7 @@
 #ifndef ANLTK_H
 #define ANLTK_H
 
-#include "utf8.h"
+
 
 #include <deque>
 #include <map>
@@ -9,7 +9,7 @@
 
 #include "anltk/anltk_typedefs.h"
 #include "anltk/char_maps.h"
-
+#include "utf8.h"
 namespace anltk
 {
 
@@ -76,7 +76,7 @@ private:
 
 bool is_tashkeel(string_view_t input);
 
-bool is_tashkeel(char_t c);
+bool is_tashkeel_c(char_t c);
 
 bool is_arabic_alpha(string_view_t input);
 

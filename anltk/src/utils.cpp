@@ -46,10 +46,10 @@ bool is_tashkeel(string_view_t input)
     {
         return false;
     }
-    return is_tashkeel(utf8::next(start, end));
+    return is_tashkeel_c(utf8::next(start, end));
 }
 
-bool is_tashkeel(char_t c)
+bool is_tashkeel_c(char_t c)
 {
     return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
 }
@@ -107,7 +107,7 @@ bool is_valid_kalima(string_view_t input)
     }
 
     auto first_letter = text.front();
-    if (is_tashkeel(first_letter) || first_letter == WAW_HAMZA_ABOVE
+    if (is_tashkeel_c(first_letter) || first_letter == WAW_HAMZA_ABOVE
         || first_letter == YEH_HAMZA_ABOVE)
     {
         return false;
@@ -136,7 +136,7 @@ bool is_valid_kalima(string_view_t input)
     {
         for (size_t i = 0; i < text.length() - 3; ++i)
         {
-            if (is_tashkeel(text[i]) && is_tashkeel(text[i + 1]) && is_tashkeel(text[i + 2]))
+            if (is_tashkeel_c(text[i]) && is_tashkeel_c(text[i + 1]) && is_tashkeel_c(text[i + 2]))
             {
                 return false;
             }
