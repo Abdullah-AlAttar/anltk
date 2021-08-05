@@ -182,4 +182,13 @@ const char* Mofaqqet::tafqeet(long long number)
     return this->result_.c_str();
 }
 
+const string_t& Mofaqqet::result() const
+{
+    return this->result_;
+}
+string_t& Mofaqqet::result()
+{
+    return this->result_;
+}
+
 } // namespace anltk

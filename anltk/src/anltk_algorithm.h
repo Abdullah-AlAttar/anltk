@@ -1,7 +1,7 @@
 #ifndef ANLTK_ALGORIHTM_H
 #define ANLTK_ALGORIHTM_H
 
-#include "anltk_typedefs.h"
+#include "anltk/anltk_typedefs.h"
 #include "utf8.h"
 
 namespace anltk

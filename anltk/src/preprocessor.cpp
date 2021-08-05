@@ -1,5 +1,4 @@
 #include "anltk/anltk.hpp"
-#include "char_maps.h"
 #include "anltk_algorithm.h"
 
 

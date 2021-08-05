@@ -1,10 +1,9 @@
 #ifndef CHAR_MAPS_H
 #define CHAR_MAPS_H
 
-#include "anltk_typedefs.h"
 #include <array>
 #include <map>
-
+#include "anltk/anltk_typedefs.h"
 namespace anltk
 {
 

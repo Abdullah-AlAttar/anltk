@@ -1,17 +1,21 @@
 #ifndef ANLTK_H
 #define ANLTK_H
 
-
 #include "utf8.h"
 
-#include <map>
 #include <deque>
+#include <map>
 #include <vector>
 
-#include <anltk_typedefs.h>
+#include "anltk/anltk_typedefs.h"
+#include "anltk/char_maps.h"
 
 namespace anltk
 {
+
+using string_t      = std::string;
+using string_view_t = std::string_view;
+using char_t        = char32_t;
 
 enum class Mappings
 {
@@ -27,6 +31,9 @@ public:
     ~Transliterator() = default;
     const char* convert(string_view_t);
 
+    const string_t& result() const;
+    string_t& result();
+    
 private:
     string_t result_;
     const std::map<char_t, char_t>* chars_map_;
@@ -38,6 +45,9 @@ public:
     Mofaqqet(bool is_ordinal, bool is_feminine);
     ~Mofaqqet() = default;
     const char* tafqeet(long long number);
+
+    const string_t& result() const;
+    string_t& result();
 
 private:
     string_t result_;
