@@ -31,14 +31,6 @@ test('tafqeet_test', exe)
 
 
 
-exe = executable(
-    'anltk_test_c_api',
-    sources : ['anltk_test.c'],
-    dependencies : [anltk_dep]
-)
-
-test('anltk_test_c_api', exe)
-
 
 exe = executable(
     'anltk_utils_test',

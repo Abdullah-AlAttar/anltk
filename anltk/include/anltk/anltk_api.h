@@ -23,7 +23,6 @@ extern "C" {
 
 #include <stdbool.h>
 
-typedef struct ANLTK_Transliterator ANLTK_Transliterator;
 typedef struct ANLTK_Mofaqqet ANLTK_Mofaqqet;
 typedef struct ANLTK_Preprocessor ANLTK_Preprocessor;
 typedef struct ANLTK_Tokenizer ANLTK_Tokenizer;
@@ -44,27 +43,27 @@ typedef enum
     CM_SBW2AR
 } Mappings;
 
-/**
- * @brief Creates Transliterator with specific mapping
- *
- * @param mapping : mapping type
- * @return Transliterator* object
- */
-ANLTK_PUBLIC ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping);
+// /**
+//  * @brief Creates Transliterator with specific mapping
+//  *
+//  * @param mapping : mapping type
+//  * @return Transliterator* object
+//  */
+// ANLTK_PUBLIC ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping);
 
-/**
- * @brief Releases the Transliterator object
- */
-ANLTK_PUBLIC void anltk_transliterator_free(ANLTK_Transliterator*);
+// /**
+//  * @brief Releases the Transliterator object
+//  */
+// ANLTK_PUBLIC void anltk_transliterator_free(ANLTK_Transliterator*);
 
-/**
- * @brief Convert given input into the pre-specified Mapping using the given Transliterator
- * if a character does not have a conversion, will be left as is. @n
- * note: the returned buffer is owned by the Transliterator* object, remember to free.
- * @param input
- * @return const char* contains the result,
- */
-ANLTK_PUBLIC const char* anltk_transliterator_convert(ANLTK_Transliterator*, const char* input);
+// /**
+//  * @brief Convert given input into the pre-specified Mapping using the given Transliterator
+//  * if a character does not have a conversion, will be left as is. @n
+//  * note: the returned buffer is owned by the Transliterator* object, remember to free.
+//  * @param input
+//  * @return const char* contains the result,
+//  */
+// ANLTK_PUBLIC const char* anltk_transliterator_convert(ANLTK_Transliterator*, const char* input);
 
 /**
  * @brief Creates Mofaqqet object

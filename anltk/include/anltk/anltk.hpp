@@ -1,5 +1,24 @@
-#ifndef ANLTK_H
-#define ANLTK_H
+#ifndef ANLTK_HPP
+#define ANLTK_HPP
+
+
+
+
+// clang-format off
+#if defined _WIN32 || defined __CYGWIN__
+  #ifdef BUILDING_ANLTK
+    #define ANLTK_PUBLIC __declspec(dllexport)
+  #else
+    #define ANLTK_PUBLIC __declspec(dllimport)
+  #endif
+#else
+  #ifdef BUILDING_ANLTK
+      #define ANLTK_PUBLIC __attribute__ ((visibility ("default")))
+  #else
+      #define ANLTK_PUBLIC
+  #endif
+#endif
+// clang-format on
 
 
 
@@ -25,26 +44,17 @@ enum class CharMapping
     SBW2AR
 };
 
-string_t transliterate(string_view_t input, CharMapping mapping);
 
-class Transliterator
-{
-public:
-    Transliterator(CharMapping);
-    ~Transliterator() = default;
-    const char* convert(string_view_t);
-
-    const string_t& result() const;
-    string_t& result();
-    
-private:
-    string_t result_;
-    const std::map<char_t, char_t>* chars_map_;
-};
+// /**
+//  * @brief Convert given input into the pre-specified Mapping using the given Transliterator
+//  * if a character does not have a conversion, will be left as is. @n
+//  * note: the returned buffer is owned by the Transliterator* object, remember to free.
+//  * @param input
+//  * @return const char* contains the result,
+ANLTK_PUBLIC string_t transliterate(string_view_t input, CharMapping mapping);
 
 
-
-string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
+ANLTK_PUBLIC string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
 class Mofaqqet
 {
 public:

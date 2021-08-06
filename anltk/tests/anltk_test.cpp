@@ -37,60 +37,60 @@ TEST_CASE("testing the factorial function")
     // }
 }
 
-TEST_CASE("Arabic to Buckwalter test C-api")
-{
-    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+// TEST_CASE("Arabic to Buckwalter test C-api")
+// {
+//     ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
 
-    const char* ar_text = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
+//     const char* ar_text = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
 
-    const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
+//     const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
 
 
-    const char* expected = ">bjd hwz HTy klmn sEfS qr$t vx* DZg";
+//     const char* expected = ">bjd hwz HTy klmn sEfS qr$t vx* DZg";
 
-    REQUIRE(std::string(bw_text) == std::string(expected));
-    anltk_transliterator_free(ttor);
-}
+//     REQUIRE(std::string(bw_text) == std::string(expected));
+//     anltk_transliterator_free(ttor);
+// }
 
-TEST_CASE("Arabic to Buckwalter test C-api mixed")
-{
-    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
+// TEST_CASE("Arabic to Buckwalter test C-api mixed")
+// {
+//     ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_AR2BW);
 
-    const char* ar_text = "أبجد هوزd حطي كلمن سعفص3 قرشت ثخذ ضظغ";
+//     const char* ar_text = "أبجد هوزd حطي كلمن سعفص3 قرشت ثخذ ضظغ";
 
-    const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
+//     const char* bw_text = anltk_transliterator_convert(ttor, ar_text);
 
-    const char* expected = ">bjd hwzd HTy klmn sEfS3 qr$t vx* DZg";
+//     const char* expected = ">bjd hwzd HTy klmn sEfS3 qr$t vx* DZg";
 
-    REQUIRE(std::string(bw_text) == std::string(expected));
-    anltk_transliterator_free(ttor);
-}
+//     REQUIRE(std::string(bw_text) == std::string(expected));
+//     anltk_transliterator_free(ttor);
+// }
 
-TEST_CASE("Buckwalter to Arabic test C-api")
-{
-    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
+// TEST_CASE("Buckwalter to Arabic test C-api")
+// {
+//     ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
 
-    const char* bw_text = ">bjd hwz HTy klmn sEfS qr$t vx* DZg";
+//     const char* bw_text = ">bjd hwz HTy klmn sEfS qr$t vx* DZg";
 
-    const char* ar_text  = anltk_transliterator_convert(ttor, bw_text);
-    const char* expected = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
+//     const char* ar_text  = anltk_transliterator_convert(ttor, bw_text);
+//     const char* expected = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ";
 
-    REQUIRE(std::string(ar_text) == std::string(expected));
+//     REQUIRE(std::string(ar_text) == std::string(expected));
 
-    anltk_transliterator_free(ttor);
-}
+//     anltk_transliterator_free(ttor);
+// }
 
-TEST_CASE("Buckwalter to Arabic Mixed ")
-{
-    ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
+// TEST_CASE("Buckwalter to Arabic Mixed ")
+// {
+//     ANLTK_Transliterator* ttor = anltk_transliterator_new(CM_BW2AR);
 
-    const char* bw_text = ">bjd hwz HTy klmn sEfS qr$t vx* DZg بسم الله 123";
+//     const char* bw_text = ">bjd hwz HTy klmn sEfS qr$t vx* DZg بسم الله 123";
 
-    const char* ar_text = anltk_transliterator_convert(ttor, bw_text);
-    const char* expected = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ بسم الله 123";
+//     const char* ar_text = anltk_transliterator_convert(ttor, bw_text);
+//     const char* expected = "أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ بسم الله 123";
 
-    REQUIRE(std::string(ar_text) == std::string(expected));
+//     REQUIRE(std::string(ar_text) == std::string(expected));
 
-    anltk_transliterator_free(ttor);
-}
+//     anltk_transliterator_free(ttor);
+// }
 

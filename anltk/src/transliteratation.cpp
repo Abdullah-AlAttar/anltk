@@ -4,45 +4,6 @@
 
 namespace anltk
 {
-
-Transliterator::Transliterator(CharMapping mapping)
-{
-    switch (mapping)
-    {
-    case CharMapping::AR2BW:
-        this->chars_map_ = &arabic_to_buckwalter_;
-        break;
-    case CharMapping::BW2AR:
-        this->chars_map_ = &buckwalter_to_arabic_;
-        break;
-    case CharMapping::AR2SBW:
-        this->chars_map_ = &arabic_to_safe_buckwalter_;
-        break;
-    case CharMapping::SBW2AR:
-        this->chars_map_ = &safe_buckwalter_to_arabic_;
-        break;
-    default:
-        // TODO(abdullah): handle this
-        break;
-    }
-}
-
-const char* Transliterator::convert(string_view_t input)
-{
-
-    auto start = input.begin();
-    auto end   = input.end();
-    while (start < end)
-    {
-        char_t next = utf8::next(start, end);
-
-        auto node = this->chars_map_->find(next);
-
-        utf8::append(node != this->chars_map_->end() ? node->second : next, this->result_);
-    }
-    return this->result_.c_str();
-}
-
 string_t transliterate(string_view_t input, CharMapping mapping)
 {
     const std::map<char_t, char_t>* chars_map;

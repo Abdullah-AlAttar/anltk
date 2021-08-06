@@ -5,21 +5,7 @@
 
 #include <iostream>
 
-ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping)
-{
-    return reinterpret_cast<ANLTK_Transliterator*>(
-        new anltk::Transliterator(static_cast<anltk::CharMapping>(mapping)));
-}
 
-void anltk_transliterator_free(ANLTK_Transliterator* ttor)
-{
-    delete reinterpret_cast<anltk::Transliterator*>(ttor);
-}
-
-const char* anltk_transliterator_convert(ANLTK_Transliterator* ttor, const char* input)
-{
-    return (reinterpret_cast<anltk::Transliterator*>(ttor))->convert(input);
-}
 
 ANLTK_Mofaqqet* anltk_mofaqqet_new(bool is_ordinal, bool is_feminine)
 {
