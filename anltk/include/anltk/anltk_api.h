@@ -89,25 +89,25 @@ typedef enum
  * @param input
  * @return bool
  */
-ANLTK_PUBLIC bool anltk_is_valid_kalima(const char* input);
+// ANLTK_PUBLIC bool anltk_is_valid_kalima(const char* input);
 
-/**
- * @brief Check wether a character is a valid tashkeel from the following list
- * { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
- *
- * @param input : should be a single arabic character.
- * @return ANLTK_PUBLIC
- */
+// /**
+//  * @brief Check wether a character is a valid tashkeel from the following list
+//  * { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
+//  *
+//  * @param input : should be a single arabic character.
+//  * @return ANLTK_PUBLIC
+//  */
 
-ANLTK_PUBLIC bool anltk_is_tashkeel(const char* input);
+// ANLTK_PUBLIC bool anltk_is_tashkeel(const char* input);
 
-/**
- * @brief Checks wether a character is from the alphabet
- *
- * @param input : should be a single arabic character. will return false if empty or more than 1
- * @return ANLTK_PUBLIC
- */
-ANLTK_PUBLIC bool anltk_is_arabic_alpha(const char* input);
+// /**
+//  * @brief Checks wether a character is from the alphabet
+//  *
+//  * @param input : should be a single arabic character. will return false if empty or more than 1
+//  * @return ANLTK_PUBLIC
+//  */
+// ANLTK_PUBLIC bool anltk_is_arabic_alpha(const char* input);
 /**
  * @brief creates preprocessor
  *

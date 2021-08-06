@@ -9,9 +9,9 @@ namespace py = pybind11;
 PYBIND11_MODULE(anltk, m)
 {
 
-    py::class_<anltk::Mofaqqet>(m, "Mofaqqet")
-        .def(py::init<bool, bool>(), py::arg("is_ordinal") = false, py::arg("is_feminine") = false)
-        .def("tafqeet", &anltk::Mofaqqet::tafqeet);
+    // py::class_<anltk::Mofaqqet>(m, "Mofaqqet")
+    //     .def(py::init<bool, bool>(), py::arg("is_ordinal") = false, py::arg("is_feminine") = false)
+    //     .def("tafqeet", &anltk::Mofaqqet::tafqeet);
 
     {
         // clang-format off
@@ -19,6 +19,7 @@ PYBIND11_MODULE(anltk, m)
               py::arg("num"),
               py::arg("is_ordinal") = false,
               py::arg("is_feminine") = false);
+              
         py::enum_<anltk::CharMapping>(m, "CharMapping")
             .value("AR2BW", anltk::CharMapping::AR2BW)
             .value("BW2AR", anltk::CharMapping::BW2AR)
@@ -30,6 +31,8 @@ PYBIND11_MODULE(anltk, m)
               py::arg("input"),
               py::arg("mapping"));
         // clang-format on
+        m.def("tokenize_words", &anltk::tokenize_words, py::arg("input"));
+
         m.def("is_tashkeel", &anltk::is_tashkeel, py::arg("c"),
               "Checks where a character is valid haraka");
 

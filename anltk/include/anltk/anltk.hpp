@@ -74,19 +74,15 @@ private:
     string_t result_;
 };
 
-bool is_tashkeel_impl(string_view_t input);
 
 bool is_tashkeel(char_t c);
 
-bool is_arabic_alpha_impl(string_view_t input);
 
 bool is_arabic_alpha(char_t c);
 
 bool is_valid_kalima(string_view_t input);
 
 bool is_small(char_t c);
-
-bool is_small_impl(string_view_t input);
 
 bool is_indic_digit(char_t c);
 
