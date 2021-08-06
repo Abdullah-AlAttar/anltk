@@ -19,6 +19,16 @@ PYBIND11_MODULE(anltk, m)
               py::arg("num"),
               py::arg("is_ordinal") = false,
               py::arg("is_feminine") = false);
+        py::enum_<anltk::CharMapping>(m, "CharMapping")
+            .value("AR2BW", anltk::CharMapping::AR2BW)
+            .value("BW2AR", anltk::CharMapping::BW2AR)
+            .value("AR2SBW", anltk::CharMapping::AR2SBW)
+            .value("SBW2AR", anltk::CharMapping::SBW2AR)
+            .export_values();
+            
+        m.def("transliterate", &anltk::transliterate,
+              py::arg("input"),
+              py::arg("mapping"));
         // clang-format on
         m.def("is_tashkeel", &anltk::is_tashkeel, py::arg("c"),
               "Checks where a character is valid haraka");

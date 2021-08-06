@@ -17,17 +17,20 @@ using string_t      = std::string;
 using string_view_t = std::string_view;
 using char_t        = char32_t;
 
-enum class Mappings
+enum class CharMapping
 {
     AR2BW,
     BW2AR,
     AR2SBW,
     SBW2AR
 };
+
+string_t transliterate(string_view_t input, CharMapping mapping);
+
 class Transliterator
 {
 public:
-    Transliterator(Mappings);
+    Transliterator(CharMapping);
     ~Transliterator() = default;
     const char* convert(string_view_t);
 

@@ -8,7 +8,7 @@
 ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping)
 {
     return reinterpret_cast<ANLTK_Transliterator*>(
-        new anltk::Transliterator(static_cast<anltk::Mappings>(mapping)));
+        new anltk::Transliterator(static_cast<anltk::CharMapping>(mapping)));
 }
 
 void anltk_transliterator_free(ANLTK_Transliterator* ttor)
