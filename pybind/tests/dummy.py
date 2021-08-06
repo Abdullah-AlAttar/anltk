@@ -1,4 +1,5 @@
 import anltk
 
-
-print(anltk.is_tashkeel('ّّ'))
+anltk.
+print(anltk.is_tashkeel('ّ'))
+print(type(anltk.constants.ALEF_HAMZA_ABOVE))

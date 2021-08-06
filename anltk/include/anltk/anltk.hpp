@@ -39,10 +39,13 @@ private:
     const std::map<char_t, char_t>* chars_map_;
 };
 
+
+
+string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
 class Mofaqqet
 {
 public:
-    Mofaqqet(bool is_ordinal, bool is_feminine);
+    Mofaqqet(bool is_ordinal = false, bool is_feminine = false);
     ~Mofaqqet() = default;
     const char* tafqeet(long long number);
 
@@ -74,11 +77,11 @@ private:
     string_t result_;
 };
 
-bool is_tashkeel(string_view_t input);
+bool is_tashkeel_impl(string_view_t input);
 
-bool is_tashkeel_c(char_t c);
+bool is_tashkeel(char_t c);
 
-bool is_arabic_alpha(string_view_t input);
+bool is_arabic_alpha_impl(string_view_t input);
 
 bool is_arabic_alpha(char_t c);
 
@@ -86,7 +89,7 @@ bool is_valid_kalima(string_view_t input);
 
 bool is_small(char_t c);
 
-bool is_small(string_view_t input);
+bool is_small_impl(string_view_t input);
 
 bool is_indic_digit(char_t c);
 

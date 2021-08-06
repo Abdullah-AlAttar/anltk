@@ -128,7 +128,7 @@ const std::map<char_t, char_t> safe_buckwalter_to_arabic_= flip_map(arabic_to_sa
 
 // clang-format on
 
-const std::array<char_t, 37> alphabet_ = { HAMZA,
+const std::array<char_t, 36> alphabet_ = { HAMZA,
                                            ALEF_MADDA,
                                            ALEF_HAMZA_ABOVE,
                                            WAW_HAMZA_ABOVE,
@@ -165,12 +165,12 @@ const std::array<char_t, 37> alphabet_ = { HAMZA,
                                            ALEF_MAQSURA,
                                            YEH };
 
-const std::array<char_t, 9> tashkeel_list_
+const std::array<char_t, 8> tashkeel_list_
     = { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN };
 
 const std::array<char_t, 3> small_list_ = { SMALL_ALEF, SMALL_WAW, SMALL_YEH };
 
-const std::array<char_t, 10> digits_
+const std::array<char_t, 10> arqam_
     = { SEFR, WAHED, ETHNAN, THALATHA, ARBA3A, KHAMSA, SETTA, SAB3A, THAMANEYA, TES3A };
 
 #define FUNC_IMPL(prefix, name)                                                                    \

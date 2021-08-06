@@ -112,11 +112,11 @@ extern const std::map<char_t, char_t> buckwalter_to_arabic_;
 extern const std::map<char_t, char_t> arabic_to_safe_buckwalter_;
 extern const std::map<char_t, char_t> safe_buckwalter_to_arabic_;
 
-extern const std::array<char_t, 37> alphabet_;
+extern const std::array<char_t, 36> alphabet_;
 
-extern const std::array<char_t, 9> tashkeel_list_;
+extern const std::array<char_t, 8> tashkeel_list_;
 extern const std::array<char_t, 3> small_list_;
-extern const std::array<char_t, 10> digits_;
+extern const std::array<char_t, 10> arqam_;
 
 
 } // namespace anltk

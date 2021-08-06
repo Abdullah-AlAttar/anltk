@@ -15,7 +15,7 @@ Preprocessor::Preprocessor()
 
 const char* Preprocessor::remove_tashkeel(string_view_t input)
 {
-    this->result_ = anltk_erase_if(input, [](char_t c) { return anltk::is_tashkeel_c(c); });
+    this->result_ = anltk_erase_if(input, [](char_t c) { return anltk::is_tashkeel(c); });
 
     return this->result_.c_str();
 }
@@ -71,7 +71,7 @@ const char* Preprocessor::remove_non_alphanumeric_and_tashkeel(string_view_t inp
                                        return std::find(stop_list_.begin(), stop_list_.end(), c)
                                            == stop_list_.end()
                                            && !anltk::is_arabic_alpha(c)
-                                           && !anltk::is_indic_digit(c) && !anltk::is_tashkeel_c(c)
+                                           && !anltk::is_indic_digit(c) && !anltk::is_tashkeel(c)
                                            && !std::isdigit(c);
                                    });
 

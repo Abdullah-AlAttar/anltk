@@ -171,6 +171,11 @@ std::string tafqeet_internal(long long number, bool is_ordinal, bool is_feminine
     return (is_negative ? "سالب " : "") + res;
 }
 
+
+string_t tafqeet(long long number, bool is_ordinal, bool is_feminine)
+{
+    return tafqeet_internal(number, is_ordinal, is_feminine);
+}
 Mofaqqet::Mofaqqet(bool is_ordinal, bool is_feminine)
     : is_ordinal_{ is_ordinal }, is_feminine_{ is_feminine }
 {
