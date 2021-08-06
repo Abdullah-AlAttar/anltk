@@ -1,9 +1,6 @@
 #ifndef ANLTK_HPP
 #define ANLTK_HPP
 
-
-
-
 // clang-format off
 #if defined _WIN32 || defined __CYGWIN__
   #ifdef BUILDING_ANLTK
@@ -20,8 +17,6 @@
 #endif
 // clang-format on
 
-
-
 #include <deque>
 #include <map>
 #include <vector>
@@ -35,6 +30,8 @@ namespace anltk
 using string_t      = std::string;
 using string_view_t = std::string_view;
 using char_t        = char32_t;
+template <typename T>
+using vector_t = std::vector<T>;
 
 enum class CharMapping
 {
@@ -44,33 +41,20 @@ enum class CharMapping
     SBW2AR
 };
 
-
-// /**
-//  * @brief Convert given input into the pre-specified Mapping using the given Transliterator
-//  * if a character does not have a conversion, will be left as is. @n
-//  * note: the returned buffer is owned by the Transliterator* object, remember to free.
-//  * @param input
-//  * @return const char* contains the result,
+/**
+ * @brief Convert given input into the pre-specified Mapping using the given Transliterator
+ * if a character does not have a conversion, will be left as is. @n
+ * @param input string
+ * @return std::string
+ */
 ANLTK_PUBLIC string_t transliterate(string_view_t input, CharMapping mapping);
 
-
+/**
+ * @brief Converest given number to spoken arabic form. @n
+ * @param input number, can be negative or positive
+ * @return std::string
+ * */
 ANLTK_PUBLIC string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
-class Mofaqqet
-{
-public:
-    Mofaqqet(bool is_ordinal = false, bool is_feminine = false);
-    ~Mofaqqet() = default;
-    const char* tafqeet(long long number);
-
-    const string_t& result() const;
-    string_t& result();
-
-private:
-    string_t result_;
-    bool is_ordinal_;
-    bool is_feminine_;
-};
-
 class Preprocessor
 {
 public:
@@ -110,18 +94,10 @@ bool is_digit(char_t c);
 
 std::u32string to_32string(string_view_t input);
 
-class Tokenizer
-{
-public:
-    Tokenizer()  = default;
-    ~Tokenizer() = default;
+vector_t<string_t>
+tokenize_words(string_view_t input);
 
-    const std::vector<const char*>& tokenize_words(string_view_t input);
 
-private:
-    std::vector<const char*> result_;
-    std::vector<std::string> holder_;
-};
 
 #define FUNC_DECL(prefix, name) bool prefix##_##name(char_t c);
 #define LIFT_DECL(name) FUNC_DECL(is, name)

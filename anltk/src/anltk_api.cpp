@@ -7,21 +7,6 @@
 
 
 
-ANLTK_Mofaqqet* anltk_mofaqqet_new(bool is_ordinal, bool is_feminine)
-{
-    return reinterpret_cast<ANLTK_Mofaqqet*>(new anltk::Mofaqqet(is_ordinal, is_feminine));
-}
-
-void anltk_mofaqqet_free(ANLTK_Mofaqqet* mof)
-{
-    delete reinterpret_cast<anltk::Mofaqqet*>(mof);
-}
-
-const char* anltk_mofaqqet_tafqeet(ANLTK_Mofaqqet* mof, long long input)
-{
-    return (reinterpret_cast<anltk::Mofaqqet*>(mof))->tafqeet(input);
-}
-
 bool anltk_is_valid_kalima(const char* input)
 {
     return anltk::is_valid_kalima(input);
@@ -99,25 +84,3 @@ void anltk_preprocessor_free(ANLTK_Preprocessor* preprocessor)
     delete reinterpret_cast<anltk::Preprocessor*>(preprocessor);
 }
 
-ANLTK_Tokenizer* anltk_tokenizer_new()
-{
-    return reinterpret_cast<ANLTK_Tokenizer*>(new anltk::Tokenizer());
-}
-
-struct ANLTK_LIST anltk_tokenizer_tokenize_words(ANLTK_Tokenizer* tok, const char* input)
-{
-    const std::vector<const char*>& tokens
-        = reinterpret_cast<anltk::Tokenizer*>(tok)->tokenize_words(input);
-
-
-    ANLTK_LIST arr;
-    arr.data = tokens.data();
-    arr.len  = tokens.size();
-
-    return arr;
-}
-
-void anltk_tokenizer_free(ANLTK_Tokenizer* tok)
-{
-    delete reinterpret_cast<anltk::Tokenizer*>(tok);
-}

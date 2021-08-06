@@ -25,15 +25,6 @@ extern "C" {
 
 typedef struct ANLTK_Mofaqqet ANLTK_Mofaqqet;
 typedef struct ANLTK_Preprocessor ANLTK_Preprocessor;
-typedef struct ANLTK_Tokenizer ANLTK_Tokenizer;
-
-
-typedef struct ANLTK_LIST
-{
-  const char *const * data;
-  // TODO(Abdullah) : This should be a size_t, but including stddef causes issue with cffi
-  unsigned long long len;
-} ANLTK_LIST;
 
 typedef enum
 {
@@ -65,27 +56,27 @@ typedef enum
 //  */
 // ANLTK_PUBLIC const char* anltk_transliterator_convert(ANLTK_Transliterator*, const char* input);
 
-/**
- * @brief Creates Mofaqqet object
- *
- * @param is_ordinal : eg : الأول , whereas cardinal : واحد
- * @param is_feminine : eg : التاسعة عشرة, vs التاسع عشر
- * @return Mofaqqet*
- */
-ANLTK_PUBLIC ANLTK_Mofaqqet* anltk_mofaqqet_new(bool is_ordinal, bool is_feminine);
+// /**
+//  * @brief Creates Mofaqqet object
+//  *
+//  * @param is_ordinal : eg : الأول , whereas cardinal : واحد
+//  * @param is_feminine : eg : التاسعة عشرة, vs التاسع عشر
+//  * @return Mofaqqet*
+//  */
+// ANLTK_PUBLIC ANLTK_Mofaqqet* anltk_mofaqqet_new(bool is_ordinal, bool is_feminine);
 
-/**
- * @brief Releases the Mofaqqet object
- */
-ANLTK_PUBLIC void anltk_mofaqqet_free(ANLTK_Mofaqqet*);
+// /**
+//  * @brief Releases the Mofaqqet object
+//  */
+// ANLTK_PUBLIC void anltk_mofaqqet_free(ANLTK_Mofaqqet*);
 
-/**
- * @brief Converest given number to spoken arabic form. @n
- * note: the returned buffer is owned by the Mofaqqet* object, remember to free.
- * @param input number, can be negative or positive
- * @return const char* containing the result
- */
-ANLTK_PUBLIC const char* anltk_mofaqqet_tafqeet(ANLTK_Mofaqqet*, long long input);
+// /**
+//  * @brief Converest given number to spoken arabic form. @n
+//  * note: the returned buffer is owned by the Mofaqqet* object, remember to free.
+//  * @param input number, can be negative or positive
+//  * @return const char* containing the result
+//  */
+// ANLTK_PUBLIC const char* anltk_mofaqqet_tafqeet(ANLTK_Mofaqqet*, long long input);
 
 /**
  * @brief Check wether the input is a valid arabic word
@@ -221,24 +212,6 @@ ANLTK_PUBLIC void anltk_preprocessor_free(ANLTK_Preprocessor*);
 
 
 
-
-/**
- * @brief creates Tokenizer
- *
- * @return ANLTK_Tokenizer*
- */
-ANLTK_PUBLIC ANLTK_Tokenizer* anltk_tokenizer_new();
-
-
-ANLTK_PUBLIC struct ANLTK_LIST anltk_tokenizer_tokenize_words(ANLTK_Tokenizer*, const char* input);
-
-
-/**
- * @brief Releases the Tokenizer
- *
- * @return ANLTK_PUBLIC
- */
-ANLTK_PUBLIC void anltk_tokenizer_free(ANLTK_Tokenizer*);
 
 #ifdef __cplusplus
 }
