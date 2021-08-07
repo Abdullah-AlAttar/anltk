@@ -23,18 +23,8 @@ extern "C" {
 
 #include <stdbool.h>
 
-typedef struct ANLTK_Transliterator ANLTK_Transliterator;
 typedef struct ANLTK_Mofaqqet ANLTK_Mofaqqet;
 typedef struct ANLTK_Preprocessor ANLTK_Preprocessor;
-typedef struct ANLTK_Tokenizer ANLTK_Tokenizer;
-
-
-typedef struct ANLTK_LIST
-{
-  const char *const * data;
-  // TODO(Abdullah) : This should be a size_t, but including stddef causes issue with cffi
-  unsigned long long len;
-} ANLTK_LIST;
 
 typedef enum
 {
@@ -44,49 +34,49 @@ typedef enum
     CM_SBW2AR
 } Mappings;
 
-/**
- * @brief Creates Transliterator with specific mapping
- *
- * @param mapping : mapping type
- * @return Transliterator* object
- */
-ANLTK_PUBLIC ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping);
+// /**
+//  * @brief Creates Transliterator with specific mapping
+//  *
+//  * @param mapping : mapping type
+//  * @return Transliterator* object
+//  */
+// ANLTK_PUBLIC ANLTK_Transliterator* anltk_transliterator_new(Mappings mapping);
 
-/**
- * @brief Releases the Transliterator object
- */
-ANLTK_PUBLIC void anltk_transliterator_free(ANLTK_Transliterator*);
+// /**
+//  * @brief Releases the Transliterator object
+//  */
+// ANLTK_PUBLIC void anltk_transliterator_free(ANLTK_Transliterator*);
 
-/**
- * @brief Convert given input into the pre-specified Mapping using the given Transliterator
- * if a character does not have a conversion, will be left as is. @n
- * note: the returned buffer is owned by the Transliterator* object, remember to free.
- * @param input
- * @return const char* contains the result,
- */
-ANLTK_PUBLIC const char* anltk_transliterator_convert(ANLTK_Transliterator*, const char* input);
+// /**
+//  * @brief Convert given input into the pre-specified Mapping using the given Transliterator
+//  * if a character does not have a conversion, will be left as is. @n
+//  * note: the returned buffer is owned by the Transliterator* object, remember to free.
+//  * @param input
+//  * @return const char* contains the result,
+//  */
+// ANLTK_PUBLIC const char* anltk_transliterator_convert(ANLTK_Transliterator*, const char* input);
 
-/**
- * @brief Creates Mofaqqet object
- *
- * @param is_ordinal : eg : الأول , whereas cardinal : واحد
- * @param is_feminine : eg : التاسعة عشرة, vs التاسع عشر
- * @return Mofaqqet*
- */
-ANLTK_PUBLIC ANLTK_Mofaqqet* anltk_mofaqqet_new(bool is_ordinal, bool is_feminine);
+// /**
+//  * @brief Creates Mofaqqet object
+//  *
+//  * @param is_ordinal : eg : الأول , whereas cardinal : واحد
+//  * @param is_feminine : eg : التاسعة عشرة, vs التاسع عشر
+//  * @return Mofaqqet*
+//  */
+// ANLTK_PUBLIC ANLTK_Mofaqqet* anltk_mofaqqet_new(bool is_ordinal, bool is_feminine);
 
-/**
- * @brief Releases the Mofaqqet object
- */
-ANLTK_PUBLIC void anltk_mofaqqet_free(ANLTK_Mofaqqet*);
+// /**
+//  * @brief Releases the Mofaqqet object
+//  */
+// ANLTK_PUBLIC void anltk_mofaqqet_free(ANLTK_Mofaqqet*);
 
-/**
- * @brief Converest given number to spoken arabic form. @n
- * note: the returned buffer is owned by the Mofaqqet* object, remember to free.
- * @param input number, can be negative or positive
- * @return const char* containing the result
- */
-ANLTK_PUBLIC const char* anltk_mofaqqet_tafqeet(ANLTK_Mofaqqet*, long long input);
+// /**
+//  * @brief Converest given number to spoken arabic form. @n
+//  * note: the returned buffer is owned by the Mofaqqet* object, remember to free.
+//  * @param input number, can be negative or positive
+//  * @return const char* containing the result
+//  */
+// ANLTK_PUBLIC const char* anltk_mofaqqet_tafqeet(ANLTK_Mofaqqet*, long long input);
 
 /**
  * @brief Check wether the input is a valid arabic word
@@ -99,31 +89,31 @@ ANLTK_PUBLIC const char* anltk_mofaqqet_tafqeet(ANLTK_Mofaqqet*, long long input
  * @param input
  * @return bool
  */
-ANLTK_PUBLIC bool anltk_is_valid_kalima(const char* input);
+// ANLTK_PUBLIC bool anltk_is_valid_kalima(const char* input);
 
-/**
- * @brief Check wether a character is a valid tashkeel from the following list
- * { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
- *
- * @param input : should be a single arabic character.
- * @return ANLTK_PUBLIC
- */
+// /**
+//  * @brief Check wether a character is a valid tashkeel from the following list
+//  * { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
+//  *
+//  * @param input : should be a single arabic character.
+//  * @return ANLTK_PUBLIC
+//  */
 
-ANLTK_PUBLIC bool anltk_is_tashkeel(const char* input);
+// ANLTK_PUBLIC bool anltk_is_tashkeel(const char* input);
 
-/**
- * @brief Checks wether a character is from the alphabet
- *
- * @param input : should be a single arabic character. will return false if empty or more than 1
- * @return ANLTK_PUBLIC
- */
-ANLTK_PUBLIC bool anltk_is_arabic_alpha(const char* input);
+// /**
+//  * @brief Checks wether a character is from the alphabet
+//  *
+//  * @param input : should be a single arabic character. will return false if empty or more than 1
+//  * @return ANLTK_PUBLIC
+//  */
+// ANLTK_PUBLIC bool anltk_is_arabic_alpha(const char* input);
 /**
  * @brief creates preprocessor
  *
  * @return ANLTK_PUBLIC*
  */
-ANLTK_PUBLIC ANLTK_Preprocessor* anltk_preprocessor_new();
+// ANLTK_PUBLIC ANLTK_Preprocessor* anltk_preprocessor_new();
 
 /**
  * @brief Removes all tashkeel from the given arabic text,
@@ -132,14 +122,14 @@ ANLTK_PUBLIC ANLTK_Preprocessor* anltk_preprocessor_new();
  * @param input
  * @return ANLTK_PUBLIC const*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(ANLTK_Preprocessor*, const char* input);
 /**
  * @brief Removes small tashkeel from the given arabic text
  * the small list is { SMALL_ALEF '\u0670',  SMALL_WAW : '\u06E5', SMALL_YEH : '\u06E6' }
  * @param input
  * @return ANLTK_PUBLIC const*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(ANLTK_Preprocessor*, const char* input);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text
@@ -148,8 +138,8 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(ANLTK_Preprocessor*, co
  * a single character
  * @return const char*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(ANLTK_Preprocessor*, const char* input,
-                                                             const char* stop_list);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(ANLTK_Preprocessor*, const char* input,
+                                                            //  const char* stop_list);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
@@ -159,9 +149,9 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(ANLTK_Preprocessor*
  * a single character
  * @return const char*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(ANLTK_Preprocessor*,
-                                                                    const char* input,
-                                                                    const char* stop_list);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(ANLTK_Preprocessor*,
+                                                                    // const char* input,
+                                                                    // const char* stop_list);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
@@ -172,9 +162,9 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(ANLTK_Prepro
  * a single character
  * @return const char*
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, const char* input,
-                                                        const char* stop_list);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, const char* input,
+                                                        // const char* stop_list);
 
 /**
  * @brief Replaces Hamzaat forms ‫ء‬, ,‫آ‬ ‫ؤ‬, ‫ئ‬, ‫ئ‬ with ‫أ‬
@@ -182,8 +172,8 @@ anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, con
  * @param input 
  * @return  const char*  
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
 
 /**
  * @brief Removes Kasheesa AKA Tatweel‬
@@ -191,8 +181,8 @@ anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
  * @param input 
  * @return  const char*  
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
 
 
 /**
@@ -201,8 +191,8 @@ anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
  * @param input 
  * @return  const char* 
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* input);
 
 
 /**
@@ -218,28 +208,10 @@ anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* inpu
  *
  * @return ANLTK_PUBLIC
  */
-ANLTK_PUBLIC void anltk_preprocessor_free(ANLTK_Preprocessor*);
+// ANLTK_PUBLIC void anltk_preprocessor_free(ANLTK_Preprocessor*);
 
 
 
-
-/**
- * @brief creates Tokenizer
- *
- * @return ANLTK_Tokenizer*
- */
-ANLTK_PUBLIC ANLTK_Tokenizer* anltk_tokenizer_new();
-
-
-ANLTK_PUBLIC struct ANLTK_LIST anltk_tokenizer_tokenize_words(ANLTK_Tokenizer*, const char* input);
-
-
-/**
- * @brief Releases the Tokenizer
- *
- * @return ANLTK_PUBLIC
- */
-ANLTK_PUBLIC void anltk_tokenizer_free(ANLTK_Tokenizer*);
 
 #ifdef __cplusplus
 }

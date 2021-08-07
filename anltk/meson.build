@@ -13,6 +13,8 @@ endif
 CXX = meson.get_compiler('cpp')
 
 
+pybind11_dep = dependency('pybind11', fallback : ['pybind11', 'pybind11_dep'])
+
 utfcpp_dep = declare_dependency(
     include_directories : include_directories('./third_party/utfcpp/source')
 )
@@ -27,7 +29,7 @@ if get_option('default_library') == 'shared'
   anltk_cpp_args = ['-DBUILDING_ANLTK']
 endif
 
-anltk_lib = shared_library('anltk', 
+anltk_lib = static_library('anltk', 
   include_directories: include_directories('.', './include' , './src'),
   sources : anltk_sources,
   install : true,

@@ -26,17 +26,17 @@ string_t parse_sequence(char_t& next, Iter& start, Iter end, bool& done, F&& pre
     return res;
 }
 
-const std::vector<const char*>& Tokenizer::tokenize_words(string_view_t input)
+vector_t<string_t> tokenize_words(string_view_t input)
 {
-
-    if(input.empty())
+    vector_t<string_t> result;
+    if (input.empty())
     {
-        return result_;
+        return result;
     }
 
     auto start = input.begin();
     auto end   = input.end();
-    
+
     char_t next = utf8::next(start, end);
     bool done   = false;
 
@@ -51,32 +51,26 @@ const std::vector<const char*>& Tokenizer::tokenize_words(string_view_t input)
 
         if (is_arabic_alpha(next) || is_tashkeel(next))
         {
-            this->holder_.push_back(parse_sequence(next, start, end, done,
-                                                   [](char_t c) { return is_arabic_alpha(c) || is_tashkeel(c); }));
+            result.push_back(parse_sequence(next, start, end, done,
+                                            [](char_t c)
+                                            { return is_arabic_alpha(c) || is_tashkeel(c); }));
         }
         else
         {
-            this->holder_.push_back(parse_sequence(next, start, end, done,
-                                                   [](char_t c)
-                                                   { return !is_arabic_alpha(c) && !isspace(c); }));
+            result.push_back(parse_sequence(next, start, end, done,
+                                            [](char_t c)
+                                            { return !is_arabic_alpha(c) && !isspace(c); }));
         }
         // To handle last character, if it didn't belong to the previous sequence eg : "بسم."
         if (done)
         {
             string_t last;
             utf8::append(next, last);
-            this->holder_.push_back(std::move(last));
+            result.push_back(std::move(last));
         }
     }
 
-    result_.reserve(holder_.size());
-
-    for (const auto& token : this->holder_)
-    {
-        result_.push_back(token.c_str());
-    }
-
-    return result_;
+    return result;
 }
 
 } // namespace anltk

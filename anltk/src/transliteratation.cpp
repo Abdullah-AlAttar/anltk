@@ -4,43 +4,41 @@
 
 namespace anltk
 {
-
-Transliterator::Transliterator(Mappings mapping)
+string_t transliterate(string_view_t input, CharMapping mapping)
 {
+    const std::map<char_t, char_t>* chars_map;
     switch (mapping)
     {
-    case Mappings::AR2BW:
-        this->chars_map_ = &arabic_to_buckwalter_;
+    case CharMapping::AR2BW:
+        chars_map = &arabic_to_buckwalter_;
         break;
-    case Mappings::BW2AR:
-        this->chars_map_ = &buckwalter_to_arabic_;
+    case CharMapping::BW2AR:
+        chars_map = &buckwalter_to_arabic_;
         break;
-    case Mappings::AR2SBW:
-        this->chars_map_ = &arabic_to_safe_buckwalter_;
+    case CharMapping::AR2SBW:
+        chars_map = &arabic_to_safe_buckwalter_;
         break;
-    case Mappings::SBW2AR:
-        this->chars_map_ = &safe_buckwalter_to_arabic_;
+    case CharMapping::SBW2AR:
+        chars_map = &safe_buckwalter_to_arabic_;
         break;
     default:
         // TODO(abdullah): handle this
+        return {};
         break;
     }
-}
 
-const char* Transliterator::convert(string_view_t input)
-{
-
+    string_t result;
     auto start = input.begin();
     auto end   = input.end();
     while (start < end)
     {
         char_t next = utf8::next(start, end);
 
-        auto node = this->chars_map_->find(next);
+        auto node = chars_map->find(next);
 
-        utf8::append(node != this->chars_map_->end() ? node->second : next, this->result_);
+        utf8::append(node != chars_map->end() ? node->second : next, result);
     }
-    return this->result_.c_str();
+    return result;
 }
 
 } // namespace anltk

@@ -171,24 +171,13 @@ std::string tafqeet_internal(long long number, bool is_ordinal, bool is_feminine
     return (is_negative ? "سالب " : "") + res;
 }
 
-Mofaqqet::Mofaqqet(bool is_ordinal, bool is_feminine)
-    : is_ordinal_{ is_ordinal }, is_feminine_{ is_feminine }
+
+string_t tafqeet(long long number, bool is_ordinal, bool is_feminine)
 {
+    return tafqeet_internal(number, is_ordinal, is_feminine);
 }
 
-const char* Mofaqqet::tafqeet(long long number)
-{
-    this->result_ = tafqeet_internal(number, this->is_ordinal_, this->is_feminine_);
-    return this->result_.c_str();
-}
 
-const string_t& Mofaqqet::result() const
-{
-    return this->result_;
-}
-string_t& Mofaqqet::result()
-{
-    return this->result_;
-}
+
 
 } // namespace anltk

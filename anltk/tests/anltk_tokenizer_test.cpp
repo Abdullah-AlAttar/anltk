@@ -1,6 +1,6 @@
 
 
-#include "anltk/anltk_api.h"
+#include "anltk/anltk.hpp"
 
 #include "doctest.h"
 
@@ -10,75 +10,64 @@
 
 TEST_CASE("Empty")
 {
-    ANLTK_Tokenizer* tok = anltk_tokenizer_new();
+    std::vector<std::string> arr = anltk::tokenize_words( "");
 
-    ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "");
+    REQUIRE(arr.size() == 0);
 
-    REQUIRE(arr.len == 0);
-
-    anltk_tokenizer_free(tok);
 }
 
 TEST_CASE("Very Basic Tokenization")
 {
-    ANLTK_Tokenizer* tok = anltk_tokenizer_new();
 
-    ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "بسم.");
+    std::vector<std::string> arr = anltk::tokenize_words( "بسم.");
 
-    REQUIRE(arr.len == 2);
-    CHECK(std::string(arr.data[0]) == "بسم");
-    CHECK(std::string(arr.data[1]) == ".");
+    REQUIRE(arr.size() == 2);
+    CHECK(std::string(arr[0]) == "بسم");
+    CHECK(std::string(arr[1]) == ".");
 
-    anltk_tokenizer_free(tok);
 }
 
 TEST_CASE("Basic Tokenization")
 {
-    ANLTK_Tokenizer* tok = anltk_tokenizer_new();
 
-    ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "بسم الله الرحمن الرحيم.");
+    std::vector<std::string> arr = anltk::tokenize_words( "بسم الله الرحمن الرحيم.");
     std::vector<std::string> expected = { "بسم", "الله", "الرحمن", "الرحيم", "." };
-    REQUIRE(arr.len == expected.size());
-    for (size_t i = 0; i < arr.len; ++i)
+    REQUIRE(arr.size() == expected.size());
+    for (size_t i = 0; i < arr.size(); ++i)
     {
-        CHECK(expected[i] == arr.data[i]);
+        CHECK(expected[i] == arr[i]);
     }
 
-    anltk_tokenizer_free(tok);
 }
 
 TEST_CASE("Mixed with non arabic letters Tokenization")
 {
-    ANLTK_Tokenizer* tok = anltk_tokenizer_new();
 
-    ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "ال3 بسم الله!! ي الرح3من ال يي");
+    std::vector<std::string> arr = anltk::tokenize_words( "ال3 بسم الله!! ي الرح3من ال يي");
 
     std::vector<std::string> expected
         = { "ال", "3", "بسم", "الله", "!!", "ي", "الرح", "3", "من", "ال", "يي" };
 
-    REQUIRE(arr.len == expected.size());
-    for (size_t i = 0; i < arr.len; ++i)
+    REQUIRE(arr.size() == expected.size());
+    for (size_t i = 0; i < arr.size(); ++i)
     {
-        CHECK(expected[i] == arr.data[i]);
+        CHECK(expected[i] == arr[i]);
     }
 
-    anltk_tokenizer_free(tok);
 }
 
 TEST_CASE("Mixed with non arabic letters and tashkeel Tokenization")
 {
-    ANLTK_Tokenizer* tok = anltk_tokenizer_new();
 
-    ANLTK_LIST arr = anltk_tokenizer_tokenize_words(tok, "ال3 بِسْمِ الله!! ي الرّح3من ال رحيمِ؟");
+    std::vector<std::string> arr = anltk::tokenize_words( "ال3 بِسْمِ الله!! ي الرّح3من ال رحيمِ؟");
 
     std::vector<std::string> expected
         = { "ال", "3", "بِسْمِ", "الله", "!!", "ي", "الرّح", "3", "من", "ال", "رحيمِ", "؟" };
 
-    REQUIRE(arr.len == expected.size());
-    for (size_t i = 0; i < arr.len; ++i)
+    REQUIRE(arr.size() == expected.size());
+    for (size_t i = 0; i < arr.size(); ++i)
     {
-        CHECK(expected[i] == arr.data[i]);
+        CHECK(expected[i] == arr[i]);
     }
 
-    anltk_tokenizer_free(tok);
 }

@@ -32,9 +32,9 @@ bool is_digit(char_t c)
 }
 bool is_indic_digit(char_t c)
 {
-    return std::find(digits_.begin(), digits_.end(), c) != digits_.end();
+    return std::find(arqam_.begin(), arqam_.end(), c) != arqam_.end();
 }
-bool is_tashkeel(string_view_t input)
+bool is_tashkeel_impl(string_view_t input)
 {
     if (input.empty())
     {
@@ -54,7 +54,7 @@ bool is_tashkeel(char_t c)
     return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
 }
 
-bool is_arabic_alpha(string_view_t input)
+bool is_arabic_alpha_impl(string_view_t input)
 {
     if (input.empty())
     {
@@ -80,7 +80,7 @@ bool is_small(char_t c)
     return std::find(small_list_.begin(), small_list_.end(), c) != small_list_.end();
 }
 
-bool is_small(string_view_t input)
+bool is_small_impl(string_view_t input)
 {
     if (input.empty())
     {
