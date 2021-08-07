@@ -55,17 +55,57 @@ ANLTK_PUBLIC string_t transliterate(string_view_t input, CharMapping mapping);
  * @return std::string
  * */
 ANLTK_PUBLIC string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
-
-
+/**
+ * @brief Removes all tashkeel from the given arabic text,
+ * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
+ * */ 
 ANLTK_PUBLIC string_t remove_tashkeel(string_view_t input);
+/**
+ * @brief Removes small tashkeel from the given arabic text
+ * the small list is { SMALL_ALEF '\u0670',  SMALL_WAW : '\u06E5', SMALL_YEH : '\u06E6' 
+ */
 ANLTK_PUBLIC string_t remove_small(string_view_t input);
+
+/**
+ * @brief Removes non alphapet 28 characters from the given arabic text
+ * @param input
+ * @param stop_list strings containing list of characters that won't be removed. each one should be
+ * a single character
+*/
 ANLTK_PUBLIC string_t remove_non_alpha(string_view_t input, string_view_t stop_list);
+/**
+ * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
+ * English)
+ * @param input
+ * @param stop_list strings containing list of characters that won't be removed. each one should be
+ * a single character
+ */
 ANLTK_PUBLIC string_t remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
+/**
+ * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
+ * English) plus tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA,
+ * KASRA, SHADDA, SUKUN }
+ * @param input
+ * @param stop_list strings containing list of characters that won't be removed. each one should be
+ * a single character
+ */
 ANLTK_PUBLIC string_t remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
+/**
+ * @brief Removes Kasheesa AKA Tatweel‬
+ */
 ANLTK_PUBLIC string_t remove_kasheeda(string_view_t input);
+
+/**
+ * @brief Replaces Hamzaat forms ‫ء‬, ,‫آ‬ ‫ؤ‬, ‫ئ‬, ‫ئ‬ with ‫أ‬
+ */
 ANLTK_PUBLIC string_t normalize_hamzat(string_view_t input);
+/**
+ * @brief Duplicates the shadda letter
+ * eg : الشّمس becomes الششمس
+ */
 ANLTK_PUBLIC string_t duplicate_shadda_letter(string_view_t input);
-ANLTK_PUBLIC string_t extract_root(string_view_t input);
+
+// ANLTK_PUBLIC string_t extract_root(string_view_t input);
 
 
 ANLTK_PUBLIC bool is_tashkeel(char_t c);
