@@ -1,5 +1,6 @@
 ![example workflow](https://github.com/Abdullah-AlAttar/anltk/actions/workflows/c-cpp.yml/badge.svg)
 
+Note: this branch is deprecated, C API will be removed.
 # Arabic Natural Language Toolkit (ANLTK)
 
 ANLTK is a set of Arabic natural language processing tools. developed with focus on performance.
