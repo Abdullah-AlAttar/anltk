@@ -11,13 +11,6 @@ anltk_source = os.getenv("ANLTK_SOURCE", os.path.abspath(os.path.join(os.path.di
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
 architecture = os.environ.get('ANLTK_ARCHITECTURE', platform.architecture()[0])
 
-# Copy precompmilled librariesa
-print(os.path.join(anltk_source, "build/lib*"))
-for lib_path in glob.glob(os.path.join(anltk_source, "build/lib*so*")):
-    if os.path.isfile(lib_path):
-        print ("Adding library", lib_path)
-        shutil.copy(lib_path, "anltk")
-
 # Create OS-dependent, but Python-independent wheels.
 try:
     from wheel.bdist_wheel import bdist_wheel
@@ -77,8 +70,6 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     # url="",
     packages=setuptools.find_packages(),
-    package_data = {'anltk': ['*.so', '*.dll', '*.dyld']},
-    include_package_data=True,
     cmdclass=cmdclass,
     python_requires='>=3',
     ext_modules=[ctranslate2_module],
