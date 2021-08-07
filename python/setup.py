@@ -82,9 +82,4 @@ setuptools.setup(
     cmdclass=cmdclass,
     python_requires='>=3',
     ext_modules=[ctranslate2_module],
-
-    zip_safe=False, # Since we load so file from the filesystem, we can not run from zip file
-    # setup_requires=['cffi>=1.0'],
-    # install_requires=['cffi>=1.0'],
-    # cffi_modules=['anltk_build.py:ffibuilder'],
 )
