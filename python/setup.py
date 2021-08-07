@@ -5,6 +5,7 @@ import shutil
 import glob
 import platform
 
+
 # Figure out environment for cross-compile
 anltk_source = os.getenv("ANLTK_SOURCE", os.path.abspath(os.path.join(os.path.dirname(__file__), "../anltk")))
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
@@ -44,6 +45,28 @@ else:
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
+include_dirs = [os.path.join(anltk_source, 'subprojects', 'pybind11-2.6.1', 'include'),
+                os.path.join(anltk_source, 'include'),
+                os.path.join(anltk_source, 'third_party', 'utfcpp', 'source')]
+library_dirs = [os.path.join(anltk_source, 'build')]
+cflags = ["-std=c++17"]
+ldflags = []
+
+print(include_dirs)
+
+
+ctranslate2_module = setuptools.Extension(
+    "anltk",
+    sources=["anltk_py.cpp"],
+    extra_compile_args=cflags,
+    extra_link_args=ldflags,
+    include_dirs=include_dirs,
+    library_dirs=library_dirs,
+    libraries=["anltk"],
+)
+
+
 setuptools.setup(
     name="anltk",
     version="0.1.1",
@@ -58,8 +81,10 @@ setuptools.setup(
     include_package_data=True,
     cmdclass=cmdclass,
     python_requires='>=3',
+    ext_modules=[ctranslate2_module],
+
     zip_safe=False, # Since we load so file from the filesystem, we can not run from zip file
-    setup_requires=['cffi>=1.0'],
-    install_requires=['cffi>=1.0'],
-    cffi_modules=['anltk_build.py:ffibuilder'],
+    # setup_requires=['cffi>=1.0'],
+    # install_requires=['cffi>=1.0'],
+    # cffi_modules=['anltk_build.py:ffibuilder'],
 )

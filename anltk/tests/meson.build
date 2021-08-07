@@ -3,14 +3,6 @@
 
 doctest_dep = dependency('doctest', fallback : ['doctest', 'doctest_dep'])
 
-exe = executable(
-    'anltk_test',
-    sources : ['anltk_test.cpp', 'doctest_main.cpp'],
-    dependencies : [anltk_dep, doctest_dep]
-)
-
-test('anltk_test', exe)
-
 
 
 exe = executable(
