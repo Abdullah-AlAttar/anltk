@@ -23,15 +23,11 @@
 
 #include "anltk/anltk_typedefs.h"
 #include "anltk/char_maps.h"
-#include "utf8.h"
+
 namespace anltk
 {
 
-using string_t      = std::string;
-using string_view_t = std::string_view;
-using char_t        = char32_t;
-template <typename T>
-using vector_t = std::vector<T>;
+
 
 enum class CharMapping
 {
@@ -120,8 +116,8 @@ ANLTK_PUBLIC bool is_indic_digit(char_t c);
 
 ANLTK_PUBLIC bool is_digit(char_t c);
 
-vector_t<string_t>
-ANLTK_PUBLIC tokenize_words(string_view_t input);
+
+ANLTK_PUBLIC vector_t<string_t> tokenize_words(string_view_t input);
 
 
 std::u32string to_32string(string_view_t input);

@@ -51,7 +51,7 @@ endif
 
 # Make this library usable from the system's
 # package manager.
-install_headers('./include/anltk/anltk_api.h', subdir : 'anltk')
+install_headers('./include/anltk/anltk.hpp', subdir : 'anltk')
 
 
 pkg_mod = import('pkgconfig')

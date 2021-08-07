@@ -1,5 +1,6 @@
 #include "anltk/anltk.hpp"
 #include <iostream>
+#include "utf8.h"
 // #include <tinyutf8/tinyutf8.h>
 
 namespace anltk
