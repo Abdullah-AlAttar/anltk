@@ -1,7 +1,6 @@
 #include "anltk/anltk.hpp"
 #include "anltk_algorithm.h"
 
-
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -9,84 +8,67 @@
 namespace anltk
 {
 
-Preprocessor::Preprocessor()
+string_t remove_tashkeel(string_view_t input)
 {
+    return anltk_erase_if(input, [](char_t c) { return anltk::is_tashkeel(c); });
 }
 
-const char* Preprocessor::remove_tashkeel(string_view_t input)
+string_t remove_small(string_view_t input)
 {
-    this->result_ = anltk_erase_if(input, [](char_t c) { return anltk::is_tashkeel(c); });
-
-    return this->result_.c_str();
+    return anltk_erase_if(input, [](char_t c) { return anltk::is_small(c); });
 }
 
-const char* Preprocessor::remove_small(string_view_t input)
-{
-    this->result_ = anltk_erase_if(input, [](char_t c) { return anltk::is_small(c); });
-
-    return this->result_.c_str();
-}
-
-const char* Preprocessor::remove_non_alpha(string_view_t input, string_view_t stop_list)
+string_t remove_non_alpha(string_view_t input, string_view_t stop_list)
 {
     std::u32string stop_list_ = to_32string(stop_list);
 
-    this->result_ = anltk_erase_if(input,
-                                   [&](char_t c)
-                                   {
-                                       return !anltk::is_arabic_alpha(c)
-                                           && std::find(stop_list_.begin(), stop_list_.end(), c)
-                                           == stop_list_.end();
-                                   });
-
-    return this->result_.c_str();
+    return anltk_erase_if(input,
+                          [&](char_t c)
+                          {
+                              return !anltk::is_arabic_alpha(c)
+                                  && std::find(stop_list_.begin(), stop_list_.end(), c)
+                                  == stop_list_.end();
+                          });
 }
 
-const char* Preprocessor::remove_non_alphanumeric(string_view_t input, string_view_t stop_list)
+string_t remove_non_alphanumeric(string_view_t input, string_view_t stop_list)
 {
 
     std::u32string stop_list_ = to_32string(stop_list);
 
-    this->result_ = anltk_erase_if(input,
-                                   [&](char_t c)
-                                   {
-                                       return std::find(stop_list_.begin(), stop_list_.end(), c)
-                                           == stop_list_.end()
-                                           && !anltk::is_arabic_alpha(c)
-                                           && !anltk::is_indic_digit(c) && !anltk::is_digit(c);
-                                   });
-
-    return this->result_.c_str();
+    return anltk_erase_if(input,
+                          [&](char_t c)
+                          {
+                              return std::find(stop_list_.begin(), stop_list_.end(), c)
+                                  == stop_list_.end()
+                                  && !anltk::is_arabic_alpha(c) && !anltk::is_indic_digit(c)
+                                  && !anltk::is_digit(c);
+                          });
 }
 
-const char* Preprocessor::remove_non_alphanumeric_and_tashkeel(string_view_t input,
-                                                               string_view_t stop_list)
+string_t remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list)
 {
 
     std::u32string stop_list_ = to_32string(stop_list);
 
-    this->result_ = anltk_erase_if(input,
-                                   [&](char_t c)
-                                   {
-                                       return std::find(stop_list_.begin(), stop_list_.end(), c)
-                                           == stop_list_.end()
-                                           && !anltk::is_arabic_alpha(c)
-                                           && !anltk::is_indic_digit(c) && !anltk::is_tashkeel(c)
-                                           && !std::isdigit(c);
-                                   });
-
-    return this->result_.c_str();
+    return anltk_erase_if(input,
+                          [&](char_t c)
+                          {
+                              return std::find(stop_list_.begin(), stop_list_.end(), c)
+                                  == stop_list_.end()
+                                  && !anltk::is_arabic_alpha(c) && !anltk::is_indic_digit(c)
+                                  && !anltk::is_tashkeel(c) && !std::isdigit(c);
+                          });
 }
 
-const char* Preprocessor::remove_kasheeda(string_view_t input)
+string_t remove_kasheeda(string_view_t input)
 {
-    this->result_ = anltk_erase_if(input, [](char_t c) { return c == TATWEEL; });
-
-    return this->result_.c_str();
+    return anltk_erase_if(input, [](char_t c) { return c == TATWEEL; });
 }
 
-const char* Preprocessor::normalize_hamzat(string_view_t input)
+string_t normalize_hamzat(string_view_t input)
 {
+    string_t result;
     auto start = input.begin();
     auto end   = input.end();
     while (start < end)
@@ -107,13 +89,14 @@ const char* Preprocessor::normalize_hamzat(string_view_t input)
             break;
         }
 
-        utf8::append(next, this->result_);
+        utf8::append(next, result);
     }
-    return this->result_.c_str();
+    return result;
 }
 
-const char* Preprocessor::duplicate_shadda_letter(string_view_t input)
+string_t duplicate_shadda_letter(string_view_t input)
 {
+    string_t result;
     auto start = input.begin();
     auto end   = input.end();
     char_t prev{};
@@ -124,16 +107,16 @@ const char* Preprocessor::duplicate_shadda_letter(string_view_t input)
         char_t next = utf8::next(start, end);
         if (next == SHADDA)
         {
-            utf8::append(prev, this->result_);
+            utf8::append(prev, result);
         }
         else
         {
-            utf8::append(next, this->result_);
+            utf8::append(next, result);
         }
         prev = next;
     }
 
-    return this->result_.c_str();
+    return result;
 }
 
 } // namespace anltk

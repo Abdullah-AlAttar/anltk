@@ -113,7 +113,7 @@ typedef enum
  *
  * @return ANLTK_PUBLIC*
  */
-ANLTK_PUBLIC ANLTK_Preprocessor* anltk_preprocessor_new();
+// ANLTK_PUBLIC ANLTK_Preprocessor* anltk_preprocessor_new();
 
 /**
  * @brief Removes all tashkeel from the given arabic text,
@@ -122,14 +122,14 @@ ANLTK_PUBLIC ANLTK_Preprocessor* anltk_preprocessor_new();
  * @param input
  * @return ANLTK_PUBLIC const*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_tashkeel(ANLTK_Preprocessor*, const char* input);
 /**
  * @brief Removes small tashkeel from the given arabic text
  * the small list is { SMALL_ALEF '\u0670',  SMALL_WAW : '\u06E5', SMALL_YEH : '\u06E6' }
  * @param input
  * @return ANLTK_PUBLIC const*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(ANLTK_Preprocessor*, const char* input);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text
@@ -138,8 +138,8 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_small(ANLTK_Preprocessor*, co
  * a single character
  * @return const char*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(ANLTK_Preprocessor*, const char* input,
-                                                             const char* stop_list);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(ANLTK_Preprocessor*, const char* input,
+                                                            //  const char* stop_list);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
@@ -149,9 +149,9 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alpha(ANLTK_Preprocessor*
  * a single character
  * @return const char*
  */
-ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(ANLTK_Preprocessor*,
-                                                                    const char* input,
-                                                                    const char* stop_list);
+// ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(ANLTK_Preprocessor*,
+                                                                    // const char* input,
+                                                                    // const char* stop_list);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
@@ -162,9 +162,9 @@ ANLTK_PUBLIC const char* anltk_preprocessor_remove_non_alphanumeric(ANLTK_Prepro
  * a single character
  * @return const char*
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, const char* input,
-                                                        const char* stop_list);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, const char* input,
+                                                        // const char* stop_list);
 
 /**
  * @brief Replaces Hamzaat forms ‫ء‬, ,‫آ‬ ‫ؤ‬, ‫ئ‬, ‫ئ‬ with ‫أ‬
@@ -172,8 +172,8 @@ anltk_preprocessor_remove_non_alphanumeric_and_tashkeel(ANLTK_Preprocessor*, con
  * @param input 
  * @return  const char*  
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
 
 /**
  * @brief Removes Kasheesa AKA Tatweel‬
@@ -181,8 +181,8 @@ anltk_preprocessor_normalize_hamzat(ANLTK_Preprocessor*, const char* input);
  * @param input 
  * @return  const char*  
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
 
 
 /**
@@ -191,8 +191,8 @@ anltk_preprocessor_remove_kasheeda(ANLTK_Preprocessor*, const char* input);
  * @param input 
  * @return  const char* 
  */
-ANLTK_PUBLIC const char*
-anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* input);
+// ANLTK_PUBLIC const char*
+// anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* input);
 
 
 /**
@@ -208,7 +208,7 @@ anltk_preprocessor_duplicate_shadda_letter(ANLTK_Preprocessor*, const char* inpu
  *
  * @return ANLTK_PUBLIC
  */
-ANLTK_PUBLIC void anltk_preprocessor_free(ANLTK_Preprocessor*);
+// ANLTK_PUBLIC void anltk_preprocessor_free(ANLTK_Preprocessor*);
 
 
 

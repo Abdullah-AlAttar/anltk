@@ -55,44 +55,36 @@ ANLTK_PUBLIC string_t transliterate(string_view_t input, CharMapping mapping);
  * @return std::string
  * */
 ANLTK_PUBLIC string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
-class Preprocessor
-{
-public:
-    Preprocessor();
-    ~Preprocessor() = default;
-    const char* remove_tashkeel(string_view_t input);
-    const char* remove_small(string_view_t input);
-    const char* remove_non_alpha(string_view_t input, string_view_t stop_list);
-    const char* remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
-    const char* remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
-    const char* remove_kasheeda(string_view_t input);
-    const char* normalize_hamzat(string_view_t input);
-    const char* duplicate_shadda_letter(string_view_t input);
-    const char* extract_root(string_view_t input);
-
-private:
-    string_t result_;
-};
 
 
-bool is_tashkeel(char_t c);
+ANLTK_PUBLIC string_t remove_tashkeel(string_view_t input);
+ANLTK_PUBLIC string_t remove_small(string_view_t input);
+ANLTK_PUBLIC string_t remove_non_alpha(string_view_t input, string_view_t stop_list);
+ANLTK_PUBLIC string_t remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
+ANLTK_PUBLIC string_t remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
+ANLTK_PUBLIC string_t remove_kasheeda(string_view_t input);
+ANLTK_PUBLIC string_t normalize_hamzat(string_view_t input);
+ANLTK_PUBLIC string_t duplicate_shadda_letter(string_view_t input);
+ANLTK_PUBLIC string_t extract_root(string_view_t input);
 
 
-bool is_arabic_alpha(char_t c);
+ANLTK_PUBLIC bool is_tashkeel(char_t c);
 
-bool is_valid_kalima(string_view_t input);
+ANLTK_PUBLIC bool is_arabic_alpha(char_t c);
 
-bool is_small(char_t c);
+ANLTK_PUBLIC bool is_valid_kalima(string_view_t input);
 
-bool is_indic_digit(char_t c);
+ANLTK_PUBLIC bool is_small(char_t c);
 
-bool is_digit(char_t c);
+ANLTK_PUBLIC bool is_indic_digit(char_t c);
 
-std::u32string to_32string(string_view_t input);
+ANLTK_PUBLIC bool is_digit(char_t c);
 
 vector_t<string_t>
-tokenize_words(string_view_t input);
+ANLTK_PUBLIC tokenize_words(string_view_t input);
 
+
+std::u32string to_32string(string_view_t input);
 
 
 #define FUNC_DECL(prefix, name) bool prefix##_##name(char_t c);

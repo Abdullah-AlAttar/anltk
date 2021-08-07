@@ -1,5 +1,5 @@
 
-#include "anltk/anltk_api.h"
+#include "anltk/anltk.hpp"
 #include <algorithm>
 #include <iostream>
 
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
     std::ofstream out_file;
     out_file.open("utfcpp.txt");
     std::string line;
-    ANLTK_Preprocessor* pp = anltk_preprocessor_new();
+    // ANLTK_Preprocessor* pp = anltk_preprocessor_new();
        std::string output;
     std::cout<< timeFuncInvocation([&]() {
         // while (std::getline(t, line))
@@ -41,11 +41,10 @@ int main(int argc, char** argv)
             // line contains the current line
          
 
-            output = anltk_preprocessor_remove_tashkeel(pp, str.c_str());
+            output = anltk::remove_tashkeel(str);
             // out_file << output << '\n';
         }
     }) << std::endl;;
-    anltk_preprocessor_free(pp);
     out_file << output ;
     // مرحبا  بكم�!
 }
