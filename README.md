@@ -6,6 +6,12 @@ ANLTK is a set of Arabic natural language processing tools. developed with focus
 
 ## ANLTK is a C++ library, with python bindings.
 
+## Installatio
+
+for python :
+```
+pip install anltk
+```
 ## Building
 Note: Currently only tested on Linux  
 The Library depends on https://github.com/nemtrif/utfcpp.git, which is cloned automatically.  
@@ -13,8 +19,8 @@ you also need a modern C++ Compiler, which supports C++17
 also meson and ninja needs to be installed.  
 simply with pip
 ```bash
-pip3 install meson
-pip3 install ninja
+pip install meson
+pip install ninja
 ```
 
 ```bash
