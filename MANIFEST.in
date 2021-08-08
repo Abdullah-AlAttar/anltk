@@ -1,0 +1,5 @@
+recursive-include python *.cpp
+
+recursive-include anltk *.cpp
+
+recursive-include anltk *.h *.hpp
