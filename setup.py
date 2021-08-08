@@ -66,7 +66,7 @@ anltk_module = setuptools.Extension(
 
 setuptools.setup(
     name="anltk",
-    version="0.1.4",
+    version="0.1.5",
     author="Abdullah Alattar",
     author_email="abdullah.mohammad.alattar@gmail.com",
     description="Arabic language processing toolkit",

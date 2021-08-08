@@ -6,7 +6,7 @@ ANLTK is a set of Arabic natural language processing tools. developed with focus
 
 ## ANLTK is a C++ library, with python bindings.
 
-## Installatio
+## Installation
 
 for python :
 ```
