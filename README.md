@@ -29,7 +29,7 @@ git clone --recurse-submodules https://github.com/Abdullah-AlAttar/anltk.git \
     && meson build --buildtype=release -Dbuild_tests=false \
     && cd build \
     && ninja \
-    && cd ../../python \
+    && cd ../../ \
     && python3 setup.py install
 ```
 

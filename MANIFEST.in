@@ -1,5 +1,7 @@
 recursive-include python *.cpp
 
-recursive-include anltk *.cpp
+recursive-include anltk/src *.h *.cpp
 
-recursive-include anltk *.h *.hpp
+recursive-include anltk/include *.h *.hpp
+
+recursive-include anltk/subprojects/pybind11-2.6.1 *.h
