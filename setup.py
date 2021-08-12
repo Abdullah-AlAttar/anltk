@@ -35,7 +35,7 @@ else:
             return 'py3', abi, oses
     cmdclass = {'bdist_wheel': bdist_wheel_tag_name}
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 
@@ -47,6 +47,8 @@ library_dirs = []
 
 cflags = ["-std=c++17", "-O3"]
 ldflags = []
+if system == 'Windows':
+    cflags = ['/std:c++17', '/O2', '/utf-8']
 
 anltk_src_files = map(str, os.listdir(os.path.join(anltk_source, 'anltk' , 'src')))
 anltk_src_cpp = list(filter(lambda x: x.endswith('.cpp'), anltk_src_files))
@@ -60,7 +62,8 @@ anltk_module = setuptools.Extension(
     extra_compile_args=cflags,
     extra_link_args=ldflags,
     include_dirs=include_dirs,
-    library_dirs=library_dirs
+    library_dirs=library_dirs,
+    libraries = ['python39']
 )
 
 

@@ -62,7 +62,7 @@ const std::string alaaf[][4] = {
 
 bool is_between(long long num, long long lower_bound, long long upper_bound)
 {
-    return num > lower_bound and num < upper_bound;
+    return num > lower_bound && num < upper_bound;
 }
 
 void tafqeet_impl(long long num, std::vector<std::string>& pieces, bool is_ordinal = false,
@@ -147,7 +147,7 @@ std::string tafqeet_internal(long long number, bool is_ordinal, bool is_feminine
     {
         return std::string() + (is_negative ? "سالب " : "") + (is_ordinal ? "الصفر" : "صفر");
     }
-    if (number == 1 and is_ordinal)
+    if (number == 1 && is_ordinal)
     {
         return std::string() + (is_negative ? "سالب " : "") + (is_feminine ? "الأولى" : "الأول");
     }

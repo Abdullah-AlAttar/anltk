@@ -25,9 +25,10 @@ subdir('src')
 
 
 anltk_cpp_args = []
-if get_option('default_library') == 'shared'
-  anltk_cpp_args = ['-DBUILDING_ANLTK']
-endif
+
+# if get_option('default_library') == 'shared'
+#   anltk_cpp_args = ['-DBUILDING_ANLTK']
+# endif
 
 anltk_lib = static_library('anltk', 
   include_directories: include_directories('.', './include' , './src'),

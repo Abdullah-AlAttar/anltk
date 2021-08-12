@@ -39,11 +39,11 @@ vector_t<string_t> tokenize_words(string_view_t input)
 
     char_t next = utf8::next(start, end);
     bool done   = false;
-
+   
     while (start != end)
     {
 
-        if (isspace(next))
+        if (isspace(static_cast<char>(next)))
         {
             next = utf8::next(start, end);
             continue;
@@ -59,7 +59,7 @@ vector_t<string_t> tokenize_words(string_view_t input)
         {
             result.push_back(parse_sequence(next, start, end, done,
                                             [](char_t c)
-                                            { return !is_arabic_alpha(c) && !isspace(c); }));
+                                            { return !is_arabic_alpha(c) && !isspace(static_cast<char>(c)); }));
         }
         // To handle last character, if it didn't belong to the previous sequence eg : "بسم."
         if (done)
