@@ -62,14 +62,13 @@ anltk_module = setuptools.Extension(
     extra_compile_args=cflags,
     extra_link_args=ldflags,
     include_dirs=include_dirs,
-    library_dirs=library_dirs,
-    libraries = ['python39']
+    library_dirs=library_dirs
 )
 
 
 setuptools.setup(
     name="anltk",
-    version="0.1.8",
+    version="0.1.9",
     author="Abdullah Alattar",
     author_email="abdullah.mohammad.alattar@gmail.com",
     description="Arabic language processing toolkit",
