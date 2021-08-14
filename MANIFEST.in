@@ -5,3 +5,7 @@ recursive-include anltk/src *.h *.cpp
 recursive-include anltk/include *.h *.hpp
 
 recursive-include anltk/subprojects/pybind11-2.6.1 *.h
+
+include README.md
+
+include Features.md

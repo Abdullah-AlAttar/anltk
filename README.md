@@ -77,7 +77,7 @@ print(anltk.remove_tashkeel("فَرَاشَةٌ مُلَوَّنَةٌ تَطِ�
 # فراشة ملونة تطير في البستان، حلوة مهندمة تدهش الإنسان.
 ```
 
-** For list of features see [Features.md](Features.md)
+**For list of features see [Features.md](Features.md)**
 
 
 ## Benchmarks
