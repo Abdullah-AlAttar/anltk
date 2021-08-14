@@ -8,7 +8,7 @@ namespace anltk
 bool is_digit(char_t c)
 {
     // TODO(Abdullah) This causes issues in windows, needs more testing
-    // return c  >= U'0' && c <= U'9'; 
+    // return c  >= U'0' && c <= U'9';
     switch (c)
     {
     case U'0':
@@ -35,12 +35,10 @@ bool is_indic_digit(char_t c)
     return std::find(arqam_.begin(), arqam_.end(), c) != arqam_.end();
 }
 
-
 bool is_tashkeel(char_t c)
 {
     return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
 }
-
 
 bool is_arabic_alpha(char_t c)
 {
@@ -55,13 +53,11 @@ bool is_small(char_t c)
 bool is_shamsi(char_t c)
 {
     return std::find(shmasi_.begin(), shmasi_.end(), c) != shmasi_.end();
-
 }
 
 bool is_qamari(char_t c)
 {
-        return std::find(qamari_.begin(), qamari_.end(), c) != qamari_.end();
-
+    return std::find(qamari_.begin(), qamari_.end(), c) != qamari_.end();
 }
 
 bool is_valid_kalima(string_view_t input)
