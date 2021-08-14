@@ -25,7 +25,7 @@ constexpr char_t KHAH             = U'\u062E'; // خ	 \u062E
 constexpr char_t DAL              = U'\u062F'; // د	 \u062F
 constexpr char_t THAL             = U'\u0630'; // ذ	 \u0630
 constexpr char_t REH              = U'\u0631'; // ر	 \u0631
-constexpr char_t ZAIN             = U'\u0632'; // ز	 \u0632
+constexpr char_t ZAAY             = U'\u0632'; // ز	 \u0632
 constexpr char_t SEEN             = U'\u0633'; // س	 \u0633
 constexpr char_t SHEEN            = U'\u0634'; // ش	 \u0634
 constexpr char_t SAD              = U'\u0635'; // ص	 \u0635
@@ -118,6 +118,8 @@ extern const std::array<char_t, 8> tashkeel_list_;
 extern const std::array<char_t, 3> small_list_;
 extern const std::array<char_t, 10> arqam_;
 
+extern const std::array<char_t, 14 > qamari_;
+extern const std::array<char_t, 14 > shmasi_;
 
 } // namespace anltk
 

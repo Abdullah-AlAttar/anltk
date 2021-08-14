@@ -46,6 +46,13 @@ anltk.is_tashkeel('ِ') # True
 # if the literal in anltk.constants.ALPHABET
 anltk.is_arabic_alpha('h') # False
 anltk.is_arabic_alpha('أ') # True
+
+# if a character is shamsi
+anltk.is_shamsi('ش')
+#	True
+# if a character is qamari
+anltk.is_qamari('و')
+#	True
 ```
 
 

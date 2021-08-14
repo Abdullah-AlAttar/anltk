@@ -100,6 +100,9 @@ bool is_indic_digit(char_t c);
 
 bool is_digit(char_t c);
 
+bool is_shamsi(char_t c);
+
+bool is_qamari(char_t c);
 
 vector_t<string_t> tokenize_words(string_view_t input);
 
@@ -127,7 +130,7 @@ LIFT_DECL(KHAH)
 LIFT_DECL(DAL)
 LIFT_DECL(THAL)
 LIFT_DECL(REH)
-LIFT_DECL(ZAIN)
+LIFT_DECL(ZAAY)
 LIFT_DECL(SEEN)
 LIFT_DECL(SHEEN)
 LIFT_DECL(SAD)

@@ -128,3 +128,18 @@ TEST_CASE("Is Alphabet")
         REQUIRE(anltk::is_arabic_alpha(ar_text) == false);
     }
 }
+
+
+TEST_CASE("Shamsi & Qamari")
+{
+    SUBCASE("Shamsi")
+    {
+        REQUIRE(anltk::is_shamsi(U'ش') == true);
+        REQUIRE(anltk::is_shamsi(U'و') == false);
+    }
+    SUBCASE("Qamari")
+    {
+        REQUIRE(anltk::is_qamari(U'ش') == false);
+        REQUIRE(anltk::is_qamari(U'و') == true);
+    }
+}

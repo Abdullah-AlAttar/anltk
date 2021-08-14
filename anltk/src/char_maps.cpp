@@ -32,7 +32,7 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ DAL              ,	U'd' },
 	{ THAL             ,	U'*' },
 	{ REH              ,	U'r' },
-	{ ZAIN             ,	U'z' },
+	{ ZAAY             ,	U'z' },
 	{ SEEN             ,	U's' },
 	{ SHEEN            ,	U'$' },
 	{ SAD              ,	U'S' },
@@ -88,7 +88,7 @@ const std::map<char_t , char_t> arabic_to_safe_buckwalter_ = {
 	{ DAL              ,	U'd' },
 	{ THAL             ,	U'V' },
 	{ REH              ,	U'r' },
-	{ ZAIN             ,	U'z' },
+	{ ZAAY             ,	U'z' },
 	{ SEEN             ,	U's' },
 	{ SHEEN            ,	U'c' },
 	{ SAD              ,	U'S' },
@@ -145,7 +145,7 @@ const std::array<char_t, 36> alphabet_ = { HAMZA,
                                            DAL,
                                            THAL,
                                            REH,
-                                           ZAIN,
+                                           ZAAY,
                                            SEEN,
                                            SHEEN,
                                            SAD,
@@ -173,6 +173,12 @@ const std::array<char_t, 3> small_list_ = { SMALL_ALEF, SMALL_WAW, SMALL_YEH };
 const std::array<char_t, 10> arqam_
     = { SEFR, WAHED, ETHNAN, THALATHA, ARBA3A, KHAMSA, SETTA, SAB3A, THAMANEYA, TES3A };
 
+extern const std::array<char_t, 14> qamari_
+    = { ALEF_NO_HAMZA, BEH, JEEM, HAH, KHAH, AIN, GHAIN, FEH, KAF, QAF, MEEM, HAH, WAW, YEH };
+	
+extern const std::array<char_t, 14> shmasi_
+    = { TEH, THEH, DAL, THAL, REH, ZAAY, SEEN, SHEEN, SAD, DAD, TAH, ZAH, LAM, NOON };
+
 #define FUNC_IMPL(prefix, name)                                                                    \
     bool prefix##_##name(char_t c)                                                                 \
     {                                                                                              \
@@ -197,7 +203,7 @@ LIFT_IMPL(KHAH)
 LIFT_IMPL(DAL)
 LIFT_IMPL(THAL)
 LIFT_IMPL(REH)
-LIFT_IMPL(ZAIN)
+LIFT_IMPL(ZAAY)
 LIFT_IMPL(SEEN)
 LIFT_IMPL(SHEEN)
 LIFT_IMPL(SAD)

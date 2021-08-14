@@ -40,6 +40,8 @@ PYBIND11_MODULE(anltk, m)
         m.def("is_small", &anltk::is_small, py::arg("c"));
         m.def("is_indic_digit", &anltk::is_indic_digit, py::arg("c"));
         m.def("is_valid_kalima", anltk::is_valid_kalima, py::arg("word"));
+        m.def("is_shamsi", &anltk::is_shamsi, py::arg("c"));
+        m.def("is_qamari", &anltk::is_qamari, py::arg("c"));
 
         m.def("remove_tashkeel", &anltk::remove_tashkeel, py::arg("input"));
         m.def("remove_small", &anltk::remove_small, py::arg("input"));
@@ -73,7 +75,7 @@ PYBIND11_MODULE(anltk, m)
         constants_m.attr("DAL")              = anltk::DAL;
         constants_m.attr("THAL")             = anltk::THAL;
         constants_m.attr("REH")              = anltk::REH;
-        constants_m.attr("ZAIN")             = anltk::ZAIN;
+        constants_m.attr("ZAAY")             = anltk::ZAAY;
         constants_m.attr("SEEN")             = anltk::SEEN;
         constants_m.attr("SHEEN")            = anltk::SHEEN;
         constants_m.attr("SAD")              = anltk::SAD;
@@ -137,7 +139,8 @@ PYBIND11_MODULE(anltk, m)
         constants_m.attr("HARAKAT")  = anltk::tashkeel_list_;
         constants_m.attr("ARQAM")    = anltk::arqam_;
         constants_m.attr("ALPHABET") = anltk::alphabet_;
-
+        constants_m.attr("QAMARI")   = anltk::qamari_;
+        constants_m.attr("SHAMSI")   = anltk::shmasi_;
         // extern const std::array<char_t, 9> tashkeel_list_;
         // extern const std::array<char_t, 3> small_list_;
         // extern const std::array<char_t, 10> digits_;
