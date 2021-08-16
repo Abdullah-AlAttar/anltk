@@ -10,6 +10,7 @@ ANLTK is a set of Arabic natural language processing tools. developed with focus
 
 for python :
 ```
+pip install pybind11
 pip install anltk
 ```
 ## Building

@@ -71,7 +71,7 @@ anltk_module = Pybind11Extension(
 
 setuptools.setup(
     name="anltk",
-    version="0.2.5",
+    version="0.2.7",
     author="Abdullah Alattar",
     author_email="abdullah.mohammad.alattar@gmail.com",
     description="Arabic language processing toolkit",
