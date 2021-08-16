@@ -4,6 +4,7 @@ import setuptools
 import shutil
 import glob
 import platform
+from pybind11.setup_helpers import Pybind11Extension
 
 
 # Figure out environment for cross-compile
@@ -48,7 +49,7 @@ library_dirs = []
 cflags = ["-std=c++17", "-O3"]
 ldflags = []
 if system == 'Windows':
-    cflags = ['/std:c++17', '/O2', '/utf-8']
+    cflags = ['/O2', '/utf-8']
 
 anltk_src_files = map(str, os.listdir(os.path.join(anltk_source, 'anltk' , 'src')))
 anltk_src_cpp = list(filter(lambda x: x.endswith('.cpp'), anltk_src_files))
@@ -56,19 +57,21 @@ anltk_src_cpp = list(
     map(lambda x: str(os.path.join(anltk_source, 'anltk', 'src', x)), anltk_src_cpp)
 )
 
-anltk_module = setuptools.Extension(
+anltk_module = Pybind11Extension(
     "anltk",
     sources=[os.path.join(anltk_source , 'python' , 'anltk_py.cpp')] + anltk_src_cpp,
     extra_compile_args=cflags,
     extra_link_args=ldflags,
     include_dirs=include_dirs,
-    library_dirs=library_dirs
+    library_dirs=library_dirs,
+    cxx_std=17,
+
 )
 
 
 setuptools.setup(
     name="anltk",
-    version="0.2.1",
+    version="0.2.5",
     author="Abdullah Alattar",
     author_email="abdullah.mohammad.alattar@gmail.com",
     description="Arabic language processing toolkit",
@@ -81,6 +84,7 @@ setuptools.setup(
     project_urls={
         "Source": "https://github.com/Abdullah-AlAttar/anltk",
     },
+    setup_requires=["pybind11>=2.6.1"],
     ext_modules=[anltk_module],
     zip_safe=False,
     include_package_data=True
