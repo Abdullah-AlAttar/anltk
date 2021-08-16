@@ -40,8 +40,7 @@ with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 
-include_dirs = [os.path.join(anltk_source, 'anltk', 'subprojects', 'pybind11-2.6.1', 'include'),
-                os.path.join(anltk_source, 'anltk', 'include'),
+include_dirs = [os.path.join(anltk_source, 'anltk', 'include'),
                 os.path.join(anltk_source, 'anltk', 'third_party', 'utfcpp', 'source')]
 
 library_dirs = []

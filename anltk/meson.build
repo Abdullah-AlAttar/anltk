@@ -13,7 +13,7 @@ endif
 CXX = meson.get_compiler('cpp')
 
 
-pybind11_dep = dependency('pybind11', fallback : ['pybind11', 'pybind11_dep'])
+# pybind11_dep = dependency('pybind11', fallback : ['pybind11', 'pybind11_dep'])
 
 utfcpp_dep = declare_dependency(
     include_directories : include_directories('./third_party/utfcpp/source')
