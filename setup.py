@@ -1,13 +1,16 @@
 import os
 import sys
+from importlib_metadata import packages_distributions
 import setuptools
 import shutil
 import glob
 import platform
-
+import pybind11
+from pybind11.setup_helpers import Pybind11Extension, build_ext
 
 # Figure out environment for cross-compile
-anltk_source = os.getenv("ANLTK_SOURCE", os.path.abspath(os.path.dirname(__file__)))
+anltk_source = os.getenv(
+    "ANLTK_SOURCE", os.path.abspath(os.path.dirname(__file__)))
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
 architecture = os.environ.get('ANLTK_ARCHITECTURE', platform.architecture()[0])
 
@@ -39,49 +42,64 @@ with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 
-include_dirs = [os.path.join(anltk_source, 'anltk', 'subprojects', 'pybind11-2.6.1', 'include'),
+def _get_project_version():
+    version_path = os.path.join(
+        anltk_source, "python", "anltk_module", "anltk", "version.py")
+    version = {}
+    with open(version_path, encoding="utf-8") as fp:
+        exec(fp.read(), version)
+    return version["__version__"]
+
+
+include_dirs = [pybind11.get_include(),
                 os.path.join(anltk_source, 'anltk', 'include'),
                 os.path.join(anltk_source, 'anltk', 'third_party', 'utfcpp', 'source')]
 
-library_dirs = []
 
-cflags = ["-std=c++17", "-O3"]
+cflags = ['-O3']
 ldflags = []
 if system == 'Windows':
-    cflags = ['/std:c++17', '/O2', '/utf-8']
+    cflags = ['/O2', '/utf-8']
 
-anltk_src_files = map(str, os.listdir(os.path.join(anltk_source, 'anltk' , 'src')))
+anltk_src_files = map(str, os.listdir(
+    os.path.join(anltk_source, 'anltk', 'src')))
 anltk_src_cpp = list(filter(lambda x: x.endswith('.cpp'), anltk_src_files))
 anltk_src_cpp = list(
     map(lambda x: str(os.path.join(anltk_source, 'anltk', 'src', x)), anltk_src_cpp)
 )
 
-anltk_module = setuptools.Extension(
-    "anltk",
-    sources=[os.path.join(anltk_source , 'python' , 'anltk_py.cpp')] + anltk_src_cpp,
-    extra_compile_args=cflags,
-    extra_link_args=ldflags,
-    include_dirs=include_dirs,
-    library_dirs=library_dirs
-)
-
+ext_modules = [
+    Pybind11Extension("anltk_pybind",
+                      sources=[os.path.join(
+                          anltk_source, 'python', 'anltk_module', 'anltk',
+                          'pybind', 'anltk_pybind.cpp')] + anltk_src_cpp,
+                      extra_compile_args=cflags,
+                      cxx_std=17,
+                      extra_link_args=ldflags,
+                      include_dirs=include_dirs)
+]
 
 setuptools.setup(
     name="anltk",
-    version="0.2.1",
+    version=_get_project_version(),
     author="Abdullah Alattar",
     author_email="abdullah.mohammad.alattar@gmail.com",
     description="Arabic language processing toolkit",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Abdullah-AlAttar/anltk",
-    packages=setuptools.find_packages(),
     cmdclass=cmdclass,
     python_requires='>=3',
     project_urls={
         "Source": "https://github.com/Abdullah-AlAttar/anltk",
     },
-    ext_modules=[anltk_module],
+    ext_modules=ext_modules,
     zip_safe=False,
-    include_package_data=True
+    include_package_data=False,
+    package_dir={str(''): str('python/anltk_module')},
+    packages=[
+        str('anltk'),
+        str('anltk.constants'),
+        str('anltk.tests')
+    ]
 )

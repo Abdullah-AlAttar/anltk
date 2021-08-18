@@ -6,13 +6,8 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(anltk, m)
+PYBIND11_MODULE(anltk_pybind, m)
 {
-
-    // py::class_<anltk::Mofaqqet>(m, "Mofaqqet")
-    //     .def(py::init<bool, bool>(), py::arg("is_ordinal") = false, py::arg("is_feminine") =
-    //     false) .def("tafqeet", &anltk::Mofaqqet::tafqeet);
-
     {
         // clang-format off
         m.def("tafqeet", &anltk::tafqeet,
@@ -46,10 +41,8 @@ PYBIND11_MODULE(anltk, m)
         m.def("remove_tashkeel", &anltk::remove_tashkeel, py::arg("input"));
         m.def("remove_small", &anltk::remove_small, py::arg("input"));
         m.def("remove_non_alpha", &anltk::remove_non_alpha, py::arg("input"), py::arg("stop_list"));
-        m.def("remove_non_alphanumeric", &anltk::remove_non_alphanumeric, py::arg("input"),
-              py::arg("stop_list"));
-        m.def("remove_non_alphanumeric_and_tashkeel", &anltk::remove_non_alphanumeric_and_tashkeel,
-              py::arg("input"), py::arg("stop_list"));
+        m.def("remove_non_alphanumeric", &anltk::remove_non_alphanumeric, py::arg("input"), py::arg("stop_list"));
+        m.def("remove_non_alphanumeric_and_tashkeel", &anltk::remove_non_alphanumeric_and_tashkeel, py::arg("input"), py::arg("stop_list"));
         m.def("remove_kasheeda", &anltk::remove_kasheeda, py::arg("input"));
         m.def("normalize_hamzat", &anltk::normalize_hamzat, py::arg("input"));
         m.def("duplicate_shadda_letter", &anltk::duplicate_shadda_letter, py::arg("input"));
