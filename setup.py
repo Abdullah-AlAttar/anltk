@@ -76,7 +76,9 @@ ext_modules = [
                       extra_compile_args=cflags,
                       cxx_std=17,
                       extra_link_args=ldflags,
-                      include_dirs=include_dirs)
+                      include_dirs=include_dirs,
+                      define_macros=[(("UTF_CPP_CPLUSPLUS", "201703L"))]
+                      )
 ]
 
 setuptools.setup(
