@@ -5,13 +5,8 @@ import setuptools
 import shutil
 import glob
 import platform
-<<<<<<< HEAD
 import pybind11
 from pybind11.setup_helpers import Pybind11Extension, build_ext
-=======
-from pybind11.setup_helpers import Pybind11Extension
-
->>>>>>> 79ba73873ce546a86b71c1ea534d5d6c35c0d0ed
 
 # Figure out environment for cross-compile
 anltk_source = os.getenv(
