@@ -104,10 +104,6 @@ setuptools.setup(
         str('anltk.constants'),
         str('anltk.tests')
     ],
-    install_requires=[
-        "pybind11==2.7.1",
-        "importlib_metadata==4.6.4"
-    ],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
