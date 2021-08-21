@@ -46,6 +46,8 @@ PYBIND11_MODULE(anltk_pybind, m)
         m.def("remove_kasheeda", &anltk::remove_kasheeda, py::arg("input"));
         m.def("normalize_hamzat", &anltk::normalize_hamzat, py::arg("input"));
         m.def("duplicate_shadda_letter", &anltk::duplicate_shadda_letter, py::arg("input"));
+        m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list") , py::arg("func") );
+
         // m.def("extract_root", &anltk::extract_root, py::arg("input"));
     }
     {

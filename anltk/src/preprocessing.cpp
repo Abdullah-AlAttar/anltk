@@ -8,8 +8,6 @@
 namespace anltk
 {
 
-
-
 string_t remove_tashkeel(string_view_t input)
 {
     return anltk_erase_if(input, [](char_t c) { return anltk::is_tashkeel(c); });
@@ -66,6 +64,19 @@ string_t remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t
 string_t remove_kasheeda(string_view_t input)
 {
     return anltk_erase_if(input, [](char_t c) { return c == TATWEEL; });
+}
+
+string_t remove_if(string_view_t input, string_view_t stop_list,
+                   const std::function<bool(char_t)>& func)
+{
+    std::u32string stop_list_ = to_32string(stop_list);
+
+    return anltk_erase_if(input,
+                          [&](char_t c) {
+                              return std::find(stop_list_.begin(), stop_list_.end(), c)
+                                  == stop_list_.end()
+                                  && func(c);
+                          });
 }
 
 string_t normalize_hamzat(string_view_t input)

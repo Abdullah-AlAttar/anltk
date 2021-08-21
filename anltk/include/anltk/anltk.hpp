@@ -1,17 +1,15 @@
 #ifndef ANLTK_HPP
 #define ANLTK_HPP
 
+#include "anltk/anltk_typedefs.h"
+#include "anltk/char_maps.h"
 #include <deque>
+#include <functional>
 #include <map>
 #include <vector>
 
-#include "anltk/anltk_typedefs.h"
-#include "anltk/char_maps.h"
-
 namespace anltk
 {
-
-
 
 enum class CharMapping
 {
@@ -37,12 +35,13 @@ string_t transliterate(string_view_t input, CharMapping mapping);
 string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
 /**
  * @brief Removes all tashkeel from the given arabic text,
- * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN }
- * */ 
+ * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA,
+ * SUKUN }
+ * */
 string_t remove_tashkeel(string_view_t input);
 /**
  * @brief Removes small tashkeel from the given arabic text
- * the small list is { SMALL_ALEF '\u0670',  SMALL_WAW : '\u06E5', SMALL_YEH : '\u06E6' 
+ * the small list is { SMALL_ALEF '\u0670',  SMALL_WAW : '\u06E5', SMALL_YEH : '\u06E6'
  */
 string_t remove_small(string_view_t input);
 
@@ -51,7 +50,7 @@ string_t remove_small(string_view_t input);
  * @param input
  * @param stop_list strings containing list of characters that won't be removed. each one should be
  * a single character
-*/
+ */
 string_t remove_non_alpha(string_view_t input, string_view_t stop_list);
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
@@ -86,7 +85,8 @@ string_t normalize_hamzat(string_view_t input);
 string_t duplicate_shadda_letter(string_view_t input);
 
 // string_t extract_root(string_view_t input);
-
+string_t remove_if(string_view_t input, string_view_t stop_list,
+                   const std::function<bool(char_t)>& func);
 
 bool is_tashkeel(char_t c);
 
@@ -106,9 +106,7 @@ bool is_qamari(char_t c);
 
 vector_t<string_t> tokenize_words(string_view_t input);
 
-
 std::u32string to_32string(string_view_t input);
-
 
 #define FUNC_DECL(prefix, name) bool prefix##_##name(char_t c);
 #define LIFT_DECL(name) FUNC_DECL(is, name)

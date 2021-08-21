@@ -1,5 +1,5 @@
 
-from typing import List
+from typing import Callable, List
 import anltk_pybind
 
 
@@ -106,3 +106,7 @@ def normalize_hamzat(text: str) -> str:
 
 def duplicate_shadda_letter(text: str) -> str:
     return anltk_pybind.duplicate_shadda_letter(text)
+
+
+def remove_if(text: str, stop_list: str, func : Callable) -> str:
+    return anltk_pybind.remove_if(text, stop_list, func)

@@ -193,3 +193,53 @@ TEST_CASE("Duplicate Shadda Letters")
         REQUIRE(found == "الششمس برراقة"s);
     }
 }
+
+TEST_CASE("Remove If")
+{
+    using namespace std::string_literals;
+
+    SUBCASE("Basic")
+    {
+        std::string input = "الشّمس برّاقة";
+        std::string found
+            = anltk::remove_if(input, " ", [](anltk::char_t c) { return anltk::is_tashkeel(c); });
+
+        std::cout << found << std::endl;
+        REQUIRE(found == "الشمس براقة"s);
+    }
+
+    SUBCASE("Basic1")
+    {
+        std::string input = "الشّم11س برّاقةd";
+        std::string found = anltk::remove_if(
+            input, " ", [](anltk::char_t c) { return !anltk::is_arabic_alpha(c); }
+
+        );
+
+        std::cout << found << std::endl;
+        REQUIRE(found == "الشمس براقة"s);
+    }
+
+    SUBCASE("Basic1")
+    {
+        std::string input = "الشّم11س برّاقةd";
+        std::string found = anltk::remove_if(
+            input, " ",
+            [](anltk::char_t c) { return !anltk::is_arabic_alpha(c) || c == U'd' || c == U'1'; });
+
+        std::cout << found << std::endl;
+        REQUIRE(found == "الشمس براقة"s);
+    }
+
+    SUBCASE("Basic2")
+    {
+        std::string input = "الشّم11س برّاقةd";
+        std::string found = anltk::remove_if(
+            input, " 1",
+            [](anltk::char_t c) { return !anltk::is_arabic_alpha(c) || c == U'd' || c == U'1'; });
+
+        std::cout << found << std::endl;
+        REQUIRE(found == "الشم11س براقة"s);
+    }
+
+}
