@@ -20,5 +20,6 @@ RUN git clone --recurse-submodules https://github.com/Abdullah-AlAttar/anltk.git
     && ninja \
     && ninja install \
     && cd ../../ \
-    && python3 setup.py install
+    && pip install -r requirements.txt  \
+    && pip install .
 
