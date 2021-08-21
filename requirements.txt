@@ -1,2 +1,2 @@
 pybind11==2.7.1
-importlib_metadata
+importlib_metadata==4.6.4
