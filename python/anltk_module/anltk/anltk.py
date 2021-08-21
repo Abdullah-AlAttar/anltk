@@ -2,18 +2,44 @@
 from typing import List
 import anltk_pybind
 
-from .version import __version__
-
-from enum import Enum
 
 from anltk_pybind import AR2BW, BW2AR, AR2SBW, SBW2AR
 
 
-def tafqeet(num: int, is_ordinal: bool = False,  is_feminine: bool = False):
+def tafqeet(num: int, is_ordinal: bool = False,  is_feminine: bool = False) -> str:
+    """Converts a number into Arabic spoken form
+
+    Args:
+        num (int): input number
+        is_ordinal (bool, optional): الأول if True, واحد if false. Defaults to False.
+        is_feminine (bool, optional): الخامسة if True, الخامس if False. Defaults to False.
+
+    Returns:
+        [str]
+    Example: 
+        `anltk.tafqeet(1934)  ` \n
+        `'ألف و تسعمئة و أربعة و ثلاثون'` 
+
+    """
     return anltk_pybind.tafqeet(num, is_ordinal, is_feminine)
 
 
-def transliterate(text: str, mapping: anltk_pybind.CharMapping):
+def transliterate(text: str, mapping: anltk_pybind.CharMapping) -> str:
+    """ Convert between famous characters mapping
+
+    Args:
+        text (str): input text
+        mapping (anltk_pybind.CharMapping): Mapping type 
+            AR2BW : Arabic to buckwalter
+            AR2SBW : Arabic to safe buckwalter
+            BW2AR: Buckwalter to arabic
+            SBW2AR : Safe buckwalter to arabic
+    Returns:
+        [str]
+    Example : 
+        `anltk.transliterate("أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ", anltk.AR2BW) `\n 
+        `'>bjd hwz HTy klmn sEfS qr$t vx* DZg ` 
+    """
     return anltk_pybind.transliterate(text, mapping)
 
 
@@ -57,12 +83,11 @@ def remove_small(text: str) -> str:
     return anltk_pybind.remove_small(text)
 
 
-def remove_non_alpha(
-    text: str, stop_list: str = ' ') -> str: return anltk_pybind.remove_non_alpha(text, stop_list)
+def remove_non_alpha(text: str, stop_list: str = ' ') -> str:
+    return anltk_pybind.remove_non_alpha(text, stop_list)
 
 
-def remove_non_alphanumeric(
-        text: str, stop_list: str = ' ') -> str:
+def remove_non_alphanumeric(text: str, stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alphanumeric(text, stop_list)
 
 
