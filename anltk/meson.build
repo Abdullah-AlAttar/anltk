@@ -5,10 +5,15 @@ project('anltk', 'c', 'cpp',
 
 host_system = host_machine.system()
 
+
+
 if host_system == 'windows'
   # add_global_link_arguments('/utf-8', language : 'cpp')
   add_global_arguments('/utf-8', language : 'cpp')
+  add_global_arguments('/DUTF_CPP_CPLUSPLUS=201703L', language : 'cpp')
 endif
+
+
 
 CXX = meson.get_compiler('cpp')
 
@@ -22,10 +27,7 @@ utfcpp_dep = declare_dependency(
 subdir('./third_party/MemMap')
 
 subdir('src')
-
-
 anltk_cpp_args = []
-
 # if get_option('default_library') == 'shared'
 #   anltk_cpp_args = ['-DBUILDING_ANLTK']
 # endif
