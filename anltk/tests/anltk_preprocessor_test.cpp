@@ -241,5 +241,173 @@ TEST_CASE("Remove If")
         std::cout << found << std::endl;
         REQUIRE(found == "الشم11س براقة"s);
     }
+}
 
+TEST_CASE("Replace")
+{
+
+    SUBCASE("Basic")
+    {
+        std::string input = "يالالال يالالا";
+        std::string found = anltk::replace(input, { { U'ا', U'ل' } });
+
+        REQUIRE(found == "يلللللل يللللل");
+    }
+
+    SUBCASE("YEH")
+    {
+        std::string input = "سكر محلي محطوط عليه كريمة";
+
+        std::string found = anltk::replace(
+            input, { { anltk::YEH, anltk::ALEF_MAQSURA }, { anltk::TEH_MARBOOTA, anltk::HEH } });
+
+        REQUIRE(found == "سكر محلى محطوط علىه كرىمه");
+    }
+
+    SUBCASE("STR")
+    {
+        std::string input = "سكر محلي محطوط عليه كريمة";
+
+        std::string found = anltk::replace_str(input, { { "سكر", "مش سكر" }, { "كر", "asdf" } });
+
+        REQUIRE(found == "مش سasdf محلي محطوط عليه asdfيمة");
+    }
+
+    SUBCASE("STR2")
+    {
+        std::string input = "الكل يرد أن يحصل على حجر الفلاسفة";
+
+        std::string found = anltk::replace_str(input, { { "ال", "الْ" }, { "أن", "إن" } });
+
+        REQUIRE(found == "الْكل يرد إن يحصل على حجر الْفلاسفة");
+    }
+
+    SUBCASE("STR3")
+    {
+        std::string input = "بسم الله";
+
+        std::string found = anltk::replace_str(input,
+                                               {
+                                                   { "بس", "ي" },
+                                               });
+
+        REQUIRE(found == "يم الله");
+    }
+
+    SUBCASE("STR4")
+    {
+        std::string input = "بسم الله";
+
+        std::string found = anltk::replace_str(input,
+                                               {
+                                                   { "بس", "" },
+                                               });
+
+        REQUIRE(found == "م الله");
+    }
+    SUBCASE("STR TASHKEEL")
+    {
+        std::string input = "فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ";
+
+        std::string found = anltk::replace_str(input,
+                                               {
+                                                   { "فَرَ", "فر" },
+                                                   { "الإِ", "الإ" },
+                                                   { "في", "فِيْ" },
+
+                                               });
+
+        REQUIRE(found == "فراشَةٌ مُلَوَّنَةٌ تَطِيْرُ فِيْ البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإنْسَانَ");
+    }
+
+    SUBCASE("STR Space")
+    {
+        std::string input = "بسم الله";
+
+        std::string found = anltk::replace_str(input,
+                                               {
+                                                   { "ل", "v" },
+                                                   { " ", "3" },
+                                                   { "الله", "d" },
+
+                                               });
+
+        REQUIRE(found == "بسم3d");
+    }
+}
+
+TEST_CASE("Folding ")
+{
+
+    SUBCASE("Empty")
+    {
+        std::string input = "";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == "");
+    }
+    SUBCASE("Single Character")
+    {
+        std::string input = "ب";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == "ب");
+    }
+
+   SUBCASE("Double Character")
+    {
+        std::string input = "  ";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == " ");
+    }
+
+    SUBCASE("Basic")
+    {
+        std::string input = "بسم  الله";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == "بسم الله");
+    }
+    SUBCASE("Basic1")
+    {
+        std::string input = "  بسم   الله  ";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == " بسم الله ");
+    }
+    SUBCASE("New line")
+    {
+        std::string input = "  بسم  \n الله  ";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == " بسم الله ");
+    }
+    SUBCASE("Tab")
+    {
+        std::string input = " \t بسم  \n الله  ";
+
+        std::string found = anltk::fold_white_spaces(input);
+
+        REQUIRE(found == " بسم الله ");
+    }
+
+    SUBCASE("Generic")
+    {
+        std::string input = "بببسم الله";
+
+        std::string found = anltk::fold_if(input,
+                                           [](anltk::char_t a, anltk::char_t b) {
+                                               return (a == anltk::BEH && b == anltk::BEH)
+                                                   || (a == anltk::LAM && b == anltk::LAM);
+                                           });
+
+        REQUIRE(found == "بسم اله");
+    }
 }

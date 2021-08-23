@@ -3,11 +3,24 @@
 #include <pybind11/functional.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <pybind11/stl_bind.h>
+
 
 namespace py = pybind11;
 
+using map_char_char_t = std::map<anltk::char_t, anltk::char_t>;
+using map_sv_sv_t = std::map<anltk::string_view_t, anltk::string_view_t>;
+
+PYBIND11_MAKE_OPAQUE(map_char_char_t);
+PYBIND11_MAKE_OPAQUE(map_sv_sv_t);
+
+
 PYBIND11_MODULE(anltk_pybind, m)
 {
+
+    py::bind_map<map_char_char_t>(m, "MapCharChar");
+    py::bind_map<map_sv_sv_t>(m, "MapSvSv");
+
     {
         // clang-format off
         m.def("tafqeet", &anltk::tafqeet,
@@ -47,6 +60,36 @@ PYBIND11_MODULE(anltk_pybind, m)
         m.def("normalize_hamzat", &anltk::normalize_hamzat, py::arg("input"));
         m.def("duplicate_shadda_letter", &anltk::duplicate_shadda_letter, py::arg("input"));
         m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list") , py::arg("func") );
+
+        m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list") , py::arg("func") );
+
+        m.def(
+            "replace",
+            [](anltk::string_view_t input, const py::dict& chars_map)
+            {
+                map_char_char_t cpp_map;
+                for (const auto& item : chars_map)
+                {
+                    cpp_map[item.first.cast<anltk::char_t>()] = item.second.cast<anltk::char_t>();
+                }
+                return anltk::replace(input, cpp_map);
+            },
+            py::arg("input"), py::arg("chars_map"));
+
+        m.def(
+            "replace_str",
+            [](anltk::string_view_t input, const py::dict& chars_map)
+            {
+                map_sv_sv_t cpp_map;
+                for (const auto& item : chars_map)
+                {
+                    auto key = item.first.cast<anltk::string_t>();
+                    auto value = item.second.cast<anltk::string_t>();
+                    cpp_map[key] = value;
+                }
+                return anltk::replace_str(input, cpp_map);
+            },
+            py::arg("input"), py::arg("chars_map"));
 
         // m.def("extract_root", &anltk::extract_root, py::arg("input"));
     }

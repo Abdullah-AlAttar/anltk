@@ -1,5 +1,5 @@
 
-from typing import Callable, List
+from typing import Callable, Dict, List
 import anltk_pybind
 
 
@@ -110,3 +110,10 @@ def duplicate_shadda_letter(text: str) -> str:
 
 def remove_if(text: str, stop_list: str, func : Callable) -> str:
     return anltk_pybind.remove_if(text, stop_list, func)
+
+
+def replace(text : str, chars_map : Dict[str, str]):
+    return anltk_pybind.replace(text, chars_map)
+
+def replace_str(text : str, chars_map : Dict[str, str]):
+    return anltk_pybind.replace_str(text, chars_map)

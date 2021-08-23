@@ -88,6 +88,15 @@ string_t duplicate_shadda_letter(string_view_t input);
 string_t remove_if(string_view_t input, string_view_t stop_list,
                    const std::function<bool(char_t)>& func);
 
+string_t fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func);
+
+string_t fold_white_spaces(string_view_t input);
+
+string_t replace(string_view_t input, std::map<char_t, char_t> chars_maps);
+
+string_t replace_str(string_view_t input, std::map<string_view_t, string_view_t> replacement_map);
+
+
 bool is_tashkeel(char_t c);
 
 bool is_arabic_alpha(char_t c);

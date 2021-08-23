@@ -1,8 +1,24 @@
+# %%
 import anltk
 
-anltk.is_tashkeel('3')
 
-print(anltk.is_tashkeel('ّ'))
-print(type(anltk.constants.ALEF_HAMZA_ABOVE))
+print(anltk.__version__)
 
-print(anltk.__file__)
+print(anltk.__doc__)
+
+print(anltk.replace('بسم الله',
+ {
+	  'ل' : 'ر' ,
+ 	  ' ' : 'd'
+ }
+))
+
+print(anltk.replace_str('بسم الله',
+ {
+	 'ال' : 'الْ', 
+	 'بس' : 'ييي', 
+
+ }
+))
+
+# %%
