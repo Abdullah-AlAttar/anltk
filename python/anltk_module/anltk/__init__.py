@@ -3,6 +3,7 @@
 from . import constants
 from .version import __version__
 from .anltk import \
+    AR2BW, BW2AR, AR2SBW, SBW2AR, \
     tafqeet, \
     transliterate, \
     tokenize_words, \
@@ -22,4 +23,7 @@ from .anltk import \
     duplicate_shadda_letter, \
     remove_if, \
     replace, \
-    replace_str
+    replace_str , \
+    split, \
+    fold_white_spaces ,\
+    fold_if

@@ -204,7 +204,6 @@ TEST_CASE("Remove If")
         std::string found
             = anltk::remove_if(input, " ", [](anltk::char_t c) { return anltk::is_tashkeel(c); });
 
-        std::cout << found << std::endl;
         REQUIRE(found == "الشمس براقة"s);
     }
 
@@ -216,7 +215,6 @@ TEST_CASE("Remove If")
 
         );
 
-        std::cout << found << std::endl;
         REQUIRE(found == "الشمس براقة"s);
     }
 
@@ -227,7 +225,6 @@ TEST_CASE("Remove If")
             input, " ",
             [](anltk::char_t c) { return !anltk::is_arabic_alpha(c) || c == U'd' || c == U'1'; });
 
-        std::cout << found << std::endl;
         REQUIRE(found == "الشمس براقة"s);
     }
 
@@ -238,7 +235,6 @@ TEST_CASE("Remove If")
             input, " 1",
             [](anltk::char_t c) { return !anltk::is_arabic_alpha(c) || c == U'd' || c == U'1'; });
 
-        std::cout << found << std::endl;
         REQUIRE(found == "الشم11س براقة"s);
     }
 }
@@ -356,7 +352,7 @@ TEST_CASE("Folding ")
         REQUIRE(found == "ب");
     }
 
-   SUBCASE("Double Character")
+    SUBCASE("Double Character")
     {
         std::string input = "  ";
 
@@ -410,4 +406,89 @@ TEST_CASE("Folding ")
 
         REQUIRE(found == "بسم اله");
     }
+}
+
+TEST_CASE("Splitting")
+{
+
+    SUBCASE("Basic")
+    {
+        std::string input                 = "بسم الله";
+        std::vector<std::string> found    = anltk::split(input, " ", false);
+        std::vector<std::string> expected = { "بسم", "الله" };
+        for (auto i : found)
+        {
+            std::cout << '"' << i << '"' << ',';
+        }
+        REQUIRE(found == expected);
+    }
+
+    SUBCASE("Long")
+    {
+        std::string input = ".فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ";
+
+        std::vector<std::string> found = anltk::split(input, " ", false);
+        std::vector<std::string> expected
+            = { ".فَرَاشَةٌ", "مُلَوَّنَةٌ", "تَطِيْرُ", "في", "البُسْتَانِ،", "حُلْوَةٌ", "مُهَنْدَمَةٌ", "تُدْهِشُ", "الإِنْسَانَ" };
+
+        REQUIRE(found == expected);
+    }
+    SUBCASE("comma")
+    {
+        std::string input = ".فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ";
+
+        std::vector<std::string> found = anltk::split(input, "،", false);
+        std::vector<std::string> expected
+            = { ".فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ", " حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ" };
+        for (auto i : found)
+        {
+            std::cout << '"' << i << '"' << ',';
+        }
+        REQUIRE(found == expected);
+
+        found    = anltk::split(input, "،", true);
+        expected = { ".فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ،", " حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ" };
+      
+        REQUIRE(found == expected);
+    }
+
+    SUBCASE("Multiple seperators")
+    {
+        std::string input = "فَرَاشَةٌ مُلَوَّنَةٌ. تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ. تُدْهِشُ الإِنْسَانَ.";
+
+        std::vector<std::string> found = anltk::split(input, "،.", false);
+        std::vector<std::string> expected
+            = { "فَرَاشَةٌ مُلَوَّنَةٌ", " تَطِيْرُ في البُسْتَانِ", " حُلْوَةٌ مُهَنْدَمَةٌ", " تُدْهِشُ الإِنْسَانَ" };
+
+        REQUIRE(found == expected);
+
+        found    = anltk::split(input, "،.", true);
+        expected = { "فَرَاشَةٌ مُلَوَّنَةٌ.", " تَطِيْرُ في البُسْتَانِ،", " حُلْوَةٌ مُهَنْدَمَةٌ.", " تُدْهِشُ الإِنْسَانَ." };
+        for (auto i : found)
+        {
+            std::cout << '"' << i << '"' << ',';
+        }
+        REQUIRE(found == expected);
+    }
+
+        SUBCASE("Surround")
+    {
+        std::string input = ".بسم.";
+
+        std::vector<std::string> found = anltk::split(input, "،.", false);
+        std::vector<std::string> expected
+            = { "بسم" };
+
+        REQUIRE(found == expected);
+
+        found    = anltk::split(input, "،.", true);
+        expected = { ".","بسم." };
+        std::cout<<std::endl;
+        for (auto i : found)
+        {
+            std::cout << '"' << i << '"' << ',';
+        }
+        REQUIRE(found == expected);
+    }
+
 }

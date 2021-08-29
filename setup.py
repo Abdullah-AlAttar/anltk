@@ -57,7 +57,6 @@ include_dirs = [pybind11.get_include(),
 
 
 cflags = ['-O3']
-cflags = []
 ldflags = []
 if system == 'Windows':
     cflags = ['/O2', '/utf-8']

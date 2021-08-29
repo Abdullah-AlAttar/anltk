@@ -60,8 +60,11 @@ PYBIND11_MODULE(anltk_pybind, m)
         m.def("normalize_hamzat", &anltk::normalize_hamzat, py::arg("input"));
         m.def("duplicate_shadda_letter", &anltk::duplicate_shadda_letter, py::arg("input"));
         m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list") , py::arg("func") );
+        m.def("fold_white_spaces", &anltk::fold_white_spaces, py::arg("input"));
+        m.def("fold_if", &anltk::fold_if, py::arg("input"), py::arg("func"));
+        m.def("split", &anltk::split, py::arg("input"), py::arg("delimeters"), py::arg("keep_delimeters"));
 
-        m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list") , py::arg("func") );
+
 
         m.def(
             "replace",
@@ -90,6 +93,8 @@ PYBIND11_MODULE(anltk_pybind, m)
                 return anltk::replace_str(input, cpp_map);
             },
             py::arg("input"), py::arg("chars_map"));
+
+
 
         // m.def("extract_root", &anltk::extract_root, py::arg("input"));
     }

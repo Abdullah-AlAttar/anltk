@@ -115,6 +115,9 @@ bool is_qamari(char_t c);
 
 vector_t<string_t> tokenize_words(string_view_t input);
 
+vector_t<string_t> split(string_view_t input, string_view_t delimeters = " ", bool keep_delimeters = false);
+
+
 std::u32string to_32string(string_view_t input);
 
 #define FUNC_DECL(prefix, name) bool prefix##_##name(char_t c);

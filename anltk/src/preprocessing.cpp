@@ -137,7 +137,7 @@ string_t fold_if(string_view_t input, const std::function<bool(char_t, char_t)>&
     string_t result;
     auto start = input.begin();
     auto end   = input.end();
-    
+
     if (start == end)
     {
         return result;
@@ -205,4 +205,92 @@ string_t replace_str(string_view_t input, std::map<string_view_t, string_view_t>
 
     return utf8::utf32to8(result);
 }
+
+std::vector<char_t> to_vec(string_view_t input)
+{
+    std::vector<char_t> result;
+    auto start = input.begin();
+    auto end   = input.end();
+    while (start < end)
+    {
+        result.push_back(utf8::next(start, end));
+    }
+
+    return result;
+}
+
+vector_t<string_t> split(string_view_t input, string_view_t delimeters, bool keep_delimeters)
+{
+
+    // std::vector<char_t> delims = to_vec(delimeters);
+
+    // std::vector<string_t> result;
+
+
+    // auto start = input.begin();
+    // auto end = input.end();
+    // auto cur = input.begin();
+    
+    // while (start < end)
+    // {
+    //     if (delimeters.find(*start) != string_view_t::npos)
+    //     {  
+    //         std::cout<< std::distance(cur, start) <<std::endl;
+    //         if (std::distance(cur, start) > 0)
+    //         {
+    //             std::string wtf(cur, keep_delimeters ? start -1 : start );
+    //             std::cout<<wtf<<std::endl;
+    //             result.emplace_back(cur, keep_delimeters ? start -1 : start );
+    //         }
+    //         cur = ++start;
+    //         continue;
+    //     }
+    //     start++;
+    // }
+
+    // if (std::distance(cur, start) > 0)
+    // {
+    //     std::string wtf(cur, start );
+    //     std::cout<<wtf<<std::endl;
+    //     result.emplace_back(cur, start);
+    // }
+    // return result;
+
+    std::vector<char_t> delims = to_vec(delimeters);
+
+    std::vector<string_t> result;
+    std::string part;
+
+    auto start = input.begin();
+    auto end   = input.end();
+
+
+    while (start < end)
+    {
+        char_t next = utf8::next(start, end);
+
+        if (std::find(delims.begin(), delims.end(), next) != delims.end())
+        {
+            if (keep_delimeters)
+            {
+                utf8::append(next, part);
+            }
+            if (!part.empty())
+            {
+                result.emplace_back(std::move(part));
+            }
+            continue;
+        }
+        // part_start = start;
+        utf8::append(next, part);
+    }
+
+    if (!part.empty())
+    {
+        result.emplace_back(std::move(part));
+    }
+
+    return result;
+}
+
 } // namespace anltk

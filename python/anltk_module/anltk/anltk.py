@@ -117,3 +117,16 @@ def replace(text : str, chars_map : Dict[str, str]):
 
 def replace_str(text : str, chars_map : Dict[str, str]):
     return anltk_pybind.replace_str(text, chars_map)
+
+
+
+
+def fold_if(text : str, func : Callable) -> str:
+    return anltk_pybind.fold_if(text, func)
+
+def fold_white_spaces(text : str) -> str:
+    return anltk_pybind.fold_white_spaces(text)
+
+
+def split(text : str, delimeters :str = ' ', keep_delimeters : bool = False) -> List[str]:
+    return anltk_pybind.split(text, delimeters, keep_delimeters)
