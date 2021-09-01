@@ -5,6 +5,7 @@
 #include "anltk/char_maps.h"
 #include <deque>
 #include <functional>
+#include <list>
 #include <map>
 #include <vector>
 
@@ -96,7 +97,6 @@ string_t replace(string_view_t input, std::map<char_t, char_t> chars_maps);
 
 string_t replace_str(string_view_t input, std::map<string_view_t, string_view_t> replacement_map);
 
-
 bool is_tashkeel(char_t c);
 
 bool is_arabic_alpha(char_t c);
@@ -115,8 +115,131 @@ bool is_qamari(char_t c);
 
 vector_t<string_t> tokenize_words(string_view_t input);
 
-vector_t<string_t> split(string_view_t input, string_view_t delimeters = " ", bool keep_delimeters = false);
+vector_t<string_t> split(string_view_t input, string_view_t delimeters = " ",
+                         bool keep_delimeters = false);
 
+class Harf;
+class Kalima;
+class Jumla;
+
+class Harf
+{
+    anltk::char_t m_c;
+    Kalima* m_kalima = nullptr;
+    Harf* m_prev     = nullptr;
+    Harf* m_next     = nullptr;
+
+public:
+
+    Harf(char32_t c);
+
+    anltk::char_t c();
+
+    friend std::ostream& operator<<(std::ostream& os, const Harf& h);
+
+    std::string to_string() const;
+
+    Harf* next();
+
+    Harf* prev();
+
+    Harf* next() const;
+
+    Harf* prev() const;
+
+    void set_next(Harf* next);
+
+    void set_prev(Harf* prev);
+
+    Kalima* kalima();
+
+    void set_kalima(Kalima* kalima);
+
+    bool operator==(std::string_view str) const noexcept;
+
+    bool operator==(anltk::char_t c) const noexcept;
+
+};
+
+class Kalima
+{
+public:
+    using container_t      = std::list<Harf>;
+    using iterator_t       = typename container_t::iterator;
+    using const_iterator_t = typename container_t::const_iterator;
+
+private:
+    container_t m_huroof;
+    Kalima* m_next = nullptr;
+    Kalima* m_prev = nullptr;
+    std::string m_text;
+
+public:
+    Kalima(anltk::string_view_t text);
+
+    iterator_t begin();
+
+    iterator_t end();
+
+    const_iterator_t begin() const;
+
+    const_iterator_t end() const;
+
+    Harf* first();
+
+    Harf* last();
+
+    Kalima* next();
+
+    Kalima* prev();
+
+    void set_next(Kalima* next);
+
+    void set_prev(Kalima* prev);
+
+    anltk::string_t to_string();
+
+    size_t size() const;
+
+    bool operator==(std::string_view str) const noexcept;
+
+    friend std::ostream& operator<<(std::ostream& os, const Kalima& kalima);
+};
+
+class Jumla
+{
+public:
+    using container_t      = std::list<Kalima>;
+    using iterator_t       = typename container_t::iterator;
+    using const_iterator_t = typename container_t::const_iterator;
+
+private:
+    container_t m_kalimat;
+    std::string m_text;
+
+public:
+    Jumla(anltk::string_view_t text);
+
+    Kalima* first();
+
+    Kalima* last();
+
+    iterator_t begin();
+
+    iterator_t end();
+
+    const_iterator_t begin() const;
+
+    const_iterator_t end() const;
+
+    size_t size() const;
+
+    std::string to_string();
+
+    bool operator==(std::string_view str) const noexcept;
+
+    friend std::ostream& operator<<(std::ostream& os, const Jumla& jumla);
+};
 
 std::u32string to_32string(string_view_t input);
 

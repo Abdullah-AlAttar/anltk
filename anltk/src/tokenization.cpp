@@ -49,11 +49,11 @@ vector_t<string_t> tokenize_words(string_view_t input)
             continue;
         }
 
-        if (is_arabic_alpha(next) || is_tashkeel(next))
+        if (is_arabic_alpha(next) || is_tashkeel(next) || is_TATWEEL(next))
         {
             result.push_back(parse_sequence(next, start, end, done,
                                             [](char_t c)
-                                            { return is_arabic_alpha(c) || is_tashkeel(c); }));
+                                            { return is_arabic_alpha(c) || is_tashkeel(c) || is_TATWEEL(c); }));
         }
         else
         {

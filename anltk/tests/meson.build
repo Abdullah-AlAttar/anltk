@@ -68,3 +68,12 @@ exe = executable(
 )
 
 test('anltk_tokenizer_test', exe)
+
+
+exe = executable(
+    'anltk_jumla_test',
+    sources : ['anltk_jumla_test.cpp', 'doctest_main.cpp'],
+    dependencies : [anltk_dep, doctest_dep]
+)
+
+test('anlntk_jumla_test', exe)
