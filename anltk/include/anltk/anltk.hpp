@@ -14,10 +14,10 @@ namespace anltk
 
 enum class CharMapping
 {
-    AR2BW,
-    BW2AR,
-    AR2SBW,
-    SBW2AR
+	AR2BW,
+	BW2AR,
+	AR2SBW,
+	SBW2AR
 };
 
 /**
@@ -124,122 +124,175 @@ class Jumla;
 
 class Harf
 {
-    anltk::char_t m_c;
-    Kalima* m_kalima = nullptr;
-    Harf* m_prev     = nullptr;
-    Harf* m_next     = nullptr;
+	anltk::char_t m_c;
+	Kalima* m_kalima = nullptr;
+	Harf* m_prev     = nullptr;
+	Harf* m_next     = nullptr;
 
 public:
+	Harf(char32_t c);
 
-    Harf(char32_t c);
+	static Harf create(char_t c);
 
-    anltk::char_t c();
+	anltk::char_t c();
 
-    friend std::ostream& operator<<(std::ostream& os, const Harf& h);
+	friend std::ostream& operator<<(std::ostream& os, const Harf& h);
 
-    std::string to_string() const;
+	std::string to_string() const;
 
-    Harf* next();
+	Harf* next();
 
-    Harf* prev();
+	Harf* prev();
 
-    Harf* next() const;
+	Harf* next() const;
 
-    Harf* prev() const;
+	Harf* prev() const;
 
-    void set_next(Harf* next);
+	void set_next(Harf* next);
 
-    void set_prev(Harf* prev);
+	void set_prev(Harf* prev);
 
-    Kalima* kalima();
+	Kalima* kalima();
 
-    void set_kalima(Kalima* kalima);
+	void set_kalima(Kalima* kalima);
 
-    bool operator==(std::string_view str) const noexcept;
+	bool operator==(std::string_view str) const noexcept;
 
-    bool operator==(anltk::char_t c) const noexcept;
-
+	bool operator==(anltk::char_t c) const noexcept;
 };
 
 class Kalima
 {
 public:
-    using container_t      = std::list<Harf>;
-    using iterator_t       = typename container_t::iterator;
-    using const_iterator_t = typename container_t::const_iterator;
+	using container_t      = std::list<Harf>;
+	using iterator_t       = typename container_t::iterator;
+	using const_iterator_t = typename container_t::const_iterator;
 
 private:
-    container_t m_huroof;
-    Kalima* m_next = nullptr;
-    Kalima* m_prev = nullptr;
-    std::string m_text;
+	container_t m_huroof;
+	Kalima* m_next = nullptr;
+	Kalima* m_prev = nullptr;
+	std::string m_text;
 
 public:
-    Kalima(anltk::string_view_t text);
+	Kalima(anltk::string_view_t text);
 
-    iterator_t begin();
+	iterator_t begin();
 
-    iterator_t end();
+	iterator_t end();
 
-    const_iterator_t begin() const;
+	const_iterator_t begin() const;
 
-    const_iterator_t end() const;
+	const_iterator_t end() const;
 
-    Harf* first();
+	Harf* first();
 
-    Harf* last();
+	Harf* last();
 
-    Kalima* next();
+	Kalima* next();
 
-    Kalima* prev();
+	Kalima* prev();
 
-    void set_next(Kalima* next);
+	void set_next(Kalima* next);
 
-    void set_prev(Kalima* prev);
+	void set_prev(Kalima* prev);
 
-    anltk::string_t to_string();
+	anltk::string_t to_string();
 
-    size_t size() const;
+	size_t size() const;
 
-    bool operator==(std::string_view str) const noexcept;
+	bool operator==(std::string_view str) const noexcept;
 
-    friend std::ostream& operator<<(std::ostream& os, const Kalima& kalima);
+	friend std::ostream& operator<<(std::ostream& os, const Kalima& kalima);
 };
 
 class Jumla
 {
 public:
-    using container_t      = std::list<Kalima>;
-    using iterator_t       = typename container_t::iterator;
-    using const_iterator_t = typename container_t::const_iterator;
+	using container_t      = std::list<Kalima>;
+	using iterator_t       = typename container_t::iterator;
+	using const_iterator_t = typename container_t::const_iterator;
 
 private:
-    container_t m_kalimat;
-    std::string m_text;
+	container_t m_kalimat;
+	std::string m_text;
 
 public:
-    Jumla(anltk::string_view_t text);
+	Jumla(anltk::string_view_t text);
 
-    Kalima* first();
+	Kalima* first();
 
-    Kalima* last();
+	Kalima* last();
 
-    iterator_t begin();
+	iterator_t begin();
 
-    iterator_t end();
+	iterator_t end();
 
-    const_iterator_t begin() const;
+	const_iterator_t begin() const;
 
-    const_iterator_t end() const;
+	const_iterator_t end() const;
 
-    size_t size() const;
+	size_t size() const;
 
-    std::string to_string();
+	std::string to_string();
 
-    bool operator==(std::string_view str) const noexcept;
+	bool operator==(std::string_view str) const noexcept;
 
-    friend std::ostream& operator<<(std::ostream& os, const Jumla& jumla);
+	friend std::ostream& operator<<(std::ostream& os, const Jumla& jumla);
 };
+
+// Incomplete, do not use
+anltk::string_t rafal_stem(
+    const std::string& word,
+    const std::vector<std::string>& stop_words
+    = { "ابا‬",          "‫ابو‬",       "‫ابي‬",       "‫احد‬",
+        "‫اخا‬",       "‫اخر‬",       "‫اخو‬",       "‫اخي‬",
+        "‫اذا‬",       "‫اال‬",       "‫االن‬",     "‫التي‬",
+        "‫الذي‬",     "‫الذين‬",   "‫اللتان‬", "‫اللتين‬",
+        "‫اللذان‬", "حول‬",          "‫حيث‬",       "‫حين‬",
+        "‫خالل‬",     "‫دون‬",       "‫ذا‬",         "‫ذات‬",
+        "‫ذلك‬",       "‫ذو‬",         "‫ذي‬",         "‫رغم‬",
+        "‫شيء‬",       "‫صار‬",       "‫صبح‬",       "‫صبر‬",
+        "‫ضحى‬",       "‫ضد‬",         "‫لذلك‬",     "‫لعل‬",
+        "‫لكن‬",       "‫لم‬",         "‫لماذا‬",   "‫لن‬",
+        "‫له‬",         "‫لو‬",         "‫ليت‬",       "‫ليس‬",
+        "‫ما‬",         "‫ماانفك‬", "‫مابرح‬",   "‫ماذا‬",
+        "‫مازال‬",   "‫مافتئ‬",   "‫مايزال‬", "‫متى‬",
+        "‫مساء‬",     "‫مسي‬",       "‫مع‬",         "‫مما‬",
+        "‫من‬",         "‫منذ‬",       "‫نحو‬",       "‫نفس‬",
+        "‫هؤالء‬",   "‫هذا‬",       "‫هذه‬",       "‫هل‬",
+        "‫هن‬",         "‫هنا‬",       "‫هو‬",         "‫هي‬",
+        "‫هما‬",       "‫هم‬",         "‫وسط‬",       "‫يكون‬",
+        "‫يلي‬",       "‫يمكن‬",     "‫يوم‬",       "‫ضمن‬",
+        "‫ظل‬",         "‫عل‬",         "‫على‬",       "‫عن‬",
+        "‫عند‬",       "‫عين‬",       "‫غير‬",       "‫ف‬",
+        "‫فقط‬",       "‫في‬",         "‫فيما‬",     "‫قبل‬",
+        "‫قد‬",         "‫ك‬",           "‫كان‬",       "‫كذلك‬",
+        "‫كل‬",         "‫كم‬",         "‫كون‬",       "‫كي‬",
+        "‫كيف‬",       "‫ل‬",           "‫ال‬",         "‫الزال‬",
+        "‫السيما‬", "‫لدي‬",       "‫اليزال‬", "‫اللذين‬",
+        "‫الي‬",       "‫اليوم‬",   "‫اما‬",       "‫امام‬",
+        "‫امس‬",       "‫ان‬",         "‫او‬",         "‫اول‬",
+        "‫اين‬",       "‫اي‬",         "‫ب‬",           "‫بات‬",
+        "‫بان‬",       "‫بد‬",         "‫بدل‬",       "‫بعد‬",
+        "‫بعض‬",       "‫بل‬",         "‫بيت‬",       "‫بين‬",
+        "‫تحت‬",       "‫تكون‬",     "‫تلك‬",       "‫ثم‬",
+        "‫جدا‬",       "‫حالي‬",     "‫حتى‬" },
+    const std::vector<std::string>& prefixes
+    = { "بال", "فال", "كال", "ال", "لل", "وال", "و", "س", "ف" },
+    const std::vector<std::string>& suffixes
+    = { "هما", "كما", "ات", "يه", "ته", "ان", "ون",  "ين", "هم", "هن",
+        "ها",  "نا",  "وا", "كم", "كن", "ني", "وني", "تم", "ه",  "ي" },
+    const std::vector<std::string>& patterns
+    = { "يفعل",    "فاعل",    "فعلى",     "فعلة",     "تفعل",     "فعول",    "فعيل ",   "فعال",
+        "يفعلون",  "مفعل",    "أفعل",     "فاعلة",    "فاعول",    "فعلاء",   "فعلان",   "فعولة",
+        "فعيلة",   "فعلية",   "فعائل",    "فعالي",    "فعالة",    "فعواعل",  "فعالل",   "افعال",
+        "افعلة",   "تفعلة",   "تفعيل",    "مفعال",    "مفعيل",    "مفعول",   "مفعلة",   "مفاعل",
+        "مفتعل ",  "متفعل",   "منفعل",    "مفعلل",    " فعللة",   "فعلانة",  "تفعيلة",  "افتعال",
+        "انفعال",  "إفعالي",  "إفعالا",   "أفعلاء",   "أفعلية",   "فاعولة",  "فعلولة",  "فعالية",
+        "مستفعل",  "مفاعلة",  "مفاعيل",   "منفعلة",   "مفعلية",   "مفعولة",  "مفتعلة",  "متفعلة",
+        "مفعللة",  "تفاعيل",  "استفعال",  "انفعالة",  "إفتعالة",  "افتعالي", "أفعالية", "مستفعلة",
+        "مفعولية", "متفاعلة", "إستفعالي", "افتعالية", "استفعالية" });
 
 std::u32string to_32string(string_view_t input);
 

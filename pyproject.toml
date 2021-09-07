@@ -1,2 +1,3 @@
 [build-system]
-requires = ["setuptools>38.6", "pybind11==2.7.1", "importlib_metadata==4.6.4"]
+requires = [ "importlib_metadata==4.6.4" ,"setuptools>=42", "wheel", "pybind11==2.7.1"]
+build-backend = "setuptools.build_meta"

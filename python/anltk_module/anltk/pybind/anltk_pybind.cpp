@@ -5,15 +5,13 @@
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 
-
 namespace py = pybind11;
 
 using map_char_char_t = std::map<anltk::char_t, anltk::char_t>;
-using map_sv_sv_t = std::map<anltk::string_view_t, anltk::string_view_t>;
+using map_sv_sv_t     = std::map<anltk::string_view_t, anltk::string_view_t>;
 
 PYBIND11_MAKE_OPAQUE(map_char_char_t);
 PYBIND11_MAKE_OPAQUE(map_sv_sv_t);
-
 
 PYBIND11_MODULE(anltk_pybind, m)
 {
@@ -54,17 +52,19 @@ PYBIND11_MODULE(anltk_pybind, m)
         m.def("remove_tashkeel", &anltk::remove_tashkeel, py::arg("input"));
         m.def("remove_small", &anltk::remove_small, py::arg("input"));
         m.def("remove_non_alpha", &anltk::remove_non_alpha, py::arg("input"), py::arg("stop_list"));
-        m.def("remove_non_alphanumeric", &anltk::remove_non_alphanumeric, py::arg("input"), py::arg("stop_list"));
-        m.def("remove_non_alphanumeric_and_tashkeel", &anltk::remove_non_alphanumeric_and_tashkeel, py::arg("input"), py::arg("stop_list"));
+        m.def("remove_non_alphanumeric", &anltk::remove_non_alphanumeric, py::arg("input"),
+              py::arg("stop_list"));
+        m.def("remove_non_alphanumeric_and_tashkeel", &anltk::remove_non_alphanumeric_and_tashkeel,
+              py::arg("input"), py::arg("stop_list"));
         m.def("remove_kasheeda", &anltk::remove_kasheeda, py::arg("input"));
         m.def("normalize_hamzat", &anltk::normalize_hamzat, py::arg("input"));
         m.def("duplicate_shadda_letter", &anltk::duplicate_shadda_letter, py::arg("input"));
-        m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list") , py::arg("func") );
+        m.def("remove_if", &anltk::remove_if, py::arg("input"), py::arg("stop_list"),
+              py::arg("func"));
         m.def("fold_white_spaces", &anltk::fold_white_spaces, py::arg("input"));
         m.def("fold_if", &anltk::fold_if, py::arg("input"), py::arg("func"));
-        m.def("split", &anltk::split, py::arg("input"), py::arg("delimeters"), py::arg("keep_delimeters"));
-
-
+        m.def("split", &anltk::split, py::arg("input"), py::arg("delimeters"),
+              py::arg("keep_delimeters"));
 
         m.def(
             "replace",
@@ -86,18 +86,40 @@ PYBIND11_MODULE(anltk_pybind, m)
                 map_sv_sv_t cpp_map;
                 for (const auto& item : chars_map)
                 {
-                    auto key = item.first.cast<anltk::string_t>();
-                    auto value = item.second.cast<anltk::string_t>();
+                    auto key     = item.first.cast<anltk::string_t>();
+                    auto value   = item.second.cast<anltk::string_t>();
                     cpp_map[key] = value;
                 }
                 return anltk::replace_str(input, cpp_map);
             },
             py::arg("input"), py::arg("chars_map"));
 
-
-
         // m.def("extract_root", &anltk::extract_root, py::arg("input"));
     }
+
+    {
+
+        // using anltk::Harf;
+        // using anltk::Kalima;
+
+        // py::class_<Harf>(m, "Harf")
+        //     .def(py::init<anltk::char_t>(), py::arg("c"))
+        //     .def("next", py::overload_cast<>(&anltk::Harf::next))
+        //     .def("prev", py::overload_cast<>(&anltk::Harf::prev))
+        //     .def("kalima", &Harf::kalima)
+        //     .def("c", &Harf::c);
+
+
+        //  py::class_<Kalima>(m, "Kalima")
+        //     .def(py::init<anltk::string_view_t>(), py::arg("text"))
+        //     .def("next", py::overload_cast<>(&anltk::Kalima::next))
+        //     .def("prev", py::overload_cast<>(&anltk::Kalima::prev))
+        //     .def("first", &Kalima::first)
+        //     .def("last", &Kalima::last)
+        //     .def("to_string", &Kalima::to_string)
+        //     .def("size", &Kalima::size);
+    }
+
     {
         py::module constants_m = m.def_submodule("constants");
 
