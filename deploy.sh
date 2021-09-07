@@ -2,6 +2,13 @@
 #!/bin/bash
 
 
+
+
+rm -rf ./release 
+DOCKER_BUILDKIT=1 docker build --file ./docker/deploy.dockerfile --tag ab_dullah/anltk_deploy:latest -o ./release . 
+twine upload ./release/*.egg ./release/*.gz $(find ./release/ -name "*.whl")  
+exit
+
 # docker run -ti -v $(pwd):/app \
 # 		ab_dullah/anltk_manylinux1:latest \
 # 		rm -rf dist && rm -rf build || exit
@@ -25,20 +32,14 @@ done
 # 	ab_dullah/anltk_manylinux1:latest \
 # 		 rm -rf tmp && rm -rf build || exit
 
-for wheel in $(find ./dist -name "*whl")
-do
-	echo $wheel
-	new_name=`python3 rename_wheel.py $wheel`
-	echo $new_name
-	docker run -ti -v $(pwd):/app \
- 		ab_dullah/anltk_manylinux1:latest \
-			mv $wheel $new_name
-done
 
 
 
+/opt/python/cp36-cp36m/bin/python setup.py install && /opt/python/cp36-cp36m/bin/python setup.py sdist 
 
-twine upload $(find ./dist/ -name "*.whl")    
+
+
+# twine upload ./dist/*.egg ./dist/*.gz $(find ./dist/ -name "*.whl")  
 
 # docker build -t myimage \
 #   --build-arg USER_ID=$(id -u) \

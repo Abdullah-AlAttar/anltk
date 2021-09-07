@@ -144,3 +144,5 @@ cython_debug/
 
 
 wheelhouse
+tmp
+release
