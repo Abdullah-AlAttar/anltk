@@ -11,6 +11,10 @@ Harf::Harf(char32_t c) :m_c(c)
 {
 }
 
+Harf Harf::create(char32_t c)
+{
+    return Harf(c);
+}
 anltk::char_t Harf::c()
 {
     return m_c;

@@ -6,5 +6,6 @@ anltk_sources = files([
     'utils.cpp',
     'preprocessing.cpp',
     'tokenization.cpp',
-    'jumla.cpp'
+    'jumla.cpp',
+    'stemming.cpp'
 ])
