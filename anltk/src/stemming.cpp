@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <iostream>
 #include <utf8.h>
+#include <algorithm>
 
 namespace anltk
 {
@@ -28,7 +29,7 @@ static bool starts_with(std::u32string_view str, std::u32string_view prefix)
 	return str.size() >= prefix.size() && 0 == str.compare(0, prefix.size(), prefix);
 }
 
-int match_pattern(std::u32string_view word, std::u32string_view pattern, anltk::string_t& root)
+size_t match_pattern(std::u32string_view word, std::u32string_view pattern, anltk::string_t& root)
 {
 
 	if (word.size() != pattern.size())
