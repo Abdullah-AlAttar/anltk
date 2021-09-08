@@ -50,7 +50,7 @@ int main()
     std::cout << anltk::transliterate(ar_text, anltk::CharMapping::AR2BW) << '\n';
     // >bjd hwz HTy klmn sEfS qr$t vx* DZg
 
-    std::string text = "فَ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ.";
+    std::string text = "فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ.";
 
     std::cout << anltk::remove_tashkeel(text) << '\n';
     // فراشة ملونة تطير في البستان، حلوة مهندمة تدهش الإنسان.
