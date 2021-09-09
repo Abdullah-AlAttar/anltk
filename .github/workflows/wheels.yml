@@ -14,17 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, windows-latest, macos-latest]
-        cibw_archs: ["auto"]
-        include:
-          - os: ubuntu-18.04
-            cibw_archs: "aarch64"
 
     steps:
-      - name: Set up QEMU
-        if: matrix.cibw_archs == 'aarch64'
-        uses: docker/setup-qemu-action@v1
-        with:
-          platforms: arm64
 
       - uses: actions/checkout@v2
         with:
@@ -44,7 +35,6 @@ jobs:
           CIBW_BUILD: "cp39-*"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux1
           CIBW_MANYLINUX_I686_IMAGE: manylinux1
-          CIBW_ARCHS: ${{ matrix.cibw_archs }}
 
       - name: Build wheels for CPython
         run: |
@@ -53,15 +43,12 @@ jobs:
           CIBW_BUILD: "cp37-* cp38-*"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux1
           CIBW_MANYLINUX_I686_IMAGE: manylinux1
-          CIBW_ARCHS: ${{ matrix.cibw_archs }}
 
       - name: Build wheels for PyPy
         run: |
           python -m cibuildwheel --output-dir dist
         env:
           CIBW_BUILD: "pp37-*"
-          CIBW_ARCHS: ${{ matrix.cibw_archs }}
-        if: matrix.cibw_archs != 'aarch64'
 
       - uses: actions/upload-artifact@v2
         with:
