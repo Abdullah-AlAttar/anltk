@@ -26,11 +26,11 @@ pip install ninja
 
 ```bash
 git clone --recurse-submodules https://github.com/Abdullah-AlAttar/anltk.git \
-    && cd anltk/anltk \
+    && cd anltk/ \
     && meson build --buildtype=release -Dbuild_tests=false \
     && cd build \
     && ninja \
-    && cd ../../ \
+    && cd ../ \
     && python3 setup.py install
 ```
 
