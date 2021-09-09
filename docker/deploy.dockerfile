@@ -13,7 +13,6 @@ RUN /opt/python/pp37-pypy37_pp73/bin/python -m pip install pybind11==2.7.1
 COPY . /opt
 
 RUN cd /opt/ && bash build_linux_wheels.sh
-RUN ls /opt/dist
 
 FROM scratch AS export-stage
 
