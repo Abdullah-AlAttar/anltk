@@ -26,25 +26,25 @@ enum class CharMapping
  * @param input string
  * @return std::string
  */
-string_t transliterate(string_view_t input, CharMapping mapping);
+std::string transliterate(string_view_t input, CharMapping mapping);
 
 /**
  * @brief Converest given number to spoken arabic form. @n
  * @param input number, can be negative or positive
  * @return std::string
  * */
-string_t tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
+std::string tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
 /**
  * @brief Removes all tashkeel from the given arabic text,
  * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA,
  * SUKUN }
  * */
-string_t remove_tashkeel(string_view_t input);
+std::string remove_tashkeel(string_view_t input);
 /**
  * @brief Removes small tashkeel from the given arabic text
  * the small list is { SMALL_ALEF '\u0670',  SMALL_WAW : '\u06E5', SMALL_YEH : '\u06E6'
  */
-string_t remove_small(string_view_t input);
+std::string remove_small(string_view_t input);
 
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text
@@ -52,7 +52,7 @@ string_t remove_small(string_view_t input);
  * @param stop_list strings containing list of characters that won't be removed. each one should be
  * a single character
  */
-string_t remove_non_alpha(string_view_t input, string_view_t stop_list);
+std::string remove_non_alpha(string_view_t input, string_view_t stop_list);
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
  * English)
@@ -60,7 +60,7 @@ string_t remove_non_alpha(string_view_t input, string_view_t stop_list);
  * @param stop_list strings containing list of characters that won't be removed. each one should be
  * a single character
  */
-string_t remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
+std::string remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
  * English) plus tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA,
@@ -69,33 +69,33 @@ string_t remove_non_alphanumeric(string_view_t input, string_view_t stop_list);
  * @param stop_list strings containing list of characters that won't be removed. each one should be
  * a single character
  */
-string_t remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
+std::string remove_non_alphanumeric_and_tashkeel(string_view_t input, string_view_t stop_list);
 /**
  * @brief Removes Kasheesa AKA Tatweel‬
  */
-string_t remove_kasheeda(string_view_t input);
+std::string remove_kasheeda(string_view_t input);
 
 /**
  * @brief Replaces Hamzaat forms ‫ء‬, ,‫آ‬ ‫ؤ‬, ‫ئ‬, ‫ئ‬ with ‫أ‬
  */
-string_t normalize_hamzat(string_view_t input);
+std::string normalize_hamzat(string_view_t input);
 /**
  * @brief Duplicates the shadda letter
  * eg : الشّمس becomes الششمس
  */
-string_t duplicate_shadda_letter(string_view_t input);
+std::string duplicate_shadda_letter(string_view_t input);
 
-// string_t extract_root(string_view_t input);
-string_t remove_if(string_view_t input, string_view_t stop_list,
+// std::string extract_root(string_view_t input);
+std::string remove_if(string_view_t input, string_view_t stop_list,
                    const std::function<bool(char_t)>& func);
 
-string_t fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func);
+std::string fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func);
 
-string_t fold_white_spaces(string_view_t input);
+std::string fold_white_spaces(string_view_t input);
 
-string_t replace(string_view_t input, std::map<char_t, char_t> chars_maps);
+std::string replace(string_view_t input, std::map<char_t, char_t> chars_maps);
 
-string_t replace_str(string_view_t input, std::map<string_view_t, string_view_t> replacement_map);
+std::string replace_str(string_view_t input, std::map<string_view_t, string_view_t> replacement_map);
 
 bool is_tashkeel(char_t c);
 
@@ -113,10 +113,20 @@ bool is_shamsi(char_t c);
 
 bool is_qamari(char_t c);
 
-vector_t<string_t> tokenize_words(string_view_t input);
+vector_t<std::string> tokenize_words(string_view_t input);
 
-vector_t<string_t> split(string_view_t input, string_view_t delimeters = " ",
+vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
                          bool keep_delimeters = false);
+
+enum class NormalizeMode 
+{
+	NFD,
+	NFC,
+	NFKD,
+	NFKC
+};
+
+std::string normalize_unicode(const std::string& input, NormalizeMode mode);
 
 class Harf;
 class Kalima;
@@ -197,7 +207,7 @@ public:
 
 	void set_prev(Kalima* prev);
 
-	anltk::string_t to_string();
+	std::string to_string();
 
 	size_t size() const;
 
@@ -242,7 +252,7 @@ public:
 };
 
 // Incomplete, do not use
-anltk::string_t rafal_stem(
+std::string rafal_stem(
     const std::string& word,
     const std::vector<std::string>& stop_words
     = { "ابا‬",          "‫ابو‬",       "‫ابي‬",       "‫احد‬",

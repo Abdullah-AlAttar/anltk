@@ -80,3 +80,22 @@ print(anltk.remove_tashkeel("فَرَاشَةٌ مُلَوَّنَةٌ تَطِ�
 
 **For list of features see [Features.md](Features.md)**
 
+
+## Benchmarks
+
+Processing a file containing 500000 Line, 6787731 Word, 112704541 Character. the task is to remove diacritics / transliterate to buckwalter
+
+
+
+### **Buckwatler transliteration**
+
+| Method           | Time          |   |   |   
+|------------------|---------------|---|---|
+| anltk python-api | 1.379 seconds |   |   |   
+| python (camel_tools)  | 11.46 seconds |   |   |   
+### **Remove Diacritics**
+
+| Method           | Time          |   |   |   
+|------------------|---------------|---|---|
+| anltk python-api | 0.989 seconds |   |   |   
+| python (camel_tools)   | 4.892 seconds |   |   |   

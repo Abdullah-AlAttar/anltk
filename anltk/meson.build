@@ -6,6 +6,7 @@ utfcpp_dep = declare_dependency(
     include_directories : include_directories('./third_party/utfcpp/source')
 )
 
+utf8proc_dep = dependency('utf8proc', fallback : ['utf8proc', 'utf8proc_dep'])
 
 subdir('./third_party/MemMap')
 
@@ -21,13 +22,13 @@ anltk_lib = static_library('anltk',
   install : true,
   cpp_args : anltk_cpp_args,
   gnu_symbol_visibility : 'hidden',
-  dependencies: [utfcpp_dep, memap_dep],
+  dependencies: [utfcpp_dep, memap_dep, utf8proc_dep],
 )
 
 anltk_dep = declare_dependency(
   include_directories: include_directories('.', './include'),
   link_with : anltk_lib,
-  dependencies : [utfcpp_dep, memap_dep]
+  dependencies : [utfcpp_dep, memap_dep, utf8proc_dep]
 )
 
 if get_option('build_tests')

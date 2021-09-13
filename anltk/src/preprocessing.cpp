@@ -222,40 +222,6 @@ std::vector<char_t> to_vec(string_view_t input)
 vector_t<string_t> split(string_view_t input, string_view_t delimeters, bool keep_delimeters)
 {
 
-    // std::vector<char_t> delims = to_vec(delimeters);
-
-    // std::vector<string_t> result;
-
-
-    // auto start = input.begin();
-    // auto end = input.end();
-    // auto cur = input.begin();
-    
-    // while (start < end)
-    // {
-    //     if (delimeters.find(*start) != string_view_t::npos)
-    //     {  
-    //         std::cout<< std::distance(cur, start) <<std::endl;
-    //         if (std::distance(cur, start) > 0)
-    //         {
-    //             std::string wtf(cur, keep_delimeters ? start -1 : start );
-    //             std::cout<<wtf<<std::endl;
-    //             result.emplace_back(cur, keep_delimeters ? start -1 : start );
-    //         }
-    //         cur = ++start;
-    //         continue;
-    //     }
-    //     start++;
-    // }
-
-    // if (std::distance(cur, start) > 0)
-    // {
-    //     std::string wtf(cur, start );
-    //     std::cout<<wtf<<std::endl;
-    //     result.emplace_back(cur, start);
-    // }
-    // return result;
-
     std::vector<char_t> delims = to_vec(delimeters);
 
     std::vector<string_t> result;

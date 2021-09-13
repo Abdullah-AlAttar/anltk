@@ -32,7 +32,6 @@ int main(int argc, char** argv)
 
     std::ofstream out_file;
     out_file.open("utfcpp.txt");
-    std::string line;
     // ANLTK_Preprocessor* pp = anltk_preprocessor_new();
        std::string output;
     std::cout<< timeFuncInvocation([&]() {
@@ -44,7 +43,7 @@ int main(int argc, char** argv)
             output = anltk::remove_tashkeel(str);
             // out_file << output << '\n';
         }
-    }) << std::endl;;
+    }) <<  " Milli Seconds " << std::endl;;
     out_file << output ;
     // مرحبا  بكم�!
 }

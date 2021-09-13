@@ -79,6 +79,17 @@ exe = executable(
 test('anlntk_jumla_test', exe)
 
 
+
+
+exe = executable(
+    'anltk_unicode_normalization_test',
+    sources : ['anltk_unicode_normalization_test.cpp', 'doctest_main.cpp'],
+    dependencies : [anltk_dep, doctest_dep]
+)
+
+test('anltk_unicode_normalization_test', exe)
+
+
 # exe = executable(
 #     'anltk_stemming_test',
 #     sources : ['anltk_stemming_test.cpp', 'doctest_main.cpp'],
