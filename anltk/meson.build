@@ -2,9 +2,8 @@
 
 
 
-utfcpp_dep = declare_dependency(
-    include_directories : include_directories('./third_party/utfcpp/source')
-)
+utfcpp_dep = dependency('utfcpp', fallback : ['utfcpp', 'utfcpp_dep'])
+
 
 utf8proc_dep = dependency('utf8proc', fallback : ['utf8proc', 'utf8proc_dep'])
 
