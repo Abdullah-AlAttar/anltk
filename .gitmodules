@@ -1,3 +1,0 @@
-[submodule "anltk/third_party/utfcpp"]
-	path = anltk/third_party/utfcpp
-	url = https://github.com/nemtrif/utfcpp.git
