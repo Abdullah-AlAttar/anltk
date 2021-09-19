@@ -1,3 +1,6 @@
+
+#ifndef BUILDING_PYBIND11
+
 #include "anltk/anltk.hpp"
 #include <utf8proc.h>
 
@@ -38,3 +41,5 @@ std::string normalize_unicode(const std::string& input, NormalizeMode mode)
 }
 
 } // namespace anltk
+
+#endif

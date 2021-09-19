@@ -10,19 +10,19 @@ from camel_tools.sentiment import SentimentAnalyzer
 
 from camel_tools.sentiment import SentimentAnalyzer
 
-sa = SentimentAnalyzer.pretrained()
+# sa = SentimentAnalyzer.pretrained()
 
-# Predict the sentiment of a single sentence
-sentiment = sa.predict_sentence('أنا بخير')
+# # Predict the sentiment of a single sentence
+# sentiment = sa.predict_sentence('أنا بخير')
 
-# Predict the sentiment of multiple sentences
-sentences = [
-    'أنا بخير',
-    'أنا لست بخير'
-]
-sentiments = sa.predict(sentences)
-print(sentiments)
-exit()
+# # Predict the sentiment of multiple sentences
+# sentences = [
+#     'أنا بخير',
+#     'أنا لست بخير'
+# ]
+# sentiments = sa.predict(sentences)
+# print(sentiments)
+# exit()
 
 with open(file_name) as f:
     file = f.read()

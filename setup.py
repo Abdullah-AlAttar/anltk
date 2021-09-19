@@ -52,8 +52,8 @@ def _get_project_version():
 
 include_dirs = [pybind11.get_include(),
                 os.path.join(anltk_source, 'anltk', 'include'),
-                os.path.join(anltk_source, 'anltk', 'third_party', 'utfcpp', 'source')]
-
+                os.path.join(anltk_source, 'subprojects', 'utfcpp', 'source')
+                ]
 
 cflags = ['-O3']
 ldflags = []
@@ -63,9 +63,11 @@ if system == 'Windows':
 anltk_src_files = map(str, os.listdir(
     os.path.join(anltk_source, 'anltk', 'src')))
 anltk_src_cpp = list(filter(lambda x: x.endswith('.cpp'), anltk_src_files))
+anltk_src_cpp.remove('unicode_normalization.cpp')
 anltk_src_cpp = list(
     map(lambda x: str(os.path.join(anltk_source, 'anltk', 'src', x)), anltk_src_cpp)
 )
+
 
 ext_modules = [
     Pybind11Extension("anltk_pybind",
@@ -76,7 +78,7 @@ ext_modules = [
                       cxx_std=17,
                       extra_link_args=ldflags,
                       include_dirs=include_dirs,
-                      define_macros=[(("UTF_CPP_CPLUSPLUS", "201703L"))]
+                      define_macros=[("UTF_CPP_CPLUSPLUS", "201703L"), ("BUILDING_PYBIND11", "1")]
                       )
 ]
 

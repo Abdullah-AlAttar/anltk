@@ -2,7 +2,7 @@
 #!/bin/bash
 
 
-for value in cp310-cp310  cp36-cp36m  cp37-cp37m  cp38-cp38  cp39-cp39  pp37-pypy37_pp73
+for value in cp310-cp310  cp36-cp36m  cp37-cp37m cp39-cp39  pp37-pypy37_pp73
 do
 	for plat in 2010
 	do
@@ -16,7 +16,7 @@ done
 for wheel in $(find ./dist -name "*whl")
 do
 	echo $wheel
-	new_name=`/opt/python/cp36-cp36m/bin/python rename_wheel.py $wheel`
+	new_name=`/opt/python/cp36-cp36m/bin/python ./scripts/rename_wheel.py $wheel`
 	echo $new_name
 	mv $wheel $new_name
 done

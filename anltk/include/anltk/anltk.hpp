@@ -118,6 +118,8 @@ vector_t<std::string> tokenize_words(string_view_t input);
 vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
                          bool keep_delimeters = false);
 
+#ifndef BUILDING_PYBIND11
+
 enum class NormalizeMode 
 {
 	NFD,
@@ -127,6 +129,8 @@ enum class NormalizeMode
 };
 
 std::string normalize_unicode(const std::string& input, NormalizeMode mode);
+
+#endif
 
 class Harf;
 class Kalima;

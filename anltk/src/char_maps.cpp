@@ -15,7 +15,7 @@ std::map<char_t, char_t> flip_map(const std::map<char_t, char_t>& other)
 
 // clang-format off
 const std::map<char_t , char_t> arabic_to_buckwalter_ = {
-	{ HAMZA            ,	U'‘' } ,
+	{ HAMZA            ,	U'\'' } ,
 	{ ALEF_MADDA       ,	U'|' },
 	{ ALEF_HAMZA_ABOVE ,	U'>' },
 	{ WAW_HAMZA_ABOVE  ,	U'&' },
