@@ -1,8 +1,8 @@
+#include <algorithm>
 #include <anltk/anltk.hpp>
 #include <assert.h>
 #include <iostream>
 #include <utf8.h>
-#include <algorithm>
 
 namespace anltk
 {
@@ -75,9 +75,8 @@ anltk::string_t get_root_from_patterns(std::u32string_view word,
 		const auto& pattern = patterns[i];
 		anltk::string_t root;
 		int match = match_pattern(word, pattern, root);
-		std::cout << utf8::utf32to8(word) << " " << utf8::utf32to8(pattern) << " "
-		          << word.size() << " " << pattern.size() << " "
-		          << root << " " << match << std::endl;
+		std::cout << utf8::utf32to8(word) << " " << utf8::utf32to8(pattern) << " " << word.size()
+		          << " " << pattern.size() << " " << root << " " << match << std::endl;
 		if (match > 0 && match > max_match)
 		{
 			std::cout << "Yes\n";
@@ -131,15 +130,15 @@ anltk::string_t rafal_stem(const std::string& word, const std::vector<std::strin
 	bool has_prefix = false;
 	// for (int i = 0; i < 4; ++i)
 	// {
-		for (const auto& prefix : prefixes)
+	for (const auto& prefix : prefixes)
+	{
+		if (starts_with(u32_word, prefix))
 		{
-			if (starts_with(u32_word, prefix))
-			{
-				has_prefix = true;
-				u32_word   = u32_word.substr(prefix.size());
-				break;
-			}
+			has_prefix = true;
+			u32_word   = u32_word.substr(prefix.size());
+			break;
 		}
+	}
 	// }
 	bool has_suffix = false;
 

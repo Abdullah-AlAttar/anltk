@@ -385,7 +385,7 @@ TEST_CASE("Folding ")
 
 		REQUIRE(found == " بسم الله ");
 	}
-	
+
 	SUBCASE("Tab")
 	{
 		std::string input = " \t بسم  \n الله  ";

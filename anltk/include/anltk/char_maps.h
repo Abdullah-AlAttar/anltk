@@ -1,9 +1,9 @@
 #ifndef CHAR_MAPS_H
 #define CHAR_MAPS_H
 
+#include "anltk/anltk_typedefs.h"
 #include <array>
 #include <map>
-#include "anltk/anltk_typedefs.h"
 namespace anltk
 {
 
@@ -118,8 +118,8 @@ extern const std::array<char_t, 8> tashkeel_list_;
 extern const std::array<char_t, 3> small_list_;
 extern const std::array<char_t, 10> arqam_;
 
-extern const std::array<char_t, 14 > qamari_;
-extern const std::array<char_t, 14 > shmasi_;
+extern const std::array<char_t, 14> qamari_;
+extern const std::array<char_t, 14> shmasi_;
 
 } // namespace anltk
 

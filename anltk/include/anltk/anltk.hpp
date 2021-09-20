@@ -87,7 +87,7 @@ std::string duplicate_shadda_letter(string_view_t input);
 
 // std::string extract_root(string_view_t input);
 std::string remove_if(string_view_t input, string_view_t stop_list,
-                   const std::function<bool(char_t)>& func);
+                      const std::function<bool(char_t)>& func);
 
 std::string fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func);
 
@@ -95,7 +95,8 @@ std::string fold_white_spaces(string_view_t input);
 
 std::string replace(string_view_t input, std::map<char_t, char_t> chars_maps);
 
-std::string replace_str(string_view_t input, std::map<string_view_t, string_view_t> replacement_map);
+std::string replace_str(string_view_t input,
+                        std::map<string_view_t, string_view_t> replacement_map);
 
 bool is_tashkeel(char_t c);
 
@@ -116,11 +117,11 @@ bool is_qamari(char_t c);
 vector_t<std::string> tokenize_words(string_view_t input);
 
 vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
-                         bool keep_delimeters = false);
+                            bool keep_delimeters = false);
 
 #ifndef BUILDING_PYBIND11
 
-enum class NormalizeMode 
+enum class NormalizeMode
 {
 	NFD,
 	NFC,

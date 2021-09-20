@@ -12,7 +12,7 @@ std::string normalize_unicode(const std::string& input, NormalizeMode mode)
 
 	std::string output;
 	char* result;
-	
+
 	switch (mode)
 	{
 	case NormalizeMode::NFD:

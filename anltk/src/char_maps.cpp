@@ -7,10 +7,10 @@ namespace anltk
 
 std::map<char_t, char_t> flip_map(const std::map<char_t, char_t>& other)
 {
-    std::map<char_t, char_t> output;
-    for (const auto& item : other)
-        output[item.second] = item.first;
-    return output;
+	std::map<char_t, char_t> output;
+	for (const auto& item : other)
+		output[item.second] = item.first;
+	return output;
 }
 
 // clang-format off
@@ -129,41 +129,41 @@ const std::map<char_t, char_t> safe_buckwalter_to_arabic_= flip_map(arabic_to_sa
 // clang-format on
 
 const std::array<char_t, 36> alphabet_ = { HAMZA,
-                                           ALEF_MADDA,
-                                           ALEF_HAMZA_ABOVE,
-                                           WAW_HAMZA_ABOVE,
-                                           ALEF_HAMZA_BELOW,
-                                           YEH_HAMZA_ABOVE,
-                                           ALEF_NO_HAMZA,
-                                           BEH,
-                                           TEH_MARBOOTA,
-                                           TEH,
-                                           THEH,
-                                           JEEM,
-                                           HAH,
-                                           KHAH,
-                                           DAL,
-                                           THAL,
-                                           REH,
-                                           ZAAY,
-                                           SEEN,
-                                           SHEEN,
-                                           SAD,
-                                           DAD,
-                                           TAH,
-                                           ZAH,
-                                           AIN,
-                                           GHAIN,
-                                           FEH,
-                                           QAF,
-                                           KAF,
-                                           LAM,
-                                           MEEM,
-                                           NOON,
-                                           HEH,
-                                           WAW,
-                                           ALEF_MAQSURA,
-                                           YEH };
+	                                       ALEF_MADDA,
+	                                       ALEF_HAMZA_ABOVE,
+	                                       WAW_HAMZA_ABOVE,
+	                                       ALEF_HAMZA_BELOW,
+	                                       YEH_HAMZA_ABOVE,
+	                                       ALEF_NO_HAMZA,
+	                                       BEH,
+	                                       TEH_MARBOOTA,
+	                                       TEH,
+	                                       THEH,
+	                                       JEEM,
+	                                       HAH,
+	                                       KHAH,
+	                                       DAL,
+	                                       THAL,
+	                                       REH,
+	                                       ZAAY,
+	                                       SEEN,
+	                                       SHEEN,
+	                                       SAD,
+	                                       DAD,
+	                                       TAH,
+	                                       ZAH,
+	                                       AIN,
+	                                       GHAIN,
+	                                       FEH,
+	                                       QAF,
+	                                       KAF,
+	                                       LAM,
+	                                       MEEM,
+	                                       NOON,
+	                                       HEH,
+	                                       WAW,
+	                                       ALEF_MAQSURA,
+	                                       YEH };
 
 const std::array<char_t, 8> tashkeel_list_
     = { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN };
@@ -175,15 +175,15 @@ const std::array<char_t, 10> arqam_
 
 extern const std::array<char_t, 14> qamari_
     = { ALEF_NO_HAMZA, BEH, JEEM, HAH, KHAH, AIN, GHAIN, FEH, KAF, QAF, MEEM, HAH, WAW, YEH };
-	
+
 extern const std::array<char_t, 14> shmasi_
     = { TEH, THEH, DAL, THAL, REH, ZAAY, SEEN, SHEEN, SAD, DAD, TAH, ZAH, LAM, NOON };
 
 #define FUNC_IMPL(prefix, name)                                                                    \
-    bool prefix##_##name(char_t c)                                                                 \
-    {                                                                                              \
-        return c == name;                                                                          \
-    }
+	bool prefix##_##name(char_t c)                                                                 \
+	{                                                                                              \
+		return c == name;                                                                          \
+	}
 #define LIFT_IMPL(name) FUNC_IMPL(is, name)
 
 LIFT_IMPL(HAMZA)
