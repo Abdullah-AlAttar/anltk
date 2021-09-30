@@ -118,8 +118,8 @@ def replace(text : str, chars_map : Dict[str, str]):
 def replace_str(text : str, chars_map : Dict[str, str]):
     return anltk_pybind.replace_str(text, chars_map)
 
-
-
+def replace_if(text: str, func : Callable, replacement : str) -> str:
+    return anltk_pybind.replace_if(text, func, replacement)
 
 def fold_if(text : str, func : Callable) -> str:
     return anltk_pybind.fold_if(text, func)

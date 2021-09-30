@@ -112,3 +112,6 @@ def test_splitting():
     assert anltk.split("ffsl بسم اللهْ") == ['ffsl', 'بسم', 'اللهْ']
     assert anltk.split("يا الله, يا رحمن يا رحيم." , delimeters=".," , keep_delimeters=False) == ['يا الله', ' يا رحمن يا رحيم']
     assert anltk.split("يا الله, يا رحمن يا رحيم." , delimeters=".," , keep_delimeters=True) == ['يا الله,', ' يا رحمن يا رحيم.']
+
+def test_replace():
+    assert anltk.replace_if('ffsl بسم اللهْ', lambda x : not anltk.is_arabic_alpha(x), '!') == "!!!!!بسم!الله!"

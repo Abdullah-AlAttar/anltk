@@ -98,6 +98,9 @@ std::string replace(string_view_t input, std::map<char_t, char_t> chars_maps);
 std::string replace_str(string_view_t input,
                         std::map<string_view_t, string_view_t> replacement_map);
 
+std::string replace_if(string_view_t input, const std::function<bool(char_t)>& func, char_t replacement);
+
+
 bool is_tashkeel(char_t c);
 
 bool is_arabic_alpha(char_t c);

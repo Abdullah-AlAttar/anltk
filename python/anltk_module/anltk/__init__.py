@@ -26,4 +26,5 @@ from .anltk import \
     replace_str , \
     split, \
     fold_white_spaces ,\
-    fold_if
+    fold_if, \
+    replace_if

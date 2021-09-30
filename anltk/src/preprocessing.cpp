@@ -206,6 +206,19 @@ string_t replace_str(string_view_t input, std::map<string_view_t, string_view_t>
 	return utf8::utf32to8(result);
 }
 
+std::string replace_if(string_view_t input, const std::function<bool(char_t)>& func,
+                       char_t replacement)
+{
+	string_t result;
+	auto start = input.begin();
+	auto end   = input.end();
+	while (start < end)
+	{
+		char_t next = utf8::next(start, end);
+		utf8::append(func(next) ? replacement : next, result);
+	}
+	return result;
+}
 std::vector<char_t> to_vec(string_view_t input)
 {
 	std::vector<char_t> result;

@@ -22,8 +22,10 @@ auto timeFuncInvocation = [](auto&& func, auto&&... params)
 	return std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
 };
 
+
 int main(int argc, char** argv)
 {
+
 	std::string file_name = argv[1];
 	std::ifstream t(file_name.c_str());
 

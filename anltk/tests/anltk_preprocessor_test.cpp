@@ -330,6 +330,24 @@ TEST_CASE("Replace")
 
 		REQUIRE(found == "بسم3d");
 	}
+	SUBCASE("Replace IF")
+	{
+		std::string input = "بسمd 3الله!!";
+
+		std::string found
+		    = anltk::replace_if(input, [](char32_t c) { return !anltk::is_arabic_alpha(c); }, U' ');
+
+		REQUIRE(found == "بسم   الله  ");
+	}
+		SUBCASE("Replace if empty input")
+	{
+		std::string input = "";
+
+		std::string found
+		    = anltk::replace_if(input, [](char32_t c) { return !anltk::is_arabic_alpha(c); }, U' ');
+
+		REQUIRE(found == "");
+	}
 }
 
 TEST_CASE("Folding ")
