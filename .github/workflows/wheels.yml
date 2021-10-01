@@ -43,13 +43,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install Deps
+      name: Install Deps
       run: |
-          python -m pip install  pybind11==2.7.1 ninja meson
-          
-    - name: Build C++ with meson
-      run : |
+          python -m pip install  pybind11==2.7.1 ninja meson && 
           meson builddir --buildtype=release -Dbuild_tests=false && cd builddir && ninja
+
 
     - name: Build wheels
     - uses: pypa/cibuildwheel@v1.12.0
