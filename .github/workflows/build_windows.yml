@@ -9,8 +9,6 @@ jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    env:
-      CIBW_ARCHS_MACOS: "x86_64 universal2 arm64"
     strategy:
       matrix:
         os: [windows-2019]
@@ -32,10 +30,7 @@ jobs:
           meson builddir --buildtype=release -Dbuild_tests=false && cd builddir && ninja
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
-        env:
-          CIBW_BUILD: "cp36-* cp37-* cp38-*"
-          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2010
-     
+
       - uses: actions/upload-artifact@v2
         with:
           name: wheels
