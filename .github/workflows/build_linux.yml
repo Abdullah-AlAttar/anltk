@@ -33,7 +33,7 @@ jobs:
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_BUILD: "cp36-* cp37-* cp38-*"
+          # CIBW_BUILD: "cp36-* cp37-* cp38-*"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2010
           CIBW_MANYLINUX_I686_IMAGE: manylinux2010
      

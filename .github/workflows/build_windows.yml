@@ -30,7 +30,8 @@ jobs:
           meson builddir --buildtype=release -Dbuild_tests=false && cd builddir && ninja
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
-
+        env: 
+          CIBW_BUILD: cp36-*
       - uses: actions/upload-artifact@v2
         with:
           name: wheels
