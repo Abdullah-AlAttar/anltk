@@ -56,7 +56,7 @@ jobs:
       env:
         # Python 2.7 on Windows requires a workaround for C++11 support,
         # built separately below
-        CIBW_SKIP: cp27-win*
+        CIBW_SKIP: "cp27-win* *-win32 *-manylinux_i686" 
 
     - name: Verify clean directory
       run: git diff --exit-code
