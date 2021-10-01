@@ -30,34 +30,18 @@ jobs:
       - name: Build C++ with meson
         run : |
           meson builddir --buildtype=release -Dbuild_tests=false && cd builddir && ninja
-      - name: Build wheels for CPython 3.9
-        run: |
-          python -m cibuildwheel --output-dir dist
+      - name: Build wheels
+        run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_BUILD: "cp39-*"
+          CIBW_BUILD: "cp36-* cp37-* cp38-*"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2010
           CIBW_MANYLINUX_I686_IMAGE: manylinux2010
-
-      - name: Build wheels for CPython
-        run: |
-          python -m cibuildwheel --output-dir dist_cpython
-        env:
-          CIBW_BUILD: "cp37-* cp38-*"
-          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2010
-          CIBW_MANYLINUX_I686_IMAGE: manylinux2010
-
-      - name: Build wheels for PyPy
-        run: |
-          python -m cibuildwheel --output-dir dist_pypy
-        env:
-          CIBW_BUILD: "pp37-*"
-
+     
       - uses: actions/upload-artifact@v2
         with:
           name: wheels
           path: |
-            - ./dist_pypy/*.whl
-            - ./dist_cpython/*.whl
+            - ./wheelhouse/*.whl
 
   build_sdist:
     name: Build source distribution
