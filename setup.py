@@ -13,8 +13,8 @@ anltk_source = os.getenv(
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
 architecture = os.environ.get('ANLTK_ARCHITECTURE', platform.architecture()[0])
 
-compiler_id = os.environ['C++']
-print(compiler_id)
+# compiler_id = os.environ['C++']
+# print(compiler_id)
 # Create OS-dependent, but Python-independent wheels.
 try:
     from wheel.bdist_wheel import bdist_wheel
