@@ -13,31 +13,6 @@ anltk_source = os.getenv(
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
 architecture = os.environ.get('ANLTK_ARCHITECTURE', platform.architecture()[0])
 
-# compiler_id = os.environ['C++']
-# print(compiler_id)
-# Create OS-dependent, but Python-independent wheels.
-try:
-    from wheel.bdist_wheel import bdist_wheel
-except ImportError:
-    cmdclass = {}
-else:
-    class bdist_wheel_tag_name(bdist_wheel):
-        def get_tag(self):
-            abi = 'none'
-            if system == 'Darwin':
-                oses = 'macosx_10_6_x86_64'
-            elif system == 'Windows' and architecture == '32bit':
-                oses = 'win32'
-            elif system == 'Windows' and architecture == '64bit':
-                oses = 'win_amd64'
-            elif system == 'Linux' and architecture == '64bit':
-                oses = 'linux_x86_64'
-            elif system == 'Linux':
-                oses = 'linux_' + architecture
-            else:
-                raise TypeError("Unknown build environment")
-            return 'py3', abi, oses
-    cmdclass = {'bdist_wheel': bdist_wheel_tag_name}
 
 with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
@@ -60,8 +35,8 @@ include_dirs = [pybind11.get_include(),
 cflags = ['-O3']
 ldflags = []
 
-# if system == 'Windows':
-    # cflags = ['/O2', '/utf-8']
+if system == 'Windows':
+    cflags = ['/O2', '/utf-8']
 
 anltk_src_files = map(str, os.listdir(
     os.path.join(anltk_source, 'anltk', 'src')))
@@ -94,7 +69,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Abdullah-AlAttar/anltk",
-    cmdclass=cmdclass,
+    cmdclass={"build_ext": build_ext},
     python_requires='>=3',
     project_urls={
         "Source": "https://github.com/Abdullah-AlAttar/anltk",
