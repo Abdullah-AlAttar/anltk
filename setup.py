@@ -13,6 +13,8 @@ anltk_source = os.getenv(
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
 architecture = os.environ.get('ANLTK_ARCHITECTURE', platform.architecture()[0])
 
+compiler_id = os.environ['C++']
+print(compiler_id)
 # Create OS-dependent, but Python-independent wheels.
 try:
     from wheel.bdist_wheel import bdist_wheel
@@ -57,8 +59,9 @@ include_dirs = [pybind11.get_include(),
 
 cflags = ['-O3']
 ldflags = []
-if system == 'Windows':
-    cflags = ['/O2', '/utf-8']
+
+# if system == 'Windows':
+    # cflags = ['/O2', '/utf-8']
 
 anltk_src_files = map(str, os.listdir(
     os.path.join(anltk_source, 'anltk', 'src')))

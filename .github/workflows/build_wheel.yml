@@ -29,7 +29,7 @@ jobs:
           python -m pip install cibuildwheel==2.1.1 pybind11==2.7.1 ninja meson
       - name: Build C++ with meson
         run : |
-          meson builddir --buildtype=release -Dbuild_tests=true --prefix=/usr/local --libdir=lib && cd builddir && ninja test
+          meson builddir --buildtype=release -Dbuild_tests=false && cd builddir && ninja
       - name: Build wheels for CPython 3.9
         run: |
           python -m cibuildwheel --output-dir dist
