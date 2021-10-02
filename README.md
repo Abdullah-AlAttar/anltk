@@ -15,10 +15,11 @@ pip install anltk
 ```
 ## Building
 Note: Currently only tested on Linux  
-The Library depends on https://github.com/nemtrif/utfcpp.git, which is cloned automatically.  
-you also need a modern C++ Compiler, which supports C++17
-also meson and ninja needs to be installed.  
-simply with pip
+### Dependencies: 
+* [utfcpp](https://github.com/nemtrif/utfcpp.git), automatically downloaded.
+* [utf8proc](https://github.com/JuliaStrings/utf8proc), automatically downlaoded.
+* C++ Compiler that supports c++17.
+* Python3, [meson](https://mesonbuild.com/), [ninja](https://ninja-build.org/)
 ```bash
 pip install meson
 pip install ninja
@@ -92,10 +93,10 @@ Processing a file containing 500000 Line, 6787731 Word, 112704541 Character. the
 | Method           | Time          |   |   |   
 |------------------|---------------|---|---|
 | anltk python-api | 1.379 seconds |   |   |   
-| python (camel_tools)  | 11.46 seconds |   |   |   
+| python [camel_tools](https://github.com/CAMeL-Lab/camel_tools)  | 11.46 seconds |   |   |   
 ### **Remove Diacritics**
 
 | Method           | Time          |   |   |   
 |------------------|---------------|---|---|
 | anltk python-api | 0.989 seconds |   |   |   
-| python (camel_tools)   | 4.892 seconds |   |   |   
+| python [camel_tools](https://github.com/CAMeL-Lab/camel_tools)   | 4.892 seconds |   |   |   
