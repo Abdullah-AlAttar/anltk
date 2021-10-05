@@ -67,6 +67,16 @@ TEST_CASE("Valid Kalima")
 		std::string ar_text = "فأسًقيٍنََاّكمٍوُه";
 		REQUIRE(anltk::is_valid_kalima(ar_text) == true);
 	}
+	SUBCASE("not arabic")
+	{
+		std::string ar_text = "فأسًقيٍنََاّكمٍوُهd";
+		REQUIRE(anltk::is_valid_kalima(ar_text) == false);
+	}
+	SUBCASE("not arabic1")
+	{
+		std::string ar_text = "فأسًقيٍنََاّ3كمٍوُه";
+		REQUIRE(anltk::is_valid_kalima(ar_text) == false);
+	}
 }
 
 TEST_CASE("is tashkeel")

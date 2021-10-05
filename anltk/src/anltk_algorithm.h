@@ -13,7 +13,6 @@ string_t anltk_erase_if(string_view_t input, Func&& f)
 	auto end   = input.end();
 
 	string_t output;
-	// output.reserve(utf8::distance(start ,end));
 
 	while (start < end)
 	{

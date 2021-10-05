@@ -70,6 +70,13 @@ bool is_valid_kalima(string_view_t input)
 		return false;
 	}
 
+	if (!std::all_of(text.begin(), text.end(),
+	                [](char32_t c)
+	                { return anltk::is_arabic_alpha(c) || anltk::is_tashkeel(c); }))
+	{
+		return false;
+	}
+
 	auto first_letter = text.front();
 	if (is_tashkeel(first_letter) || first_letter == WAW_HAMZA_ABOVE
 	    || first_letter == YEH_HAMZA_ABOVE)

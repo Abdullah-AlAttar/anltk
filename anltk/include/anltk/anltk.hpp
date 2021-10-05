@@ -85,7 +85,6 @@ std::string normalize_hamzat(string_view_t input);
  */
 std::string duplicate_shadda_letter(string_view_t input);
 
-// std::string extract_root(string_view_t input);
 std::string remove_if(string_view_t input, string_view_t stop_list,
                       const std::function<bool(char_t)>& func);
 
