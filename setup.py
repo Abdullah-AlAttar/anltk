@@ -1,8 +1,5 @@
 import os
-import sys
 import setuptools
-import shutil
-import glob
 import platform
 import pybind11
 from pybind11.setup_helpers import Pybind11Extension, build_ext
@@ -11,7 +8,6 @@ from pybind11.setup_helpers import Pybind11Extension, build_ext
 anltk_source = os.getenv(
     "ANLTK_SOURCE", os.path.abspath(os.path.dirname(__file__)))
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
-architecture = os.environ.get('ANLTK_ARCHITECTURE', platform.architecture()[0])
 
 
 with open("README.md", "r", encoding='utf-8') as fh:
@@ -46,12 +42,12 @@ anltk_src_cpp = list(
     map(lambda x: str(os.path.join(anltk_source, 'anltk', 'src', x)), anltk_src_cpp)
 )
 
-
+anltk_pybind_module_cpp = os.path.join(
+                          anltk_source, 'python', 'anltk_module', 'anltk',
+                          'pybind', 'anltk_pybind.cpp')
 ext_modules = [
     Pybind11Extension("anltk_pybind",
-                      sources=[os.path.join(
-                          anltk_source, 'python', 'anltk_module', 'anltk',
-                          'pybind', 'anltk_pybind.cpp')] + anltk_src_cpp,
+                      sources= anltk_src_cpp + [anltk_pybind_module_cpp],
                       extra_compile_args=cflags,
                       cxx_std=17,
                       extra_link_args=ldflags,
@@ -84,7 +80,7 @@ setuptools.setup(
         str('anltk.tests')
     ],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 1 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Programming Language :: Python :: 3',
