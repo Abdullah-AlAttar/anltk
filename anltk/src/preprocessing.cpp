@@ -90,12 +90,13 @@ string_t normalize_hamzat(string_view_t input)
 
 		switch (next)
 		{
-		case HAMZA:
-		case WAW_HAMZA_ABOVE:
-		case YEH_HAMZA_ABOVE:
+		// case HAMZA:
+		// case WAW_HAMZA_ABOVE:
+		// case YEH_HAMZA_ABOVE:
 		case ALEF_HAMZA_BELOW:
 		case ALEF_MADDA:
-			next = ALEF_HAMZA_ABOVE;
+		case ALEF_HAMZA_ABOVE:
+			next = ALEF_NO_HAMZA;
 			break;
 
 		default:
@@ -107,11 +108,51 @@ string_t normalize_hamzat(string_view_t input)
 	return result;
 }
 
+std::string normalize_to_teh(string_view_t input)
+{
+	string_t result;
+	auto start = input.begin();
+	auto end   = input.end();
+
+	if (start == end)
+	{
+		return result;
+	}
+
+	while (start < end)
+	{
+		char_t next = utf8::next(start, end);
+		if (next == HEH)
+		{
+			if (start == end)
+			{
+				utf8::append(TEH_MARBOOTA, result);
+				continue;
+			}
+			char_t peek = utf8::peek_next(start, end);
+			if (!is_arabic_alpha(peek))
+			{
+				utf8::append(TEH_MARBOOTA, result);
+				continue;
+			}
+		}
+
+		utf8::append(next, result);
+	}
+	return result;
+}
+std::string normalize_to_heh(string_view_t input)
+{
+	return replace_if(
+	    input, [](char_t c) { return c == TEH_MARBOOTA; }, HEH);
+}
+
 string_t duplicate_shadda_letter(string_view_t input)
 {
 	string_t result;
 	auto start = input.begin();
 	auto end   = input.end();
+
 	char_t prev{};
 	// TODO(Abdullah) : Could be more efficient
 	while (start < end)

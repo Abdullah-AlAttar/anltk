@@ -152,23 +152,67 @@ TEST_CASE("HAMZA Normalization")
 	{
 		std::string input = "سماء";
 		std::string found = anltk::normalize_hamzat(input);
-		REQUIRE(found == "سماأ"s);
+		REQUIRE(found == "سماء"s);
 	}
 
 	SUBCASE("Full")
 	{
 		std::string input = " يآ إمام اللؤلؤ المتلألئ في المساء";
 		std::string found = anltk::normalize_hamzat(input);
-		REQUIRE(found == " يأ أمام اللألأ المتلألأ في المساأ"s);
+		REQUIRE(found == " يا امام اللؤلؤ المتلالئ في المساء"s);
 	}
 	SUBCASE("Should do nothing")
 	{
 		std::string input = "وَلَاd d!!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
 		std::string found = anltk::normalize_hamzat(input);
 
-		REQUIRE(found == "وَلَاd d!!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ"s);
+		REQUIRE(found == "وَلَاd d!!!!اَنتُمْsdf 32عَابِدُونَ مَا اَعْبُدُ"s);
 	}
 }
+
+
+TEST_CASE("TEH/HEH Normalization")
+{
+	using namespace std::string_literals;
+
+	SUBCASE("Empty1")
+	{
+		std::string input = "";
+		std::string found = anltk::normalize_to_heh(input);
+		REQUIRE(found == ""s);
+	}
+	SUBCASE("Empty2")
+	{
+		std::string input = "";
+		std::string found = anltk::normalize_to_teh(input);
+		REQUIRE(found == ""s);
+	}
+
+	SUBCASE("Basic1")
+	{
+		std::string input = "قرية";
+		std::string found = anltk::normalize_to_heh(input);
+		REQUIRE(found == "قريه"s);
+	}
+	SUBCASE("Basic1")
+	{
+		std::string input = "قريه";
+		std::string found = anltk::normalize_to_teh(input);
+		REQUIRE(found == "قرية"s);
+	}
+
+	SUBCASE("Full")
+	{
+		std::string input = "الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاه";
+		std::string found = anltk::normalize_to_heh(input);
+		REQUIRE(found == "الحديقه! الجديدهُ كانت مشرقه إشراقهً تهيم على الشفاه"s);
+		std::string found2 = anltk::normalize_to_teh(found);
+		REQUIRE(found2 == "الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاة");
+	}
+
+}
+
+
 
 TEST_CASE("Remove Kasheeda")
 {

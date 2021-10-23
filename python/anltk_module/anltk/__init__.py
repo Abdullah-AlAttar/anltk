@@ -27,4 +27,6 @@ from .anltk import \
     split, \
     fold_white_spaces ,\
     fold_if, \
-    replace_if
+    replace_if, \
+    normalize_to_heh, \
+    normalize_to_teh

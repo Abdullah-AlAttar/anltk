@@ -130,3 +130,10 @@ def fold_white_spaces(text : str) -> str:
 
 def split(text : str, delimeters :str = ' ', keep_delimeters : bool = False) -> List[str]:
     return anltk_pybind.split(text, delimeters, keep_delimeters)
+
+
+def normalize_to_heh(text : str) -> str:
+    return anltk_pybind.normalize_to_heh(text)
+
+def normalize_to_teh(text : str) -> str:
+    return anltk_pybind.normalize_to_teh(text)
