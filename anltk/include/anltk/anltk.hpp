@@ -232,7 +232,7 @@ public:
 
 	void set_prev(Kalima* prev);
 
-	std::string to_string();
+	std::string to_string() const;
 
 	size_t size() const;
 
@@ -269,7 +269,7 @@ public:
 
 	size_t size() const;
 
-	std::string to_string();
+	std::string to_string() const;
 
 	bool operator==(std::string_view str) const noexcept;
 

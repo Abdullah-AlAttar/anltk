@@ -260,6 +260,7 @@ std::string replace_if(string_view_t input, const std::function<bool(char_t)>& f
 	}
 	return result;
 }
+
 std::vector<char_t> to_vec(string_view_t input)
 {
 	std::vector<char_t> result;

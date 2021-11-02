@@ -154,7 +154,7 @@ void Kalima::set_prev(Kalima* prev)
 	m_prev = prev;
 }
 
-std::string Kalima::to_string()
+std::string Kalima::to_string() const
 {
 	return m_text;
 }
@@ -246,7 +246,7 @@ size_t Jumla::size() const
 {
 	return m_kalimat.size();
 }
-std::string Jumla::to_string()
+std::string Jumla::to_string() const
 {
 	return m_text;
 }

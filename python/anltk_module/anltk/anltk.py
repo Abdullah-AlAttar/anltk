@@ -1,12 +1,12 @@
-
 from typing import Callable, Dict, List
 import anltk_pybind
-
 
 from anltk_pybind import AR2BW, BW2AR, AR2SBW, SBW2AR
 
 
-def tafqeet(num: int, is_ordinal: bool = False,  is_feminine: bool = False) -> str:
+def tafqeet(num: int,
+            is_ordinal: bool = False,
+            is_feminine: bool = False) -> str:
     """Converts a number into Arabic spoken form
 
     Args:
@@ -91,8 +91,8 @@ def remove_non_alphanumeric(text: str, stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alphanumeric(text, stop_list)
 
 
-def remove_non_alphanumeric_and_tashkeel(
-        text: str, stop_list: str = ' ') -> str:
+def remove_non_alphanumeric_and_tashkeel(text: str,
+                                         stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alphanumeric_and_tashkeel(text, stop_list)
 
 
@@ -108,32 +108,39 @@ def duplicate_shadda_letter(text: str) -> str:
     return anltk_pybind.duplicate_shadda_letter(text)
 
 
-def remove_if(text: str, stop_list: str, func : Callable) -> str:
+def remove_if(text: str, stop_list: str, func: Callable) -> str:
     return anltk_pybind.remove_if(text, stop_list, func)
 
 
-def replace(text : str, chars_map : Dict[str, str]):
+def replace(text: str, chars_map: Dict[str, str]):
     return anltk_pybind.replace(text, chars_map)
 
-def replace_str(text : str, chars_map : Dict[str, str]):
+
+def replace_str(text: str, chars_map: Dict[str, str]):
     return anltk_pybind.replace_str(text, chars_map)
 
-def replace_if(text: str, func : Callable, replacement : str) -> str:
+
+def replace_if(text: str, func: Callable, replacement: str) -> str:
     return anltk_pybind.replace_if(text, func, replacement)
 
-def fold_if(text : str, func : Callable) -> str:
+
+def fold_if(text: str, func: Callable) -> str:
     return anltk_pybind.fold_if(text, func)
 
-def fold_white_spaces(text : str) -> str:
+
+def fold_white_spaces(text: str) -> str:
     return anltk_pybind.fold_white_spaces(text)
 
 
-def split(text : str, delimeters :str = ' ', keep_delimeters : bool = False) -> List[str]:
+def split(text: str,
+          delimeters: str = ' ',
+          keep_delimeters: bool = False) -> List[str]:
     return anltk_pybind.split(text, delimeters, keep_delimeters)
 
 
-def normalize_to_heh(text : str) -> str:
+def normalize_to_heh(text: str) -> str:
     return anltk_pybind.normalize_to_heh(text)
 
-def normalize_to_teh(text : str) -> str:
+
+def normalize_to_teh(text: str) -> str:
     return anltk_pybind.normalize_to_teh(text)

@@ -14,7 +14,7 @@ pip install pybind11
 pip install anltk
 ```
 ## Building
-Note: Currently only tested on Linux, prebuilt python wheels are avialables for Linux, Windows, Macos on (pypi)[https://pypi.org/project/anltk/]
+Note: Currently only tested on Linux, prebuilt python wheels are available for Linux, Windows, Macos on [pypi](https://pypi.org/project/anltk/)
 ### Dependencies: 
 * [utfcpp](https://github.com/nemtrif/utfcpp.git), automatically downloaded.
 * [utf8proc](https://github.com/JuliaStrings/utf8proc), automatically downlaoded.
