@@ -1,6 +1,5 @@
 import anltk
 
-
 # def test_has_spaces():
 
 #     ar_text = 'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ'
@@ -66,8 +65,9 @@ def test_tokenize():
 
     text = 'بسم الله@ الرحمن23 الرحيم.'
 
-    assert anltk.tokenize_words(
-        text) == ['بسم', 'الله', '@', 'الرحمن', '23', 'الرحيم', '.']
+    assert anltk.tokenize_words(text) == [
+        'بسم', 'الله', '@', 'الرحمن', '23', 'الرحيم', '.'
+    ]
 
 
 def test_tafqeet():
@@ -77,48 +77,103 @@ def test_tafqeet():
 
 def test_transliterate():
 
-    assert anltk.transliterate('أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ',
-                               anltk.AR2BW) == '>bjd hwz HTy klmn sEfS qr$t vx* DZg'
+    assert anltk.transliterate(
+        'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ',
+        anltk.AR2BW) == '>bjd hwz HTy klmn sEfS qr$t vx* DZg'
 
     # Safe Buckwalter
-    assert anltk.transliterate('أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ',
-                               anltk.AR2SBW) == 'Objd hwz HTy klmn sEfS qrct vxV DZg'
+    assert anltk.transliterate(
+        'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ',
+        anltk.AR2SBW) == 'Objd hwz HTy klmn sEfS qrct vxV DZg'
 
-    assert anltk.transliterate('>bjd hwz HTy klmn sEfS qr$t vx* DZg',
-                               anltk.BW2AR) == 'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ'
+    assert anltk.transliterate(
+        '>bjd hwz HTy klmn sEfS qr$t vx* DZg',
+        anltk.BW2AR) == 'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ'
 
-    assert anltk.transliterate('Objd hwz HTy klmn sEfS qrct vxV DZg',
-                               anltk.SBW2AR) == 'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ'
+    assert anltk.transliterate(
+        'Objd hwz HTy klmn sEfS qrct vxV DZg',
+        anltk.SBW2AR) == 'أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ'
+
 
 def test_remove_tashkeel():
     assert anltk.remove_tashkeel('فرَاشَةٌ مُلَوَّنَةٌ') == 'فراشة ملونة'
 
 
 def test_remove_non_alpha():
-    assert anltk.remove_non_alpha('فرَاdشَةٌ مُلَوَّنَ3ةٌ!', stop_list = '! ') ==  'فراشة ملونة!'
-    assert anltk.remove_non_alphanumeric('فرَاdشَةٌ مُلَوَّ3نَةٌ!', stop_list = '! ') ==  'فراشة ملو3نة!'
+    assert anltk.remove_non_alpha('فرَاdشَةٌ مُلَوَّنَ3ةٌ!',
+                                  stop_list='! ') == 'فراشة ملونة!'
+    assert anltk.remove_non_alphanumeric('فرَاdشَةٌ مُلَوَّ3نَةٌ!',
+                                         stop_list='! ') == 'فراشة ملو3نة!'
 
-    assert anltk.remove_non_alphanumeric_and_tashkeel('فرَاdشَةٌ مُلَوَّ3نَةٌ!', stop_list = '! ') == 'فرَاشَةٌ مُلَوَّ3نَةٌ!'
-    assert anltk.remove_kasheeda('بســــم الـــله') ==  'بسم الله'
+    assert anltk.remove_non_alphanumeric_and_tashkeel(
+        'فرَاdشَةٌ مُلَوَّ3نَةٌ!', stop_list='! ') == 'فرَاشَةٌ مُلَوَّ3نَةٌ!'
+    assert anltk.remove_kasheeda('بســــم الـــله') == 'بسم الله'
 
 
 def test_remove_if():
-    assert anltk.remove_if('باب الحارة', ' ', lambda x : x == 'ب') == 'ا الحارة'
+    assert anltk.remove_if('باب الحارة', ' ', lambda x: x == 'ب') == 'ا الحارة'
+
 
 def test_folding():
-    assert anltk.fold_white_spaces('بسم     الله    الرحمن ال   رحيم\t\t') == 'بسم الله الرحمن ال رحيم\t'
+    assert anltk.fold_white_spaces(
+        'بسم     الله    الرحمن ال   رحيم\t\t') == 'بسم الله الرحمن ال رحيم\t'
+
 
 def test_splitting():
     assert anltk.split('ffsl بسم اللهْ') == ['ffsl', 'بسم', 'اللهْ']
-    assert anltk.split('يا الله, يا رحمن يا رحيم.' , delimeters='.,' , keep_delimeters=False) == ['يا الله', ' يا رحمن يا رحيم']
-    assert anltk.split('يا الله, يا رحمن يا رحيم.' , delimeters='.,' , keep_delimeters=True) == ['يا الله,', ' يا رحمن يا رحيم.']
+    assert anltk.split('يا الله, يا رحمن يا رحيم.',
+                       delimeters='.,',
+                       keep_delimeters=False) == [
+                           'يا الله', ' يا رحمن يا رحيم'
+                       ]
+    assert anltk.split('يا الله, يا رحمن يا رحيم.',
+                       delimeters='.,',
+                       keep_delimeters=True) == [
+                           'يا الله,', ' يا رحمن يا رحيم.'
+                       ]
+
 
 def test_replace():
-    assert anltk.replace_if('ffsl بسم اللهْ', lambda x : not anltk.is_arabic_alpha(x), '!') == '!!!!!بسم!الله!'
+    assert anltk.replace_if('ffsl بسم اللهْ',
+                            lambda x: not anltk.is_arabic_alpha(x),
+                            '!') == '!!!!!بسم!الله!'
 
-    
+
 def test_normalize():
-    assert anltk.normalize_to_heh('الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاه') == 'الحديقه! الجديدهُ كانت مشرقه إشراقهً تهيم على الشفاه'
-    assert anltk.normalize_to_teh('الحديقه! الجديدهُ كانت مشرقه إشراقهً تهيم على الشفاه') == 'الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاة'
+    assert anltk.normalize_to_heh(
+        'الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاه'
+    ) == 'الحديقه! الجديدهُ كانت مشرقه إشراقهً تهيم على الشفاه'
+    assert anltk.normalize_to_teh(
+        'الحديقه! الجديدهُ كانت مشرقه إشراقهً تهيم على الشفاه'
+    ) == 'الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاة'
 
-    
+
+def test_tokenize_if():
+    text = "إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ ."
+
+    assert anltk.tokenize_if(text,
+                             [anltk.is_tashkeel, anltk.is_arabic_alpha]) == [
+                                 (1, 'إ'), (0, 'ِ'), (1, 'ن'), (0, 'َّ'),
+                                 (-1, ' '), (1, 'ال'), (0, 'َّ'), (1, 'ذ'),
+                                 (0, 'ِ'), (1, 'ين'), (0, 'َ'), (-1, ' '),
+                                 (1, 'ك'), (0, 'َ'), (1, 'ف'), (0, 'َ'),
+                                 (1, 'ر'), (0, 'ُ'), (1, 'وا'), (-1, ' '),
+                                 (1, 'س'), (0, 'َ'), (1, 'و'), (0, 'َ'),
+                                 (1, 'اء'), (0, 'ٌ'), (-1, ' '), (1, 'ع'),
+                                 (0, 'َ'), (1, 'ل'), (0, 'َ'), (1, 'ي'),
+                                 (0, 'ْ'), (1, 'ه'), (0, 'ِ'), (1, 'م'),
+                                 (0, 'ْ'), (-1, ' '), (1, 'أ'), (0, 'َ'),
+                                 (1, 'أ'), (0, 'َ'), (1, 'نذ'), (0, 'َ'),
+                                 (1, 'ر'), (0, 'ْ'), (1, 'ت'), (0, 'َ'),
+                                 (1, 'ه'), (0, 'ُ'), (1, 'م'), (0, 'ْ'),
+                                 (-1, ' '), (1, 'أ'), (0, 'َ'), (1, 'م'),
+                                 (0, 'ْ'), (-1, ' '), (1, 'ل'), (0, 'َ'),
+                                 (1, 'م'), (0, 'ْ'), (-1, ' '), (1, 'ت'),
+                                 (0, 'ُ'), (1, 'نذ'), (0, 'ِ'), (1, 'ر'),
+                                 (0, 'ْ'), (1, 'ه'), (0, 'ُ'), (1, 'م'),
+                                 (0, 'ْ'), (-1, ' '), (1, 'ل'), (0, 'َ'),
+                                 (1, 'ا'), (-1, ' '), (1, 'ي'), (0, 'ُ'),
+                                 (1, 'ؤ'), (0, 'ْ'), (1, 'م'), (0, 'ِ'),
+                                 (1, 'ن'), (0, 'ُ'), (1, 'ون'), (0, 'َ'),
+                                 (-1, ' .')
+                             ]

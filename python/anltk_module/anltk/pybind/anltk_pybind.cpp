@@ -70,6 +70,9 @@ PYBIND11_MODULE(anltk_pybind, m)
 		m.def("split", &anltk::split, py::arg("input"), py::arg("delimeters"),
 		      py::arg("keep_delimeters"));
 
+		m.def("tokenize_if", &anltk::tokenize_if, py::arg("input"), py::arg("funcs"));
+
+		
 		m.def(
 		    "replace",
 		    [](anltk::string_view_t input, const py::dict& chars_map)

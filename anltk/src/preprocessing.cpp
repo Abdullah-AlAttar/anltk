@@ -1,5 +1,5 @@
 #include "anltk/anltk.hpp"
-#include "anltk_algorithm.h"
+#include "anltk/anltk_algorithm.h"
 
 #include <algorithm>
 #include <iostream>
@@ -311,5 +311,6 @@ vector_t<string_t> split(string_view_t input, string_view_t delimeters, bool kee
 
 	return result;
 }
+
 
 } // namespace anltk

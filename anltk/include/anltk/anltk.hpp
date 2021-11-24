@@ -95,9 +95,8 @@ std::string normalize_to_teh(string_view_t input);
  */
 std::string normalize_to_heh(string_view_t input);
 
-
 /**
- * 
+ *
  * @brief Duplicates the shadda letter
  * eg : الشّمس becomes الششمس
  */
@@ -115,8 +114,11 @@ std::string replace(string_view_t input, std::map<char_t, char_t> chars_maps);
 std::string replace_str(string_view_t input,
                         std::map<string_view_t, string_view_t> replacement_map);
 
-std::string replace_if(string_view_t input, const std::function<bool(char_t)>& func, char_t replacement);
+std::string replace_if(string_view_t input, const std::function<bool(char_t)>& func,
+                       char_t replacement);
 
+std::vector<std::pair<int, std::string>>
+tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>& funcs);
 
 bool is_tashkeel(char_t c);
 
@@ -275,7 +277,6 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Jumla& jumla);
 };
-
 
 std::u32string to_32string(string_view_t input);
 

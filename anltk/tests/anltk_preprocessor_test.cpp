@@ -170,7 +170,6 @@ TEST_CASE("HAMZA Normalization")
 	}
 }
 
-
 TEST_CASE("TEH/HEH Normalization")
 {
 	using namespace std::string_literals;
@@ -209,10 +208,7 @@ TEST_CASE("TEH/HEH Normalization")
 		std::string found2 = anltk::normalize_to_teh(found);
 		REQUIRE(found2 == "الحديقة! الجديدةُ كانت مشرقة إشراقةً تهيم على الشفاة");
 	}
-
 }
-
-
 
 TEST_CASE("Remove Kasheeda")
 {
@@ -378,17 +374,17 @@ TEST_CASE("Replace")
 	{
 		std::string input = "بسمd 3الله!!";
 
-		std::string found
-		    = anltk::replace_if(input, [](char32_t c) { return !anltk::is_arabic_alpha(c); }, U' ');
+		std::string found = anltk::replace_if(
+		    input, [](char32_t c) { return !anltk::is_arabic_alpha(c); }, U' ');
 
 		REQUIRE(found == "بسم   الله  ");
 	}
-		SUBCASE("Replace if empty input")
+	SUBCASE("Replace if empty input")
 	{
 		std::string input = "";
 
-		std::string found
-		    = anltk::replace_if(input, [](char32_t c) { return !anltk::is_arabic_alpha(c); }, U' ');
+		std::string found = anltk::replace_if(
+		    input, [](char32_t c) { return !anltk::is_arabic_alpha(c); }, U' ');
 
 		REQUIRE(found == "");
 	}

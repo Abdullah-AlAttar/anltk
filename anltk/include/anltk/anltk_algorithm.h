@@ -25,5 +25,29 @@ string_t anltk_erase_if(string_view_t input, Func&& f)
 
 	return output;
 }
+
+template <typename Iter, typename F>
+string_t parse_sequence(char_t& next, Iter& start, Iter end, bool& done, F&& predicate)
+{
+	string_t res;
+	utf8::append(next, res);
+	next = utf8::next(start, end);
+	while (true)
+	{
+		if (!predicate(next))
+		{
+			done = (start == end);
+			break;
+		}
+		utf8::append(next, res);
+		if (start == end)
+		{
+			break;
+		}
+		next = utf8::next(start, end);
+	}
+	return res;
+}
+
 } // namespace anltk
 #endif

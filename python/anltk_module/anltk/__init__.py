@@ -27,4 +27,5 @@ from .anltk import \
     fold_if, \
     replace_if, \
     normalize_to_heh, \
-    normalize_to_teh
+    normalize_to_teh, \
+    tokenize_if

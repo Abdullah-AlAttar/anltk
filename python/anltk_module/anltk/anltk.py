@@ -1,4 +1,4 @@
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Tuple
 import anltk_pybind
 
 from anltk_pybind import AR2BW, BW2AR, AR2SBW, SBW2AR
@@ -144,3 +144,6 @@ def normalize_to_heh(text: str) -> str:
 
 def normalize_to_teh(text: str) -> str:
     return anltk_pybind.normalize_to_teh(text)
+
+def tokenize_if(text: str, funcs : List[Callable]) -> List[Tuple[int, str]]:
+    return anltk_pybind.tokenize_if(text, funcs)
