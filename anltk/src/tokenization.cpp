@@ -4,8 +4,6 @@
 namespace anltk
 {
 
-
-
 vector_t<string_t> tokenize_words(string_view_t input)
 {
 	vector_t<string_t> result;
@@ -53,17 +51,29 @@ vector_t<string_t> tokenize_words(string_view_t input)
 	return result;
 }
 
-
 std::vector<std::pair<int, std::string>>
 tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>& funcs)
 {
+	if (input.empty())
+	{
+		return {};
+	}
+
+	if (funcs.empty())
+	{
+		return { { -1, std::string(input.begin(), input.end()) } };
+	}
+
 	auto start = input.begin();
 	auto end   = input.end();
+
 	std::vector<std::pair<int, std::string>> result;
 
-	auto get_nth_match = [&funcs](char_t c)
+	const size_t funcs_len = funcs.size(); // Does the compiler optimize this?
+
+	auto get_nth_match = [&funcs, &funcs_len](char_t c) -> int
 	{
-		for (size_t i = 0; i < funcs.size(); ++i)
+		for (size_t i = 0; i < funcs_len; ++i)
 		{
 			if (funcs[i](c))
 			{
@@ -77,32 +87,30 @@ tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>&
 
 	while (start < end)
 	{
-		int func_match = get_nth_match(next);
-		bool done      = false;
-		if (func_match == -1)
+		int func_idx = get_nth_match(next);
+		bool done    = false;
+		if (func_idx == -1)
 		{
-			// std::cout << "next \"" << utf8::utf32to8(std::u32string{ next }) << '"' << std::endl;
-			std::string sequence = parse_sequence(next, start, end, done,
-			                                      [&](char_t c) { return get_nth_match(c) == -1; });
-			// std::cout << "Seq " << sequence << std::endl;
-			result.push_back({ -1, sequence });
+			std::string seq = parse_sequence(
+			    next, start, end, done, [&](char_t c) -> bool { return get_nth_match(c) == -1; });
+			result.push_back({ -1, seq });
 		}
 		else
 		{
-			const auto& func = funcs[func_match];
-			std::string sequence
-			    = parse_sequence(next, start, end, done, [&](char_t c) { return func(c); });
+			const auto& func = funcs[func_idx];
 
-			// std::cout << "Seq " << sequence << std::endl;
-			result.push_back({ func_match, sequence });
+			std::string seq
+			    = parse_sequence(next, start, end, done, [&](char_t c) -> bool { return func(c); });
+
+			result.push_back({ func_idx, seq });
 		}
 		if (done)
 		{
 			string_t last;
 			utf8::append(next, last);
-			func_match = get_nth_match(next);
+			func_idx = get_nth_match(next);
 
-			result.push_back({ func_match, last });
+			result.push_back({ func_idx, last });
 		}
 	}
 	return result;

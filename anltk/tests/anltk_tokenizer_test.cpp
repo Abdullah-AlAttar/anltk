@@ -84,11 +84,7 @@ TEST_CASE("tokenize If")
 		    { [](char32_t c) { return anltk::is_digit(c); }, &anltk::is_arabic_alpha
 
 		    });
-
-		for (auto [i, seq] : found)
-		{
-			std::cout << "{" << i << " , \"" << seq << "\"}," << std::endl;
-		}
+		
 		REQUIRE(found == expected);
 	}
 
@@ -114,10 +110,6 @@ TEST_CASE("tokenize If")
 		std::vector<std::pair<int, std::string>> found
 		    = anltk::tokenize_if(input, { [](char32_t c) { return anltk::is_tashkeel(c); } });
 
-		// for (auto [i, seq] : found)
-		// {
-		// 	std::cout << "{" << i << " , \"" << seq << "\"}," << std::endl;
-		// }
 		REQUIRE(found == expected);
 	}
 
@@ -146,13 +138,54 @@ TEST_CASE("tokenize If")
 
 		std::vector<std::pair<int, std::string>> found
 		    = anltk::tokenize_if(input,
-		                      { [](char32_t c) { return anltk::is_tashkeel(c); },
-		                        [](char32_t c) { return anltk::is_arabic_alpha(c); } });
+		                         { [](char32_t c) { return anltk::is_tashkeel(c); },
+		                           [](char32_t c) { return anltk::is_arabic_alpha(c); } });
 
-		for (auto [i, seq] : found)
-		{
-			std::cout << "{" << i << " , \"" << seq << "\"}," << std::endl;
-		}
+		
+		REQUIRE(found == expected);
+	}
+
+	SUBCASE("Empty input")
+	{
+		std::string input = "";
+
+		std::vector<std::pair<int, std::string>> expected = {};
+
+		std::vector<std::pair<int, std::string>> found
+		    = anltk::tokenize_if(input,
+		                         { [](char32_t c) { return anltk::is_tashkeel(c); },
+		                           [](char32_t c) { return anltk::is_arabic_alpha(c); } });
+
+		
+		REQUIRE(found == expected);
+	}
+	SUBCASE("Empty Functors")
+	{
+		std::string input = "Nice Input Bro";
+
+		std::vector<std::pair<int, std::string>> expected = { { -1, "Nice Input Bro" } };
+
+		std::vector<std::pair<int, std::string>> found = anltk::tokenize_if(input, {});
+
+		
+		REQUIRE(found == expected);
+	}
+
+	SUBCASE("Multiple Matches")
+	{
+		// Matches by functions order
+		std::string input = "بسم الله";
+
+		std::vector<std::pair<int, std::string>> expected
+		    = { { 0, "بسم" }, { -1, " " }, { 0, "الله" } };
+
+		std::vector<std::pair<int, std::string>> found
+		    = anltk::tokenize_if(input, { &anltk::is_arabic_alpha, &anltk::is_arabic_alpha });
+
+		// for (auto [i, seq] : found)
+		// {
+		// 	std::cout << "{" << i << " , \"" << seq << "\"}," << std::endl;
+		// }
 		REQUIRE(found == expected);
 	}
 }
