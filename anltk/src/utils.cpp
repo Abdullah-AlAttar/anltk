@@ -30,6 +30,7 @@ bool is_digit(char_t c)
 		break;
 	}
 }
+
 bool is_indic_digit(char_t c)
 {
 	return std::find(arqam_.begin(), arqam_.end(), c) != arqam_.end();
