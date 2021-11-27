@@ -102,23 +102,44 @@ std::string normalize_to_heh(string_view_t input);
  */
 std::string duplicate_shadda_letter(string_view_t input);
 
+/**
+ *
+ * @brief Removes characters from input that matches the functor, if that character in the stop_list it won't be removed
+ */
 std::string remove_if(string_view_t input, string_view_t stop_list,
                       const std::function<bool(char_t)>& func);
 
+/**
+ *
+ * @brief Removes The second character, if it matches the condition
+ */
 std::string fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func);
-
+/**
+ *
+ * @brief Removes consecutive white spaces
+ */
 std::string fold_white_spaces(string_view_t input);
 
+/**
+ *
+ * @brief Basic Char replacement algorithm, Note: use python builtin function, as it is more efficient
+ */
 std::string replace(string_view_t input, std::map<char_t, char_t> chars_maps);
 
+/**
+ *
+ * @brief Basic String replacement algorithm, Note: use python builtin function, as it is more efficient
+ */
 std::string replace_str(string_view_t input,
                         std::map<string_view_t, string_view_t> replacement_map);
-
+/**
+ *
+ * @brief Replace a character if it matches a condition
+ */
 std::string replace_if(string_view_t input, const std::function<bool(char_t)>& func,
                        char_t replacement);
 
-std::vector<std::pair<int, std::string>>
-tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>& funcs);
+
 
 bool is_tashkeel(char_t c);
 
@@ -136,8 +157,25 @@ bool is_shamsi(char_t c);
 
 bool is_qamari(char_t c);
 
+/**
+ *
+ * @brief Split input into tokens, Each Arabic word is a token.
+ */
 vector_t<std::string> tokenize_words(string_view_t input);
 
+/**
+ *
+ * @brief Split input into tokens, if they satisfy the input functors, 
+ * the result contains the functor index that made the match, and the corresponding token, -1 if it matches nothing.
+ */
+std::vector<std::pair<int, std::string>>
+tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>& funcs);
+
+/**
+ *
+ * @brief Basic split algorithm, Note: use Pythons builtin split, 
+ * @param keep_delimeters: keep the delimeters that we split on.
+ */
 vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
                             bool keep_delimeters = false);
 
