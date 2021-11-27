@@ -51,6 +51,7 @@ vector_t<string_t> tokenize_words(string_view_t input)
 	return result;
 }
 
+
 std::vector<std::pair<int, std::string>>
 tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>& funcs)
 {

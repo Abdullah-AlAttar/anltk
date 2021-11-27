@@ -66,6 +66,14 @@ TEST_CASE("Mixed with non arabic letters and tashkeel Tokenization")
 		CHECK(expected[i] == arr[i]);
 	}
 }
+std::string trim(std::string s)
+{
+	s.erase(s.begin(),
+	        std::find_if_not(s.begin(), s.end(), [](char c) { return std::isspace(c); }));
+	s.erase(std::find_if_not(s.rbegin(), s.rend(), [](char c) { return std::isspace(c); }).base(),
+	        s.end());
+	return s;
+}
 
 TEST_CASE("tokenize If")
 {
@@ -84,7 +92,7 @@ TEST_CASE("tokenize If")
 		    { [](char32_t c) { return anltk::is_digit(c); }, &anltk::is_arabic_alpha
 
 		    });
-		
+
 		REQUIRE(found == expected);
 	}
 
@@ -141,7 +149,6 @@ TEST_CASE("tokenize If")
 		                         { [](char32_t c) { return anltk::is_tashkeel(c); },
 		                           [](char32_t c) { return anltk::is_arabic_alpha(c); } });
 
-		
 		REQUIRE(found == expected);
 	}
 
@@ -156,7 +163,6 @@ TEST_CASE("tokenize If")
 		                         { [](char32_t c) { return anltk::is_tashkeel(c); },
 		                           [](char32_t c) { return anltk::is_arabic_alpha(c); } });
 
-		
 		REQUIRE(found == expected);
 	}
 	SUBCASE("Empty Functors")
@@ -167,7 +173,6 @@ TEST_CASE("tokenize If")
 
 		std::vector<std::pair<int, std::string>> found = anltk::tokenize_if(input, {});
 
-		
 		REQUIRE(found == expected);
 	}
 
@@ -186,6 +191,28 @@ TEST_CASE("tokenize If")
 		// {
 		// 	std::cout << "{" << i << " , \"" << seq << "\"}," << std::endl;
 		// }
+		REQUIRE(found == expected);
+	}
+	SUBCASE("Tokenize words")
+	{
+		std::vector<std::pair<int, std::string>> tmp = anltk::tokenize_if(
+		    "ال3 بِسْمِ الـله!! ي الرّح3من ال رحيمِ؟", { [](char32_t c) {
+			    return anltk::is_arabic_alpha(c) || anltk::is_tashkeel(c) || anltk::is_TATWEEL(c);
+		    } });
+		std::vector<std::string> expected;
+		for (auto [id, token] : tmp)
+		{
+			token = trim(token);
+			if (token.empty())
+			{
+				continue;
+			}
+			expected.push_back(token);
+		}
+
+		std::vector<std::string> found
+		    = { "ال", "3", "بِسْمِ", "الـله", "!!", "ي", "الرّح", "3", "من", "ال", "رحيمِ", "؟" };
+
 		REQUIRE(found == expected);
 	}
 }
