@@ -33,6 +33,11 @@ anltk_dep = declare_dependency(
 if get_option('build_tests')
   subdir('tests')
 endif
+
+if get_option('build_bin')
+  subdir('bin')
+endif
+
   # subdir('tests')
 
 # Make this library usable from the system's

@@ -10,7 +10,9 @@
 
 namespace anltk
 {
+
 #define NO_DISCARD [[nodiscard]]
+
 enum class CharMapping
 {
 	AR2BW,

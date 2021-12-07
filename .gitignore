@@ -152,3 +152,4 @@ build
 /subprojects/*
 
 !/subprojects/*.wrap
+data
