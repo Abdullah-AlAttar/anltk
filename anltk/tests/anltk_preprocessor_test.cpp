@@ -419,6 +419,46 @@ TEST_CASE("Folding ")
 		REQUIRE(found == " ");
 	}
 
+	SUBCASE("lotta spaces Character")
+	{
+		std::string input = "         \n                      ";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == " ");
+	}
+	SUBCASE("lotta spaces Character")
+	{
+		std::string input = "         t                     ";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == " t ");
+	}
+	SUBCASE("lotta spaces Character")
+	{
+		std::string input = "         t";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == " t");
+	}
+	SUBCASE("lotta spaces Character")
+	{
+		std::string input = "t                     ";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == "t ");
+	}
+	SUBCASE("lotta spaces Character")
+	{
+		std::string input = "t   t    \t\t      t   \n  t   ";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == "t t t t ");
+	}
 	SUBCASE("Basic")
 	{
 		std::string input = "بسم  الله";
@@ -560,6 +600,45 @@ TEST_CASE("Splitting")
 
 		found    = anltk::split(input, ",.", true);
 		expected = { "Is this a real life,", " or it's just a fantasy." };
+
+		REQUIRE(found == expected);
+	}
+}
+
+TEST_CASE("Split On")
+{
+	SUBCASE("Basic")
+	{
+		std::string input = "Is this a real life, or it's just a fantasy wow. Caught in a "
+		                    "landside, No escape from reality really no .";
+
+		std::vector<std::string> found = anltk::split_on(input, ".,", 4);
+		std::vector<std::string> expected
+		    = { "Is this a real life,",  "or it's just ",   "a fantasy wow.",
+			    "Caught in a landside,", "No escape from ", "reality really no ." };
+		std::cout << std::endl;
+		for (auto line : found)
+		{
+			std::cout << '"' << line << "\"," << std::endl;
+		}
+		REQUIRE(found == expected);
+	}
+	SUBCASE("Arabic")
+	{
+		std::string input = "لَكِنَّهُ فِي الْأَخِيرَةِ لَمَّا قَرَنَ بِعَزَّ وَهَانَ شَمِلَ عُرْفًا الْقَلِيلَ وَالْكَثِيرَ أَيْضًا ، وَكَيْفَ "
+		                    "لِلْحَالِ فَشَمِلَ الْحَالَّ وَالْمُؤَجَّلَ ،";
+
+		std::vector<std::string> found = anltk::split_on(input, ",.\"،؟?:", 10);
+		std::cout << std::endl;
+		for (auto line : found)
+		{
+			std::cout << '"' << line << "\"," << std::endl;
+		}
+		std::vector<std::string> expected = {
+			"لَكِنَّهُ فِي الْأَخِيرَةِ لَمَّا قَرَنَ بِعَزَّ وَهَانَ شَمِلَ عُرْفًا الْقَلِيلَ",
+			"وَالْكَثِيرَ أَيْضًا ،",
+			"وَكَيْفَ لِلْحَالِ فَشَمِلَ الْحَالَّ وَالْمُؤَجَّلَ ،",
+		};
 
 		REQUIRE(found == expected);
 	}

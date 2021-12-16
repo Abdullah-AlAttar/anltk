@@ -30,6 +30,10 @@ anltk_dep = declare_dependency(
   dependencies : [utfcpp_dep, utf8proc_dep]
 )
 
+argparse_dep = declare_dependency(
+  include_directories : include_directories('./third_party/argeparse/include')
+)
+
 if get_option('build_tests')
   subdir('tests')
 endif

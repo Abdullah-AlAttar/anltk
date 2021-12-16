@@ -274,6 +274,42 @@ std::vector<char_t> to_vec(string_view_t input)
 	return result;
 }
 
+vector_t<string_t> split(string_view_t input, char_t delimeter, bool keep_delimeters)
+{
+
+	std::vector<string_t> result;
+	std::string part;
+
+	auto start = input.begin();
+	auto end   = input.end();
+
+	while (start < end)
+	{
+		char_t next = utf8::next(start, end);
+
+		if (next == delimeter)
+		{
+			if (keep_delimeters)
+			{
+				utf8::append(next, part);
+			}
+			if (!part.empty())
+			{
+				result.emplace_back(std::move(part));
+			}
+			continue;
+		}
+		utf8::append(next, part);
+	}
+
+	if (!part.empty())
+	{
+		result.emplace_back(std::move(part));
+	}
+
+	return result;
+}
+
 vector_t<string_t> split(string_view_t input, string_view_t delimeters, bool keep_delimeters)
 {
 
@@ -312,5 +348,64 @@ vector_t<string_t> split(string_view_t input, string_view_t delimeters, bool kee
 	return result;
 }
 
+void split_on_impl(string_view_t input, const std::vector<char_t>& delims, int max_word_per_line,
+                   size_t idx, vector_t<std::string>& output)
+{
+
+	if (idx == delims.size())
+	{
+		int counter = 0;
+		size_t prev = 0;
+		for (size_t i = 0; i < input.size(); ++i)
+		{
+			if (std::isspace(input[i]))
+			{
+				counter++;
+			}
+			if (counter == max_word_per_line)
+			{
+				output.emplace_back(
+				    input.substr(std::isspace(input[prev]) ? prev + 1 : prev, i - prev));
+				counter = 0;
+				prev    = i;
+			}
+		}
+		if (prev != input.size() - 1)
+		{
+			output.emplace_back(
+			    input.substr(std::isspace(input[prev]) ? prev + 1 : prev, input.size() - prev));
+		}
+		return;
+	}
+
+	std::vector<std::string> lines = anltk::split(input, delims[idx], true);
+	for (auto&& line : lines)
+	{
+		if (line.empty()
+		    || std::all_of(line.begin(), line.end(), [](char c) { return std::isspace(c); }))
+		{
+			continue;
+		}
+		auto start = std::isspace(line.front()) ? line.begin() + 1 : line.begin();
+		auto end   = std::isspace(line.back()) ? line.end() - 1 : line.end();
+
+		if (std::count(start, end, ' ') > max_word_per_line)
+		{
+			split_on_impl(line, delims, max_word_per_line, idx + 1, output);
+		}
+		else
+		{
+			output.emplace_back(std::isspace(line.front()) ? line.substr(1) : line);
+		}
+	}
+}
+
+vector_t<std::string> split_on(string_view_t input, string_view_t delimeters, int max_word_per_line)
+{
+	std::vector<char_t> delims = to_vec(delimeters);
+	vector_t<std::string> output;
+	split_on_impl(input, delims, max_word_per_line, 0, output);
+	return output;
+}
 
 } // namespace anltk

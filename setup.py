@@ -6,7 +6,7 @@ from pybind11.setup_helpers import Pybind11Extension, build_ext
 
 # Figure out environment for cross-compile
 anltk_source = os.getenv("ANLTK_SOURCE",
-                         os.path.abspath(os.path.dirname(__file__)))
+                         os.path.abspath(os.path.dirname(__file__)))            
 system = os.environ.get('ANLTK_PLATFORM', platform.system())
 
 with open("README.md", "r", encoding='utf-8') as fh:

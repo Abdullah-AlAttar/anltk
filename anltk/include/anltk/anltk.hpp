@@ -204,6 +204,10 @@ NO_DISCARD
 vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
                             bool keep_delimeters = false);
 
+
+NO_DISCARD
+vector_t<std::string> split_on(string_view_t input, string_view_t delimeters, int max_word_per_line);
+
 #ifndef BUILDING_PYBIND11
 
 enum class NormalizeMode
