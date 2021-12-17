@@ -50,7 +50,7 @@ jobs:
         CIBW_SKIP: "cp27*"
     - name: Build C++ with meson
       run : |
-          meson builddir --buildtype=release -Dbuild_tests=false && cd builddir && ninja
+          meson builddir --buildtype=release -Dbuild_tests=false -Dbuild_bin=false && cd builddir && ninja
     
     - uses: pypa/cibuildwheel@v1.12.0
 
