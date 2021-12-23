@@ -133,7 +133,7 @@ NO_DISCARD
 std::string fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func);
 /**
  *
- * @brief Removes consecutive white spaces
+ * @brief Removes consecutive whitespaces, and converts all white-spaces to space ' '
  */
 NO_DISCARD
 std::string fold_white_spaces(string_view_t input);

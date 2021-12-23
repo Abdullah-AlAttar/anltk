@@ -410,6 +410,15 @@ TEST_CASE("Folding ")
 		REQUIRE(found == "ب");
 	}
 
+	SUBCASE("New Lines")
+	{
+		std::string input = "\n\n\n\n";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == " ");
+	}
+
 	SUBCASE("Double Character")
 	{
 		std::string input = "  ";
@@ -419,6 +428,22 @@ TEST_CASE("Folding ")
 		REQUIRE(found == " ");
 	}
 
+	SUBCASE("single Character")
+	{
+		std::string input = "\nt\t";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == " t ");
+	}
+	SUBCASE("single Character")
+	{
+		std::string input = "\n  \t\nt\t\t\t\t\t     \n\n    \t";
+
+		std::string found = anltk::fold_white_spaces(input);
+
+		REQUIRE(found == " t ");
+	}
 	SUBCASE("lotta spaces Character")
 	{
 		std::string input = "         \n                      ";

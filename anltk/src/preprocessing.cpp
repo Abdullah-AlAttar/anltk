@@ -111,13 +111,9 @@ string_t normalize_hamzat(string_view_t input)
 std::string normalize_to_teh(string_view_t input)
 {
 	string_t result;
+
 	auto start = input.begin();
 	auto end   = input.end();
-
-	if (start == end)
-	{
-		return result;
-	}
 
 	while (start < end)
 	{
@@ -176,13 +172,12 @@ string_t duplicate_shadda_letter(string_view_t input)
 string_t fold_if(string_view_t input, const std::function<bool(char_t, char_t)>& func)
 {
 	string_t result;
-	auto start = input.begin();
-	auto end   = input.end();
-
-	if (start == end)
+	if (input.empty())
 	{
 		return result;
 	}
+	auto start = input.begin();
+	auto end   = input.end();
 
 	char_t prev = utf8::next(start, end);
 	utf8::append(prev, result);
@@ -202,11 +197,29 @@ string_t fold_if(string_view_t input, const std::function<bool(char_t, char_t)>&
 
 string_t fold_white_spaces(string_view_t input)
 {
-	return fold_if(input,
-	               [](char_t a, char_t b) {
-		               return std::isspace(static_cast<char>(a))
-		                   && std::isspace(static_cast<char>(b));
-	               });
+
+	string_t result;
+	if (input.empty())
+	{
+		return result;
+	}
+	auto start = input.begin();
+	auto end   = input.end();
+
+	char_t prev = utf8::next(start, end);
+	utf8::append(std::isspace(static_cast<int>(prev)) ? U' ' : prev, result);
+
+	while (start < end)
+	{
+		char_t next = utf8::next(start, end);
+		if (std::isspace(static_cast<char>(prev)) && std::isspace(static_cast<char>(next)))
+		{
+			continue;
+		}
+		utf8::append(std::isspace(static_cast<int>(next)) ? U' ' : next, result);
+		prev = next;
+	}
+	return result;
 }
 
 string_t replace(string_view_t input, std::map<char_t, char_t> chars_map)
@@ -226,7 +239,6 @@ string_t replace(string_view_t input, std::map<char_t, char_t> chars_map)
 template <typename StringT>
 void replace_inplace(StringT& subject, StringT search, StringT replace)
 {
-
 	size_t pos = 0;
 	while ((pos = subject.find(search, pos)) != StringT::npos)
 	{
