@@ -17,10 +17,4 @@ jobs:
     - uses: snickerbockers/submodules-init@v4
     - run: pip install meson ninja
     - run: meson builddir --buildtype=release -Dbuild_tests=true --prefix=/usr/local --libdir=lib && cd builddir && ninja test
-    - uses: actions/upload-artifact@v1
-      if: failure()
-      with:
-        name: Linux_Meson_Testlog
-        path: anltk/builddir/meson-logs/testlog.txt
-
 
