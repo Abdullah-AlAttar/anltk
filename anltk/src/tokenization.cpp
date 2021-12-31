@@ -51,7 +51,6 @@ vector_t<string_t> tokenize_words(string_view_t input)
 	return result;
 }
 
-
 std::vector<std::pair<int, std::string>>
 tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>& funcs)
 {
@@ -92,16 +91,17 @@ tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>&
 		bool done    = false;
 		if (func_idx == -1)
 		{
-			std::string seq = parse_sequence(
-			    next, start, end, done, [&](char_t c) -> bool { return get_nth_match(c) == -1; });
+			std::string seq = parse_sequence(next, start, end, done,
+			                                 [&get_nth_match](char_t c) -> bool
+			                                 { return get_nth_match(c) == -1; });
 			result.push_back({ -1, seq });
 		}
 		else
 		{
 			const auto& func = funcs[func_idx];
 
-			std::string seq
-			    = parse_sequence(next, start, end, done, [&](char_t c) -> bool { return func(c); });
+			std::string seq = parse_sequence(next, start, end, done,
+			                                 [&func](char_t c) -> bool { return func(c); });
 
 			result.push_back({ func_idx, seq });
 		}
