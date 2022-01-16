@@ -53,7 +53,7 @@ TEST_CASE("Stemming")
 	}
 	SUBCASE("Basic")
 	{
-		std::string input = "‫استعمالتها‬";
+		std::string input = "‫استعمالتها";
 
 		std::string found    = anltk::rafal_stem(input);
 		std::string expected = "‫عمل‬";

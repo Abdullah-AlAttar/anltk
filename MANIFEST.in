@@ -6,6 +6,8 @@ recursive-include anltk/include *.h *.hpp
 
 recursive-include subprojects/utfcpp/source *.h
 
+recursive-include subprojects/utf8proc-2.6.0 *.h *c
+
 include README.md
 
 include Features.md 

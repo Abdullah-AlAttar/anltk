@@ -16,17 +16,16 @@ std::string normalize_unicode(const std::string& input, NormalizeMode mode)
 	switch (mode)
 	{
 	case NormalizeMode::NFD:
-		result = (char*)utf8proc_NFD((unsigned char*)input.c_str());
+		result = (char*)utf8proc_NFD((utf8proc_uint8_t*)input.c_str());
 		break;
 	case NormalizeMode::NFC:
-		result = (char*)utf8proc_NFC((unsigned char*)input.c_str());
+		result = (char*)utf8proc_NFC((utf8proc_uint8_t*)input.c_str());
 		break;
-
 	case NormalizeMode::NFKC:
-		result = (char*)utf8proc_NFKC((unsigned char*)input.c_str());
+		result = (char*)utf8proc_NFKC((utf8proc_uint8_t*)input.c_str());
 		break;
 	case NormalizeMode::NFKD:
-		result = (char*)utf8proc_NFKD((unsigned char*)input.c_str());
+		result = (char*)utf8proc_NFKD((utf8proc_uint8_t*)input.c_str());
 		break;
 	default:
 		break;

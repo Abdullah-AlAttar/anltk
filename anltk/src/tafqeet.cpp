@@ -91,26 +91,30 @@ void tafqeet_impl(long long num, std::vector<std::string>& pieces, bool is_ordin
 		return;
 	}
 
+	auto handle_triplet = [&](long long thousands_digits, long long current_multiplier, size_t i)
+	{
+		if (thousands_digits < 3)
+		{
+			std::string next_piece = alaaf[i - 1][thousands_digits];
+			pieces.push_back(is_ordinal ? "ال" + next_piece : next_piece);
+		}
+		else
+		{
+			long long tmp = current_multiplier / 10;
+			tafqeet_impl(thousands_digits, pieces, is_ordinal, is_feminine);
+			pieces.back() += is_between(thousands_digits % tmp, 2, 11) ? " " + alaaf[i - 1][3]
+			                                                           : " " + alaaf[i - 1][1];
+		}
+		tafqeet_impl(num % current_multiplier, pieces, is_ordinal, is_feminine);
+	};
+
 	for (size_t i = 1; i < alaaf_numbers.size(); ++i)
 	{
 		if (num < alaaf_numbers[i])
 		{
 			long long current_multiplier = alaaf_numbers[i - 1];
 			long long thousands_digits   = num / current_multiplier;
-
-			if (thousands_digits < 3)
-			{
-				std::string next_piece = alaaf[i - 1][thousands_digits];
-				pieces.push_back(is_ordinal ? "ال" + next_piece : next_piece);
-			}
-			else
-			{
-				long long tmp = current_multiplier / 10;
-				tafqeet_impl(thousands_digits, pieces, is_ordinal, is_feminine);
-				pieces.back() += is_between(thousands_digits % tmp, 2, 11) ? " " + alaaf[i - 1][3]
-				                                                           : " " + alaaf[i - 1][1];
-			}
-			tafqeet_impl(num % current_multiplier, pieces, is_ordinal, is_feminine);
+			handle_triplet(thousands_digits, current_multiplier, i);
 			return;
 		}
 	}
@@ -118,21 +122,9 @@ void tafqeet_impl(long long num, std::vector<std::string>& pieces, bool is_ordin
 	size_t i                     = alaaf_numbers.size();
 	long long current_multiplier = alaaf_numbers[i - 1];
 	long long thousands_digits   = num / current_multiplier;
+	handle_triplet(thousands_digits, current_multiplier, i);
 
-	if (thousands_digits < 3)
-	{
-		std::string next_piece = alaaf[i - 1][thousands_digits];
-		pieces.push_back(is_ordinal ? "ال" + next_piece : next_piece);
-	}
-	else
-	{
-		long long tmp = current_multiplier / 10;
-
-		tafqeet_impl(thousands_digits, pieces, is_feminine);
-		pieces.back() += is_between(thousands_digits % tmp, 2, 11) ? " " + alaaf[i - 1][3]
-		                                                           : " " + alaaf[i - 1][1];
-	}
-	tafqeet_impl(num % current_multiplier, pieces, is_ordinal, is_feminine);
+	// tafqeet_impl(num % current_multiplier, pieces, is_ordinal, is_feminine);
 }
 
 std::string tafqeet_internal(long long number, bool is_ordinal, bool is_feminine)
@@ -173,6 +165,8 @@ std::string tafqeet_internal(long long number, bool is_ordinal, bool is_feminine
 
 string_t tafqeet(long long number, bool is_ordinal, bool is_feminine)
 {
+	// TODO: Needs importvent, قواعد العدد والمعدود, وزيادة الخيارات,
+	// TODO: Use this as refrence https://github.com/MohsenAlyafei/tafqit
 	return tafqeet_internal(number, is_ordinal, is_feminine);
 }
 
