@@ -23,6 +23,13 @@ test('tafqeet_test', exe)
 
 
 
+exe = executable(
+    'tafqit_test',
+    sources : ['anltk_tafqit_test.cpp', 'doctest_main.cpp'],
+    dependencies : [anltk_dep, doctest_dep]
+)
+
+test('tafqit_test', exe)
 
 exe = executable(
     'anltk_utils_test',

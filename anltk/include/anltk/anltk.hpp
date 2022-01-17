@@ -3,10 +3,10 @@
 
 #include "anltk/anltk_typedefs.h"
 #include "anltk/char_maps.h"
+#include <functional>
 #include <list>
 #include <map>
 #include <vector>
-#include <functional>
 
 namespace anltk
 {
@@ -31,12 +31,30 @@ NO_DISCARD
 std::string transliterate(string_view_t input, CharMapping mapping);
 
 /**
- * @brief Converest given number to spoken arabic form. @n
+ * @brief Converest given number to spoken arabic form. \n
  * @param input number, can be negative or positive
+ * @param is_ordinal bool. default: false, Cardinal vs Ordinal form, eg : واحد vs الأول
+ * @param is_feminine bool. default : false, Generate string for a Feminine subject (أرقام بصيغة
  * @return std::string
  * */
 NO_DISCARD
 std::string tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
+
+struct TafqeetOpts
+{
+	bool is_feminine                  = false;
+	bool use_comma                    = false;
+	bool split_hundred                = false;
+	bool use_miah                     = false;
+	bool use_billion                  = false;
+	bool has_followup_text            = false;
+	bool is_accusative                = false;
+	std::vector<std::string> subjects = {};
+	bool use_legal_form               = false;
+};
+// Ported from https://github.com/MohsenAlyafei/tafqit, check it for full documentation.
+NO_DISCARD
+std::string tafqit(long long Num, TafqeetOpts opts = {});
 /**
  * @brief Removes all tashkeel from the given arabic text,
  * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA,
@@ -204,9 +222,9 @@ NO_DISCARD
 vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
                             bool keep_delimeters = false);
 
-
 NO_DISCARD
-vector_t<std::string> split_on(string_view_t input, string_view_t delimeters, int max_word_per_line);
+vector_t<std::string> split_on(string_view_t input, string_view_t delimeters,
+                               int max_word_per_line);
 
 #ifndef BUILDING_PYBIND11
 
