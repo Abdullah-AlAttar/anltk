@@ -40,7 +40,7 @@ PYBIND11_MODULE(anltk_pybind, m)
             ;
         m.def("tafqit", &anltk::tafqit,
               py::arg("number"),
-              py::arg("opts") = {});
+              py::arg("opts"));
 			  
         py::enum_<anltk::CharMapping>(m, "CharMapping")
             .value("AR2BW", anltk::CharMapping::AR2BW)
