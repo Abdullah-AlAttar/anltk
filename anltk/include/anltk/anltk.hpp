@@ -40,7 +40,7 @@ std::string transliterate(string_view_t input, CharMapping mapping);
 NO_DISCARD
 std::string tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
 
-struct TafqeetOpts
+struct TafqitOptions
 {
 	bool is_feminine                  = false;
 	bool use_comma                    = false;
@@ -54,7 +54,7 @@ struct TafqeetOpts
 };
 // Ported from https://github.com/MohsenAlyafei/tafqit, check it for full documentation.
 NO_DISCARD
-std::string tafqit(long long Num, TafqeetOpts opts = {});
+std::string tafqit(long long number, TafqitOptions opts = {});
 /**
  * @brief Removes all tashkeel from the given arabic text,
  * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA,

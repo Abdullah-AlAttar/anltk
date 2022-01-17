@@ -23,6 +23,41 @@ def tafqeet(num: int,
     """
     return anltk_pybind.tafqeet(num, is_ordinal, is_feminine)
 
+def tafqit(num: int,
+            opts : Dict = {}) -> str:
+    """Converts a number into Arabic spoken form
+    * {is_feminine}     : "on": Generate string for a Feminine subject (أرقام بصيغة المؤنث).
+    *                        The default is the Masculine form.
+    * {use_miah}         : "on": Use Mi'ah for Hundreds (مئة بدل مائة). Default is Ma'ah "مائة".
+    * {use_comma}        : "on": Insert comma between triplet words.
+    * {split_hundred}    : "on": Split number from hundred words (فصل الرقم عن المئة).
+                       i.e. ثلاث مائة. Default "No Split" i.e. (ثلاثمائة).
+    * {use_billion}     : "on": Use Billions (بليون) instead of Miliard (مليار).
+    * {has_followup_text} : "on": Indicates that there will be text to follow the resulting text.
+    *                  This permits proper subject name to be added after the resulting text.
+    * {is_accusative}           : "on": Text is produced in Accusative/Genitive (جر/نصب) case.
+    *                  The default is the Nominative cse (رفع).
+    *
+    * {subjects}       : An optional array holding the Subject Name to be counted in 4 forms as follows:
+    *                  [0] = Deafult Name Singular      (e.g. "كتاب/تفاحة/دينار").
+    *                  [1] = Name for 2's (double)      (e.g. "كتابان/تفاحتان/ديناران").
+    *                  [2] = Name for plural            (e.g. "كتب/تفاحات/دنانير").
+    *                  [3] = Name Singular with Tanween (e.g. "كتابًا/تفاحةً/دينارًا").
+    *                  The subject name will be added to the resulting string in acordance
+    *                  with the number grammar rules.
+    * {use_legal_form}        : "on" Uses the lagal form of output text.
+    """
+    opts_ = anltk_pybind.TafqitOptionsType()
+    opts_.is_feminine = opts.get('is_feminine', False)
+    opts_.use_comma = opts.get('use_comma', False)
+    opts_.split_hundred = opts.get('split_hundred', False)
+    opts_.use_miah = opts.get('use_miah', False)
+    opts_.use_billion = opts.get('use_billion', False)
+    opts_.has_followup_text = opts.get('has_followup_text', False)
+    opts_.is_accusative = opts.get('is_accusative', False)
+    opts_.subjects = opts.get('subjects', [])
+    opts_.use_legal_form = opts.get('use_legal_form', False)
+    return anltk_pybind.tafqit(num, opts_)
 
 def transliterate(text: str, mapping: anltk_pybind.CharMapping) -> str:
     """ Convert between famous characters mapping

@@ -25,7 +25,23 @@ PYBIND11_MODULE(anltk_pybind, m)
               py::arg("num"),
               py::arg("is_ordinal") = false,
               py::arg("is_feminine") = false);
-              
+
+		py::class_<anltk::TafqitOptions>(m, "TafqitOptionsType")
+            .def(py::init<>())
+            .def_readwrite("is_feminine",&anltk::TafqitOptions::is_feminine)
+            .def_readwrite("use_comma",&anltk::TafqitOptions::use_comma)
+            .def_readwrite("split_hundred",&anltk::TafqitOptions::split_hundred)
+            .def_readwrite("use_miah",&anltk::TafqitOptions::use_miah)
+            .def_readwrite("use_billion",&anltk::TafqitOptions::use_billion)
+            .def_readwrite("has_followup_text",&anltk::TafqitOptions::has_followup_text)
+            .def_readwrite("is_accusative",&anltk::TafqitOptions::is_accusative)
+            .def_readwrite("subjects",&anltk::TafqitOptions::subjects)
+            .def_readwrite("use_legal_form",&anltk::TafqitOptions::use_legal_form)
+            ;
+        m.def("tafqit", &anltk::tafqit,
+              py::arg("number"),
+              py::arg("opts") = {});
+			  
         py::enum_<anltk::CharMapping>(m, "CharMapping")
             .value("AR2BW", anltk::CharMapping::AR2BW)
             .value("BW2AR", anltk::CharMapping::BW2AR)
@@ -72,8 +88,7 @@ PYBIND11_MODULE(anltk_pybind, m)
 
 		m.def("tokenize_if", &anltk::tokenize_if, py::arg("input"), py::arg("funcs"));
 
-		
-		m.def(
+				m.def(
 		    "replace",
 		    [](anltk::string_view_t input, const py::dict& chars_map)
 		    {

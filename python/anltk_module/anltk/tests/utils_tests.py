@@ -116,7 +116,7 @@ def test_remove_if():
 
 def test_folding():
     assert anltk.fold_white_spaces(
-        'بسم     الله    الرحمن ال   رحيم\t\t') == 'بسم الله الرحمن ال رحيم\t'
+        'بسم     الله    الرحمن ال   رحيم\t\t') == 'بسم الله الرحمن ال رحيم '
 
 
 def test_splitting():
@@ -177,3 +177,77 @@ def test_tokenize_if():
                                  (1, 'ن'), (0, 'ُ'), (1, 'ون'), (0, 'َ'),
                                  (-1, ' .')
                              ]
+def test_tafqit():
+    opts ={}
+    assert anltk.tafqit(2000, opts) == "ألفان"
+    assert anltk.tafqit(2020, opts) == "ألفان وعشرون"
+    assert anltk.tafqit(15000120, opts) == "خمسة عشر مليونًا ومائة وعشرون"
+    assert anltk.tafqit(0, opts) == "صفر"
+    assert anltk.tafqit(1, opts) == "واحد"
+    assert anltk.tafqit(2, opts) == "اثنان"
+    assert anltk.tafqit(3, opts) == "ثلاثة"
+    assert anltk.tafqit(4, opts) == "أربعة"
+    assert anltk.tafqit(5, opts) == "خمسة"
+    assert anltk.tafqit(6, opts) == "ستة"
+    assert anltk.tafqit(7, opts) == "سبعة"
+    assert anltk.tafqit(8, opts) == "ثمانية"
+    assert anltk.tafqit(9, opts) == "تسعة"  
+    assert anltk.tafqit(10, opts) == "عشرة"
+    assert anltk.tafqit(22, opts) == "اثنان وعشرون"
+    assert anltk.tafqit(30, opts) == "ثلاثون"   
+    assert anltk.tafqit(119, opts) == "مائة وتسعة عشر"
+    assert anltk.tafqit(120, opts) == "مائة وعشرون"
+    assert anltk.tafqit(199, opts) == "مائة وتسعة وتسعون"   
+    assert anltk.tafqit(200, opts) == "مائتان"  
+    assert anltk.tafqit(300, opts) == "ثلاثمائة"
+    assert anltk.tafqit(311, opts) == "ثلاثمائة وأحد عشر"   
+    assert anltk.tafqit(1019, opts) == "ألف وتسعة عشر"
+    assert anltk.tafqit(3019, opts) == "ثلاثة آلاف وتسعة عشر"
+    assert anltk.tafqit(10000, opts) == "عشرة آلاف"
+    assert anltk.tafqit(10500, opts) == "عشرة آلاف وخمسمائة"
+    assert anltk.tafqit(100500, opts) == "مائة ألف وخمسمائة"
+    assert anltk.tafqit(110500, opts) == "مائة وعشرة آلاف وخمسمائة"
+    assert anltk.tafqit(-110500, opts) == "سالب مائة وعشرة آلاف وخمسمائة"
+    assert anltk.tafqit(99999, opts) == "تسعة وتسعون ألفًا وتسعمائة وتسعة وتسعون"
+    assert anltk.tafqit(999999, opts) == "تسعمائة وتسعة وتسعون ألفًا وتسعمائة وتسعة وتسعون"
+    assert anltk.tafqit(1000000000, opts) == "مليار"
+    assert anltk.tafqit(1000000001, opts) == "مليار وواحد"
+    assert anltk.tafqit(10000000000, opts) == "عشرة مليارات"
+    assert anltk.tafqit(1000000000000, opts) == "ترليون"
+    
+    opts['is_feminine'] = True
+    assert anltk.tafqit(2000, opts) == "ألفان"
+    assert anltk.tafqit(2020, opts) == "ألفان وعشرون"
+    assert anltk.tafqit(15000120, opts) == "خمسة عشر مليونًا ومائة وعشرون"
+    assert anltk.tafqit(0, opts) == "صفر"
+    assert anltk.tafqit(1, opts) == "واحدة"
+    assert anltk.tafqit(2, opts) == "اثنتان"
+    assert anltk.tafqit(3, opts) == "ثلاث"
+    assert anltk.tafqit(4, opts) == "أربع"
+    assert anltk.tafqit(5, opts) == "خمس"
+    assert anltk.tafqit(6, opts) == "ست"
+    assert anltk.tafqit(7, opts) == "سبع"
+    assert anltk.tafqit(8, opts) == "ثمان"
+    assert anltk.tafqit(9, opts) == "تسع"   
+    assert anltk.tafqit(10, opts) == "عشر"
+    assert anltk.tafqit(22, opts) == "اثنتان وعشرون"
+    assert anltk.tafqit(30, opts) == "ثلاثون"   
+    assert anltk.tafqit(119, opts) == "مائة وتسع عشرة"
+    assert anltk.tafqit(120, opts) == "مائة وعشرون"
+    assert anltk.tafqit(199, opts) == "مائة وتسع وتسعون"    
+    assert anltk.tafqit(200, opts) == "مائتان"  
+    assert anltk.tafqit(300, opts) == "ثلاثمائة"
+    assert anltk.tafqit(311, opts) == "ثلاثمائة وإحدى عشرة" 
+    assert anltk.tafqit(1019, opts) == "ألف وتسع عشرة"
+    assert anltk.tafqit(3019, opts) == "ثلاثة آلاف وتسع عشرة"
+    assert anltk.tafqit(10000, opts) == "عشرة آلاف"
+    assert anltk.tafqit(10500, opts) == "عشرة آلاف وخمسمائة"
+    assert anltk.tafqit(100500, opts) == "مائة ألف وخمسمائة"
+    assert anltk.tafqit(110500, opts) == "مائة وعشرة آلاف وخمسمائة"
+    assert anltk.tafqit(-110500, opts) == "سالب مائة وعشرة آلاف وخمسمائة"
+    assert anltk.tafqit(99999, opts) == "تسعة وتسعون ألفًا وتسعمائة وتسع وتسعون"
+    assert anltk.tafqit(999999, opts) == "تسعمائة وتسعة وتسعون ألفًا وتسعمائة وتسع وتسعون"
+    assert anltk.tafqit(1000000000, opts) == "مليار"
+    assert anltk.tafqit(1000000001, opts) == "مليار وواحدة"
+    assert anltk.tafqit(10000000000, opts) == "عشرة مليارات"
+    assert anltk.tafqit(1000000000000, opts) == "ترليون"

@@ -5,7 +5,7 @@
 TEST_CASE("Testing new parameters")
 {
 	using namespace std::string_literals;
-	anltk::TafqeetOpts opts;
+	anltk::TafqitOptions opts;
 	SUBCASE("Default")
 	{
 		CHECK(anltk::tafqit(2000, opts) == "ألفان"s);

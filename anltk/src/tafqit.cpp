@@ -53,7 +53,7 @@ const std::vector<std::string> TableMale{ "",    "واحد", "اثنان",  "ث�
 const std::vector<std::string> TableFemale{ "",   "واحدة", "اثنتان", "ثلاث", "أربع", "خمس",
 	                                        "ست", "سبع",   "ثمان",   "تسع",  "عشر" };
 
-std::string tafqit(long long Num, TafqeetOpts opts)
+std::string tafqit(long long Num, TafqitOptions opts)
 {
 	using namespace std::string_literals;
 	if (Num == 0)
