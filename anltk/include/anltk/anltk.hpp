@@ -3,10 +3,10 @@
 
 #include "anltk/anltk_typedefs.h"
 #include "anltk/char_maps.h"
+#include <functional>
 #include <list>
 #include <map>
 #include <vector>
-#include <functional>
 
 namespace anltk
 {
@@ -31,12 +31,38 @@ NO_DISCARD
 std::string transliterate(string_view_t input, CharMapping mapping);
 
 /**
- * @brief Converest given number to spoken arabic form. @n
+ * @brief Converest given number to spoken arabic form. \n
  * @param input number, can be negative or positive
+ * @param is_ordinal bool. default: false, Cardinal vs Ordinal form, eg : واحد vs الأول
+ * @param is_feminine bool. default : false, Generate string for a Feminine subject (أرقام بصيغة
+ * المؤنث).
+ * @param use_miah bool. default : false, Use Mi`ah for Hundreds (مئة بدل مائة). Default is Ma'ah
+ * "مائة".
+ * @param split_hundreds bool. default : false,  Split number from hundred words (فصل الرقم عن
+ * المئة).  \n i.e. ثلاث مائة. Default "No Split" i.e. (ثلاثمائة).
+ * @param use_billions bool . default : false, Use Billions (بليون) instead of Miliard (مليار).
+ * @param use_genitive_form bool . default : false,  Text is produced in Accusative/Genitive
+ * (جر/نصب) case. default is Nominative (رفع)
  * @return std::string
  * */
 NO_DISCARD
 std::string tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
+
+struct TafqeetOpts
+{
+	bool Feminine                    = false;
+	bool Comma                       = false;
+	bool SplitHund                   = false;
+	bool Miah                        = false;
+	bool Billions                    = false;
+	bool TextToFollow                = false;
+	bool AG                          = false;
+	std::vector<std::string> Subject = {};
+	bool Legal                       = false;
+};
+
+NO_DISCARD
+std::string tafqit(long long Num, TafqeetOpts  opts = {});
 /**
  * @brief Removes all tashkeel from the given arabic text,
  * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA,
@@ -204,9 +230,9 @@ NO_DISCARD
 vector_t<std::string> split(string_view_t input, string_view_t delimeters = " ",
                             bool keep_delimeters = false);
 
-
 NO_DISCARD
-vector_t<std::string> split_on(string_view_t input, string_view_t delimeters, int max_word_per_line);
+vector_t<std::string> split_on(string_view_t input, string_view_t delimeters,
+                               int max_word_per_line);
 
 #ifndef BUILDING_PYBIND11
 
