@@ -67,7 +67,7 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 	bool IsLastEffTriplet = false;
 	bool ON               = true; // Flag to test if Option is ON
 
-	bool IsAG                 = (opts.AG == ON); // Option Accusative or Genitive case Grammar?
+	bool IsAG                 = (opts.is_accusative == ON); // Option Accusative or Genitive case Grammar?
 	std::string SpWa          = " و"; // AND word
 	std::string TanweenLetter = "ًا"; // Tanween Fatih for Scale Names above 10
 	std::string Ahad          = "أحد";
@@ -82,15 +82,15 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 	std::string Ethnan  = IsAG ? "اثنين" : "اثنان";
 	std::string Ethnatan = IsAG ? "اثنتين" : "اثنتان"; // Masculine/Feminine 2
 	std::string Woon     = IsAG ? "ين" : "ون"; // Second part of 20's to 90's
-	bool IsSubject       = opts.Subject.size() == 4; // Check for Subject Array Names
+	bool IsSubject       = opts.subjects.size() == 4; // Check for Subject Array Names
 
-	opts.TextToFollow = opts.TextToFollow == ON; // TextToFollow Option Flag
+	opts.has_followup_text = opts.has_followup_text == ON; // TextToFollow Option Flag
 	if (IsSubject)
-		opts.TextToFollow = false; // Disable TextToFollow Option if Subject Option is ON
+		opts.has_followup_text = false; // Disable TextToFollow Option if Subject Option is ON
 	std::string NumIn = std::to_string(Num); // Make numeric string
 	// NumIn = "" + NumIn.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)); // Convert Arabic-Indic
 	// Numbers to Arabic if any
-	std::string MiahStr = (opts.Miah == ON) ? "مئة" : "مائة"; // Select chosen Miah (Hundred) Option
+	std::string MiahStr = (opts.use_miah == ON) ? "مئة" : "مائة"; // Select chosen Miah (Hundred) Option
 
 	std::vector<std::string> TableUnits = TableMale;
 	std::vector<std::string> Table11_19
@@ -112,7 +112,7 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 		std::string Word_100 = "";
 		std::string Word_99  = ""; // Holds words for Hundreds & 0-99
 
-		if (opts.Feminine == ON && Scale.empty())
+		if (opts.is_feminine == ON && Scale.empty())
 		{ // If Feminine, use the Feminine table if no scale
 			TableUnits = TableFemale;
 			Table11_19 = TableFemale; // Create copies of Feminine Table for manipulation
@@ -129,12 +129,12 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 		{ // ---- Do Hundreds (100 to 900)
 			if (Num_100 > 2)
 				Word_100
-				    = TableFemale[Num_100] + (opts.SplitHund == ON ? " " : "") + MiahStr; // 300-900
+				    = TableFemale[Num_100] + (opts.split_hundred == ON ? " " : "") + MiahStr; // 300-900
 			else if (Num_100 == 1)
 				Word_100 = MiahStr; // 100
 			else
 				Word_100 = MiahStr.substr(0, MiahStr.size() - 2)
-				    + (((!Scale.empty() && !Num_99) || opts.TextToFollow)
+				    + (((!Scale.empty() && !Num_99) || opts.has_followup_text)
 				           ? Taa
 				           : Taan); // 200 Use either مئتا or مئتان
 		}
@@ -153,7 +153,7 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 
 		if (!Scale.empty())
 		{ // Add Scale Name if applicable
-			std::string legalTxt = (opts.Legal == ON && Num_99 < 3)
+			std::string legalTxt = (opts.use_legal_form == ON && Num_99 < 3)
 			    ? " " + Scale
 			    : ""; // if Legal Option add Extra Word
 			std::string Word_100Wa
@@ -162,7 +162,7 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 			{
 				Words999 += " " + // Scale for for 3 to 99
 				    (Num_99 > 10 ? Scale
-				             + (IsLastEffTriplet && opts.TextToFollow
+				             + (IsLastEffTriplet && opts.has_followup_text
 				                    ? ""
 				                    : TanweenLetter) // Scale for 11 to 99 (Tanween)
 				                 : ScalePlural); // Scale for 3 to 10 (Plural)
@@ -175,7 +175,7 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 					Words999 = Word_100Wa; // Scale for 1
 				else
 					Words999 = Word_100Wa
-					    + (IsLastEffTriplet && opts.TextToFollow
+					    + (IsLastEffTriplet && opts.has_followup_text
 					           ? Aa
 					           : Aan); // Scale for 2 ألفا or ألفان
 			}
@@ -199,11 +199,11 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 			Scale       = TableScales[ScalePos]; // Get Scale Name
 			ScalePlural = (ScalePos < 4 ? TableScalesP[ScalePos]
 			                            : TableScales[ScalePos] + "ات"); // Make Scale Plural
-			if (opts.Billions && ScalePos == 3)
+			if (opts.use_billion && ScalePos == 3)
 				Scale = "بليون", ScalePlural = "بلايين"; // If Billions Option
 			NumberInWords += oneTripletToWords(); // Convert 1 Triplet to Words
 			if (!IsLastEffTriplet)
-				NumberInWords += (opts.Comma == ON ? "،" : "") + SpWa; // Add "و " and Option Comma
+				NumberInWords += (opts.use_comma == ON ? "،" : "") + SpWa; // Add "و " and Option Comma
 		}
 	}
 	// All done with conversion, Process Subject Name if any
@@ -213,14 +213,14 @@ std::string tafqit(long long Num, TafqeetOpts opts)
 		std::string space = !IsLastEffTriplet ? "" : " "; // Position correct spacing
 		// Triplet = +(Triplet + "").slice(-2); // Get last 2 digits of last Triplet
 		Triplet     = Triplet % 100;
-		SubjectName = space + opts.Subject[0]; // Default Subject Name is at Pos 0
+		SubjectName = space + opts.subjects[0]; // Default Subject Name is at Pos 0
 		if (Triplet > 10)
-			SubjectName = space + opts.Subject[3]; // Subject name with Tanween for 11-99
+			SubjectName = space + opts.subjects[3]; // Subject name with Tanween for 11-99
 		else if (Triplet > 2)
-			SubjectName = space + opts.Subject[2]; // Subject name Plural for 3-10
+			SubjectName = space + opts.subjects[2]; // Subject name Plural for 3-10
 		else if (Triplet > 0)
 			SubjectName
-			    = opts.Subject[Triplet - 1] + " " + TableUnits[Num_99]; // Reverse names for 1 or 2
+			    = opts.subjects[Triplet - 1] + " " + TableUnits[Num_99]; // Reverse names for 1 or 2
 	}
 
 	return (Num < 0 ? "سالب " : "") +  NumberInWords + SubjectName; // All done

@@ -35,14 +35,6 @@ std::string transliterate(string_view_t input, CharMapping mapping);
  * @param input number, can be negative or positive
  * @param is_ordinal bool. default: false, Cardinal vs Ordinal form, eg : واحد vs الأول
  * @param is_feminine bool. default : false, Generate string for a Feminine subject (أرقام بصيغة
- * المؤنث).
- * @param use_miah bool. default : false, Use Mi`ah for Hundreds (مئة بدل مائة). Default is Ma'ah
- * "مائة".
- * @param split_hundreds bool. default : false,  Split number from hundred words (فصل الرقم عن
- * المئة).  \n i.e. ثلاث مائة. Default "No Split" i.e. (ثلاثمائة).
- * @param use_billions bool . default : false, Use Billions (بليون) instead of Miliard (مليار).
- * @param use_genitive_form bool . default : false,  Text is produced in Accusative/Genitive
- * (جر/نصب) case. default is Nominative (رفع)
  * @return std::string
  * */
 NO_DISCARD
@@ -50,19 +42,19 @@ std::string tafqeet(long long number, bool is_ordinal = false, bool is_feminine 
 
 struct TafqeetOpts
 {
-	bool Feminine                    = false;
-	bool Comma                       = false;
-	bool SplitHund                   = false;
-	bool Miah                        = false;
-	bool Billions                    = false;
-	bool TextToFollow                = false;
-	bool AG                          = false;
-	std::vector<std::string> Subject = {};
-	bool Legal                       = false;
+	bool is_feminine                  = false;
+	bool use_comma                    = false;
+	bool split_hundred                = false;
+	bool use_miah                     = false;
+	bool use_billion                  = false;
+	bool has_followup_text            = false;
+	bool is_accusative                = false;
+	std::vector<std::string> subjects = {};
+	bool use_legal_form               = false;
 };
-
+// Ported from https://github.com/MohsenAlyafei/tafqit, check it for full documentation.
 NO_DISCARD
-std::string tafqit(long long Num, TafqeetOpts  opts = {});
+std::string tafqit(long long Num, TafqeetOpts opts = {});
 /**
  * @brief Removes all tashkeel from the given arabic text,
  * the tashkeel list is { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA,
