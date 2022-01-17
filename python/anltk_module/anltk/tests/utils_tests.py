@@ -178,7 +178,7 @@ def test_tokenize_if():
                                  (-1, ' .')
                              ]
 def test_tafqit():
-    opts ={}
+    opts = anltk.TafqitOptions()
     assert anltk.tafqit(2000, opts) == "ألفان"
     assert anltk.tafqit(2020, opts) == "ألفان وعشرون"
     assert anltk.tafqit(15000120, opts) == "خمسة عشر مليونًا ومائة وعشرون"
@@ -215,7 +215,7 @@ def test_tafqit():
     assert anltk.tafqit(10000000000, opts) == "عشرة مليارات"
     assert anltk.tafqit(1000000000000, opts) == "ترليون"
     
-    opts['is_feminine'] = True
+    opts.is_feminine = True
     assert anltk.tafqit(2000, opts) == "ألفان"
     assert anltk.tafqit(2020, opts) == "ألفان وعشرون"
     assert anltk.tafqit(15000120, opts) == "خمسة عشر مليونًا ومائة وعشرون"

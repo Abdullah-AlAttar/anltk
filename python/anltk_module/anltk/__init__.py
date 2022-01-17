@@ -3,6 +3,7 @@ from .version import __version__
 from .anltk import \
     AR2BW, BW2AR, AR2SBW, SBW2AR, \
     tafqeet, \
+    TafqitOptions, \
     tafqit, \
     transliterate, \
     tokenize_words, \

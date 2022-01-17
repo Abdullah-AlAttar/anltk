@@ -1,3 +1,4 @@
+from dataclasses import dataclass, field
 from typing import Callable, Dict, List, Tuple
 import anltk_pybind
 
@@ -23,8 +24,21 @@ def tafqeet(num: int,
     """
     return anltk_pybind.tafqeet(num, is_ordinal, is_feminine)
 
-def tafqit(num: int,
-            opts : Dict = {}) -> str:
+
+@dataclass
+class TafqitOptions:
+    is_feminine: bool = False
+    use_comma: bool = False
+    split_hundred: bool = False
+    use_miah: bool = False
+    use_billion: bool = False
+    has_followup_text: bool = False
+    is_accusative: bool = False
+    subjects: List[str] = field(default_factory=list)
+    use_legal_form: bool = False
+
+
+def tafqit(num: int, opts: TafqitOptions = TafqitOptions()) -> str:
     """Converts a number into Arabic spoken form
     * {is_feminine}     : "on": Generate string for a Feminine subject (أرقام بصيغة المؤنث).
     *                        The default is the Masculine form.
@@ -48,16 +62,17 @@ def tafqit(num: int,
     * {use_legal_form}        : "on" Uses the lagal form of output text.
     """
     opts_ = anltk_pybind.TafqitOptionsType()
-    opts_.is_feminine = opts.get('is_feminine', False)
-    opts_.use_comma = opts.get('use_comma', False)
-    opts_.split_hundred = opts.get('split_hundred', False)
-    opts_.use_miah = opts.get('use_miah', False)
-    opts_.use_billion = opts.get('use_billion', False)
-    opts_.has_followup_text = opts.get('has_followup_text', False)
-    opts_.is_accusative = opts.get('is_accusative', False)
-    opts_.subjects = opts.get('subjects', [])
-    opts_.use_legal_form = opts.get('use_legal_form', False)
+    opts_.is_feminine = opts.is_feminine
+    opts_.use_comma = opts.use_comma
+    opts_.split_hundred = opts.split_hundred
+    opts_.use_miah = opts.use_miah
+    opts_.use_billion = opts.use_billion
+    opts_.has_followup_text = opts.has_followup_text
+    opts_.is_accusative = opts.is_accusative
+    opts_.subjects = opts.subjects
+    opts_.use_legal_form = opts.use_legal_form
     return anltk_pybind.tafqit(num, opts_)
+
 
 def transliterate(text: str, mapping: anltk_pybind.CharMapping) -> str:
     """ Convert between famous characters mapping
@@ -180,5 +195,6 @@ def normalize_to_heh(text: str) -> str:
 def normalize_to_teh(text: str) -> str:
     return anltk_pybind.normalize_to_teh(text)
 
-def tokenize_if(text: str, funcs : List[Callable]) -> List[Tuple[int, str]]:
+
+def tokenize_if(text: str, funcs: List[Callable]) -> List[Tuple[int, str]]:
     return anltk_pybind.tokenize_if(text, funcs)
