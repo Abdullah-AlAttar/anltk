@@ -25,7 +25,7 @@ pip install ninja
 ```
 
 ```bash
-git clone --recurse-submodules https://github.com/Abdullah-AlAttar/anltk.git \
+git clone https://github.com/Abdullah-AlAttar/anltk.git \
     && cd anltk/ \
     && meson build --buildtype=release -Dbuild_tests=false \
     && cd build \
@@ -58,6 +58,10 @@ int main()
     // Third paramters is a stop_list, charactres in this list won't be removed
     std::cout << anltk::remove_non_alpha(text, " ") << '\n';
     // فراشة ملونة تطير في البستان حلوة مهندمة تدهش الإنسان
+
+    anltk::TafqitOptions opts;
+    std::cout<< anltk::tafqit(15000120, opts) <<'\n';
+    // خمسة عشر مليونًا ومائة وعشرون
 }
 
 ```
@@ -76,6 +80,9 @@ print(bw)
 print(anltk.remove_tashkeel("فَرَاشَةٌ مُلَوَّنَةٌ تَطِيْرُ في البُسْتَانِ، حُلْوَةٌ مُهَنْدَمَةٌ تُدْهِشُ الإِنْسَانَ."))
 
 # فراشة ملونة تطير في البستان، حلوة مهندمة تدهش الإنسان.
+
+print(anltk.tafqit(15000120))
+# خمسة عشر مليونًا ومائة وعشرون
 ```
 
 **For list of features see [Features.md](Features.md)**
