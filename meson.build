@@ -15,10 +15,4 @@ if host_system == 'windows' and CXX.get_id() == 'msvc'
 endif
 
 
-
-
-
-# pybind11_dep = dependency('pybind11', fallback : ['pybind11', 'pybind11_dep'])
-
-
 subdir('anltk')

@@ -1,4 +1,5 @@
 ![example workflow](https://github.com/Abdullah-AlAttar/anltk/actions/workflows/c-cpp.yml/badge.svg)
+![example workflow](https://github.com/Abdullah-AlAttar/anltk/actions/workflows/wheels.yml/badge.svg)
 
 # Arabic Natural Language Toolkit (ANLTK)
 
