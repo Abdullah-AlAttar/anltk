@@ -212,11 +212,12 @@ string_t fold_white_spaces(string_view_t input)
 	while (start < end)
 	{
 		char_t next = utf8::next(start, end);
-		if (std::isspace(static_cast<int>(prev)) && std::isspace(static_cast<int>(next)))
+		if (std::isspace(static_cast<char>(prev)) && std::isspace(static_cast<char>(next)))
 		{
 			continue;
 		}
-		utf8::append(std::isspace(static_cast<int>(next)) ? U' ' : next, result); 
+		utf8::append(std::isspace(static_cast<int>(next)) ? U' ' : next, result);
+		prev = next;
 	}
 	return result;
 }
