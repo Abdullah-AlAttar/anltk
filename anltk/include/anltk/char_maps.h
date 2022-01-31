@@ -25,7 +25,7 @@ constexpr char_t KHAH             = U'\u062E'; // خ	 \u062E
 constexpr char_t DAL              = U'\u062F'; // د	 \u062F
 constexpr char_t THAL             = U'\u0630'; // ذ	 \u0630
 constexpr char_t REH              = U'\u0631'; // ر	 \u0631
-constexpr char_t ZAAY             = U'\u0632'; // ز	 \u0632
+constexpr char_t ZAIN             = U'\u0632'; // ز	 \u0632
 constexpr char_t SEEN             = U'\u0633'; // س	 \u0633
 constexpr char_t SHEEN            = U'\u0634'; // ش	 \u0634
 constexpr char_t SAD              = U'\u0635'; // ص	 \u0635
@@ -111,6 +111,7 @@ extern const std::map<char_t, char_t> buckwalter_to_arabic_;
 
 extern const std::map<char_t, char_t> arabic_to_safe_buckwalter_;
 extern const std::map<char_t, char_t> safe_buckwalter_to_arabic_;
+extern const std::map<char_t, std::string> chars_names_;
 
 extern const std::array<char_t, 36> alphabet_;
 

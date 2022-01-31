@@ -207,7 +207,7 @@ string_t fold_white_spaces(string_view_t input)
 	auto end   = input.end();
 
 	char_t prev = utf8::next(start, end);
-	utf8::append(std::isspace(static_cast<int>(prev)) ? U' ' : prev, result);
+	utf8::append(std::isspace(static_cast<char>(prev)) ? U' ' : prev, result);
 
 	while (start < end)
 	{
@@ -216,7 +216,7 @@ string_t fold_white_spaces(string_view_t input)
 		{
 			continue;
 		}
-		utf8::append(std::isspace(static_cast<int>(next)) ? U' ' : next, result);
+		utf8::append(std::isspace(static_cast<char>(next)) ? U' ' : next, result);
 		prev = next;
 	}
 	return result;

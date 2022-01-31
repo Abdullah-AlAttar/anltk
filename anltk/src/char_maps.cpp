@@ -32,7 +32,7 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ DAL              ,	U'd' },
 	{ THAL             ,	U'*' },
 	{ REH              ,	U'r' },
-	{ ZAAY             ,	U'z' },
+	{ ZAIN             ,	U'z' },
 	{ SEEN             ,	U's' },
 	{ SHEEN            ,	U'$' },
 	{ SAD              ,	U'S' },
@@ -88,7 +88,7 @@ const std::map<char_t , char_t> arabic_to_safe_buckwalter_ = {
 	{ DAL              ,	U'd' },
 	{ THAL             ,	U'V' },
 	{ REH              ,	U'r' },
-	{ ZAAY             ,	U'z' },
+	{ ZAIN             ,	U'z' },
 	{ SEEN             ,	U's' },
 	{ SHEEN            ,	U'c' },
 	{ SAD              ,	U'S' },
@@ -145,7 +145,7 @@ const std::array<char_t, 36> alphabet_ = { HAMZA,
 	                                       DAL,
 	                                       THAL,
 	                                       REH,
-	                                       ZAAY,
+	                                       ZAIN,
 	                                       SEEN,
 	                                       SHEEN,
 	                                       SAD,
@@ -177,7 +177,93 @@ extern const std::array<char_t, 14> qamari_
     = { ALEF_NO_HAMZA, BEH, JEEM, HAH, KHAH, AIN, GHAIN, FEH, KAF, QAF, MEEM, HAH, WAW, YEH };
 
 extern const std::array<char_t, 14> shmasi_
-    = { TEH, THEH, DAL, THAL, REH, ZAAY, SEEN, SHEEN, SAD, DAD, TAH, ZAH, LAM, NOON };
+    = { TEH, THEH, DAL, THAL, REH, ZAIN, SEEN, SHEEN, SAD, DAD, TAH, ZAH, LAM, NOON };
+
+extern const std::map<char_t, std::string> chars_names_
+    = { { U'\u0621', "ARABIC LETTER HAMZA" },
+	    { U'\u0622', "ARABIC LETTER ALEF WITH MADDA ABOVE" },
+	    { U'\u0623', "ARABIC LETTER ALEF WITH HAMZA ABOVE" },
+	    { U'\u0624', "ARABIC LETTER WAW WITH HAMZA ABOVE" },
+	    { U'\u0625', "ARABIC LETTER ALEF WITH HAMZA BELOW" },
+	    { U'\u0626', "ARABIC LETTER YEH WITH HAMZA ABOVE" },
+	    { U'\u0627', "ARABIC LETTER ALEF" },
+	    { U'\u0628', "ARABIC LETTER BEH" },
+	    { U'\u0629', "ARABIC LETTER TEH MARBUTA" },
+	    { U'\u062a', "ARABIC LETTER TEH" },
+	    { U'\u062b', "ARABIC LETTER THEH" },
+	    { U'\u062c', "ARABIC LETTER JEEM" },
+	    { U'\u062d', "ARABIC LETTER HAH" },
+	    { U'\u062e', "ARABIC LETTER KHAH" },
+	    { U'\u062f', "ARABIC LETTER DAL" },
+	    { U'\u0630', "ARABIC LETTER THAL" },
+	    { U'\u0631', "ARABIC LETTER REH" },
+	    { U'\u0632', "ARABIC LETTER ZAIN" },
+	    { U'\u0633', "ARABIC LETTER SEEN" },
+	    { U'\u0634', "ARABIC LETTER SHEEN" },
+	    { U'\u0635', "ARABIC LETTER SAD" },
+	    { U'\u0636', "ARABIC LETTER DAD" },
+	    { U'\u0637', "ARABIC LETTER TAH" },
+	    { U'\u0638', "ARABIC LETTER ZAH" },
+	    { U'\u0639', "ARABIC LETTER AIN" },
+	    { U'\u063a', "ARABIC LETTER GHAIN" },
+	    { U'\u0641', "ARABIC LETTER FEH" },
+	    { U'\u0642', "ARABIC LETTER QAF" },
+	    { U'\u0643', "ARABIC LETTER KAF" },
+	    { U'\u0644', "ARABIC LETTER LAM" },
+	    { U'\u0645', "ARABIC LETTER MEEM" },
+	    { U'\u0646', "ARABIC LETTER NOON" },
+	    { U'\u0647', "ARABIC LETTER HEH" },
+	    { U'\u0648', "ARABIC LETTER WAW" },
+	    { U'\u0649', "ARABIC LETTER ALEF MAKSURA" },
+	    { U'\u064a', "ARABIC LETTER YEH" },
+	    { U'\u064b', "ARABIC FATHATAN" },
+	    { U'\u064c', "ARABIC DAMMATAN" },
+	    { U'\u064d', "ARABIC KASRATAN" },
+	    { U'\u064e', "ARABIC FATHA" },
+	    { U'\u064f', "ARABIC DAMMA" },
+	    { U'\u0650', "ARABIC KASRA" },
+	    { U'\u0651', "ARABIC SHADDA" },
+	    { U'\u0652', "ARABIC SUKUN" },
+	    { U'\u0640', "ARABIC TATWEEL" },
+	    { U'\u0670', "ARABIC LETTER SUPERSCRIPT ALEF" },
+	    { U'\u06e5', "ARABIC SMALL WAW" },
+	    { U'\u06e6', "ARABIC SMALL YEH" },
+	    { U'\u0660', "ARABIC-INDIC DIGIT ZERO" },
+	    { U'\u0661', "ARABIC-INDIC DIGIT ONE" },
+	    { U'\u0662', "ARABIC-INDIC DIGIT TWO" },
+	    { U'\u0663', "ARABIC-INDIC DIGIT THREE" },
+	    { U'\u0664', "ARABIC-INDIC DIGIT FOUR" },
+	    { U'\u0665', "ARABIC-INDIC DIGIT FIVE" },
+	    { U'\u0666', "ARABIC-INDIC DIGIT SIX" },
+	    { U'\u0667', "ARABIC-INDIC DIGIT SEVEN" },
+	    { U'\u0668', "ARABIC-INDIC DIGIT EIGHT" },
+	    { U'\u0669', "ARABIC-INDIC DIGIT NINE" },
+	    { U'\u0671', "ARABIC LETTER ALEF WASLA" },
+	    { U'\u067e', "ARABIC LETTER PEH" },
+	    { U'\u067e', "ARABIC LETTER PEH" },
+	    { U'\u06a4', "ARABIC LETTER VEH" },
+	    { U'\u06af', "ARABIC LETTER GAF" },
+	    { U'\u060c', "ARABIC COMMA" },
+	    { U'\u061f', "ARABIC QUESTION MARK" },
+	    { U'\u060b', "AFGHANI SIGN" },
+	    { U'\u003a', "COLON" },
+	    { U'\u0025', "PERCENT SIGN" },
+	    { U'\u0021', "EXCLAMATION MARK" },
+	    { U'\u0028', "LEFT PARENTHESIS" },
+	    { U'\u0029', "RIGHT PARENTHESIS" },
+	    { U'\u002a', "ASTERISK" },
+	    { U'\u002b', "PLUS SIGN" },
+	    { U'\u002f', "SOLIDUS" },
+	    { U'\u002d', "HYPHEN-MINUS" },
+	    { U'\u003d', "EQUALS SIGN" },
+	    { U'\u06f0', "EXTENDED ARABIC-INDIC DIGIT ZERO" } };
+
+std::string char_name(char_t c)
+{
+	auto name = chars_names_.find(c);
+	return name == chars_names_.end() ? "Unknown" : name->second;
+}
+
 
 #define FUNC_IMPL(prefix, name)                                                                    \
 	bool prefix##_##name(char_t c)                                                                 \
@@ -203,7 +289,7 @@ LIFT_IMPL(KHAH)
 LIFT_IMPL(DAL)
 LIFT_IMPL(THAL)
 LIFT_IMPL(REH)
-LIFT_IMPL(ZAAY)
+LIFT_IMPL(ZAIN)
 LIFT_IMPL(SEEN)
 LIFT_IMPL(SHEEN)
 LIFT_IMPL(SAD)

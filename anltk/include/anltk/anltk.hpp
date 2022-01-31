@@ -226,6 +226,8 @@ NO_DISCARD
 vector_t<std::string> split_on(string_view_t input, string_view_t delimeters,
                                int max_word_per_line);
 
+std::string char_name(char_t c);
+
 #ifndef BUILDING_PYBIND11
 
 enum class NormalizeMode
@@ -385,7 +387,7 @@ LIFT_DECL(KHAH)
 LIFT_DECL(DAL)
 LIFT_DECL(THAL)
 LIFT_DECL(REH)
-LIFT_DECL(ZAAY)
+LIFT_DECL(ZAIN)
 LIFT_DECL(SEEN)
 LIFT_DECL(SHEEN)
 LIFT_DECL(SAD)
