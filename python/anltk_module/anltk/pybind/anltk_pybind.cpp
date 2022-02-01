@@ -140,7 +140,7 @@ PYBIND11_MODULE(anltk_pybind, m)
 		constants_m.attr("DAL")              = anltk::DAL;
 		constants_m.attr("THAL")             = anltk::THAL;
 		constants_m.attr("REH")              = anltk::REH;
-		constants_m.attr("ZAAY")             = anltk::ZAAY;
+		constants_m.attr("ZAIN")             = anltk::ZAIN;
 		constants_m.attr("SEEN")             = anltk::SEEN;
 		constants_m.attr("SHEEN")            = anltk::SHEEN;
 		constants_m.attr("SAD")              = anltk::SAD;
