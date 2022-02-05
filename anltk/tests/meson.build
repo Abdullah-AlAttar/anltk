@@ -17,13 +17,14 @@ test_files = [
 ]
 
 foreach test_file : test_files
-    message(test_file.substring(0, -4))
+    target_name = test_file.substring(0, -4)
+    message('Adding ' + target_name)
     exe = executable(
-        test_file.substring(0, -4),
+        target_name,
         sources : [test_file, 'doctest_main.cpp'],
         dependencies : [anltk_dep, doctest_dep]
     )
-    test(test_file.substring(0, -4), exe)
+    test(target_name, exe)
 
 endforeach
 

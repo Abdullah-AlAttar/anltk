@@ -10,23 +10,6 @@ utf8proc_dep = dependency('utf8proc', fallback : ['utf8proc', 'utf8proc_dep'])
 # subdir('./third_party/MemMap')
 
 subdir('src')
-anltk_cpp_args = []
-
-
-anltk_lib = static_library('anltk', 
-  include_directories: include_directories('.', './include' , './src'),
-  sources : anltk_sources,
-  install : true,
-  cpp_args : anltk_cpp_args,
-  gnu_symbol_visibility : 'hidden',
-  dependencies: [utfcpp_dep, utf8proc_dep],
-)
-
-anltk_dep = declare_dependency(
-  include_directories: include_directories('.', './include'),
-  link_with : anltk_lib,
-  dependencies : [utfcpp_dep, utf8proc_dep]
-)
 
 argparse_dep = declare_dependency(
   include_directories : include_directories('./third_party/argeparse/include')

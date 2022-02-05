@@ -24,6 +24,7 @@ string_t transliterate(string_view_t input, CharMapping mapping)
 		break;
 	default:
 		// TODO(abdullah): handle this
+		std::cerr << "transliterate : Unknown CharMapping\n";
 		return {};
 		break;
 	}

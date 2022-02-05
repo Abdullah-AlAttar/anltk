@@ -56,44 +56,47 @@ const std::vector<std::string> TableFemale{ "",   "واحدة", "اثنتان", 
 std::string tafqit(long long Num, TafqitOptions opts)
 {
 	using namespace std::string_literals;
+	using std::string;
+	using std::vector;
+
 	if (Num == 0)
 		return "صفر"; // if 0 or "0" then "zero"
 	// let Triplet, Scale, ScalePos, ScalePlural, TableUnits, Table11_19, NumberInWords = "",
 	// IsLastEffTriplet = false,
 	// Num_99;
 	long long Triplet, ScalePos, Num_99;
-	std::string NumberInWords = "";
-	std::string Scale, ScalePlural;
+	string NumberInWords = "";
+	string Scale, ScalePlural;
 	bool IsLastEffTriplet = false;
 	bool ON               = true; // Flag to test if Option is ON
 
 	bool IsAG                 = (opts.is_accusative == ON); // Option Accusative or Genitive case Grammar?
-	std::string SpWa          = " و"; // AND word
-	std::string TanweenLetter = "ًا"; // Tanween Fatih for Scale Names above 10
-	std::string Ahad          = "أحد";
-	std::string Ehda          = "إحدى"; // Masculine/Feminine 11
+	string SpWa          = " و"; // AND word
+	string TanweenLetter = "ًا"; // Tanween Fatih for Scale Names above 10
+	string Ahad          = "أحد";
+	string Ehda          = "إحدى"; // Masculine/Feminine 11
 	// ---- Setup constants for the AG Option (Accusative/Genitive or Nominative case Grammar)
-	std::string Taa = IsAG ? "تي" : "تا";
-	std::string Taan = IsAG ? "تين" : "تان"; // Hundred 2's مئتا/مائتا مئتان/مائتان
-	std::string Aa = IsAG ? "ي" : "ا";
-	std::string Aan = IsAG ? "ين" : "ان"; // Scale 2's الفا/مليونا الفان/مليونان
-	std::string Ethna   = IsAG ? "اثني" : "اثنا";
-	std::string Ethnata = IsAG ? "اثنتي" : "اثنتا"; // Masculine/Feminine 12 starting word
-	std::string Ethnan  = IsAG ? "اثنين" : "اثنان";
-	std::string Ethnatan = IsAG ? "اثنتين" : "اثنتان"; // Masculine/Feminine 2
-	std::string Woon     = IsAG ? "ين" : "ون"; // Second part of 20's to 90's
+	string Taa = IsAG ? "تي" : "تا";
+	string Taan = IsAG ? "تين" : "تان"; // Hundred 2's مئتا/مائتا مئتان/مائتان
+	string Aa = IsAG ? "ي" : "ا";
+	string Aan = IsAG ? "ين" : "ان"; // Scale 2's الفا/مليونا الفان/مليونان
+	string Ethna   = IsAG ? "اثني" : "اثنا";
+	string Ethnata = IsAG ? "اثنتي" : "اثنتا"; // Masculine/Feminine 12 starting word
+	string Ethnan  = IsAG ? "اثنين" : "اثنان";
+	string Ethnatan = IsAG ? "اثنتين" : "اثنتان"; // Masculine/Feminine 2
+	string Woon     = IsAG ? "ين" : "ون"; // Second part of 20's to 90's
 	bool IsSubject       = opts.subjects.size() == 4; // Check for Subject Array Names
 
 	opts.has_followup_text = opts.has_followup_text == ON; // TextToFollow Option Flag
 	if (IsSubject)
 		opts.has_followup_text = false; // Disable TextToFollow Option if Subject Option is ON
-	std::string NumIn = std::to_string(Num); // Make numeric string
+	string NumIn = std::to_string(Num); // Make numeric string
 	// NumIn = "" + NumIn.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)); // Convert Arabic-Indic
 	// Numbers to Arabic if any
-	std::string MiahStr = (opts.use_miah == ON) ? "مئة" : "مائة"; // Select chosen Miah (Hundred) Option
+	string MiahStr = (opts.use_miah == ON) ? "مئة" : "مائة"; // Select chosen Miah (Hundred) Option
 
-	std::vector<std::string> TableUnits = TableMale;
-	std::vector<std::string> Table11_19
+	vector<string> TableUnits = TableMale;
+	vector<string> Table11_19
 	    = TableMale; // Create copies of Masculine Table for manipulation
 	Table11_19[0] = TableFemale[10]; // Borrow word "عشرة" from Feminine's Table for use in 11-19
 	Table11_19[1] = Ahad; // Masculine starting words for 11
@@ -109,8 +112,8 @@ std::string tafqit(long long Num, TafqitOptions opts)
 		long long Num_100    = (Triplet / 100); // Hundreds (1 digit)
 		long long Num_Unit   = Num_99 % 10; // 0 to 9 (1 digit)
 		long long Num_Tens   = (Num_99 / 10); // Tens   (1 digit)
-		std::string Word_100 = "";
-		std::string Word_99  = ""; // Holds words for Hundreds & 0-99
+		string Word_100 = "";
+		string Word_99  = ""; // Holds words for Hundreds & 0-99
 
 		if (opts.is_feminine == ON && Scale.empty())
 		{ // If Feminine, use the Feminine table if no scale
@@ -148,15 +151,15 @@ std::string tafqit(long long Num, TafqitOptions opts)
 		else if (Num_99 > 2 || !Num_99 || !IsSubject)
 			Word_99 = TableUnits[Num_99]; // 0 or 3-10 (else keep void for 1 &2)
 
-		std::string Words999
+		string Words999
 		    = Word_100 + (Num_100 && Num_99 ? SpWa : "") + Word_99; // Join Hund, Tens, and Units
 
 		if (!Scale.empty())
 		{ // Add Scale Name if applicable
-			std::string legalTxt = (opts.use_legal_form == ON && Num_99 < 3)
+			string legalTxt = (opts.use_legal_form == ON && Num_99 < 3)
 			    ? " " + Scale
 			    : ""; // if Legal Option add Extra Word
-			std::string Word_100Wa
+			string Word_100Wa
 			    = (Num_100 ? Word_100 + legalTxt + SpWa : "") + Scale; // Default Scale Name
 			if (Num_99 > 2)
 			{
@@ -184,12 +187,12 @@ std::string tafqit(long long Num, TafqitOptions opts)
 	};
 
 	// NumIn = "0".repeat(NumIn.length * 2 % 3) + NumIn; // Convert Number to a Triplets String
-	NumIn = std::string(NumIn.size() * 2 % 3, '0') + NumIn; // Convert Number to a Triplets String;
+	NumIn = string(NumIn.size() * 2 % 3, '0') + NumIn; // Convert Number to a Triplets String;
 	size_t NumLen = NumIn.size();
 	for (size_t digits = NumLen; digits > 0; digits -= 3)
 	{ // Loop and convert each Triplet
 		Triplet = std::stoll(NumIn.substr(NumLen - digits, 3)); // Get a Triplet Number
-		std::string lastTriplet = NumIn.substr(NumLen - digits + 3);
+		string lastTriplet = NumIn.substr(NumLen - digits + 3);
 		IsLastEffTriplet        = lastTriplet.empty()
 		    || !std::stoll(lastTriplet); // Determine if Last Effective Triplet
 		if (Triplet)
@@ -207,10 +210,10 @@ std::string tafqit(long long Num, TafqitOptions opts)
 		}
 	}
 	// All done with conversion, Process Subject Name if any
-	std::string SubjectName = "";
+	string SubjectName = "";
 	if (IsSubject)
 	{ // Process Subject Name
-		std::string space = !IsLastEffTriplet ? "" : " "; // Position correct spacing
+		string space = !IsLastEffTriplet ? "" : " "; // Position correct spacing
 		// Triplet = +(Triplet + "").slice(-2); // Get last 2 digits of last Triplet
 		Triplet     = Triplet % 100;
 		SubjectName = space + opts.subjects[0]; // Default Subject Name is at Pos 0
