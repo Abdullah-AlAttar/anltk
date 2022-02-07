@@ -109,19 +109,13 @@ NO_DISCARD
 std::string normalize_hamzat(string_view_t input);
 
 /**
- * @brief Replaces ه with ة
+ * @brief Replaces ه with ة, only at the end of the words
  */
 NO_DISCARD
 std::string normalize_to_teh(string_view_t input);
 
 /**
- * @brief Replaces ه with ة
- */
-NO_DISCARD
-std::string normalize_to_teh(string_view_t input);
-
-/**
- * @brief Replaces ه with ة
+ * @brief Replaces ة with ه
  */
 NO_DISCARD
 std::string normalize_to_heh(string_view_t input);

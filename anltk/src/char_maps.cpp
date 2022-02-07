@@ -1,17 +1,9 @@
 
 #include "anltk/char_maps.h"
+#include <iostream>
 #include <map>
-
 namespace anltk
 {
-
-std::map<char_t, char_t> flip_map(const std::map<char_t, char_t>& other)
-{
-	std::map<char_t, char_t> output;
-	for (const auto& item : other)
-		output[item.second] = item.first;
-	return output;
-}
 
 // clang-format off
 const std::map<char_t , char_t> arabic_to_buckwalter_ = {
@@ -68,7 +60,60 @@ const std::map<char_t , char_t> arabic_to_buckwalter_ = {
 	{ GAF			   , 	U'G' },
  };
 
-const std::map<char_t , char_t> buckwalter_to_arabic_ = flip_map(arabic_to_buckwalter_);
+const std::map<char_t , char_t> buckwalter_to_arabic_ = 
+{
+	{ U'\'' , HAMZA },
+	{ U'|' , ALEF_MADDA },
+	{ U'>' , ALEF_HAMZA_ABOVE },
+	{ U'&' , WAW_HAMZA_ABOVE },
+	{ U'<' , ALEF_HAMZA_BELOW },
+	{ U'}' , YEH_HAMZA_ABOVE },
+	{ U'A' , ALEF_NO_HAMZA },
+	{ U'b' , BEH },
+	{ U'p' , TEH_MARBOOTA },
+	{ U't' , TEH },
+	{ U'v' , THEH },
+	{ U'j' , JEEM },
+	{ U'H' , HAH },
+	{ U'x' , KHAH },
+	{ U'd' , DAL },
+	{ U'*' , THAL },
+	{ U'r' , REH },
+	{ U'z' , ZAIN },
+	{ U's' , SEEN },
+	{ U'$' , SHEEN },
+	{ U'S' , SAD },
+	{ U'D' , DAD },
+	{ U'T' , TAH },
+	{ U'Z' , ZAH },
+	{ U'E' , AIN },
+	{ U'g' , GHAIN },
+	{ U'_' , TATWEEL },
+	{ U'f' , FEH },
+	{ U'q' , QAF },
+	{ U'k' , KAF },
+	{ U'l' , LAM },
+	{ U'm' , MEEM },
+	{ U'n' , NOON },
+	{ U'h' , HEH },
+	{ U'w' , WAW },
+	{ U'Y' , ALEF_MAQSURA },
+	{ U'y' , YEH },
+	{ U'F' , TANWEEN_FATHA },
+	{ U'N' , TANWEEN_DAMMA },
+	{ U'K' , TANWEEN_KASRA },
+	{ U'a' , FATHA },
+	{ U'u' , DAMMA },
+	{ U'i' , KASRA },
+	{ U'~' , SHADDA },
+	{ U'o' , SUKUN },
+	{ U'`' , SMALL_ALEF },
+	{ U'{' , ALEF_WASLA },
+	{ U'P' , PEH },
+	{ U'J' , TCHEH },
+	{ U'V' , VEH },
+	{ U'G' , GAF }
+ };
 
 const std::map<char_t , char_t> arabic_to_safe_buckwalter_ = {
 	{ HAMZA            ,	U'C' } ,
@@ -124,7 +169,61 @@ const std::map<char_t , char_t> arabic_to_safe_buckwalter_ = {
 	{ GAF			   , 	U'G' },
  };
 
-const std::map<char_t, char_t> safe_buckwalter_to_arabic_= flip_map(arabic_to_safe_buckwalter_);
+const std::map<char_t, char_t> safe_buckwalter_to_arabic_= 
+{
+	{ U'C' , HAMZA} ,
+	{ U'M', ALEF_MADDA },
+	{ U'O', ALEF_HAMZA_ABOVE },
+	{ U'W', WAW_HAMZA_ABOVE },
+	{ U'I', ALEF_HAMZA_BELOW },
+	{ U'Q', YEH_HAMZA_ABOVE },
+	{ U'A', ALEF_NO_HAMZA },
+	{ U'b', BEH },
+	{ U'p', TEH_MARBOOTA },
+	{ U't', TEH },
+	{ U'v', THEH },
+	{ U'j', JEEM },
+	{ U'H', HAH },
+	{ U'x', KHAH },
+	{ U'd', DAL },
+	{ U'V', THAL },
+	{ U'r', REH },
+	{ U'z', ZAIN },
+	{ U's', SEEN },
+	{ U'c', SHEEN },
+	{ U'S', SAD },
+	{ U'D', DAD },
+	{ U'T', TAH },
+	{ U'Z', ZAH },
+	{ U'E', AIN },
+	{ U'g', GHAIN },
+	{ U'_', TATWEEL },
+	{ U'f', FEH },
+	{ U'q', QAF },
+	{ U'k', KAF },
+	{ U'l', LAM },
+	{ U'm', MEEM },
+	{ U'n', NOON },
+	{ U'h', HEH },
+	{ U'w', WAW },
+	{ U'Y', ALEF_MAQSURA },
+	{ U'y', YEH },
+	{ U'F', TANWEEN_FATHA },
+	{ U'N', TANWEEN_DAMMA },
+	{ U'K', TANWEEN_KASRA },
+	{ U'a', FATHA },
+	{ U'u', DAMMA },
+	{ U'i', KASRA },
+	{ U'~', SHADDA },
+	{ U'o', SUKUN },
+	{ U'e', SMALL_ALEF },
+	{ U'L', ALEF_WASLA },
+	{ U'P', PEH },
+	{ U'J', TCHEH },
+	{ U'B', VEH },
+	{ U'G', GAF },
+ };
+
 
 // clang-format on
 
@@ -263,7 +362,6 @@ std::string char_name(char_t c)
 	auto name = chars_names_.find(c);
 	return name == chars_names_.end() ? "Unknown" : name->second;
 }
-
 
 #define FUNC_IMPL(prefix, name)                                                                    \
 	bool prefix##_##name(char_t c)                                                                 \
