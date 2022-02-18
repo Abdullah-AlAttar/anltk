@@ -30,7 +30,18 @@ string_t remove_non_alpha(string_view_t input, string_view_t stop_list)
 		                          == stop_list_.end();
 	                      });
 }
+std::string remove_non_alpha_and_tashkeel(string_view_t input, string_view_t stop_list)
+{
+	std::u32string stop_list_ = to_32string(stop_list);
 
+	return anltk_erase_if(input,
+	                      [&](char_t c)
+	                      {
+		                      return std::find(stop_list_.begin(), stop_list_.end(), c)
+		                          == stop_list_.end()
+		                          && !anltk::is_arabic_alpha(c) && !anltk::is_tashkeel(c);
+	                      });
+}
 string_t remove_non_alphanumeric(string_view_t input, string_view_t stop_list)
 {
 

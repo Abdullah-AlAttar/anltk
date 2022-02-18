@@ -70,6 +70,9 @@ PYBIND11_MODULE(anltk_pybind, m)
 		m.def("remove_non_alpha", &anltk::remove_non_alpha, py::arg("input"), py::arg("stop_list"));
 		m.def("remove_non_alphanumeric", &anltk::remove_non_alphanumeric, py::arg("input"),
 		      py::arg("stop_list"));
+		m.def("remove_non_alpha_and_tashkeel", &anltk::remove_non_alpha_and_tashkeel,
+		      py::arg("input"), py::arg("stop_list"));
+
 		m.def("remove_non_alphanumeric_and_tashkeel", &anltk::remove_non_alphanumeric_and_tashkeel,
 		      py::arg("input"), py::arg("stop_list"));
 		m.def("remove_kasheeda", &anltk::remove_kasheeda, py::arg("input"));

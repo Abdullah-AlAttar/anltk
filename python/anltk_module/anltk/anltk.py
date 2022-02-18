@@ -136,6 +136,9 @@ def remove_small(text: str) -> str:
 def remove_non_alpha(text: str, stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alpha(text, stop_list)
 
+def remove_non_alpha_and_tashkeel(text: str, stop_list: str = ' ') -> str:
+    return anltk_pybind.remove_non_alpha_and_tashkeel(text, stop_list)
+
 
 def remove_non_alphanumeric(text: str, stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alphanumeric(text, stop_list)

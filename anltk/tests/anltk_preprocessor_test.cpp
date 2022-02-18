@@ -65,6 +65,36 @@ TEST_CASE("Presprocessor Remove non alpha")
 	}
 }
 
+TEST_CASE("Presprocessor Remove non alpha and tashkeel")
+{
+	using namespace std::string_literals;
+
+	SUBCASE("Empty")
+	{
+		std::string input = "";
+		REQUIRE(anltk::remove_non_alpha_and_tashkeel(input, " ") == ""s);
+	}
+
+	SUBCASE("Basic")
+	{
+		std::string input = "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ";
+		REQUIRE(anltk::remove_non_alpha_and_tashkeel(input, " ") == "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ"s);
+	}
+
+	SUBCASE("Mixed with non arabic ")
+	{
+		std::string input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+
+		REQUIRE(anltk::remove_non_alpha_and_tashkeel(input, " ") == "وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ"s);
+	}
+	SUBCASE("Remove multi speartor")
+	{
+		std::string input = "وَلَاd !!!!أَنتُمْsdf 32عَابِدُونَ مَا أَعْبُدُ";
+
+		REQUIRE(anltk::remove_non_alpha_and_tashkeel(input, " !")
+		        == "وَلَا !!!!أَنتُمْ عَابِدُونَ مَا أَعْبُدُ"s);
+	}
+}
 TEST_CASE("Presprocessor Remove non alphanmeric")
 {
 	using namespace std::string_literals;

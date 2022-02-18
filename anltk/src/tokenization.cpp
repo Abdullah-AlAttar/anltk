@@ -110,7 +110,6 @@ tokenize_if(string_view_t input, const std::vector<std::function<bool(char_t)>>&
 			string_t last;
 			utf8::append(next, last);
 			func_idx = get_nth_match(next);
-
 			result.push_back({ func_idx, last });
 		}
 	}

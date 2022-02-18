@@ -77,6 +77,16 @@ std::string remove_small(string_view_t input);
  */
 NO_DISCARD
 std::string remove_non_alpha(string_view_t input, string_view_t stop_list);
+
+/**
+ * @brief Removes non alphapet 28 characters plus tashkeel from the given arabic text
+ * @param input
+ * @param stop_list strings containing list of characters that won't be removed. each one should be
+ * a single character
+ */
+NO_DISCARD
+std::string remove_non_alpha_and_tashkeel(string_view_t input, string_view_t stop_list);
+
 /**
  * @brief Removes non alphapet 28 characters from the given arabic text plus 9 digits(both Indic and
  * English)

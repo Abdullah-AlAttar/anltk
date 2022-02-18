@@ -16,6 +16,7 @@ from .anltk import \
     remove_tashkeel, \
     remove_small, \
     remove_non_alpha, \
+    remove_non_alpha_and_tashkeel, \
     remove_non_alphanumeric, \
     remove_non_alphanumeric_and_tashkeel, \
     remove_kasheeda, \
