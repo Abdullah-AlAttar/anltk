@@ -2,10 +2,10 @@
 
 ## Convert numbers into spoken form (تفقيط) :
 ```python
-anltk.tafqeet(1934)
-# 'ألف و تسعمئة و أربعة و ثلاثون'
-anltk.tafqeet(1934, is_ordinal=True)
-# 'الألف و التسعمئة و الرابع و الثلاثون'
+anltk.tafqit(1934)
+# 'ألف وتسعمائة وأربعة وثلاثون'
+anltk.tafqit(1934, anltk.TafqitOptions(is_feminine=True))
+# 'ألف وتسعمائة وأربع وثلاثون'
 ```
 
 ## Transliteration. converting between Characters Mapping

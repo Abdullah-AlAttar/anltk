@@ -360,7 +360,7 @@ extern const std::map<char_t, std::string> chars_names_
 std::string char_name(char_t c)
 {
 	auto name = chars_names_.find(c);
-	return name == chars_names_.end() ? "Unknown" : name->second;
+	return name == chars_names_.end() ? "<unk>" : name->second;
 }
 
 #define FUNC_IMPL(prefix, name)                                                                    \

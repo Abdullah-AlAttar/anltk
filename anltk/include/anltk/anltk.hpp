@@ -38,6 +38,7 @@ std::string transliterate(string_view_t input, CharMapping mapping);
  * @return std::string
  * */
 NO_DISCARD
+[[deprecated("Replaced by tafqit, will be removed soon")]]
 std::string tafqeet(long long number, bool is_ordinal = false, bool is_feminine = false);
 
 struct TafqitOptions
