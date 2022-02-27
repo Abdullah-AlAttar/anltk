@@ -14,6 +14,7 @@ test_files = [
     'anltk_transliterator_test.cpp',
     'anltk_unicode_normalization_test.cpp',
     'anltk_utils_test.cpp',
+    'anltk_string_utils_test.cpp'
 ]
 
 foreach test_file : test_files
