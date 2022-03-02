@@ -43,6 +43,6 @@ int main(int argc, char** argv)
 	                  [](const fs::path& filename) { process_file(filename); });
 
 	executor.run(taskflow).get();
-	
+
 	return 0;
 }

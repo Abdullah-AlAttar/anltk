@@ -1,13 +1,13 @@
 
 
 #include "anltk/anltk.hpp"
-
+#include "anltk/anltk_string_utils.h"
 #include "doctest.h"
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 TEST_CASE("Empty")
 {
@@ -66,14 +66,6 @@ TEST_CASE("Mixed with non arabic letters and tashkeel Tokenization")
 	{
 		CHECK(expected[i] == arr[i]);
 	}
-}
-std::string trim(std::string s)
-{
-	s.erase(s.begin(),
-	        std::find_if_not(s.begin(), s.end(), [](char c) { return std::isspace(c); }));
-	s.erase(std::find_if_not(s.rbegin(), s.rend(), [](char c) { return std::isspace(c); }).base(),
-	        s.end());
-	return s;
 }
 
 TEST_CASE("tokenize If")
@@ -203,7 +195,7 @@ TEST_CASE("tokenize If")
 		std::vector<std::string> expected;
 		for (auto [id, token] : tmp)
 		{
-			token = trim(token);
+			anltk::trim(token);
 			if (token.empty())
 			{
 				continue;

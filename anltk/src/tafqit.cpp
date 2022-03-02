@@ -229,4 +229,3 @@ std::string tafqit(long long Num, TafqitOptions opts)
 	return (Num < 0 ? "سالب " : "") +  NumberInWords + SubjectName; // All done
 }
 } // namespace anltk
-// console.log(tafqit(60))
