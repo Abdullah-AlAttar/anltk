@@ -1,4 +1,3 @@
-from dataclasses import dataclass, field
 from typing import Callable, Dict, List, Tuple
 import anltk_pybind
 
@@ -25,17 +24,28 @@ def tafqeet(num: int,
     return anltk_pybind.tafqeet(num, is_ordinal, is_feminine)
 
 
-@dataclass
 class TafqitOptions:
-    is_feminine: bool = False
-    use_comma: bool = False
-    split_hundred: bool = False
-    use_miah: bool = False
-    use_billion: bool = False
-    has_followup_text: bool = False
-    is_accusative: bool = False
-    subjects: List[str] = field(default_factory=list)
-    use_legal_form: bool = False
+
+    def __init__(self,
+                 is_feminine: bool = False,
+                 use_comma: bool = False,
+                 split_hundred: bool = False,
+                 use_miah: bool = False,
+                 use_billion: bool = False,
+                 has_followup_text: bool = False,
+                 is_accusative: bool = False,
+                 subjects: List[str] = [],
+                 use_legal_form: bool = False) -> None:
+
+        self.is_feminine = is_feminine
+        self.use_comma = use_comma
+        self.split_hundred = split_hundred
+        self.use_miah = use_miah
+        self.use_billion = use_billion
+        self.has_followup_text = has_followup_text
+        self.is_accusative = is_accusative
+        self.subjects = subjects
+        self.use_legal_form = use_legal_form
 
 
 def tafqit(num: int, opts: TafqitOptions = TafqitOptions()) -> str:
@@ -135,6 +145,7 @@ def remove_small(text: str) -> str:
 
 def remove_non_alpha(text: str, stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alpha(text, stop_list)
+
 
 def remove_non_alpha_and_tashkeel(text: str, stop_list: str = ' ') -> str:
     return anltk_pybind.remove_non_alpha_and_tashkeel(text, stop_list)
