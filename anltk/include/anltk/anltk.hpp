@@ -259,7 +259,7 @@ class Harf
 	Harf* m_next     = nullptr;
 
 public:
-	Harf(char32_t c);
+	explicit Harf(char32_t c);
 
 	static Harf create(char_t c);
 
@@ -304,7 +304,7 @@ private:
 	std::string m_text;
 
 public:
-	Kalima(anltk::string_view_t text);
+	explicit Kalima(anltk::string_view_t text);
 
 	iterator_t begin();
 
@@ -347,7 +347,7 @@ private:
 	std::string m_text;
 
 public:
-	Jumla(anltk::string_view_t text);
+	explicit Jumla(anltk::string_view_t text);
 
 	Kalima* first();
 
