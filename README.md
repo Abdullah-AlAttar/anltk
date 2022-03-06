@@ -1,6 +1,7 @@
 ![example workflow](https://github.com/Abdullah-AlAttar/anltk/actions/workflows/c-cpp.yml/badge.svg)
 ![example workflow](https://github.com/Abdullah-AlAttar/anltk/actions/workflows/wheels.yml/badge.svg)
-
+[![PyPI version](https://badge.fury.io/py/anltk.svg)](https://badge.fury.io/py/anltk)
+[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
 # Arabic Natural Language Toolkit (ANLTK)
 
 ANLTK is a set of Arabic natural language processing tools. developed with focus on performance.
