@@ -222,5 +222,8 @@ TEST_CASE("Testing new parameters")
 		opts.use_legal_form = true;
 		CHECK(anltk::tafqit(101000, opts) == "مائة ألف وألف"s);
 		CHECK(anltk::tafqit(102010, opts) == "مائة ألف وألفان وعشرة"s);
+		opts.use_legal_form = false;
+		CHECK(anltk::tafqit(101000, opts) == "مائة وألف"s);
+		CHECK(anltk::tafqit(102010, opts) == "مائة وألفان وعشرة"s);
 	}
 }
