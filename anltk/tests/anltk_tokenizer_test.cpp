@@ -190,7 +190,7 @@ TEST_CASE("tokenize If")
 	{
 		std::vector<std::pair<int, std::string>> tmp = anltk::tokenize_if(
 		    "ال3 بِسْمِ الـله!! ي الرّح3من ال رحيمِ؟", { [](char32_t c) {
-			    return anltk::is_arabic_alpha(c) || anltk::is_tashkeel(c) || anltk::is_TATWEEL(c);
+			    return anltk::is_arabic_alpha(c) || anltk::is_tashkeel(c) || c == anltk::TATWEEL ;
 		    } });
 		std::vector<std::string> expected;
 		for (auto [id, token] : tmp)
