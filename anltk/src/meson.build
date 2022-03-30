@@ -9,12 +9,12 @@ anltk_sources = files([
     'tokenization.cpp',
     'jumla.cpp',
     # 'stemming.cpp',
-    'unicode_normalization.cpp'
+    'unicode_normalization.cpp',
+    'noise.cpp'
 ])
 
 
 anltk_cpp_args = []
-
 
 anltk_lib = static_library('anltk', 
   include_directories: include_directories('.', '../include'),

@@ -4,25 +4,6 @@ import anltk_pybind
 from anltk_pybind import AR2BW, BW2AR, AR2SBW, SBW2AR
 
 
-def tafqeet(num: int,
-            is_ordinal: bool = False,
-            is_feminine: bool = False) -> str:
-    """Converts a number into Arabic spoken form
-
-    Args:
-        num (int): input number
-        is_ordinal (bool, optional): الأول if True, واحد if false. Defaults to False.
-        is_feminine (bool, optional): الخامسة if True, الخامس if False. Defaults to False.
-
-    Returns:
-        [str]
-    Example: 
-        `anltk.tafqeet(1934)  ` \n
-        `'ألف و تسعمئة و أربعة و ثلاثون'` 
-
-    """
-    return anltk_pybind.tafqeet(num, is_ordinal, is_feminine)
-
 
 class TafqitOptions:
 
@@ -212,3 +193,18 @@ def normalize_to_teh(text: str) -> str:
 
 def tokenize_if(text: str, funcs: List[Callable]) -> List[Tuple[int, str]]:
     return anltk_pybind.tokenize_if(text, funcs)
+
+
+class NoiseGenerator:
+
+    def __init__(self) -> None:
+        self.ng = anltk_pybind.NoiseGenerator() # Default random seed
+
+    def set_seed(self, seed: int):
+        self.ng.set_seed(seed)
+
+    def swap_adjacent_chars(self, text: str, n: int = 1) -> str:
+        return self.ng.swap_adjacent_chars(text, n)
+
+    def insert_random_chars(self, text: str, n: int = 1) -> str:
+        return self.ng.insert_random_chars(text, n)

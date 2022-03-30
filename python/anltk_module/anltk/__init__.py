@@ -2,7 +2,6 @@ from . import constants
 from .version import __version__
 from .anltk import \
     AR2BW, BW2AR, AR2SBW, SBW2AR, \
-    tafqeet, \
     TafqitOptions, \
     tafqit, \
     transliterate, \
@@ -31,4 +30,5 @@ from .anltk import \
     replace_if, \
     normalize_to_heh, \
     normalize_to_teh, \
-    tokenize_if
+    tokenize_if, \
+    NoiseGenerator

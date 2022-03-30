@@ -121,6 +121,13 @@ PYBIND11_MODULE(anltk_pybind, m)
 
 		m.def("replace_if", &anltk::replace_if, py::arg("input"), py::arg("func"),
 		      py::arg("replacement"));
+
+		py::class_<anltk::NoiseGenerator>(m, "NoiseGenerator")
+			.def(py::init<>())
+		    .def("insert_random_chars", &anltk::NoiseGenerator::insert_random_chars, py::arg("input"),
+		         py::arg("n"))
+		    .def("swap_adjacent_chars", &anltk::NoiseGenerator::swap_adjacent_chars, py::arg("input"),
+		         py::arg("n"));
 	}
 
 	{
@@ -168,9 +175,9 @@ PYBIND11_MODULE(anltk_pybind, m)
 		constants_m.attr("VEH")              = anltk::VEH;
 		constants_m.attr("GAF")              = anltk::GAF;
 		constants_m.attr("TATWEEL")          = anltk::TATWEEL;
-		constants_m.attr("TANWEEN_FATHA")    = anltk::TANWEEN_FATHA;
-		constants_m.attr("TANWEEN_DAMMA")    = anltk::TANWEEN_DAMMA;
-		constants_m.attr("TANWEEN_KASRA")    = anltk::TANWEEN_KASRA;
+		constants_m.attr("FATHATAN")         = anltk::FATHATAN;
+		constants_m.attr("DAMMATAN")         = anltk::DAMMATAN;
+		constants_m.attr("KASRATAN")         = anltk::KASRATAN;
 		constants_m.attr("FATHA")            = anltk::FATHA;
 		constants_m.attr("DAMMA")            = anltk::DAMMA;
 		constants_m.attr("KASRA")            = anltk::KASRA;

@@ -14,3 +14,9 @@ exe = executable(
     sources : ['balance_lines.cpp'],
     dependencies : [anltk_dep, argparse_dep, taskflow_dep, dependency('threads')]
 )
+
+exe = executable(
+    'corrupt',
+    sources : ['corrupt.cpp'],
+    dependencies : [anltk_dep]
+)

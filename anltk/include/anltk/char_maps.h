@@ -45,7 +45,10 @@ constexpr char_t WAW              = U'\u0648'; // و	 \u0648
 constexpr char_t ALEF_MAQSURA     = U'\u0649'; // ى	 \u0649
 constexpr char_t YEH              = U'\u064A'; // ي	 \u064A
 
+
 // extras
+// not an alpha
+constexpr char_t TATWEEL    = U'\u0640'; // ـ \u0640
 constexpr char_t ALEF_WASLA = U'\u0671'; // ٱ  \u0671
 constexpr char_t PEH        = U'\u067E'; // پ  \u067E
 constexpr char_t TCHEH      = U'\u067E'; // چ  \u0686
@@ -63,10 +66,9 @@ constexpr char_t GAF        = U'\u06AF'; // گ  \u06AF
 // \u0670	ٰ
 
 // harakat
-constexpr char_t TATWEEL       = U'\u0640'; // 	ـ \u0640
-constexpr char_t TANWEEN_FATHA = U'\u064b'; // 	ً  \u064B
-constexpr char_t TANWEEN_DAMMA = U'\u064c'; // 	ٌ  \u064C
-constexpr char_t TANWEEN_KASRA = U'\u064d'; // 	ٍ  \u064D
+constexpr char_t FATHATAN = U'\u064b'; // 	ً  \u064B
+constexpr char_t DAMMATAN = U'\u064c'; // 	ٌ  \u064C
+constexpr char_t KASRATAN = U'\u064d'; // 	ٍ  \u064D
 constexpr char_t FATHA         = U'\u064e'; // 	َ  \u064E
 constexpr char_t DAMMA         = U'\u064f'; // 	ُ  \u064F
 constexpr char_t KASRA         = U'\u0650'; // 	ِ  \u0650
@@ -108,7 +110,7 @@ constexpr char_t SMALL_YEH  = U'\u06E6';
 
 extern const std::map<char_t, char_t> arabic_to_buckwalter_;
 
-extern const  std::map<char_t, char_t> buckwalter_to_arabic_;
+extern const std::map<char_t, char_t> buckwalter_to_arabic_;
 
 extern const std::map<char_t, char_t> arabic_to_safe_buckwalter_;
 
@@ -155,7 +157,7 @@ const constexpr std::array<char_t, 36> alphabet_ =
 };
 
 const constexpr std::array<char_t, 8> tashkeel_list_
-    = { TANWEEN_FATHA, TANWEEN_DAMMA, TANWEEN_KASRA, FATHA, DAMMA, KASRA, SHADDA, SUKUN };
+    = { FATHATAN, DAMMATAN, KASRATAN, FATHA, DAMMA, KASRA, SHADDA, SUKUN };
 
 const constexpr std::array<char_t, 3> small_list_ = { SMALL_ALEF, SMALL_WAW, SMALL_YEH };
 const constexpr std::array<char_t, 10> arqam_

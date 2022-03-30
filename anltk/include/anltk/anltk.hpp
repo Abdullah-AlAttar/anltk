@@ -7,7 +7,9 @@
 #include <list>
 #include <map>
 #include <vector>
-
+#include <random>
+// TODO: Remove this
+#include <iostream>
 namespace anltk
 {
 
@@ -247,6 +249,23 @@ std::string normalize_unicode(const std::string& input, NormalizeMode mode);
 
 #endif
 
+
+class NoiseGenerator
+{
+public:
+	NoiseGenerator();
+	std::string swap_adjacent_chars(anltk::string_view_t input, size_t n = 1);
+	std::string insert_random_chars(anltk::string_view_t input, size_t n = 1);
+	std::string remove_random_chars(anltk::string_view_t input, size_t n = 1);
+
+	void set_seed(int seed);
+
+private:
+	
+	std::random_device rd;
+	std::mt19937 gen;
+};
+
 class Harf;
 class Kalima;
 class Jumla;
@@ -417,9 +436,9 @@ LIFT_DECL(TCHEH)
 LIFT_DECL(VEH)
 LIFT_DECL(GAF)
 LIFT_DECL(TATWEEL)
-LIFT_DECL(TANWEEN_FATHA)
-LIFT_DECL(TANWEEN_DAMMA)
-LIFT_DECL(TANWEEN_KASRA)
+LIFT_DECL(FATHATAN)
+LIFT_DECL(DAMMATAN)
+LIFT_DECL(KASRATAN)
 LIFT_DECL(FATHA)
 LIFT_DECL(DAMMA)
 LIFT_DECL(KASRA)

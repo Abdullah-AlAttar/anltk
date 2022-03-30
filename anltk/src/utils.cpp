@@ -33,17 +33,17 @@ bool is_digit(char_t c)
 
 bool is_indic_digit(char_t c)
 {
-	return std::find(arqam_.begin(), arqam_.end(), c) != arqam_.end();
+	return c >= SEFR && c <=TES3A;
 }
 
 bool is_tashkeel(char_t c)
 {
-	return std::find(tashkeel_list_.begin(), tashkeel_list_.end(), c) != tashkeel_list_.end();
+	return c >= FATHATAN && c <= SUKUN;
 }
 
 bool is_arabic_alpha(char_t c)
 {
-	return std::find(alphabet_.begin(), alphabet_.end(), c) != alphabet_.end();
+	return c != TATWEEL && (c >= HAMZA && c <= YEH);
 }
 
 bool is_small(char_t c)
@@ -72,8 +72,7 @@ bool is_valid_kalima(string_view_t input)
 	}
 
 	if (!std::all_of(text.begin(), text.end(),
-	                [](char32_t c)
-	                { return anltk::is_arabic_alpha(c) || anltk::is_tashkeel(c); }))
+	                 [](char32_t c) { return anltk::is_arabic_alpha(c) || anltk::is_tashkeel(c); }))
 	{
 		return false;
 	}
