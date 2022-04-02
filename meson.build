@@ -1,6 +1,6 @@
 project('anltk', 'c', 'cpp',
   version : '0.1',
-  default_options : ['warning_level=3', 'cpp_std=c++20'])
+  default_options : ['warning_level=3', 'cpp_std=c++17'])
 
 
 host_system = host_machine.system()

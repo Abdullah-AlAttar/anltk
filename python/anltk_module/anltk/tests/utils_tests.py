@@ -259,3 +259,5 @@ def test_noise():
     assert gen.swap_adjacent_chars('صوت صفير البلبل') == 'صوت فصير البلبل'
     assert gen.remove_random_chars('صوت صفير البلبل') == 'صوت صفير البلل'
     assert gen.replace_random_chars('صوت صفير البلبل') == 'صوت صفير ءلبلبل'
+    assert gen.join_random_words('صوت صفير البلبل') == 'صوت صفيرالبلبل'
+    assert gen.swap_random_words('صوت صفير البلبل') == 'صفير صوت البلبل'

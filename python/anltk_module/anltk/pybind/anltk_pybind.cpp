@@ -132,6 +132,10 @@ PYBIND11_MODULE(anltk_pybind, m)
 		    .def("remove_random_chars", &anltk::NoiseGenerator::remove_random_chars,
 		         py::arg("input"), py::arg("n"))
 		    .def("replace_random_chars", &anltk::NoiseGenerator::replace_random_chars,
+		         py::arg("input"), py::arg("n"))
+		    .def("join_random_words", &anltk::NoiseGenerator::join_random_words,
+		         py::arg("input"), py::arg("n"))
+		    .def("swap_random_words", &anltk::NoiseGenerator::swap_random_words,
 		         py::arg("input"), py::arg("n"));
 	}
 

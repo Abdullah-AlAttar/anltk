@@ -6,8 +6,8 @@
 #include <functional>
 #include <list>
 #include <map>
-#include <vector>
 #include <random>
+#include <vector>
 // TODO: Remove this
 #include <iostream>
 namespace anltk
@@ -249,20 +249,19 @@ std::string normalize_unicode(const std::string& input, NormalizeMode mode);
 
 #endif
 
-
 class NoiseGenerator
 {
 public:
 	NoiseGenerator();
-	std::string swap_adjacent_chars(anltk::string_view_t input, size_t n = 1);
-	std::string insert_random_chars(anltk::string_view_t input, size_t n = 1);
-	std::string remove_random_chars(anltk::string_view_t input, size_t n = 1);
-	std::string replace_random_chars(anltk::string_view_t input, size_t n = 1);
-
+	std::string swap_adjacent_chars(string_view_t input, size_t n = 1);
+	std::string insert_random_chars(string_view_t input, size_t n = 1);
+	std::string remove_random_chars(string_view_t input, size_t n = 1);
+	std::string replace_random_chars(string_view_t input, size_t n = 1);
+	std::string join_random_words(string_view_t input, size_t n = 1);
+	std::string swap_random_words(string_view_t input, size_t n = 1);
 	void set_seed(int seed);
 
 private:
-	
 	std::random_device rd;
 	std::mt19937 gen;
 };

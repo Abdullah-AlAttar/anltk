@@ -214,3 +214,9 @@ class NoiseGenerator:
 
     def replace_random_chars(self, text:str, n : int = 1) -> str:
         return self.ng.replace_random_chars(text, n)
+
+    def join_random_words(self, text:str, n : int = 1) -> str:
+        return self.ng.join_random_words(text, n)
+    
+    def swap_random_words(self, text:str, n : int = 1) -> str:
+        return self.ng.swap_random_words(text, n) 
