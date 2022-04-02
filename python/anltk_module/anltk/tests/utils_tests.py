@@ -70,9 +70,7 @@ def test_tokenize():
     ]
 
 
-def test_tafqeet():
 
-    assert anltk.tafqeet(394) == 'ثلاثمئة و أربعة و تسعون'
 
 
 def test_transliterate():
@@ -251,3 +249,13 @@ def test_tafqit():
     assert anltk.tafqit(1000000001, opts) == "مليار وواحدة"
     assert anltk.tafqit(10000000000, opts) == "عشرة مليارات"
     assert anltk.tafqit(1000000000000, opts) == "ترليون"
+    
+    
+def test_noise():
+    gen = anltk.NoiseGenerator()
+    gen.set_seed(3)
+    
+    assert gen.insert_random_chars('صوت صفير البلبل') == 'صوت صشفير البلبل'
+    assert gen.swap_adjacent_chars('صوت صفير البلبل') == 'صوت فصير البلبل'
+    assert gen.remove_random_chars('صوت صفير البلبل') == 'صوت صفير البلل'
+    assert gen.replace_random_chars('صوت صفير البلبل') == 'صوت صفير ءلبلبل'

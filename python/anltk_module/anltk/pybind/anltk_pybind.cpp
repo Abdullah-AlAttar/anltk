@@ -123,11 +123,16 @@ PYBIND11_MODULE(anltk_pybind, m)
 		      py::arg("replacement"));
 
 		py::class_<anltk::NoiseGenerator>(m, "NoiseGenerator")
-			.def(py::init<>())
-		    .def("insert_random_chars", &anltk::NoiseGenerator::insert_random_chars, py::arg("input"),
-		         py::arg("n"))
-		    .def("swap_adjacent_chars", &anltk::NoiseGenerator::swap_adjacent_chars, py::arg("input"),
-		         py::arg("n"));
+		    .def(py::init<>())
+			.def("set_seed", &anltk::NoiseGenerator::set_seed, py::arg("seed"))
+		    .def("insert_random_chars", &anltk::NoiseGenerator::insert_random_chars,
+		         py::arg("input"), py::arg("n"))
+		    .def("swap_adjacent_chars", &anltk::NoiseGenerator::swap_adjacent_chars,
+		         py::arg("input"), py::arg("n"))
+		    .def("remove_random_chars", &anltk::NoiseGenerator::remove_random_chars,
+		         py::arg("input"), py::arg("n"))
+		    .def("replace_random_chars", &anltk::NoiseGenerator::replace_random_chars,
+		         py::arg("input"), py::arg("n"));
 	}
 
 	{

@@ -257,6 +257,7 @@ public:
 	std::string swap_adjacent_chars(anltk::string_view_t input, size_t n = 1);
 	std::string insert_random_chars(anltk::string_view_t input, size_t n = 1);
 	std::string remove_random_chars(anltk::string_view_t input, size_t n = 1);
+	std::string replace_random_chars(anltk::string_view_t input, size_t n = 1);
 
 	void set_seed(int seed);
 

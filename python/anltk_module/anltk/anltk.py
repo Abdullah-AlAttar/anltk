@@ -208,3 +208,9 @@ class NoiseGenerator:
 
     def insert_random_chars(self, text: str, n: int = 1) -> str:
         return self.ng.insert_random_chars(text, n)
+    
+    def remove_random_chars(self, text:str, n : int = 1) -> str:
+        return self.ng.remove_random_chars(text, n)
+
+    def replace_random_chars(self, text:str, n : int = 1) -> str:
+        return self.ng.replace_random_chars(text, n)

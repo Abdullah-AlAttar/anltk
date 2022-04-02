@@ -13,9 +13,10 @@ int main(int argc, char* argv[])
 	while (std::getline(ifs, line))
 	{
 		std::string corrupted = anltk::remove_tashkeel(line);
-
 		corrupted = n_gen.swap_adjacent_chars(corrupted, 5);
 		corrupted = n_gen.insert_random_chars(corrupted, 5);
+		corrupted = n_gen.remove_random_chars(corrupted, 5);
+		corrupted = n_gen.replace_random_chars(corrupted,5);
 		ofs << corrupted << '\n';
 	}
 }

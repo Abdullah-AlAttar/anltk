@@ -9,7 +9,6 @@ NoiseGenerator::NoiseGenerator()
 {
 	auto seed = rd();
 	gen.seed(seed);
-	std::srand(seed);
 }
 
 bool _has_adjacent_ar_chars(const std::u32string& inp)
@@ -26,8 +25,26 @@ bool _has_adjacent_ar_chars(const std::u32string& inp)
 	return has_adjacent_ar_chars;
 }
 
+std::vector<size_t> _get_ar_chars_indices(const std::u32string& inp)
+{
+	std::vector<size_t> indices;
+
+	for (size_t i = 0; i < inp.size(); i++)
+	{
+		if (is_arabic_alpha(inp[i]))
+		{
+			indices.push_back(i);
+		}
+	}
+	return indices;
+}
 std::string NoiseGenerator::swap_adjacent_chars(anltk::string_view_t input, size_t n)
 {
+	if (n == 0)
+	{
+		return std::string(input.begin(), input.end());
+	}
+
 	std::u32string inp = anltk::to_32string(input);
 	size_t len         = inp.size();
 	if (len < 2)
@@ -42,11 +59,11 @@ std::string NoiseGenerator::swap_adjacent_chars(anltk::string_view_t input, size
 
 	for (size_t i = 0; i < n; i++)
 	{
-		size_t pos = (std::rand() % len) - 1;
+		size_t pos = (this->gen() % len) - 1;
 
 		while (!(is_arabic_alpha(inp[pos]) && is_arabic_alpha(inp[pos + 1])))
 		{
-			pos = (std::rand() % len) - 1;
+			pos = (this->gen() % len) - 1;
 		}
 		std::swap(inp[pos], inp[pos + 1]);
 	}
@@ -56,18 +73,14 @@ std::string NoiseGenerator::swap_adjacent_chars(anltk::string_view_t input, size
 
 std::string NoiseGenerator::insert_random_chars(anltk::string_view_t input, size_t n)
 {
+	if (n == 0)
+	{
+		return std::string(input.begin(), input.end());
+	}
 	std::u32string inp = anltk::to_32string(input);
 	size_t len         = inp.size();
 
-	std::vector<size_t> indices;
-
-	for (size_t i = 0; i < len; i++)
-	{
-		if (is_arabic_alpha(inp[i]))
-		{
-			indices.push_back(i);
-		}
-	}
+	std::vector<size_t> indices = _get_ar_chars_indices(inp);
 
 	std::shuffle(indices.begin(), indices.end(), this->gen);
 
@@ -99,42 +112,66 @@ std::string NoiseGenerator::insert_random_chars(anltk::string_view_t input, size
 
 std::string NoiseGenerator::remove_random_chars(anltk::string_view_t input, size_t n)
 {
+	if (n == 0)
+	{
+		return std::string(input.begin(), input.end());
+	}
+
 	std::u32string inp = anltk::to_32string(input);
 	size_t len         = inp.size();
 
-	std::vector<size_t> indices;
-
-	for (size_t i = 0; i < len; i++)
-	{
-		if (is_arabic_alpha(inp[i]))
-		{
-			indices.push_back(i);
-		}
-	}
+	std::vector<size_t> indices = _get_ar_chars_indices(inp);
 
 	std::shuffle(indices.begin(), indices.end(), this->gen);
 
-	std::sort(indices.begin(), indices.begin() + std::min(n, indices.size()));
+	size_t limit = std::min(n, indices.size());
 
-	auto start = inp.begin();
-	auto end   = inp.end();
-
-	size_t del_idx = 0, random_idx = 0;
+	std::sort(indices.begin(), indices.begin() + limit);
 
 	std::string result;
 
-	while (start < end)
+	for (size_t i = 0, del_i = 0; i < len; ++i)
 	{
-
-		if (random_idx < n && del_idx == indices[random_idx])
+		if (del_i < limit && i == indices[del_i])
 		{
-			random_idx++;
+			del_i++;
 			continue;
 		}
-		utf8::append(*start, result);
+		utf8::append(inp[i], result);
+	}
 
-		del_idx++;
-		start++;
+	return result;
+}
+
+std::string NoiseGenerator::replace_random_chars(anltk::string_view_t input, size_t n)
+{
+	if (n == 0)
+	{
+		return std::string(input.begin(), input.end());
+	}
+
+	std::u32string inp = anltk::to_32string(input);
+	size_t len         = inp.size();
+
+	std::vector<size_t> indices = _get_ar_chars_indices(inp);
+
+	std::shuffle(indices.begin(), indices.end(), this->gen);
+
+	size_t limit = std::min(n, indices.size());
+
+	std::sort(indices.begin(), indices.begin() + limit);
+
+	std::string result;
+
+	for (size_t i = 0, repl_i = 0; i < len; ++i)
+	{
+		if (repl_i < limit && i == indices[repl_i])
+		{
+			repl_i++;
+			utf8::append(alphabet_[this->gen() % alphabet_.size()], result);
+			continue;
+		}
+		utf8::append(inp[i], result);
 	}
 
 	return result;
@@ -142,7 +179,6 @@ std::string NoiseGenerator::remove_random_chars(anltk::string_view_t input, size
 
 void NoiseGenerator::set_seed(int seed)
 {
-	std::srand(seed);
 	this->gen.seed(seed);
 }
 } // namespace anltk
