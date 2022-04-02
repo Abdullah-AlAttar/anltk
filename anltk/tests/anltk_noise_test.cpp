@@ -118,7 +118,7 @@ TEST_CASE("Swap Words")
 
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 1) == "صوتف البلبل صفير");
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 1) == "البلبل صفير صوتف");
-	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 2) == "صفير البلبل صوتف ");
+	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 2) == "صفير البلبل صوتف");
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 5) == "البلبل صفير صوتف");
 
 
