@@ -16,5 +16,5 @@ jobs:
         python-version: '3.x'
     - uses: snickerbockers/submodules-init@v4
     - run: pip install meson ninja
-    - run: meson builddir --buildtype=release -Dbuild_tests=true --prefix=/usr/local --libdir=lib && cd builddir && ninja test
+    - run: meson builddir --buildtype=release -Dbuild_tests=true --prefix=/usr/local --libdir=lib && cd builddir && ninja test && cd .. && pip install -e .
 

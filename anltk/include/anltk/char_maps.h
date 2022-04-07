@@ -66,9 +66,9 @@ constexpr char_t GAF        = U'\u06AF'; // گ  \u06AF
 // \u0670	ٰ
 
 // harakat
-constexpr char_t FATHATAN = U'\u064b'; // 	ً  \u064B
-constexpr char_t DAMMATAN = U'\u064c'; // 	ٌ  \u064C
-constexpr char_t KASRATAN = U'\u064d'; // 	ٍ  \u064D
+constexpr char_t FATHATAN      = U'\u064b'; // 	ً  \u064B
+constexpr char_t DAMMATAN      = U'\u064c'; // 	ٌ  \u064C
+constexpr char_t KASRATAN      = U'\u064d'; // 	ٍ  \u064D
 constexpr char_t FATHA         = U'\u064e'; // 	َ  \u064E
 constexpr char_t DAMMA         = U'\u064f'; // 	ُ  \u064F
 constexpr char_t KASRA         = U'\u0650'; // 	ِ  \u0650

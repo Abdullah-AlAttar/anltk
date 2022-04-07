@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
 # Arabic Natural Language Toolkit (ANLTK)
 
-ANLTK is a set of Arabic natural language processing tools. developed with focus on performance.
+ANLTK is a set of Arabic natural language processing tools. developed with focus on simplicity and performance.
 
 ## ANLTK is a C++ library, with python bindings.
 
@@ -33,7 +33,7 @@ git clone https://github.com/Abdullah-AlAttar/anltk.git \
     && cd build \
     && ninja \
     && cd ../ \
-    && python3 setup.py install
+    && pip install -e .
 ```
 
 ## Usage Examples:
