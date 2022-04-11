@@ -153,3 +153,4 @@ build
 
 !/subprojects/*.wrap
 data
+fuzz_build

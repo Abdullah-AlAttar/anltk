@@ -1,6 +1,5 @@
 #include "anltk/anltk.hpp"
 #include "doctest.h"
-#include <random>
 #include <iostream>
 
 TEST_CASE("Swap Chars")
@@ -23,7 +22,6 @@ TEST_CASE("Swap Chars")
 
 TEST_CASE("Chars Insertion")
 {
-	// std::srand(42);
 	anltk::NoiseGenerator n_gen;
 	n_gen.set_seed(1);
 	CHECK(n_gen.insert_random_chars("له") == "لهش");
@@ -37,14 +35,10 @@ TEST_CASE("Chars Insertion")
 	CHECK(n_gen.insert_random_chars("هل يمكن", 2) == "هل يثمكحن");
 	CHECK(n_gen.insert_random_chars("هل يمكن", 3) == "هول يآمكند");
 	CHECK(n_gen.insert_random_chars("هل يمكن", 5) == "هنلد يبمظكطن");
-
-	// CHECK(n_gen.insert_random_chars("لا يجب علينا أن نذهب", 5)
-	//       == "لا يجب علءيعنا أنف نرذهبء");
 }
 
 TEST_CASE("Chars Removal")
 {
-	// std::srand(42);
 	anltk::NoiseGenerator n_gen;
 	n_gen.set_seed(1);
 	CHECK(n_gen.remove_random_chars("له") == "ل");
@@ -57,15 +51,10 @@ TEST_CASE("Chars Removal")
 	CHECK(n_gen.remove_random_chars("صوت صفير البلبل", 3) == "وت صفير للبل");
 	CHECK(n_gen.remove_random_chars("صوت صفير البلبل", 3) == "صوت في البلب");
 	CHECK(n_gen.remove_random_chars("صوت صفير البلبل", 3) == "صو صير لبلبل");
-
-	// CHECK(n_gen.insert_random_chars("لا يجب علينا أن نذهب", 5)
-	//       == "لا يجب علءيعنا أنف نرذهبء");
 }
-
 
 TEST_CASE("Chars Replace")
 {
-	// std::srand(42);
 	anltk::NoiseGenerator n_gen;
 	n_gen.set_seed(1);
 	CHECK(n_gen.replace_random_chars("له") == "لظ");
@@ -80,46 +69,37 @@ TEST_CASE("Chars Replace")
 	CHECK(n_gen.replace_random_chars("صوت صفير البلبل", 3) == "صصت صفيأ الولبل");
 	CHECK(n_gen.replace_random_chars("له", 0) == "له");
 	CHECK(n_gen.replace_random_chars("wow", 2) == "wow"); // WIll not replace non arab
-
-	// CHECK(n_gen.insert_random_chars("لا يجب علينا أن نذهب", 5)
-	//       == "لا يجب علءيعنا أنف نرذهبء");
 }
-
 
 TEST_CASE("Join Words")
 {
-	// std::srand(42);
 	anltk::NoiseGenerator n_gen;
 	n_gen.set_seed(1);
 	CHECK(n_gen.join_random_words("له") == "له");
 	CHECK(n_gen.join_random_words("له", 2) == "له");
 	CHECK(n_gen.join_random_words("له", 3) == "له");
 
-
 	CHECK(n_gen.join_random_words("صوتف صفير البلبل", 1) == "صوتف صفيرالبلبل");
 	CHECK(n_gen.join_random_words("صوتف صفير البلبل", 1) == "صوتفصفير البلبل");
 	CHECK(n_gen.join_random_words("صوتف صفير البلبل", 2) == "صوتفصفيرالبلبل");
 	CHECK(n_gen.join_random_words("صوتف صفير البلبل", 5) == "صوتفصفيرالبلبل");
-
-
 }
-
-
 
 TEST_CASE("Swap Words")
 {
-	// std::srand(42);
 	anltk::NoiseGenerator n_gen;
 	n_gen.set_seed(1);
 	CHECK(n_gen.swap_random_words("له") == "له");
 	CHECK(n_gen.swap_random_words("له", 2) == "له");
 	CHECK(n_gen.swap_random_words("له", 3) == "له");
 
-
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 1) == "صوتف البلبل صفير");
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 1) == "البلبل صفير صوتف");
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 2) == "صفير البلبل صوتف");
 	CHECK(n_gen.swap_random_words("صوتف صفير البلبل", 5) == "البلبل صفير صوتف");
 
-
+	CHECK(n_gen.swap_random_words("واحد اثنان", 1) == "اثنان واحد");
+	CHECK(n_gen.swap_random_words("واحد اثنان", 2) == "واحد اثنان");
+	CHECK(n_gen.swap_random_words("واحد اثنان", 3) == "اثنان واحد");
+	CHECK(n_gen.swap_random_words("واحد اثنان", 4) == "واحد اثنان");
 }
