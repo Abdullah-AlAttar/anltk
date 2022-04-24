@@ -1,2 +1,3 @@
 option('build_tests', type : 'boolean', value : true)
-option('build_bin', type : 'boolean', value : true)
+option('build_bin', type : 'boolean', value : false)
+option('build_fuzz', type : 'boolean', value : false)

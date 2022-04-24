@@ -23,7 +23,9 @@ if get_option('build_bin')
   subdir('bin')
 endif
 
-subdir('fuzz_test')
+if get_option('build_fuzz')
+  subdir('fuzz_test')
+endif
 
 # Make this library usable from the system's
 # package manager.
