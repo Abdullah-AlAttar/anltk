@@ -2,7 +2,6 @@
 #include "anltk/anltk_algorithm.h"
 
 #include <algorithm>
-#include <iostream>
 #include <vector>
 
 namespace anltk

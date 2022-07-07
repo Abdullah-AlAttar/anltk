@@ -1,8 +1,6 @@
 #include "anltk/anltk.hpp"
 #include "utf8.h"
 #include <iostream>
-// #include <tinyutf8/tinyutf8.h>
-
 namespace anltk
 {
 string_t transliterate(string_view_t input, CharMapping mapping)

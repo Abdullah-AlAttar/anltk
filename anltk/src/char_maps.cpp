@@ -1,6 +1,5 @@
 
 #include "anltk/char_maps.h"
-#include <iostream>
 #include <map>
 namespace anltk
 {
