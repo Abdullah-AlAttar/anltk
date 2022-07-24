@@ -216,7 +216,7 @@ std::string NoiseGenerator::swap_random_words(string_view_t input, size_t n)
 		return std::string(input.begin(), input.end());
 	}
 	std::vector<std::string> words = split(input);
-	
+
 	size_t words_len = words.size();
 
 	if (words_len <= 1)
@@ -228,8 +228,9 @@ std::string NoiseGenerator::swap_random_words(string_view_t input, size_t n)
 		std::uniform_int_distribution<> distr(start, end);
 		int a = distr(this->gen);
 		int b = distr(this->gen);
-		while(a == b) b = distr(this->gen);
-		return std::pair{a, b};
+		while (a == b)
+			b = distr(this->gen);
+		return std::pair{ a, b };
 	};
 	using std::swap;
 
@@ -238,14 +239,13 @@ std::string NoiseGenerator::swap_random_words(string_view_t input, size_t n)
 		auto [a, b] = get_two_random_numbers(0, words_len - 1);
 		swap(words[a], words[b]);
 	}
-	
+
 	std::string res = words[0];
-	for(size_t i = 1; i <words_len; ++i)
+	for (size_t i = 1; i < words_len; ++i)
 	{
 		res += " " + words[i];
 	}
 	return res;
-
 }
 void NoiseGenerator::set_seed(int seed)
 {

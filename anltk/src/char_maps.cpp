@@ -3,7 +3,7 @@
 #include <map>
 namespace anltk
 {
-
+// clang-format off
 const std::map<char_t, char_t> arabic_to_buckwalter_= 
 {
 	{ HAMZA            ,	U'\'' } ,
@@ -157,9 +157,9 @@ const std::map<char_t, char_t> arabic_to_safe_buckwalter_ =
 	{ WAW              ,	U'w' },
 	{ ALEF_MAQSURA     ,	U'Y' },
 	{ YEH 			   ,	U'y' },
-	{ FATHATAN    ,	U'F' },
-	{ DAMMATAN    ,	U'N' },
-	{ KASRATAN    ,	U'K' },
+	{ FATHATAN         ,	U'F' },
+	{ DAMMATAN         ,	U'N' },
+	{ KASRATAN         ,	U'K' },
 	{ FATHA            ,	U'a' },
 	{ DAMMA            ,	U'u' },
 	{ KASRA            ,	U'i' },
@@ -316,5 +316,5 @@ std::string char_name(char_t c)
 	auto name = chars_names_.find(c);
 	return name == chars_names_.end() ? "<unk>" : name->second;
 }
-
+// clang-format on
 } // namespace anltk

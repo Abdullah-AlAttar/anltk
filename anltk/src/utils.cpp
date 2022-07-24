@@ -33,7 +33,7 @@ bool is_digit(char_t c)
 
 bool is_indic_digit(char_t c)
 {
-	return c >= SEFR && c <=TES3A;
+	return c >= SEFR && c <= TES3A;
 }
 
 bool is_tashkeel(char_t c)
