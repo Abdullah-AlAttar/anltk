@@ -11,12 +11,11 @@ TEST_CASE("Swap Chars")
 	CHECK(n_gen.swap_adjacent_chars("ل") == "ل");
 	CHECK(n_gen.swap_adjacent_chars("") == "");
 
-	CHECK(n_gen.swap_adjacent_chars("هل يمكن") == "هل ميكن");
-	CHECK(n_gen.swap_adjacent_chars("لا يجب علينا أن نذهب") == "لا يجب لعينا أن نذهب");
-
-	CHECK(n_gen.swap_adjacent_chars("هل يمكن", 2) == "هل ينمك");
-	CHECK(n_gen.swap_adjacent_chars("هل يمكن", 3) == "هل منيك");
-	CHECK(n_gen.swap_adjacent_chars("هل يمكن", 5) == "له مينك");
+	CHECK(n_gen.swap_adjacent_chars("هل يمكن") == "هل يمنك" ); 
+	CHECK(n_gen.swap_adjacent_chars("لا يجب علينا أن نذهب") == "لا يجب عيلنا أن نذهب");
+	CHECK(n_gen.swap_adjacent_chars("هل يمكن", 2) == "هل يمكن");
+	CHECK(n_gen.swap_adjacent_chars("هل يمكن أن", 3) == "له ميكن نأ");
+	CHECK(n_gen.swap_adjacent_chars("هل يمكن", 5) == "هل كينم");
 	CHECK(n_gen.swap_adjacent_chars("له", 2) == "له");
 }
 

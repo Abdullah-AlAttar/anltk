@@ -61,11 +61,11 @@ std::string NoiseGenerator::swap_adjacent_chars(anltk::string_view_t input, size
 	for (size_t i = 0; i < n; i++)
 	{
 		int rnd_num = this->gen();
-		int pos = (rnd_num % len);
-		std::cout<< rnd_num << " :: " << pos <<std::endl;
+		int pos     = (rnd_num % (len - 1));
+		// std::cout<< rnd_num << " :: " << pos <<std::endl;
 		while (!(is_arabic_alpha(inp[pos]) && is_arabic_alpha(inp[pos + 1])))
 		{
-			pos = (this->gen() % len) - 1;
+			pos = (this->gen() % (len-1));
 		}
 		std::swap(inp[pos], inp[pos + 1]);
 	}
