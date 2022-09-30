@@ -1,5 +1,6 @@
 #include "anltk/anltk.hpp"
-#include "doctest.h"
+#include "doctest_include.h"
+
 
 TEST_CASE("Jumla")
 {

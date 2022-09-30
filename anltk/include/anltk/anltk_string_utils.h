@@ -7,41 +7,6 @@
 namespace anltk
 {
 
-template <typename T>
-inline bool ends_with(std::basic_string_view<T> s, std::basic_string_view<T> suffix)
-{
-	return std::mismatch(suffix.rbegin(), suffix.rend(), s.rbegin()).first == suffix.rend();
-}
-
-template <typename T>
-inline bool ends_with(const T* s, const T* suffix)
-{
-	return ends_with<T>(std::basic_string_view<T>(s), std::basic_string_view<T>(suffix));
-}
-
-template <typename T>
-inline bool ends_with(const std::basic_string<T>& s, const std::basic_string<T>& suffix)
-{
-	return std::mismatch(suffix.rbegin(), suffix.rend(), s.rbegin()).first == suffix.rend();
-}
-
-template <typename T>
-inline bool starts_with(std::basic_string_view<T> s, std::basic_string_view<T> prefix)
-{
-	return std::mismatch(prefix.begin(), prefix.end(), s.begin()).first == prefix.end();
-}
-
-template <typename T>
-inline bool starts_with(const std::basic_string<T>& s, const std::basic_string<T>& prefix)
-{
-	return std::mismatch(prefix.begin(), prefix.end(), s.begin()).first == prefix.end();
-}
-
-template <typename T>
-inline bool starts_with(const T* s, const T* prefix)
-{
-	return starts_with<T>(std::basic_string_view<T>(s), std::basic_string_view<T>(prefix));
-}
 
 template <typename T>
 inline void rtrim(std::basic_string<T>& s)

@@ -154,3 +154,7 @@ build
 !/subprojects/*.wrap
 data
 fuzz_build
+
+cbuild
+artifact
+artifact.zip

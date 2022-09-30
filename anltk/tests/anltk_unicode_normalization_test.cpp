@@ -1,7 +1,6 @@
 #include "anltk/anltk.hpp"
-#include "doctest.h"
-#include <iostream>
-#include <string>
+#include "doctest_include.h"
+
 
 TEST_CASE("Normalization")
 {

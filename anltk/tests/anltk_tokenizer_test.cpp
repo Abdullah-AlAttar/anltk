@@ -2,11 +2,9 @@
 
 #include "anltk/anltk.hpp"
 #include "anltk/anltk_string_utils.h"
-#include "doctest.h"
+#include "doctest_include.h"
 
 #include <algorithm>
-#include <iostream>
-#include <string>
 #include <vector>
 
 TEST_CASE("Empty")

@@ -1,5 +1,6 @@
 #include "anltk/anltk.hpp"
-#include "doctest.h"
+#include "doctest_include.h"
+#include <string>
 
 TEST_CASE("Char Names")
 {

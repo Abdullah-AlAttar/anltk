@@ -2,9 +2,7 @@
 
 #include "anltk/anltk.hpp"
 
-#include "doctest.h"
-
-#include <string>
+#include "doctest_include.h"
 
 TEST_CASE("Empty")
 {
