@@ -51,7 +51,7 @@ constexpr char_t YEH              = U'\u064A'; // ي	 \u064A
 constexpr char_t TATWEEL    = U'\u0640'; // ـ \u0640
 constexpr char_t ALEF_WASLA = U'\u0671'; // ٱ  \u0671
 constexpr char_t PEH        = U'\u067E'; // پ  \u067E
-constexpr char_t TCHEH      = U'\u067E'; // چ  \u0686
+constexpr char_t TCHEH      = U'\u0686'; // چ  \u0686
 constexpr char_t VEH        = U'\u06A4'; // ڤ  \u06A4
 constexpr char_t GAF        = U'\u06AF'; // گ  \u06AF
 
