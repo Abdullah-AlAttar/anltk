@@ -38,14 +38,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-latest]
+        os: [ubuntu-20.04, windows-2019, macOS-latest]
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Install cibuildwheel
       run: |
-          python3 -m pip install --upgrade pip && python3 -m pip install pybind11==2.7.1 ninja meson
+          python3 -m pip install pybind11==2.7.1 ninja meson
       env:
         CIBW_SKIP: "cp27*"
     - name: Build C++ with meson

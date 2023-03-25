@@ -1,8 +1,8 @@
 
 #pragma once
-#if __has_include("doctest.h") 
+#if __has_include("doctest.h")
 #include "doctest.h"
-#else 
+#else
 #include "doctest/doctest.h"
 #endif
 

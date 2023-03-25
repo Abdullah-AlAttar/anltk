@@ -1,7 +1,7 @@
 #include <anltk/anltk.hpp>
+#include <iostream>
 #include <random>
 #include <utf8.h>
-#include <iostream>
 
 namespace anltk
 {
@@ -65,7 +65,7 @@ std::string NoiseGenerator::swap_adjacent_chars(anltk::string_view_t input, size
 		// std::cout<< rnd_num << " :: " << pos <<std::endl;
 		while (!(is_arabic_alpha(inp[pos]) && is_arabic_alpha(inp[pos + 1])))
 		{
-			pos = (this->gen() % (len-1));
+			pos = (this->gen() % (len - 1));
 		}
 		std::swap(inp[pos], inp[pos + 1]);
 	}
