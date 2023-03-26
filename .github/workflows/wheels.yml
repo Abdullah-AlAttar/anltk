@@ -11,7 +11,7 @@ on:
       - published
 
 env:
-  CIBW_SKIP: "cp27*"
+  CIBW_SKIP: "cp27* cp35-*"
 
 
 jobs:
