@@ -45,7 +45,7 @@ jobs:
 
     - name: Install cibuildwheel
       run: |
-          python3 -m pip install pybind11>=2.10.0 ninja meson
+          python3 -m pip install pybind11==2.9.2 ninja meson
       env:
         CIBW_SKIP: "cp27*"
     - name: Build C++ with meson
