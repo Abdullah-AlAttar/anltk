@@ -173,3 +173,8 @@ tasks:
       msg: "Run 'task py:venv' first"
     - sh: test -d dist && ls dist/*.whl >/dev/null 2>&1
       msg: "No wheels found. Run 'task py:wheel' first"
+
+  dist:unzip:
+    desc: Unzip all wheel zip files
+    cmds:
+    - for file in ./dist/wheels-*.zip; do unzip "$file"; done

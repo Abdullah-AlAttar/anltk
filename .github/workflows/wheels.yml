@@ -13,8 +13,10 @@ on:
 env:
   CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-* cp312-* cp313-* cp314-*"
   CIBW_SKIP: "*-win32 *-manylinux_i686 *-musllinux_*"
-  CIBW_BEFORE_BUILD: "pip install meson-python \"pybind11>=3.0.0\" ninja patchelf || pip install meson-python \"pybind11>=3.0.0\" ninja"
+  CIBW_BEFORE_BUILD: "pip install meson-python \"pybind11>=3.0.0\" ninja patchelf delvewheel || pip install meson-python \"pybind11>=3.0.0\" ninja delvewheel"
   CIBW_BUILD_VERBOSITY: 1
+  CIBW_TEST_COMMAND: "python -c \"import anltk; print('anltk version:', anltk.__version__); print('Import successful!')\""
+  CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -w {dest_dir} {wheel}"
 
 jobs:
   build_sdist:
@@ -69,6 +71,8 @@ jobs:
         CIBW_SKIP: ${{ env.CIBW_SKIP }}
         CIBW_BEFORE_BUILD: ${{ env.CIBW_BEFORE_BUILD }}
         CIBW_BUILD_VERBOSITY: ${{ env.CIBW_BUILD_VERBOSITY }}
+        CIBW_TEST_COMMAND: ${{ env.CIBW_TEST_COMMAND }}
+        CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: ${{ env.CIBW_REPAIR_WHEEL_COMMAND_WINDOWS }}
 
     - name: Verify clean directory
       run: git diff --exit-code
