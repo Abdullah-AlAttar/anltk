@@ -137,3 +137,39 @@ tasks:
     preconditions:
     - sh: test -d .venv
       msg: "Run 'task py:venv' first"
+
+  py:twine:check:
+    desc: Check wheel with twine before upload
+    cmds:
+    - .venv/bin/pip install --upgrade twine
+    - .venv/bin/twine check dist/*
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+    - sh: test -d dist && ls dist/*.whl >/dev/null 2>&1
+      msg: "No wheels found. Run 'task py:wheel' first"
+
+  py:upload:test:
+    desc: Upload to TestPyPI (for testing)
+    cmds:
+    - .venv/bin/pip install --upgrade twine
+    - .venv/bin/twine upload --repository testpypi dist/*
+    - echo "Uploaded to TestPyPI! Test install with{{":"}} pip install --index-url https://test.pypi.org/simple/ anltk"
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+    - sh: test -d dist && ls dist/*.whl >/dev/null 2>&1
+      msg: "No wheels found. Run 'task py:wheel' first"
+
+  py:upload:
+    desc: Upload to PyPI (PRODUCTION - use with caution!)
+    cmds:
+    - .venv/bin/pip install --upgrade twine
+    - echo "⚠️  You are about to upload to PRODUCTION PyPI!"
+    - .venv/bin/twine upload dist/*
+    - echo "✓ Uploaded to PyPI!"
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+    - sh: test -d dist && ls dist/*.whl >/dev/null 2>&1
+      msg: "No wheels found. Run 'task py:wheel' first"
