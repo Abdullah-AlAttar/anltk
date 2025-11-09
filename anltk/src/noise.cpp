@@ -1,4 +1,5 @@
 #include <anltk/anltk.hpp>
+#include <algorithm>
 #include <iostream>
 #include <random>
 #include <utf8.h>

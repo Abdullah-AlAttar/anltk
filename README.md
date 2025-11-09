@@ -3,26 +3,32 @@
 [![PyPI version](https://badge.fury.io/py/anltk.svg)](https://badge.fury.io/py/anltk)
 [![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
 [![Downloads](https://static.pepy.tech/personalized-badge/anltk?period=total&units=international_system&left_color=blue&right_color=orange&left_text=Downloads)](https://pepy.tech/project/anltk)
-# Arabic Natural Language Toolkit (ANLTK)
 
+# Arabic Natural Language Toolkit (ANLTK)
 
 ANLTK is a set of Arabic natural language processing tools. developed with focus on simplicity and performance.
 
-## ANLTK is a C++ library, with python bindings.
+## ANLTK is a C++ library, with python bindings
 
 ## Installation
 
 for python :
+
 ```
 pip install anltk
 ```
+
 ## Building
+
 Note: Currently only tested on Linux, prebuilt python wheels are available for Linux, Windows, Macos on [pypi](https://pypi.org/project/anltk/)
-### Dependencies: 
+
+### Dependencies
+
 * [utfcpp](https://github.com/nemtrif/utfcpp.git), automatically downloaded.
 * [utf8proc](https://github.com/JuliaStrings/utf8proc), automatically downlaoded.
 * C++ Compiler that supports c++17.
 * Python3, [meson](https://mesonbuild.com/), [ninja](https://ninja-build.org/)
+
 ```bash
 pip install meson
 pip install ninja
@@ -38,9 +44,10 @@ git clone https://github.com/Abdullah-AlAttar/anltk.git \
     && pip install -e .
 ```
 
-## Usage Examples:
+## Usage Examples
 
-### C++ API :
+### C++ API
+
 ```c++
 #include "anltk/anltk.hpp"
 #include <iostream>
@@ -91,22 +98,20 @@ print(anltk.tafqit(15000120))
 
 **For list of features see [Features.md](Features.md)**
 
-
 ## Benchmarks
 
 Processing a file containing 500000 Line, 6787731 Word, 112704541 Character. the task is to remove diacritics / transliterate to buckwalter
 
-
-
 ### **Buckwatler transliteration**
 
-| Method           | Time          |   |   |   
+| Method           | Time          |   |   |
 |------------------|---------------|---|---|
-| anltk python-api | 1.379 seconds |   |   |   
-| python [camel_tools](https://github.com/CAMeL-Lab/camel_tools)  | 11.46 seconds |   |   |   
+| anltk python-api | 1.379 seconds |   |   |
+| python [camel_tools](https://github.com/CAMeL-Lab/camel_tools)  | 11.46 seconds |   |   |
+
 ### **Remove Diacritics**
 
-| Method           | Time          |   |   |   
+| Method           | Time          |   |   |
 |------------------|---------------|---|---|
-| anltk python-api | 0.989 seconds |   |   |   
-| python [camel_tools](https://github.com/CAMeL-Lab/camel_tools)   | 4.892 seconds |   |   |   
+| anltk python-api | 0.989 seconds |   |   |
+| python [camel_tools](https://github.com/CAMeL-Lab/camel_tools)   | 4.892 seconds |   |   |

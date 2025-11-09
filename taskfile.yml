@@ -1,0 +1,18 @@
+version: '3'
+
+tasks:
+
+  configure:
+    desc: Configure cpp project using meson
+    cmds:
+    - meson setup build
+
+  build:
+    desc: Build cpp project using meson
+    cmds:
+    - meson compile -C build
+
+  test:
+    desc: Run tests using meson
+    cmds:
+    - meson test -C build
