@@ -4,12 +4,11 @@
 
 utfcpp_dep = dependency('utfcpp', fallback : ['utfcpp', 'utfcpp_dep'])
 
-# Force utf8proc to build as static library to avoid DLL issues on Windows
-# When building Python bindings, don't install the static library
-utf8proc_default_library = get_option('python_bindings') ? 'static' : 'both'
+# Force utf8proc to build as static library
+# The custom overlay in subprojects/packagefiles/utf8proc sets install: false
 utf8proc_dep = dependency('utf8proc', 
   fallback : ['utf8proc', 'utf8proc_dep'],
-  default_options: ['default_library=' + utf8proc_default_library]
+  default_options: ['default_library=static']
 )
 
 # subdir('./third_party/MemMap')
