@@ -4,8 +4,11 @@
 
 utfcpp_dep = dependency('utfcpp', fallback : ['utfcpp', 'utfcpp_dep'])
 
-
-utf8proc_dep = dependency('utf8proc', fallback : ['utf8proc', 'utf8proc_dep'])
+# Force utf8proc to build as static library to avoid DLL issues on Windows
+utf8proc_dep = dependency('utf8proc', 
+  fallback : ['utf8proc', 'utf8proc_dep'],
+  default_options: ['default_library=static']
+)
 
 # subdir('./third_party/MemMap')
 
