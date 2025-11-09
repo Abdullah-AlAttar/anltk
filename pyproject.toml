@@ -39,6 +39,10 @@ Homepage = "https://github.com/Abdullah-AlAttar/anltk"
 Source = "https://github.com/Abdullah-AlAttar/anltk"
 "Bug Tracker" = "https://github.com/Abdullah-AlAttar/anltk/issues"
 
+[tool.meson-python]
+# Allow bundling shared libraries in Windows wheels
+allow-windows-internal-shared-libs = true
+
 [tool.meson-python.args]
 # Automatically enable Python bindings and disable tests when building wheels
 setup = ["-Dpython_bindings=true", "-Dbuild_tests=false"]
