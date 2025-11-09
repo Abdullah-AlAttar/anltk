@@ -19,7 +19,7 @@ anltk_cpp_args = []
 anltk_lib = static_library('anltk', 
   include_directories: include_directories('.', '../include'),
   sources : anltk_sources,
-  install : true,
+  install : get_option('python_bindings') ? false : true,  # Don't install static lib when building Python bindings
   cpp_args : anltk_cpp_args,
   gnu_symbol_visibility : 'hidden',
   dependencies: [utfcpp_dep, utf8proc_dep],

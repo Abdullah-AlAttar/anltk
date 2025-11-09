@@ -16,3 +16,124 @@ tasks:
     desc: Run tests using meson
     cmds:
     - meson test -C build
+
+  # Python-related tasks
+
+  py:venv:
+    desc: Create Python virtual environment
+    cmds:
+    - python3 -m venv .venv
+    - echo "Virtual environment created! Activate with{{":"}} source .venv/bin/activate"
+    status:
+    - test -d .venv
+
+  py:venv:clean:
+    desc: Remove Python virtual environment
+    cmds:
+    - rm -rf .venv
+    - echo "Virtual environment removed"
+
+  py:deps:
+    desc: Install Python build dependencies in venv
+    cmds:
+    - .venv/bin/pip install --upgrade pip meson-python build pybind11 ninja patchelf
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  py:install:
+    desc: Install package in development mode
+    cmds:
+    - .venv/bin/pip install -e . -v
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  py:install:clean:
+    desc: Clean install (non-editable) of the package
+    cmds:
+    - .venv/bin/pip uninstall -y anltk || true
+    - .venv/bin/pip install . --no-cache-dir -v
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  py:test:
+    desc: Quick test of Python bindings
+    cmds:
+    - |
+      .venv/bin/python3 -c "
+      import anltk
+      print('✓ Version:', anltk.__version__)
+      print('✓ Transliterate:', anltk.transliterate('أبجد هوز', anltk.AR2BW))
+      print('✓ Remove tashkeel:', anltk.remove_tashkeel('فَرَاشَةٌ مُلَوَّنَةٌ'))
+      print('✓ Tafqit:', anltk.tafqit(1500))
+      print('✓ All tests passed!')
+      "
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  py:wheel:
+    desc: Build Python wheel (no isolation, uses meson-python)
+    cmds:
+    - .venv/bin/python -m build --no-isolation --wheel
+    - ls -lh dist/
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  py:wheel:clean:
+    desc: Clean build artifacts and rebuild wheel
+    cmds:
+    - rm -rf build/cp* dist/ .mesonpy-* *.egg-info
+    - .venv/bin/python -m build --no-isolation --wheel
+    - ls -lh dist/
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  py:uninstall:
+    desc: Uninstall the package from venv
+    cmds:
+    - .venv/bin/pip uninstall -y anltk
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"
+
+  clean:
+    desc: Clean all build artifacts
+    cmds:
+    - rm -rf build/ builddir/ dist/ .mesonpy-* *.egg-info
+    - find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+    - find . -type f -name "*.pyc" -delete
+    - echo "Cleaned all build artifacts"
+
+  py:setup:
+    desc: Complete development setup (venv + deps + install)
+    cmds:
+    - task: py:venv
+    - task: py:deps
+    - task: py:install
+    - echo "✓ Development environment ready!"
+    - echo "  Activate with{{":"}} source .venv/bin/activate"
+
+  py:check:
+    desc: Check if Python package is properly installed
+    cmds:
+    - |
+      .venv/bin/python3 -c "
+      import sys
+      try:
+          import anltk
+          print('✓ anltk is installed')
+          print('  Version:', anltk.__version__)
+          print('  Location:', anltk.__file__)
+          print('  Has anltk_pybind:', hasattr(anltk, 'anltk_pybind'))
+      except ImportError as e:
+          print('✗ anltk is not installed:', e)
+          sys.exit(1)
+      "
+    preconditions:
+    - sh: test -d .venv
+      msg: "Run 'task py:venv' first"

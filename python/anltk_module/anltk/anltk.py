@@ -1,7 +1,7 @@
 from typing import Callable, Dict, List, Tuple
-import anltk_pybind
+from . import anltk_pybind
 
-from anltk_pybind import AR2BW, BW2AR, AR2SBW, SBW2AR
+from .anltk_pybind import AR2BW, BW2AR, AR2SBW, SBW2AR
 
 
 

@@ -1,5 +1,7 @@
 project('anltk', 'c', 'cpp',
-  version : '0.1',
+  version : run_command('python3', '-c', 
+    'exec(open("python/anltk_module/anltk/version.py").read()); print(__version__)',
+    check: true).stdout().strip(),
   default_options : ['warning_level=3', 'cpp_std=c++17'])
 
 
@@ -16,3 +18,9 @@ endif
 
 
 subdir('anltk')
+
+# Python bindings (for pip install / meson-python builds)
+# This will only be active when building through meson-python
+if get_option('python_bindings')
+  subdir('python/anltk_module')
+endif

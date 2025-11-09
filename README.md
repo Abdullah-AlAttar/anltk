@@ -25,23 +25,55 @@ Note: Currently only tested on Linux, prebuilt python wheels are available for L
 ### Dependencies
 
 * [utfcpp](https://github.com/nemtrif/utfcpp.git), automatically downloaded.
-* [utf8proc](https://github.com/JuliaStrings/utf8proc), automatically downlaoded.
+* [utf8proc](https://github.com/JuliaStrings/utf8proc), automatically downloaded.
 * C++ Compiler that supports c++17.
 * Python3, [meson](https://mesonbuild.com/), [ninja](https://ninja-build.org/)
+* [Task](https://taskfile.dev/) (optional, for simplified build commands)
+
+### Building C++ Library
 
 ```bash
-pip install meson
-pip install ninja
+git clone https://github.com/Abdullah-AlAttar/anltk.git
+cd anltk/
+
+# Using taskfile (recommended)
+task configure
+task build
+task test
+
+# Or manually with meson
+meson build --buildtype=release -Dbuild_tests=false
+cd build
+ninja
 ```
 
+### Building Python Bindings
+
 ```bash
-git clone https://github.com/Abdullah-AlAttar/anltk.git \
-    && cd anltk/ \
-    && meson build --buildtype=release -Dbuild_tests=false \
-    && cd build \
-    && ninja \
-    && cd ../ \
-    && pip install -e .
+# Complete setup (creates venv, installs deps, builds package)
+task py:setup
+
+# Or step by step:
+task py:venv              # Create virtual environment
+task py:deps              # Install build dependencies
+task py:install           # Install in development mode
+
+# Test the installation
+task py:test              # Run quick tests
+
+# Build wheel for distribution
+task py:wheel             # Build wheel package
+
+# Clean build artifacts
+task clean                # Clean all build artifacts
+```
+
+### Manual Python Build (without taskfile)
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install --upgrade pip meson-python build pybind11 ninja patchelf
+.venv/bin/pip install -e .
 ```
 
 ## Usage Examples

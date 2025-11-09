@@ -21,10 +21,10 @@ string_t transliterate(string_view_t input, CharMapping mapping)
 		chars_map = &safe_buckwalter_to_arabic_;
 		break;
 	default:
-		// TODO(abdullah): handle this
-		std::cerr << "transliterate : Unknown CharMapping\n";
+		// This should never happen if CharMapping enum is used correctly
+		// If reached, there's a programming error or memory corruption
+		std::cerr << "transliterate: Invalid CharMapping enum value (possible memory corruption)\n";
 		return {};
-		break;
 	}
 
 	string_t result;

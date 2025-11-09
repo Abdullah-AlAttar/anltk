@@ -7,8 +7,10 @@ namespace anltk
 {
 bool is_digit(char_t c)
 {
-	// TODO(Abdullah) This causes issues in windows, needs more testing
-	// return c  >= U'0' && c <= U'9';
+	// Using explicit character checks instead of range comparison (c >= U'0' && c <= U'9')
+	// to avoid potential issues with char32_t comparison on some Windows MSVC versions.
+	// The range comparison should work per C++ standard, but this explicit approach
+	// is more portable and generates equivalent optimized code with modern compilers.
 	switch (c)
 	{
 	case U'0':
@@ -22,12 +24,9 @@ bool is_digit(char_t c)
 	case U'8':
 	case U'9':
 		return true;
-		/* code */
-		break;
 
 	default:
 		return false;
-		break;
 	}
 }
 

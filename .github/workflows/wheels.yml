@@ -5,32 +5,42 @@ on:
   pull_request:
   push:
     branches:
-     - master
+    - master
   release:
     types:
-      - published
+    - published
 
 env:
-  CIBW_SKIP: "cp27* cp35-* *-win32 *-manylinux_i686"
-
+  CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-* cp312-*"
+  CIBW_SKIP: "*-win32 *-manylinux_i686 *-musllinux_*"
+  CIBW_BEFORE_BUILD: "pip install meson-python pybind11 ninja patchelf || pip install meson-python pybind11 ninja"
+  CIBW_BUILD_VERBOSITY: 1
 
 jobs:
   build_sdist:
     name: Build SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
 
     - name: Build SDist
-      run: pip install meson ninja && meson build && pipx run build --sdist
+      run: |
+        pip install build meson-python ninja pybind11
+        python -m build --sdist --no-isolation
 
     - name: Check metadata
       run: pipx run twine check dist/*
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
+        name: sdist
         path: dist/*.tar.gz
-
 
   build_wheels:
     name: Wheels on ${{ matrix.os }}
@@ -38,30 +48,34 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2019, macOS-latest]
+        os: [ ubuntu-22.04, windows-2022, macos-13 ]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
-    - name: Install cibuildwheel
-      run: |
-          python3 -m pip install pybind11==2.9.2 ninja meson
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: python -m pip install cibuildwheel
+
+    - name: Build wheels
+      run: python -m cibuildwheel --output-dir wheelhouse
       env:
-        CIBW_SKIP: "cp27*"
-    - name: Build C++ with meson
-      run : |
-          meson builddir --buildtype=release -Dbuild_tests=false -Dbuild_bin=false && cd builddir && ninja
-    
-    - uses: pypa/cibuildwheel@v2.12.1
+        CIBW_BUILD: ${{ env.CIBW_BUILD }}
+        CIBW_SKIP: ${{ env.CIBW_SKIP }}
+        CIBW_BEFORE_BUILD: ${{ env.CIBW_BEFORE_BUILD }}
+        CIBW_BUILD_VERBOSITY: ${{ env.CIBW_BUILD_VERBOSITY }}
 
     - name: Verify clean directory
       run: git diff --exit-code
       shell: bash
 
     - name: Upload wheels
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
+        name: wheels-${{ matrix.os }}
         path: wheelhouse/*.whl
-
-
-

@@ -155,18 +155,21 @@ std::string normalize_to_heh(string_view_t input)
 
 string_t duplicate_shadda_letter(string_view_t input)
 {
+	// Reserve space to minimize reallocations - shadda duplication increases size at most 2x
+	// In practice, shadda is rare, so reserve input.size() + input.size()/4 as a good estimate
 	string_t result;
+	result.reserve(input.size() + input.size() / 4);
+
 	auto start = input.begin();
 	auto end   = input.end();
 
 	char_t prev{};
-	// TODO(Abdullah) : Could be more efficient
 	while (start < end)
 	{
-
 		char_t next = utf8::next(start, end);
 		if (next == SHADDA)
 		{
+			// Duplicate the previous character when shadda is encountered
 			utf8::append(prev, result);
 		}
 		else

@@ -10,11 +10,11 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.x'
-    - uses: snickerbockers/submodules-init@v4
     - run: pip install meson ninja
     - run: meson setup builddir --buildtype=release -Dbuild_tests=true && cd builddir && meson compile && meson test
-
