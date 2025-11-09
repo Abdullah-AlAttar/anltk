@@ -152,6 +152,7 @@ build
 /subprojects/*
 
 !/subprojects/*.wrap
+!/subprojects/packagefiles/
 !/subprojects/packagefiles/**
 data
 fuzz_build
